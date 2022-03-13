@@ -2,7 +2,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
@@ -60,6 +60,7 @@ module.exports = (env, { mode } = { mode: MODE_PRODUCTION }) => ({
     extensions: ['*', '.js', '.jsx', '.tsx', '.ts'],
   },
   plugins: [
+    new Dotenv(),
     new webpack.ProvidePlugin({
       React: 'react',
     }),
