@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export default () => (
-    <Container>
-      <span>Login view</span>
-    </Container>
-  )
+  <Container>
+    <span>Login view</span>
+  </Container>
+)
 
 const Container = styled.div`
   display: flex;

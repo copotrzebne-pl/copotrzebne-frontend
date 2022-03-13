@@ -6,7 +6,7 @@ export type User = {
 }
 
 export type UserContextValue = {
-  user: User | null,
+  user: User | null
   fetchUser: () => void
 }
 

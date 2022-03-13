@@ -1,15 +1,15 @@
 import styled from 'styled-components'
 import ukraineFlag from 'assets/ukraine-flag.svg'
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import { PATHS } from 'routes'
 
 export default () => (
-    <Container>
-      <Title>Home view</Title>
-      <Flag src={ukraineFlag} alt='' />
-      <Link to={PATHS.login}>Log in</Link>
-    </Container>
-  )
+  <Container>
+    <Title>Home view</Title>
+    <Flag src={ukraineFlag} alt="" />
+    <Link to={PATHS.login}>Log in</Link>
+  </Container>
+)
 
 const Container = styled.div`
   display: flex;

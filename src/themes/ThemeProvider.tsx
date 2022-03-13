@@ -4,7 +4,13 @@ import GlobalStyles from './globalStyles'
 import ResetStyles from './resetStyles'
 import theme from './theme'
 
-export default ({ className, children }: { className?: string; children: ReactNode }) => (
+export default ({
+  className,
+  children
+}: {
+  className?: string
+  children: ReactNode
+}) => (
   <>
     <ResetStyles />
     <GlobalStyles />

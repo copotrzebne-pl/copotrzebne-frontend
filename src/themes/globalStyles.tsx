@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
   html, #root {
@@ -15,4 +15,4 @@ export default createGlobalStyle`
     height: 100%;
     width: 100%;
   }
-`;
+`

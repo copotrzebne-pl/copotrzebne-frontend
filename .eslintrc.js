@@ -21,7 +21,8 @@ module.exports = {
     '@typescript-eslint/no-unused-vars': ['error'],
     'no-shadow': 'warn',
     'arrow-body-style': ['error', 'as-needed'],
-    'import/no-default-export': 'warn',
+    'import/no-default-export': 0,
+    'import/no-anonymous-default-export': 0,
     '@typescript-eslint/no-unnecessary-type-constraint': 'warn'
   }
 }
