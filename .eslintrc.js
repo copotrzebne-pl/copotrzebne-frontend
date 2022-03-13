@@ -9,7 +9,10 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   settings: {
-    'import/extensions': ['.js', '.jsx', '.ts', '.tsx']
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
+    "import/resolver": {
+      "typescript": {}
+    }
   },
   ignorePatterns: ['*.stories.tsx'],
   rules: {
