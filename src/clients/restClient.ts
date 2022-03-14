@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 import memoize from 'p-memoize'
 
 const successInterceptor = (response: AxiosResponse) => response.data
@@ -14,12 +14,25 @@ const errorInterceptor = (error: AxiosError) => {
   return Promise.reject(error.response || error.message)
 }
 
+const requestInterceptor = (config: AxiosRequestConfig) => {
+  try {
+    const token = window.localStorage.getItem('_token')
+    if (token && config.headers) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+  } catch {
+    console.error('Request error! Check localStorage access')
+  }
+  return config
+}
+
 export const restClient = (host?: string) => {
   const axiosInstance = axios.create({
     headers: { Accept: 'application/json' },
     baseURL: host
   })
   axiosInstance.interceptors.response.use(successInterceptor, errorInterceptor)
+  axiosInstance.interceptors.request.use(requestInterceptor)
   return axiosInstance
 }
 

@@ -1,27 +1,33 @@
-import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { routes } from 'routes'
+import { Page, PrivatePath, routes } from 'routes'
 import ThemeProvider from 'themes/ThemeProvider'
-import { UserContextProvider } from 'contexts/userContext'
+import { PanelContextProvider } from 'contexts/panelContext'
+
+import Layout from 'themes/Layout'
+import PanelLayout from 'themes/PanelLayout'
+
+import Home from 'views/Home'
+import Login from 'views/Login'
+import NotFound from 'views/NotFound'
+import Panel from 'views/Panel'
 
 export default () => (
   <ThemeProvider>
-    <UserContextProvider>
+    <PanelContextProvider>
       <BrowserRouter>
         <Routes>
-          {routes.map(
-            (
-              {
-                component: Component,
-                path
-              }: { component: React.ComponentType; path: string },
-              index
-            ) => (
-              <Route key={index} path={path} element={<Component />} />
-            )
-          )}
+          <Route path={routes[Page.PANEL]} element={<PanelLayout />}>
+            <Route path="" element={<PrivatePath />}>
+              <Route path="" element={<Panel />} />
+            </Route>
+          </Route>
+          <Route path={routes[Page.HOME]} element={<Layout />}>
+            <Route path="" element={<Home />} />
+            <Route path={routes[Page.LOGIN]} element={<Login />} />
+            <Route path={routes[Page.NOTFOUND]} element={<NotFound />} />
+          </Route>
         </Routes>
       </BrowserRouter>
-    </UserContextProvider>
+    </PanelContextProvider>
   </ThemeProvider>
 )

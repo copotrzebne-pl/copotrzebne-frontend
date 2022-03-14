@@ -1,5 +1,8 @@
 import colors from './colors'
 
 export default {
-  colors
+  colors,
+  dimensions: {
+    headerHeight: '64px'
+  }
 }

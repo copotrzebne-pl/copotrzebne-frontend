@@ -1,20 +1,30 @@
 import styled from 'styled-components'
-import ukraineFlag from 'assets/ukraine-flag.svg'
-import { Link } from 'react-router-dom'
-import { PATHS } from 'routes'
+import { useEffect } from 'react'
+import { usePanelContext } from 'contexts/panelContext'
+import { PlaceBox } from './components'
 
-export default () => (
-  <Container>
-    <Title>Home view</Title>
-    <Flag src={ukraineFlag} alt="" />
-    <Link to={PATHS.login}>Log in</Link>
-  </Container>
-)
+export default () => {
+  const { fetchPlaces, places } = usePanelContext()
+  useEffect(() => {
+    fetchPlaces()
+  }, [])
+
+  return (
+    <Container>
+      <Title>copotrzebne.pl</Title>
+      <PlacesWrapper>
+        {places.map((place, index) => (
+          <PlaceBox key={index} place={place} />
+        ))}
+      </PlacesWrapper>
+    </Container>
+  )
+}
 
 const Container = styled.div`
   display: flex;
   width: 100%;
-  height: 100%;
+  min-height: 70vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -22,11 +32,14 @@ const Container = styled.div`
 
 const Title = styled.span`
   display: inline-block;
-  margin-bottom: 2.6rem;
+  font-size: 1.2rem;
 `
 
-const Flag = styled.img`
-  height: 120px;
-  width: auto;
-  margin-bottom: 2.6rem;
+const PlacesWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2.3rem;
+  width: 100%;
 `
