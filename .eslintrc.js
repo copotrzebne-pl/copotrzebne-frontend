@@ -10,8 +10,8 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   settings: {
     'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
-    "import/resolver": {
-      "typescript": {}
+    'import/resolver': {
+      typescript: {}
     }
   },
   ignorePatterns: ['*.stories.tsx'],
@@ -23,6 +23,7 @@ module.exports = {
     'arrow-body-style': ['error', 'as-needed'],
     'import/no-default-export': 0,
     'import/no-anonymous-default-export': 0,
-    '@typescript-eslint/no-unnecessary-type-constraint': 'warn'
+    '@typescript-eslint/no-unnecessary-type-constraint': 'warn',
+    'react-hooks/exhaustive-deps': 0
   }
 }

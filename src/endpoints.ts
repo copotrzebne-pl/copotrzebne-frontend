@@ -1,10 +1,11 @@
 const main = {
-  getMissingProducts: 'api/<path-to-api>'
+  demands: '/demands'
 } as const
 
-const admin = {
-  login: 'api/login',
-  getUser: 'api/user'
+const panel = {
+  login: '/login',
+  getPlaces: '/places',
+  getUser: '/users/whoami'
 } as const
 
-export const API = { main, admin }
+export const API = { main, panel }
