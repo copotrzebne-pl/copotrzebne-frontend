@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { UserContextProvider } from 'contexts/userContext'
 
 import Header from 'components/PageHeader'
-import Footer from 'components/PageFooter'
 
 export default () => (
   <UserContextProvider>
@@ -12,7 +11,6 @@ export default () => (
     <PageContent>
       <Outlet />
     </PageContent>
-    <Footer />
   </UserContextProvider>
 )
 

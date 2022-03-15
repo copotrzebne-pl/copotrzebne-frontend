@@ -55,3 +55,10 @@ export const RegisterPanel = styled.div`
   width: 100%;
   max-width: 320px;
 `
+
+export const RegisterTitle = styled.h2`
+  font-size: 2.4rem;
+  font-weight: 700;
+  lin-height: 1.6;
+  color: ${({ theme }) => theme.colors.grey900};
+`
