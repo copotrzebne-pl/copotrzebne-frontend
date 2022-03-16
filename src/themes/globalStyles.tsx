@@ -9,7 +9,7 @@ export default createGlobalStyle`
     font-size: 16px;
   }
   body {
-    font-family: roboto, helvetica, arial, sans-serif;
+    font-family: 'DM Sans', sans-serif, helvetica, arial, sans-serif;
     color: #15141A;
     font-size: 16px;
     height: 100%;
