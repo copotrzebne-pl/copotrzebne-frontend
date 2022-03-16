@@ -3,27 +3,19 @@ import styled from 'styled-components'
 
 const PlaceName = styled.h3`
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.45;
-  color: ${({ theme }) => theme.colors.grey900};
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.1rem;
+  color: #1f2635;
 `
 
 const PlaceDetails = styled.span`
   display: inline-block;
   width: 100%;
-  font-size: 0.95rem;
+  font-size: 0.7rem;
   line-height: 1.2;
-`
-
-const Link = styled.a`
-  display: inline-block;
-  font-size: 0.95rem;
-  line-height: 1.2;
-  color: ${({ theme }) => theme.colors.blue};
-  margin-right: 1rem;
-  margin-top: 0.45rem;
-  width: 100%;
+  font-weight: 400;
+  color: #8d99b2;
 `
 
 const PlaceBoxComponent = ({
@@ -38,18 +30,15 @@ const PlaceBoxComponent = ({
     <PlaceDetails>
       {place.city}, {place.street} {place.apartment}
     </PlaceDetails>
-    {place.phone && <Link href={`tel:${place.phone}`}>tel: {place.phone}</Link>}
-    {place.email && (
-      <Link href={`mailto:${place.email}`}>email: {place.email}</Link>
-    )}
   </div>
 )
 
 export const PlaceBox = styled(PlaceBoxComponent)`
-  margin: 1rem;
-  padding: 1.1rem;
+  padding: 1rem 1.2rem;
+  background-color: white;
   width: 100%;
-  max-width: 320px;
-  border: 2px solid ${({ theme }) => theme.colors.grey300};
-  border-radius: 16px;
+  border-radius: 15px;
+  box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.8rem;
+  cursor: pointer;
 `
