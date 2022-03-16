@@ -3,11 +3,15 @@ import styled from 'styled-components'
 export const TextInput = styled.input`
   display: inline-block;
   width: 100%;
-  border: 2px solid ${({ theme }) => theme.colors.grey900};
-  border-radius: 6px;
+  border: 1px solid rgba(150, 147, 147, 0.8);
+  border-radius: 10px;
   color: ${({ theme }) => theme.colors.grey900};
-  height: 42px;
+  height: 45px;
   padding: 0 1rem;
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.grey};
+    opacity: 0.7;
+  }
 `
 
 export const Label = styled.label`
@@ -15,37 +19,38 @@ export const Label = styled.label`
   margin-bottom: 0.6rem;
   color: ${({ theme }) => theme.colors.grey900};
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 400;
 `
 
 export const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1.2rem;
+  padding: 0 1.8rem;
 `
 
 export const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin-top: 0.8rem;
 `
 
 export const LoginButton = styled.button`
   border: none;
   outline: none;
   padding: 0.8rem 1.8rem;
-  background-color: ${({ theme }) => theme.colors.ink};
+  background-color: ${({ theme }) => theme.colors.blue};
   color: white;
-  border-radius: 6px;
-  height: 40px;
+  border-radius: 10px;
+  height: 48px;
   width: 100%;
-  max-width: 320px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: 0.85rem;
-  font-weight: 700;
-  margin-top: 1rem;
+  font-weight: 500;
+  margin-top: 1.6rem;
 `
 
 export const RegisterPanel = styled.div`

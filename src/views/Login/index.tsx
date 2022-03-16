@@ -8,6 +8,8 @@ import {
   LoginButton
 } from './components'
 import { useUserContext } from 'contexts/userContext'
+import PageTitle from 'components/PageTitle'
+import { Page } from 'routes'
 
 export default () => {
   const [login, setLogin] = useState<string>('')
@@ -16,6 +18,7 @@ export default () => {
   const handleLogin = useCallback(
     (e: SyntheticEvent) => {
       e.preventDefault()
+      if (!login || !password) return
       loginUser(login, password)
     },
     [login, password, loginUser]
@@ -23,34 +26,33 @@ export default () => {
 
   return (
     <Container>
-      <Content>
-        <LoginForm onSubmit={handleLogin}>
-          <FormGroup>
-            <Label>Login</Label>
-            <TextInput
-              autoComplete="on"
-              id="login"
-              type="email"
-              placeholder="Wpisz login"
-              value={login}
-              onChange={e => setLogin(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label>Hasło</Label>
-            <TextInput
-              id="password"
-              type="password"
-              placeholder="Podaj hasło"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-            />
-          </FormGroup>
+      <PageTitle backPage={Page.HOME}>Zaloguj się</PageTitle>
+      <LoginForm onSubmit={handleLogin}>
+        <FormGroup>
+          <Label>Email</Label>
+          <TextInput
+            autoComplete="on"
+            id="login"
+            type="email"
+            placeholder="Email"
+            value={login}
+            onChange={e => setLogin(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>Hasło</Label>
+          <TextInput
+            id="password"
+            type="password"
+            placeholder="Hasło"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
           <LoginButton type="submit" onClick={handleLogin}>
-            Zaloguj
+            Zaloguj się
           </LoginButton>
-        </LoginForm>
-      </Content>
+        </FormGroup>
+      </LoginForm>
     </Container>
   )
 }
@@ -58,13 +60,6 @@ export default () => {
 const Container = styled.div`
   display: flex;
   width: 100%;
-  min-height: 70vh;
+  height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-`
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: row;
 `
