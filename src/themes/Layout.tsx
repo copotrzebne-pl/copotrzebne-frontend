@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { UserContextProvider } from 'contexts/userContext'
 
 import Header from 'components/PageHeader'
+import Copyright from 'components/Copyright'
 
 export default () => (
   <UserContextProvider>
@@ -11,6 +12,7 @@ export default () => (
     <PageContent>
       <Outlet />
     </PageContent>
+    <Copyright />
   </UserContextProvider>
 )
 
