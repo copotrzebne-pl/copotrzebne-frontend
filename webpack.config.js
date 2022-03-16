@@ -62,7 +62,9 @@ module.exports = (env, { mode } = { mode: MODE_PRODUCTION }) => ({
     extensions: ['*', '.js', '.jsx', '.tsx', '.ts']
   },
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      systemvars: true
+    }),
     new webpack.ProvidePlugin({
       React: 'react'
     }),
