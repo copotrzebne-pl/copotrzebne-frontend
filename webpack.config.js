@@ -5,6 +5,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const ENTRY_FILE = './src/index.tsx'
 const OUTPUT_FILE = 'index.js'
@@ -69,7 +70,15 @@ module.exports = (env, { mode } = { mode: MODE_PRODUCTION }) => ({
       React: 'react'
     }),
     mode === MODE_DEVELOPMENT && new ReactRefreshWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: './public/index.html' })
+    new HtmlWebpackPlugin({ template: './public/index.html' }),
+    new CopyWebpackPlugin({
+      patterns: [
+        // relative path is from src
+        { from: 'public/favicon.ico' },
+        { from: 'public/favicon-16x16.png' },
+        { from: 'public/favicon-32x32.png' }
+      ]
+    })
   ].filter(Boolean),
   devServer: {
     port: 3000,
