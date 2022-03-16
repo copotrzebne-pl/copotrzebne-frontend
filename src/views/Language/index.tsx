@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PageTitle from 'components/PageTitle'
 import { Page } from 'routes'
 import styled from 'styled-components'
+import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
   const [selected, setSelected] = useState<string>('pl')
@@ -19,13 +20,13 @@ export default () => {
           selected={selected === 'ua'}
           onClick={() => setSelected('ua')}
         >
-          Ukraiński
+          український
         </Language>
         <Language
           selected={selected === 'en'}
           onClick={() => setSelected('en')}
         >
-          Angielski
+          English
         </Language>
       </LanguageWrapper>
     </Container>
@@ -37,6 +38,10 @@ const Container = styled.div`
   width: 100%;
   height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
   flex-direction: column;
+  ${breakpoint.sm`
+    max-width: 450px;
+    margin: 0 auto;
+  `}
 `
 
 const LanguageWrapper = styled.div`
@@ -61,4 +66,5 @@ const Language = styled.div<{ selected: boolean }>`
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+  cursor: pointer;
 `

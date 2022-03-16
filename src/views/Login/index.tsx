@@ -10,6 +10,7 @@ import {
 import { useUserContext } from 'contexts/userContext'
 import PageTitle from 'components/PageTitle'
 import { Page } from 'routes'
+import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
   const [login, setLogin] = useState<string>('')
@@ -62,4 +63,8 @@ const Container = styled.div`
   width: 100%;
   height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
   flex-direction: column;
+  ${breakpoint.sm`
+    max-width: 450px;
+    margin: 0 auto;
+  `}
 `

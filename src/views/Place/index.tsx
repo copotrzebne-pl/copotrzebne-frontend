@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 
 import marker from 'assets/marker.svg'
 import { Place } from 'contexts/types'
+import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
   const { fetchPlaces, places } = usePanelContext()
@@ -77,6 +78,12 @@ const PlaceDetails = styled.div`
   padding: 1rem;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  ${breakpoint.sm`
+    max-width: 450px;
+    margin: 0 auto;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+  `}
 `
 const PlaceDetailsWrapper = styled.div`
   display: flex;
