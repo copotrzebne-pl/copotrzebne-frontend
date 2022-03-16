@@ -1,21 +1,64 @@
+import { useState } from 'react'
+import PageTitle from 'components/PageTitle'
+import { Page } from 'routes'
 import styled from 'styled-components'
 
-export default () => (
-  <Container>
-    <Content>Language</Content>
-  </Container>
-)
+export default () => {
+  const [selected, setSelected] = useState<string>('pl')
+  return (
+    <Container>
+      <PageTitle backPage={Page.HOME}>Zmień język</PageTitle>
+      <LanguageWrapper>
+        <Language
+          selected={selected === 'pl'}
+          onClick={() => setSelected('pl')}
+        >
+          Polski
+        </Language>
+        <Language
+          selected={selected === 'ua'}
+          onClick={() => setSelected('ua')}
+        >
+          Ukraiński
+        </Language>
+        <Language
+          selected={selected === 'en'}
+          onClick={() => setSelected('en')}
+        >
+          Angielski
+        </Language>
+      </LanguageWrapper>
+    </Container>
+  )
+}
 
 const Container = styled.div`
   display: flex;
   width: 100%;
-  min-height: 70vh;
+  height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 `
 
-const Content = styled.div`
+const LanguageWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+`
+
+const Language = styled.div<{ selected: boolean }>`
+  width: 100%;
+  margin: 0.3rem 0;
+  border: 2px solid
+    ${({ selected, theme }) =>
+      selected ? theme.colors.pink : theme.colors.grey};
+  color: ${({ selected, theme }) =>
+    selected ? theme.colors.pink : theme.colors.grey};
+  transition: border-color 0.3s, color 0.3s;
+  border-radius: 50px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
 `
