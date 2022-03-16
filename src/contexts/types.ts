@@ -15,6 +15,17 @@ export type UserContextProviderProps = {
   children: ReactNode
 }
 
+export type Supply = {
+  id: string
+  namePl: string
+  nameUa: string
+  nameEn: string
+}
+
+export type Demand = {
+  supply: Supply
+}
+
 export type Place = {
   apartment: null
   buildingNumber: string
@@ -27,6 +38,7 @@ export type Place = {
   name: string
   phone: string
   street: string
+  demands: Demand[]
 }
 
 export type PanelContextValue = {
