@@ -5,6 +5,7 @@ const main = {
 const panel = {
   login: '/login',
   getPlaces: '/places',
+  getPlaceDemands: '/places/:id/demands',
   getUser: '/users/whoami'
 } as const
 

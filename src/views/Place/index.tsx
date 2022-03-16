@@ -10,16 +10,21 @@ import { Place } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
-  const { fetchPlaces, places } = usePanelContext()
+  const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
+    usePanelContext()
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
   useEffect(() => {
     fetchPlaces()
+    return clearDemands
   }, [])
   useEffect(() => {
     const place = places.filter(elem => elem.id === id)[0]
-    if (place) setSelectedPlace(place)
-  }, [places, selectedPlace])
+    if (place) {
+      setSelectedPlace(place)
+      fetchDemands(place.id)
+    }
+  }, [places])
 
   return (
     <Container>
@@ -48,12 +53,17 @@ export default () => {
           </PlaceDetailsWrapper>
         </PlaceDetails>
       )}
-      {selectedPlace !== null && selectedPlace.demands && (
+      {selectedPlace !== null && demands.length > 0 && (
         <DemansWrapper>
           <DemandsListTitle>Lista potrzeb</DemandsListTitle>
           <DemansList>
-            {selectedPlace.demands.map(demand => (
-              <Demand>{demand?.supply?.namePl}</Demand>
+            {demands.map(demand => (
+              <Demand>
+                <span>
+                  <span>{demand?.supply?.namePl}</span>
+                  <b>{demand?.priority?.namePl}</b>
+                </span>
+              </Demand>
             ))}
           </DemansList>
         </DemansWrapper>
@@ -159,6 +169,11 @@ const DemansWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2.2rem 1.2rem 3.2rem;
+  width: 100%;
+  ${breakpoint.sm`
+    max-width: 450px;
+    margin: 0 auto;
+  `}
 `
 
 const DemandsListTitle = styled.h4`
@@ -179,5 +194,17 @@ const DemansList = styled.ol`
 
 const Demand = styled.li`
   margin: 0.5rem;
-  color: #999999;
+  & > span {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    & > span {
+      color: #999;
+    }
+    & > b {
+      color: #333;
+      font-weight: 600;
+    }
+  }
 `

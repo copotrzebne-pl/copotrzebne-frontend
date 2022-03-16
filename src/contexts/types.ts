@@ -15,6 +15,13 @@ export type UserContextProviderProps = {
   children: ReactNode
 }
 
+export type Priority = {
+  id: string
+  namePl: string
+  nameUa: string
+  nameEn: string
+}
+
 export type Supply = {
   id: string
   namePl: string
@@ -24,6 +31,9 @@ export type Supply = {
 
 export type Demand = {
   supply: Supply
+  priority: Priority
+  updatedAt: string
+  comment?: string
 }
 
 export type Place = {
@@ -43,7 +53,10 @@ export type Place = {
 
 export type PanelContextValue = {
   places: Place[]
+  demands: Demand[]
   fetchPlaces: () => void
+  fetchDemands: (placeId: string) => void
+  clearDemands: () => void
 }
 
 export type PanelContextProviderProps = {
