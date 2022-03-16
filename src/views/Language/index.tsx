@@ -48,7 +48,7 @@ const LanguageWrapper = styled.div`
 
 const Language = styled.div<{ selected: boolean }>`
   width: 100%;
-  margin: 0.3rem 0;
+  margin: 0.45rem 0;
   border: 2px solid
     ${({ selected, theme }) =>
       selected ? theme.colors.pink : theme.colors.grey};
