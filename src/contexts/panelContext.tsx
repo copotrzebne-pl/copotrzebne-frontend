@@ -1,5 +1,10 @@
 import { createContext, useContext, useState, useCallback } from 'react'
-import { PanelContextValue, PanelContextProviderProps, Place } from './types'
+import {
+  PanelContextValue,
+  PanelContextProviderProps,
+  Place,
+  Demand
+} from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
 
@@ -9,6 +14,7 @@ export const PanelContextProvider = ({
   children
 }: PanelContextProviderProps) => {
   const [places, setPlaces] = useState<Place[]>([])
+  const [demands, setDemands] = useState<Demand[]>([])
   const [errors, setError] = useState<Record<string, string>>({})
 
   const fetchPlaces = useCallback(async () => {
@@ -23,11 +29,33 @@ export const PanelContextProvider = ({
     }
   }, [errors])
 
+  const fetchDemands = useCallback(
+    async (placeId: string) => {
+      try {
+        const client = await getRestClient(process.env.API_URL)
+        const response = await client.get<null, Record<string, string>>(
+          API.panel.getPlaceDemands.replace(':id', placeId)
+        )
+        Array.isArray(response) ? setDemands(response) : setDemands([])
+      } catch {
+        setError({ ...errors, places: 'Fetching demands error' })
+      }
+    },
+    [errors]
+  )
+
+  const clearDemands = useCallback(() => {
+    setDemands([])
+  }, [])
+
   return (
     <PanelContext.Provider
       value={{
         places,
-        fetchPlaces
+        demands,
+        fetchDemands,
+        fetchPlaces,
+        clearDemands
       }}
     >
       {children}

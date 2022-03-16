@@ -41,4 +41,5 @@ export const PlaceBox = styled(PlaceBoxComponent)`
   box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.8rem;
   cursor: pointer;
+  width: 100%;
 `
