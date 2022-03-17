@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import PageTitle from 'components/PageTitle'
-import { Page } from 'routes'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 
@@ -8,7 +7,7 @@ export default () => {
   const [selected, setSelected] = useState<string>('pl')
   return (
     <Container>
-      <PageTitle backPage={Page.HOME}>Zmień język</PageTitle>
+      <PageTitle>Zmień język</PageTitle>
       <LanguageWrapper>
         <Language
           selected={selected === 'pl'}

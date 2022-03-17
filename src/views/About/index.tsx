@@ -1,11 +1,10 @@
 import PageTitle from 'components/PageTitle'
-import { Page } from 'routes'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 
 export default () => (
   <Container>
-    <PageTitle backPage={Page.HOME}>Copotrzebne</PageTitle>
+    <PageTitle>Copotrzebne</PageTitle>
     <AboutUsText>
       Opis organizacji - Diam facilisi insolens per cu, eos malorum voluptaria
       concludaturque usu id, et facete quaeque consequat visDiam facilisi

@@ -1,25 +1,25 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 import backArrow from 'assets/back-arrow.svg'
-import { Link } from 'react-router-dom'
-import { Page, routes } from 'routes'
+import { useNavigate } from 'react-router-dom'
 
 const PageTitle = ({
   className,
-  children,
-  backPage
+  children
 }: {
   className?: string
   children: ReactNode
-  backPage: Page
-}) => (
-  <div className={className}>
-    <GoBack to={routes[backPage]}>
-      <BackIcon src={backArrow} alt="go back" />
-    </GoBack>
-    {children}
-  </div>
-)
+}) => {
+  const navigate = useNavigate()
+  return (
+    <div className={className}>
+      <GoBack onClick={() => navigate(-1)}>
+        <BackIcon src={backArrow} alt="go back" />
+      </GoBack>
+      {children}
+    </div>
+  )
+}
 
 export default styled(PageTitle)`
   width: 100%;
@@ -42,7 +42,8 @@ const BackIcon = styled.img`
   margin-top: 4px;
 `
 
-const GoBack = styled(Link)`
+const GoBack = styled.span`
+  display: inline-block;
   position: absolute;
   left: 0;
   padding: 0.4rem;

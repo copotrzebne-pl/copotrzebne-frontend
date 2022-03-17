@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
-import { Page } from 'routes'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 
@@ -20,7 +19,7 @@ export default () => {
   }, [])
   useEffect(() => {
     const place = places.filter(elem => elem.id === id)[0]
-    if (place) {
+    if (place && place.id) {
       setSelectedPlace(place)
       fetchDemands(place.id)
     }
@@ -30,7 +29,7 @@ export default () => {
     <Container>
       {selectedPlace !== null && (
         <PlaceDetails>
-          <PageTitle backPage={Page.HOME}>{selectedPlace?.name}</PageTitle>
+          <PageTitle>{selectedPlace?.name}</PageTitle>
           <PlaceDetailsWrapper>
             {selectedPlace?.comment && (
               <PlaceDescription>{selectedPlace?.comment}</PlaceDescription>
