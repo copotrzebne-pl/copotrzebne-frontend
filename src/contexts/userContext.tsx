@@ -61,6 +61,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
             delete place[key as keyof typeof place]
           }
         }
+        delete place.id
         await client.post<null, Place>(`${API.panel.savePlace}`, place)
       }
     } catch {
