@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useUserContext } from 'contexts/userContext'
 import AdminPanel from './components/AdminPanel'
 import PlaceManagerPanel from './components/PlaceManagerPanel'
+import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
   const { fetchUser, user } = useUserContext()
@@ -26,4 +27,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  ${breakpoint.sm`
+    max-width: 450px;
+    margin: 0 auto;
+  `}
 `
