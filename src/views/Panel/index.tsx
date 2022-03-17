@@ -1,20 +1,20 @@
 import { useEffect } from 'react'
 import styled from 'styled-components'
 import { useUserContext } from 'contexts/userContext'
-import { usePanelContext } from 'contexts/panelContext'
+import AdminPanel from './components/AdminPanel'
+import PlaceManagerPanel from './components/PlaceManagerPanel'
 
 export default () => {
-  const { fetchUser } = useUserContext()
-  const { fetchPlaces } = usePanelContext()
+  const { fetchUser, user } = useUserContext()
   useEffect(() => {
     // whoimi - get logged in user data
     fetchUser()
-    fetchPlaces()
   }, [])
 
   return (
     <Container>
-      <Content>Panel</Content>
+      {user?.role === 'admin' && <AdminPanel />}
+      {user?.role === 'place_manager' && <PlaceManagerPanel />}
     </Container>
   )
 }
@@ -26,9 +26,4 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: row;
 `

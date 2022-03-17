@@ -13,6 +13,7 @@ import Login from 'views/Login'
 import NotFound from 'views/NotFound'
 import Panel from 'views/Panel'
 import Place from 'views/Place'
+import ManagePlace from 'views/ManagePlace'
 
 export default () => (
   <ThemeProvider>
@@ -22,6 +23,11 @@ export default () => (
           <Route path={routes[Page.PANEL]} element={<PanelLayout />}>
             <Route path="" element={<PrivatePath />}>
               <Route path="" element={<Panel />} />
+              <Route
+                path={routes[Page.MANAGE_PLACE]}
+                element={<ManagePlace />}
+              />
+              <Route />
             </Route>
           </Route>
           <Route path={routes[Page.HOME]} element={<Layout />}>

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import ukraineFlag from 'assets/ukraine-flag.svg'
 import { Page, routes } from 'routes'
 
 const PanelHeader = ({ className }: { className?: string }) => {
@@ -18,7 +17,7 @@ const PanelHeader = ({ className }: { className?: string }) => {
   return (
     <header className={className}>
       <Link to={routes[Page.HOME]}>
-        <Flag src={ukraineFlag} alt="slava ukraini" />
+        <Logo>copotrzebne</Logo>
       </Link>
       <Navigation>
         <StyledLink onClick={handleLogout}>Wyloguj</StyledLink>
@@ -38,9 +37,11 @@ export default styled(PanelHeader)`
   justify-content: space-between;
 `
 
-const Flag = styled.img`
-  height: 38px;
-  width: auto;
+const Logo = styled.span`
+  display: inline-block;
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.colors.black};
 `
 
 const Navigation = styled.nav`

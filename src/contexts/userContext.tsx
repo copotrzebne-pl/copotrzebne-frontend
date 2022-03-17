@@ -1,6 +1,11 @@
 import { createContext, useContext, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { User, UserContextValue, UserContextProviderProps } from './types'
+import {
+  User,
+  UserContextValue,
+  UserContextProviderProps,
+  Place
+} from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
 import { Page, routes } from 'routes'
@@ -9,6 +14,7 @@ export const UserContext = createContext<UserContextValue | null>(null)
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [userValue, setUserValue] = useState<User | null>(null)
+  const [ownedPlaces, setOwnedPlaces] = useState<Place[]>([])
   const [errors, setError] = useState<Record<string, string>>({})
   const navigate = useNavigate()
   const login = useCallback(
@@ -28,21 +34,52 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     [errors, navigate]
   )
   const fetchUser = useCallback(async () => {
-    //TODO: provider valid API URL and fetch user data
-    // const client = await getRestClient(process.env.API_URL)
-    // const response = await client.get<null, Record<string, string>>(
-    //   API.panel.getUser
-    // )
-    //TODO: set data from rest client response
-    setUserValue({ email: '', id: '' })
+    const client = await getRestClient(process.env.API_URL)
+    const response = await client.get<null, User>(API.panel.getUser)
+
+    setUserValue(response)
+  }, [])
+
+  const fetchOwnedPlaces = useCallback(async () => {
+    const client = await getRestClient(process.env.API_URL)
+    const response = await client.get<null, Place[]>(API.panel.getOwnedPlaces)
+
+    setOwnedPlaces(response)
+  }, [])
+
+  const savePlace = useCallback(async (place: Place) => {
+    const client = await getRestClient(process.env.API_URL)
+    try {
+      if (place.id !== 'new') {
+        await client.patch<null, Place>(
+          `${API.panel.savePlace}/${place.id}`,
+          place
+        )
+      } else {
+        for (const key in place) {
+          if (place[key as keyof typeof place] === '') {
+            delete place[key as keyof typeof place]
+          }
+        }
+        await client.post<null, Place>(`${API.panel.savePlace}`, place)
+      }
+    } catch {
+      console.error('Error: place save error!')
+      return
+    }
+
+    navigate(routes[Page.PANEL])
   }, [])
 
   return (
     <UserContext.Provider
       value={{
         user: userValue,
+        ownedPlaces,
         fetchUser,
-        login
+        fetchOwnedPlaces,
+        login,
+        savePlace
       }}
     >
       {children}

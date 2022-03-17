@@ -8,16 +8,18 @@ export enum Page { //eslint-disable-line no-shadow
   NOTFOUND,
   ABOUT,
   LANGUAGE,
-  PANEL
+  PANEL,
+  MANAGE_PLACE
 }
 
 export const routes: { [key in Page]: string } = {
   [Page.HOME]: '/',
   [Page.LOGIN]: '/login',
-  [Page.PANEL]: '/panel',
   [Page.PLACE]: '/place',
   [Page.LANGUAGE]: '/language',
   [Page.ABOUT]: '/about',
+  [Page.PANEL]: '/panel',
+  [Page.MANAGE_PLACE]: '/panel/manage-place/:id',
   [Page.NOTFOUND]: '*'
 }
 
