@@ -1,14 +1,18 @@
 import { ReactNode } from 'react'
 
 export type User = {
-  email: string
+  role: string
+  login: string
   id: string
 }
 
 export type UserContextValue = {
   user: User | null
+  ownedPlaces: Place[]
   login: (login: string, password: string) => void
   fetchUser: () => void
+  fetchOwnedPlaces: () => void
+  savePlace: (place: Place) => void
 }
 
 export type UserContextProviderProps = {
@@ -37,18 +41,17 @@ export type Demand = {
 }
 
 export type Place = {
-  apartment: null
+  apartment: string
   buildingNumber: string
   city: string
   comment: string
   email: string
-  id: string
-  latitude: string
-  longitude: string
+  id?: string
+  latitude: string | null
+  longitude: string | null
   name: string
   phone: string
   street: string
-  demands: Demand[]
 }
 
 export type PanelContextValue = {

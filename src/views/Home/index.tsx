@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useEffect, useCallback, useState } from 'react'
 import { usePanelContext } from 'contexts/panelContext'
-import { PlaceBox } from './components'
+import { PlaceBox } from 'components/PlaceBox'
 import marker from 'assets/marker.svg'
 import { Page, routes } from 'routes'
 import { Link } from 'react-router-dom'
