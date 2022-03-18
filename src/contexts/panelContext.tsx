@@ -3,7 +3,10 @@ import {
   PanelContextValue,
   PanelContextProviderProps,
   Place,
-  Demand
+  Demand,
+  Supply,
+  Priority,
+  DemandDTO
 } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
@@ -15,6 +18,8 @@ export const PanelContextProvider = ({
 }: PanelContextProviderProps) => {
   const [places, setPlaces] = useState<Place[]>([])
   const [demands, setDemands] = useState<Demand[]>([])
+  const [supplies, setSupplies] = useState<Supply[]>([])
+  const [priorities, setPriorities] = useState<Priority[]>([])
   const [errors, setError] = useState<Record<string, string>>({})
 
   const fetchPlaces = useCallback(async () => {
@@ -33,12 +38,12 @@ export const PanelContextProvider = ({
     async (placeId: string) => {
       try {
         const client = await getRestClient(process.env.API_URL)
-        const response = await client.get<null, Record<string, string>>(
+        const response = await client.get<null, Demand>(
           API.panel.getPlaceDemands.replace(':id', placeId)
         )
         Array.isArray(response) ? setDemands(response) : setDemands([])
       } catch {
-        setError({ ...errors, places: 'Fetching demands error' })
+        setError({ ...errors, demands: 'Fetching demands error' })
       }
     },
     [errors]
@@ -48,6 +53,55 @@ export const PanelContextProvider = ({
     setDemands([])
   }, [])
 
+  const fetchPriorities = useCallback(async () => {
+    try {
+      const client = await getRestClient(process.env.API_URL)
+      const response = await client.get<null, Record<string, string>>(
+        API.panel.priorities
+      )
+      Array.isArray(response) ? setPriorities(response) : setPriorities([])
+    } catch {
+      setError({ ...errors, places: 'Fetching priorities error' })
+    }
+  }, [])
+
+  const fetchSupplies = useCallback(async () => {
+    try {
+      const client = await getRestClient(process.env.API_URL)
+      const response = await client.get<null, Supply>(API.panel.supplies)
+      Array.isArray(response) ? setSupplies(response) : setSupplies([])
+    } catch {
+      setError({ ...errors, places: 'Fetching priorities error' })
+    }
+  }, [])
+
+  const saveDemand = useCallback(
+    async (demand: DemandDTO): Promise<boolean> => {
+      try {
+        const client = await getRestClient(process.env.API_URL)
+        await client.post<null, Supply>(API.panel.saveDemand, demand)
+        return Promise.resolve(true)
+      } catch {
+        setError({ ...errors, places: 'Fetching priorities error' })
+        return Promise.reject(false)
+      }
+    },
+    []
+  )
+
+  const removeAllDemands = useCallback(async (placeId: string) => {
+    try {
+      const client = await getRestClient(process.env.API_URL)
+      setDemands([])
+      await client.delete<null, null>(
+        API.panel.removeAllDemands.replace(':id', placeId)
+      )
+    } catch {
+      setError({ ...errors, demands: 'Remove demands error' })
+      return Promise.reject(false)
+    }
+  }, [])
+
   return (
     <PanelContext.Provider
       value={{
@@ -55,7 +109,13 @@ export const PanelContextProvider = ({
         demands,
         fetchDemands,
         fetchPlaces,
-        clearDemands
+        clearDemands,
+        supplies,
+        priorities,
+        fetchPriorities,
+        fetchSupplies,
+        saveDemand,
+        removeAllDemands
       }}
     >
       {children}

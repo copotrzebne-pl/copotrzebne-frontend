@@ -14,6 +14,7 @@ import NotFound from 'views/NotFound'
 import Panel from 'views/Panel'
 import Place from 'views/Place'
 import ManagePlace from 'views/ManagePlace'
+import Demands from 'views/Demands'
 
 export default () => (
   <ThemeProvider>
@@ -27,6 +28,7 @@ export default () => (
                 path={routes[Page.MANAGE_PLACE]}
                 element={<ManagePlace />}
               />
+              <Route path={routes[Page.DEMANDS]} element={<Demands />} />
               <Route />
             </Route>
           </Route>

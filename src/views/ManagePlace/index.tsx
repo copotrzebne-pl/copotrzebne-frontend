@@ -5,7 +5,6 @@ import PageTitle from 'components/PageTitle'
 import { Place } from 'contexts/types'
 import { useUserContext } from 'contexts/userContext'
 import { useParams } from 'react-router-dom'
-import { Page } from 'routes'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 
@@ -22,8 +21,8 @@ export default () => {
     comment: '',
     email: '',
     phone: '',
-    latitude: '',
-    longitude: ''
+    latitude: null,
+    longitude: null
   })
 
   useEffect(() => {
@@ -61,9 +60,7 @@ export default () => {
 
   return (
     <Container>
-      <PageTitle backPage={Page.PANEL}>
-        {selectedPlace?.name || 'Dodaj nowe miejsce'}
-      </PageTitle>
+      <PageTitle>{selectedPlace?.name || 'Dodaj nowe miejsce'}</PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>Nazwa</Label>

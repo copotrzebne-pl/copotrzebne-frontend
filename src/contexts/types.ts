@@ -40,6 +40,13 @@ export type Demand = {
   comment?: string
 }
 
+export type DemandDTO = {
+  comment?: string | null
+  placeId: string
+  supplyId: string
+  priorityId: string
+}
+
 export type Place = {
   apartment: string
   buildingNumber: string
@@ -57,9 +64,15 @@ export type Place = {
 export type PanelContextValue = {
   places: Place[]
   demands: Demand[]
+  supplies: Supply[]
+  priorities: Priority[]
   fetchPlaces: () => void
   fetchDemands: (placeId: string) => void
   clearDemands: () => void
+  fetchPriorities: (placeId: string) => void
+  fetchSupplies: (placeId: string) => void
+  saveDemand: (demand: DemandDTO) => Promise<boolean>
+  removeAllDemands: (placeId: string) => void
 }
 
 export type PanelContextProviderProps = {
