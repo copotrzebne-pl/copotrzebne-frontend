@@ -14,5 +14,6 @@ export default {
   ink: '#180C3C',
   blue: '#0076FF',
   grey: '#969393',
-  pink: '#DC3673'
+  pink: '#DC3673',
+  red: '#d70000'
 }

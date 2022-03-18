@@ -1,6 +1,6 @@
 import Button from 'components/Button'
 import { DemandDTO, Priority, Supply } from 'contexts/types'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 const Demand = ({
@@ -28,6 +28,10 @@ const Demand = ({
     priorityId: ''
   })
 
+  useEffect(() => {
+    setDemandDTO({ ...demandDTO, priorityId: priorities[0]?.id })
+  }, [priorities])
+
   const handleDemandSave = useCallback(() => {
     if (!demandDTO.priorityId && !demandDTO.placeId) return
     saveDemand({ ...demandDTO, placeId }).then((saved: boolean) => {
@@ -40,7 +44,10 @@ const Demand = ({
 
   return (
     <div className={className}>
-      <DemandTitle onClick={() => onSelected(supply.id)}>
+      <DemandTitle
+        onClick={() => onSelected(supply.id)}
+        isSelected={isSelected}
+      >
         <Title>
           {addedToList && <CheckIcon />} <span>{supply.namePl}</span>
         </Title>
@@ -50,15 +57,22 @@ const Demand = ({
         <DemandDetails>
           <PrioritiesWrapper>
             {priorities.map((priority, key) => (
-              <SelectPriority
+              <PriorityWrapper
                 key={key}
-                selected={priority.id === demandDTO.priorityId}
                 onClick={() =>
                   setDemandDTO({ ...demandDTO, priorityId: priority.id })
                 }
               >
-                {priority.namePl}
-              </SelectPriority>
+                <input
+                  type="radio"
+                  name={priority.id}
+                  checked={priority.id === demandDTO.priorityId}
+                  readOnly
+                />
+                <PriorityInputLabel htmlFor={priority.id}>
+                  {priority.namePl}
+                </PriorityInputLabel>
+              </PriorityWrapper>
             ))}
           </PrioritiesWrapper>
           <FormGroup>
@@ -83,19 +97,25 @@ const Demand = ({
 export default styled(Demand)`
   padding: 1rem 1.2rem;
   background-color: white;
-  width: 100%;
   border-radius: 15px;
   box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.8rem;
-  cursor: pointer;
   width: 100%;
 `
 
-const DemandTitle = styled.div`
+const DemandTitle = styled.div<{ isSelected: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  padding: 1rem 1.2rem;
+  margin: -1rem -1.2rem;
+  ${({ isSelected }) =>
+    isSelected &&
+    `
+    cursor: auto;
+  `}
 `
 
 const AddIcon = styled.span`
@@ -153,20 +173,18 @@ const PrioritiesWrapper = styled.div`
   margin: 1rem 0;
 `
 
-const SelectPriority = styled.div<{ selected: boolean }>`
+const PriorityWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 100%;
-  border: 1px solid #c4c4c4;
-  border-radius: 10px;
-  padding: 0.4rem 1.2rem;
-  width: 100%;
-  margin: 0.6rem 0;
-  ${({ selected }) =>
-    selected &&
-    `
-    border: 2px solid #0076FF;
-  `}
+  align-items: center;
+  align-self: flex-start;
+  margin: 0 0 8px;
+`
+
+const PriorityInputLabel = styled.label`
+  padding: 2px 8px;
+  cursor: pointer;
+  color: ${({ theme }) => theme.colors.grey900};
+  align-self: flex-start;
 `
 
 const Title = styled.div`

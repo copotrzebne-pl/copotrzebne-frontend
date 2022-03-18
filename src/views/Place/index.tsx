@@ -70,7 +70,9 @@ export default () => {
             </PlaceDetailsWrapper>
           </PlaceDetails>
         )}
-        <StyledFacebookButton>Udostępnij</StyledFacebookButton>
+        <StyledFacebookButton>
+          Udostępnij zbiórkę tej organizacji
+        </StyledFacebookButton>
         {selectedPlace !== null && demands.length > 0 && (
           <DemansWrapper>
             <DemandsListTitle>Lista potrzeb</DemandsListTitle>
@@ -248,6 +250,7 @@ const DemandInfo = styled.div`
 const StyledFacebookButton = styled(FacebookShareButton)`
   margin: 1.2rem;
   width: calc(100% - 2.4rem);
+  cursor: pointer;
   ${breakpoint.sm`
     max-width: 450px;
     margin: 1.2rem auto;
