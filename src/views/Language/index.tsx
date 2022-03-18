@@ -4,10 +4,11 @@ import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
-  const [selected, setSelected] = useState<string>('pl')
+  const [selected, setSelected] = useState<string>('')
   return (
     <Container>
       <PageTitle>Zmień język</PageTitle>
+      <NotAvailableYet>Wkrótce dostępne</NotAvailableYet>
       <LanguageWrapper>
         <Language
           selected={selected === 'pl'}
@@ -51,6 +52,7 @@ const LanguageWrapper = styled.div`
 `
 
 const Language = styled.div<{ selected: boolean }>`
+  pointer-events: none;
   width: 100%;
   margin: 0.45rem 0;
   border: 2px solid
@@ -66,4 +68,13 @@ const Language = styled.div<{ selected: boolean }>`
   justify-content: center;
   text-transform: uppercase;
   cursor: pointer;
+`
+
+const NotAvailableYet = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  marign: 1rem 0;
+  color: #999;
+  font-size: 0.9rem;
 `

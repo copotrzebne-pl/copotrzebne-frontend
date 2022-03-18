@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useCallback, useState } from 'react'
+import { Helmet } from 'react-helmet'
 import { usePanelContext } from 'contexts/panelContext'
 import { PlaceBox } from 'components/PlaceBox'
 import marker from 'assets/marker.svg'
@@ -33,23 +34,42 @@ export default () => {
   )
 
   return (
-    <Container>
-      {Object.keys(groupedPlaces).map((cityName, key) => (
-        <div key={key}>
-          <Title>
-            <Marker src={marker} alt="marker" />
-            {cityName}
-          </Title>
-          <PlacesWrapper>
-            {groupedPlaces[cityName].map((place, index) => (
-              <StyledLink to={`${routes[Page.PLACE]}/${place.id}`} key={index}>
-                <PlaceBox place={place} />
-              </StyledLink>
-            ))}
-          </PlacesWrapper>
-        </div>
-      ))}
-    </Container>
+    <>
+      <Helmet>
+        <title>
+          Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Strona główna
+        </title>
+        <meta
+          name="description"
+          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+        />
+      </Helmet>
+      <Container>
+        <PageDesciption>
+          Nie wiesz gdzie potrzebna jest żywność, komu koce a gdzie zawieźć
+          środki higieniczne? Zobacz aktualne zbiórki dla Ukrainy w twoim
+          mieście.
+        </PageDesciption>
+        {Object.keys(groupedPlaces).map((cityName, key) => (
+          <div key={key}>
+            <Title>
+              <Marker src={marker} alt="marker" />
+              {cityName}
+            </Title>
+            <PlacesWrapper>
+              {groupedPlaces[cityName].map((place, index) => (
+                <StyledLink
+                  to={`${routes[Page.PLACE]}/${place.id}`}
+                  key={index}
+                >
+                  <PlaceBox place={place} />
+                </StyledLink>
+              ))}
+            </PlacesWrapper>
+          </div>
+        ))}
+      </Container>
+    </>
   )
 }
 
@@ -58,6 +78,7 @@ const Container = styled.div`
   width: 100%;
   min-height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
   flex-direction: column;
+  padding-bottom: 4.6rem;
   ${breakpoint.sm`
     max-width: 450px;
     margin: 0 auto;
@@ -95,4 +116,9 @@ const PlacesWrapper = styled.div`
 
 const StyledLink = styled(Link)`
   width: 100%;
+`
+
+const PageDesciption = styled.div`
+  width: 100%;
+  padding: 3.2rem 1.2rem 0;
 `

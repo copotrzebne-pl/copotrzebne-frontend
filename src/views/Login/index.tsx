@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useState, useCallback, SyntheticEvent } from 'react'
+import { Helmet } from 'react-helmet'
 import {
   LoginForm,
   FormGroup,
@@ -25,6 +26,16 @@ export default () => {
   )
 
   return (
+    <>
+    <Helmet>
+        <title>
+          Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Panel logowania
+        </title>
+        <meta
+          name="description"
+          content="Panel logowania organizacji. Dodaj zbiórkę i zarządzaj aktualnymi potrzebami w twoim punkcie pomocowym."
+        />
+      </Helmet>
     <Container>
       <PageTitle>Zaloguj się</PageTitle>
       <LoginForm onSubmit={handleLogin}>
@@ -54,6 +65,7 @@ export default () => {
         </FormGroup>
       </LoginForm>
     </Container>
+    </>
   )
 }
 
