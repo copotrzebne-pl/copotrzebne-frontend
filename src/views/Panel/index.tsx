@@ -6,12 +6,11 @@ import PlaceManagerPanel from './components/PlaceManagerPanel'
 import { breakpoint } from 'themes/breakpoints'
 
 export default () => {
-  const { fetchUser, user } = useUserContext()
+  const { user, fetchUser } = useUserContext()
   useEffect(() => {
     // whoimi - get logged in user data
     fetchUser()
   }, [])
-
   return (
     <Container>
       {user?.role === 'admin' && <AdminPanel />}
@@ -25,8 +24,6 @@ const Container = styled.div`
   width: 100%;
   min-height: 70vh;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   ${breakpoint.sm`
     max-width: 450px;
     margin: 0 auto;
