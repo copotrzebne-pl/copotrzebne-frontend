@@ -8,6 +8,7 @@ import { Page, routes } from 'routes'
 import { Link } from 'react-router-dom'
 import { breakpoint } from 'themes/breakpoints'
 import { Place } from 'contexts/types'
+import FacebookShareButton from 'components/FacebookShareButton'
 
 export default () => {
   const { fetchPlaces, places } = usePanelContext()
@@ -50,6 +51,7 @@ export default () => {
           środki higieniczne? Zobacz aktualne zbiórki dla Ukrainy w twoim
           mieście.
         </PageDesciption>
+        <StyledFacebookButton>Udostępnij</StyledFacebookButton>
         {Object.keys(groupedPlaces).map((cityName, key) => (
           <div key={key}>
             <Title>
@@ -121,4 +123,9 @@ const StyledLink = styled(Link)`
 const PageDesciption = styled.div`
   width: 100%;
   padding: 3.2rem 1.2rem 0;
+`
+
+const StyledFacebookButton = styled(FacebookShareButton)`
+  margin: 1.2rem;
+  width: calc(100% - 2.4rem);
 `
