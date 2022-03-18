@@ -18,7 +18,7 @@ const PageHeader = ({ className }: { className?: string }) => {
   return (
     <header className={className}>
       <Link to={routes[Page.HOME]}>
-        <Logo>copotrzebne</Logo>
+        <Logo>copotrzebne.pl</Logo>
       </Link>
       <Navigation>
         <MenuIcon
@@ -30,7 +30,7 @@ const PageHeader = ({ className }: { className?: string }) => {
       <Menu opened={opened} ref={menuRef}>
         <MenuHeader>
           <Link to={routes[Page.HOME]} onClick={closeMenu}>
-            <Logo>copotrzebne</Logo>
+            <Logo>copotrzebne.pl</Logo>
           </Link>
           <MenuIcon
             src={closeIcon}
