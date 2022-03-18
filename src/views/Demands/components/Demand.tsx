@@ -29,14 +29,14 @@ const Demand = ({
   })
 
   const handleDemandSave = useCallback(() => {
-    if (!demandDTO.priorityId) return
-    saveDemand(demandDTO).then((saved: boolean) => {
+    if (!demandDTO.priorityId && !demandDTO.placeId) return
+    saveDemand({ ...demandDTO, placeId }).then((saved: boolean) => {
       if (saved) {
         onSelected('')
         setAddedToList(true)
       }
     })
-  }, [demandDTO])
+  }, [demandDTO, placeId])
 
   return (
     <div className={className}>

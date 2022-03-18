@@ -14,10 +14,10 @@ export default () => {
     supplies,
     fetchPlaces,
     fetchDemands,
-    clearDemands,
     fetchPriorities,
     fetchSupplies,
-    saveDemand
+    saveDemand,
+    clearDemands
   } = usePanelContext()
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
