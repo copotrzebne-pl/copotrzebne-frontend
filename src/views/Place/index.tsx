@@ -30,10 +30,10 @@ export default () => {
   return (
     <>
       <Helmet>
-        <title>Copotrzebne.pl - pomagamy pomagać - {selectedPlace?.name}</title>
+        <title>Copotrzebne.pl - pomagamy pomagać</title>
         <meta
           property="og:title"
-          content={`${selectedPlace?.name} - Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy.`}
+          content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy."
         />
         <meta
           name="description"
@@ -248,4 +248,8 @@ const DemandInfo = styled.div`
 const StyledFacebookButton = styled(FacebookShareButton)`
   margin: 1.2rem;
   width: calc(100% - 2.4rem);
+  ${breakpoint.sm`
+    max-width: 450px;
+    margin: 1.2rem auto;
+  `}
 `
