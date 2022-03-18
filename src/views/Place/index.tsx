@@ -8,6 +8,7 @@ import marker from 'assets/marker.svg'
 import { Place } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
+import { Helmet } from 'react-helmet'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -27,54 +28,71 @@ export default () => {
   }, [places])
 
   return (
-    <Container>
-      {selectedPlace !== null && (
-        <PlaceDetails>
-          <PageTitle>{selectedPlace?.name}</PageTitle>
-          <PlaceDetailsWrapper>
-            {selectedPlace?.comment && (
-              <PlaceDescription>{selectedPlace?.comment}</PlaceDescription>
-            )}
-            <DetailsRow>
-              <PlaceAddressWrapper>
-                <Marker src={marker} alt="marker" />
-                <PlaceAddress>
+    <>
+      <Helmet>
+        <title>Copotrzebne.pl - pomagamy pomagać - {selectedPlace?.name}</title>
+        <meta
+          property="og:title"
+          content={`${selectedPlace?.name} - Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy.`}
+        />
+        <meta
+          name="description"
+          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+        />
+        <meta
+          property="og:description"
+          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+        />
+      </Helmet>
+      <Container>
+        {selectedPlace !== null && (
+          <PlaceDetails>
+            <PageTitle>{selectedPlace?.name}</PageTitle>
+            <PlaceDetailsWrapper>
+              {selectedPlace?.comment && (
+                <PlaceDescription>{selectedPlace?.comment}</PlaceDescription>
+              )}
+              <DetailsRow>
+                <PlaceAddressWrapper>
+                  <Marker src={marker} alt="marker" />
+                  <PlaceAddress>
+                    <span>
+                      {selectedPlace?.street} {selectedPlace?.apartment}
+                    </span>
+                    <span>{selectedPlace?.city}</span>
+                  </PlaceAddress>
+                </PlaceAddressWrapper>
+                <LastUpdate>
+                  <span>Ostatnia aktualizacja:</span>
+                  <h3>---</h3>
+                </LastUpdate>
+              </DetailsRow>
+            </PlaceDetailsWrapper>
+          </PlaceDetails>
+        )}
+        <StyledFacebookButton>Udostępnij</StyledFacebookButton>
+        {selectedPlace !== null && demands.length > 0 && (
+          <DemansWrapper>
+            <DemandsListTitle>Lista potrzeb</DemandsListTitle>
+            <DemansList>
+              {demands.map((demand, index) => (
+                <Demand key={index}>
                   <span>
-                    {selectedPlace?.street} {selectedPlace?.apartment}
+                    <span>{demand?.supply?.namePl}</span>
+                    <div>
+                      <DemandInfo>
+                        <b>{demand?.priority?.namePl}</b>
+                        {demand?.comment && <span>{demand?.comment}</span>}
+                      </DemandInfo>
+                    </div>
                   </span>
-                  <span>{selectedPlace?.city}</span>
-                </PlaceAddress>
-              </PlaceAddressWrapper>
-              <LastUpdate>
-                <span>Ostatnia aktualizacja:</span>
-                <h3>---</h3>
-              </LastUpdate>
-            </DetailsRow>
-          </PlaceDetailsWrapper>
-        </PlaceDetails>
-      )}
-      <StyledFacebookButton>Udostępnij</StyledFacebookButton>
-      {selectedPlace !== null && demands.length > 0 && (
-        <DemansWrapper>
-          <DemandsListTitle>Lista potrzeb</DemandsListTitle>
-          <DemansList>
-            {demands.map((demand, index) => (
-              <Demand key={index}>
-                <span>
-                  <span>{demand?.supply?.namePl}</span>
-                  <div>
-                    <DemandInfo>
-                      <b>{demand?.priority?.namePl}</b>
-                      {demand?.comment && <span>{demand?.comment}</span>}
-                    </DemandInfo>
-                  </div>
-                </span>
-              </Demand>
-            ))}
-          </DemansList>
-        </DemansWrapper>
-      )}
-    </Container>
+                </Demand>
+              ))}
+            </DemansList>
+          </DemansWrapper>
+        )}
+      </Container>
+    </>
   )
 }
 
