@@ -49,8 +49,9 @@ const Demand = ({
       {isSelected && (
         <DemandDetails>
           <PrioritiesWrapper>
-            {priorities.map(priority => (
+            {priorities.map((priority, key) => (
               <SelectPriority
+                key={key}
                 selected={priority.id === demandDTO.priorityId}
                 onClick={() =>
                   setDemandDTO({ ...demandDTO, priorityId: priority.id })

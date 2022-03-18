@@ -34,20 +34,20 @@ export default () => {
 
   return (
     <Container>
-      {Object.keys(groupedPlaces).map(cityName => (
-        <>
+      {Object.keys(groupedPlaces).map((cityName, key) => (
+        <div key={key}>
           <Title>
             <Marker src={marker} alt="marker" />
             {cityName}
           </Title>
           <PlacesWrapper>
             {groupedPlaces[cityName].map((place, index) => (
-              <StyledLink to={`${routes[Page.PLACE]}/${place.id}`}>
-                <PlaceBox key={index} place={place} />
+              <StyledLink to={`${routes[Page.PLACE]}/${place.id}`} key={index}>
+                <PlaceBox place={place} />
               </StyledLink>
             ))}
           </PlacesWrapper>
-        </>
+        </div>
       ))}
     </Container>
   )

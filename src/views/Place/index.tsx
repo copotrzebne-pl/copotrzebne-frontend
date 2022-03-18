@@ -56,11 +56,16 @@ export default () => {
         <DemansWrapper>
           <DemandsListTitle>Lista potrzeb</DemandsListTitle>
           <DemansList>
-            {demands.map(demand => (
-              <Demand>
+            {demands.map((demand, index) => (
+              <Demand key={index}>
                 <span>
                   <span>{demand?.supply?.namePl}</span>
-                  <b>{demand?.priority?.namePl}</b>
+                  <div>
+                    <DemandInfo>
+                      <b>{demand?.priority?.namePl}</b>
+                      {demand?.comment && <span>{demand?.comment}</span>}
+                    </DemandInfo>
+                  </div>
                 </span>
               </Demand>
             ))}
@@ -192,7 +197,9 @@ const DemansList = styled.ol`
 `
 
 const Demand = styled.li`
-  margin: 0.5rem;
+  margin: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #999;
   & > span {
     display: flex;
     width: 100%;
@@ -205,5 +212,15 @@ const Demand = styled.li`
       color: #333;
       font-weight: 600;
     }
+  }
+`
+
+const DemandInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  & > span {
+    color: #999999;
+    margin-top: 0.3rem;
   }
 `
