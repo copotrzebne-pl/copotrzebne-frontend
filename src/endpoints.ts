@@ -7,7 +7,7 @@ const panel = {
   getPlaces: '/places',
   getPlaceDemands: '/places/:id/demands',
   getUser: '/users/whoami',
-  getOwnedPlaces: '/places/owned',
+  getOwnedPlaces: '/users-places/owned',
   savePlace: '/places',
   supplies: '/supplies',
   priorities: '/priorities',
