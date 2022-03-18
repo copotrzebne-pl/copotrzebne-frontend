@@ -51,7 +51,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                     <DemandBox key={index}>
                       <DemandTitle>
                         <span>{demand.supply.namePl}</span>
-                        <span>{demand.priority.namePl}</span>
+                        <PriorityLabel>{demand.priority.namePl}</PriorityLabel>
                       </DemandTitle>
                     </DemandBox>
                   ))}
@@ -160,6 +160,10 @@ const DemandTitle = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+`
+
+const PriorityLabel = styled.span`
+  color: #999;
 `
 
 const RemoveAllDemandsButton = styled(Button)`
