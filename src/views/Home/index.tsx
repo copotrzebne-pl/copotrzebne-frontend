@@ -41,7 +41,15 @@ export default () => {
           Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Strona główna
         </title>
         <meta
+          property="og:title"
+          content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Strona główna"
+        />
+        <meta
           name="description"
+          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+        />
+        <meta
+          property="og:description"
           content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
         />
       </Helmet>
