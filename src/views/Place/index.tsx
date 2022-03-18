@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import marker from 'assets/marker.svg'
 import { Place } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
+import FacebookShareButton from 'components/FacebookShareButton'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -52,6 +53,7 @@ export default () => {
           </PlaceDetailsWrapper>
         </PlaceDetails>
       )}
+      <StyledFacebookButton>Udostępnij</StyledFacebookButton>
       {selectedPlace !== null && demands.length > 0 && (
         <DemansWrapper>
           <DemandsListTitle>Lista potrzeb</DemandsListTitle>
@@ -223,4 +225,9 @@ const DemandInfo = styled.div`
     color: #999999;
     margin-top: 0.3rem;
   }
+`
+
+const StyledFacebookButton = styled(FacebookShareButton)`
+  margin: 1.2rem;
+  width: calc(100% - 2.4rem);
 `

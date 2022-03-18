@@ -27,7 +27,7 @@ export default () => {
 
   return (
     <>
-    <Helmet>
+      <Helmet>
         <title>
           Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Panel logowania
         </title>
@@ -36,35 +36,35 @@ export default () => {
           content="Panel logowania organizacji. Dodaj zbiórkę i zarządzaj aktualnymi potrzebami w twoim punkcie pomocowym."
         />
       </Helmet>
-    <Container>
-      <PageTitle>Zaloguj się</PageTitle>
-      <LoginForm onSubmit={handleLogin}>
-        <FormGroup>
-          <Label>Email</Label>
-          <TextInput
-            autoComplete="on"
-            id="login"
-            type="email"
-            placeholder="Email"
-            value={login}
-            onChange={e => setLogin(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Hasło</Label>
-          <TextInput
-            id="password"
-            type="password"
-            placeholder="Hasło"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-          <LoginButton type="submit" onClick={handleLogin}>
-            Zaloguj się
-          </LoginButton>
-        </FormGroup>
-      </LoginForm>
-    </Container>
+      <Container>
+        <PageTitle>Zaloguj się</PageTitle>
+        <LoginForm onSubmit={handleLogin}>
+          <FormGroup>
+            <Label>Email</Label>
+            <TextInput
+              autoComplete="on"
+              id="login"
+              type="email"
+              placeholder="Email"
+              value={login}
+              onChange={e => setLogin(e.target.value)}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label>Hasło</Label>
+            <TextInput
+              id="password"
+              type="password"
+              placeholder="Hasło"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+            <LoginButton type="submit" onClick={handleLogin}>
+              Zaloguj się
+            </LoginButton>
+          </FormGroup>
+        </LoginForm>
+      </Container>
     </>
   )
 }
