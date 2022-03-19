@@ -60,7 +60,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                   <RemoveAllDemandsButton
                     onClick={() => removeAllDemands(ownedPlaces[0]?.id || '')}
                   >
-                    Usuń wszystkie
+                    Zakończ zbiórkę
                   </RemoveAllDemandsButton>
                 )}
               </>
@@ -152,7 +152,6 @@ const DemandBox = styled.div`
   box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.8rem;
   cursor: pointer;
-  width: 100%;
 `
 
 const DemandTitle = styled.div`
@@ -170,6 +169,6 @@ const RemoveAllDemandsButton = styled(Button)`
   margin-top: 0.8rem;
   margin-bottom: 2.2rem;
   background-color: transparent;
-  color: #333;
-  border: 1px solid #333;
+  color: ${({ theme }) => theme.colors.red};
+  border: 1px solid ${({ theme }) => theme.colors.red};
 `

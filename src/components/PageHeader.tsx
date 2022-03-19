@@ -6,9 +6,11 @@ import closeIcon from 'assets/close-icon.svg'
 
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
+import { useUserContext } from '../contexts/userContext'
 
 const PageHeader = ({ className }: { className?: string }) => {
   const [opened, setOpened] = useState<boolean>(false)
+  const { authorized } = useUserContext()
   const closeMenu = useCallback(() => {
     setOpened(false)
   }, [setOpened])
@@ -18,7 +20,7 @@ const PageHeader = ({ className }: { className?: string }) => {
   return (
     <header className={className}>
       <Link to={routes[Page.HOME]}>
-        <Logo>copotrzebne</Logo>
+        <Logo>copotrzebne.pl</Logo>
       </Link>
       <Navigation>
         <MenuIcon
@@ -30,7 +32,7 @@ const PageHeader = ({ className }: { className?: string }) => {
       <Menu opened={opened} ref={menuRef}>
         <MenuHeader>
           <Link to={routes[Page.HOME]} onClick={closeMenu}>
-            <Logo>copotrzebne</Logo>
+            <Logo>copotrzebne.pl</Logo>
           </Link>
           <MenuIcon
             src={closeIcon}
@@ -42,9 +44,15 @@ const PageHeader = ({ className }: { className?: string }) => {
           <MenuItem to={routes[Page.ABOUT]} onClick={closeMenu}>
             O nas
           </MenuItem>
-          <MenuItem to={routes[Page.LOGIN]} onClick={closeMenu}>
-            Zaloguj się
-          </MenuItem>
+          {authorized ? (
+            <MenuItem to={routes[Page.PANEL]} onClick={closeMenu}>
+              Panel
+            </MenuItem>
+          ) : (
+            <MenuItem to={routes[Page.LOGIN]} onClick={closeMenu}>
+              Zaloguj się
+            </MenuItem>
+          )}
           <MenuItem to={routes[Page.LANGUAGE]} onClick={closeMenu}>
             Zmień język
           </MenuItem>

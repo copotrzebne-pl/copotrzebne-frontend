@@ -59,7 +59,7 @@ export default () => {
           środki higieniczne? Zobacz aktualne zbiórki dla Ukrainy w twoim
           mieście.
         </PageDesciption>
-        <StyledFacebookButton>Udostępnij</StyledFacebookButton>
+        <StyledFacebookButton>Udostępnij aktywne zbiórki</StyledFacebookButton>
         {Object.keys(groupedPlaces).map((cityName, key) => (
           <div key={key}>
             <Title>
@@ -136,4 +136,5 @@ const PageDesciption = styled.div`
 const StyledFacebookButton = styled(FacebookShareButton)`
   margin: 1.2rem;
   width: calc(100% - 2.4rem);
+  cursor: pointer;
 `
