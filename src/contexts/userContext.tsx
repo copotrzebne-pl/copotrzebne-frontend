@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo
+} from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   User,
@@ -9,10 +15,14 @@ import {
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
 import { Page, routes } from 'routes'
+import { checkIfAuthorized } from '../utils/session'
 
 export const UserContext = createContext<UserContextValue | null>(null)
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
+  const [authorized, setAuthorized] = useState<boolean>(
+    useMemo(() => checkIfAuthorized(), [])
+  )
   const [userValue, setUserValue] = useState<User | null>(null)
   const [ownedPlaces, setOwnedPlaces] = useState<Place[]>([])
   const [errors, setError] = useState<Record<string, string>>({})
@@ -26,6 +36,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
           { login: userLogin, password }
         )
         window.localStorage.setItem('_token', response.jwt)
+        setAuthorized(true)
         navigate(routes[Page.PANEL])
       } catch {
         setError({ ...errors, login: 'Błąd logowania' })
@@ -80,7 +91,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         fetchUser,
         fetchOwnedPlaces,
         login,
-        savePlace
+        savePlace,
+        authorized
       }}
     >
       {children}

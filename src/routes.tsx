@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { checkIfAuthorized } from 'utils/session'
+import { useUserContext } from './contexts/userContext'
 
 export enum Page { //eslint-disable-line no-shadow
   LOGIN,
@@ -26,6 +26,6 @@ export const routes: { [key in Page]: string } = {
 }
 
 export const PrivatePath = () => {
-  const authorized = checkIfAuthorized()
+  const { authorized } = useUserContext()
   return authorized ? <Outlet /> : <Navigate to={routes[Page.LOGIN]} />
 }
