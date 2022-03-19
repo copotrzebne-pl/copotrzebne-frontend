@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import menuIcon from 'assets/menu-icon.svg'
 import closeIcon from 'assets/close-icon.svg'
+import logoImage from 'assets/uk-heart.svg'
 
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
@@ -20,11 +21,12 @@ const PageHeader = ({ className }: { className?: string }) => {
   return (
     <header className={className}>
       <Link to={routes[Page.HOME]}>
-        <Logo>copotrzebne.pl</Logo>
+        <Logo src={logoImage}/>
+        <LogoText>copotrzebne.pl</LogoText>
       </Link>
       <Navigation>
         <MenuIcon
-          src={menuIcon}
+          src={menuIcon}ś
           alt="menu"
           onClick={() => setOpened(!opened)}
         />
@@ -32,7 +34,8 @@ const PageHeader = ({ className }: { className?: string }) => {
       <Menu opened={opened} ref={menuRef}>
         <MenuHeader>
           <Link to={routes[Page.HOME]} onClick={closeMenu}>
-            <Logo>copotrzebne.pl</Logo>
+            <Logo src={logoImage}/>
+            <LogoText>copotrzebne.pl</LogoText>
           </Link>
           <MenuIcon
             src={closeIcon}
@@ -75,8 +78,14 @@ export default styled(PageHeader)`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 `
+const Logo = styled.img`
+  display: inline-block;
+  float: left;
+  height: 2.85rem;
+  width: auto;
+`
 
-const Logo = styled.span`
+const LogoText = styled.span`
   display: inline-block;
   font-size: 1.85rem;
   font-weight: 700;
