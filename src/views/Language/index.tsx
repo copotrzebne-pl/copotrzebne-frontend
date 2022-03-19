@@ -9,7 +9,6 @@ export default () => {
   return (
     <Container>
       <PageTitle>Zmień język</PageTitle>
-      <NotAvailableYet>Wkrótce dostępne</NotAvailableYet>
       <LanguageWrapper>
         <Language
           selected={language === 'pl'}
@@ -53,14 +52,13 @@ const LanguageWrapper = styled.div`
 `
 
 const Language = styled.div<{ selected: boolean }>`
-  pointer-events: none;
   width: 100%;
   margin: 0.45rem 0;
   border: 2px solid
     ${({ selected, theme }) =>
-      selected ? theme.colors.grey /* theme.colors.pink */ : theme.colors.grey};
+      selected ? theme.colors.pink : theme.colors.grey};
   color: ${({ selected, theme }) =>
-    selected ? theme.colors.grey /* theme.colors.pink */ : theme.colors.grey};
+    selected ? theme.colors.pink : theme.colors.grey};
   transition: border-color 0.3s, color 0.3s;
   border-radius: 50px;
   height: 48px;
