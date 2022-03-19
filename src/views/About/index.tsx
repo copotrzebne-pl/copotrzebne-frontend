@@ -54,8 +54,7 @@ const ContactDetails = styled.div`
   font-size: 0.89rem;
   color: ${({ theme }) => theme.colors.black};
   line-height: 1.4rem;
-  white-space: pre-line
-  ;
+  white-space: pre-line;
 `
 
 const StyledLink = styled.a`
