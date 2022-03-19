@@ -4,7 +4,7 @@ import { breakpoint } from 'themes/breakpoints'
 
 export default () => (
   <Container>
-    <PageTitle>Copotrzebne.pl</PageTitle>
+    <PageTitle>Copotrzebne.pl - O nas</PageTitle>
     <AboutUsText>
       {`Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
       wsparcie osobom uchodźczym z Ukrainy - z osobami, które chciałyby je w tej
@@ -54,7 +54,8 @@ const ContactDetails = styled.div`
   font-size: 0.89rem;
   color: ${({ theme }) => theme.colors.black};
   line-height: 1.4rem;
-  white-space: pre-line;
+  white-space: pre-line
+  ;
 `
 
 const StyledLink = styled.a`
