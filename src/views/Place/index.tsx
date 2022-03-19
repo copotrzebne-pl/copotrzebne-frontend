@@ -79,15 +79,15 @@ export default () => {
             <DemansList>
               {demands.map((demand, index) => (
                 <Demand key={index}>
-                  <span>
-                    <span>{demand?.supply?.namePl}</span>
-                    <div>
-                      <DemandInfo>
-                        <b>{demand?.priority?.namePl}</b>
-                        {demand?.comment && <span>{demand?.comment}</span>}
-                      </DemandInfo>
-                    </div>
-                  </span>
+                  <div>
+                    <DemandInfo>
+                      <span>{demand?.supply?.namePl}</span>
+                      <b>{demand?.priority?.namePl}</b>
+                    </DemandInfo>
+                    {demand?.comment && (
+                      <DemandComment>{demand?.comment}</DemandComment>
+                    )}
+                  </div>
                 </Demand>
               ))}
             </DemansList>
@@ -158,6 +158,7 @@ const Marker = styled.img`
 const PlaceAddress = styled.div`
   display: flex;
   flex-direction: column;
+
   span {
     color: #8d99b2;
     font-size: 0.7rem;
@@ -177,12 +178,14 @@ const LastUpdate = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+
   span {
     color: #8d99b2;
     font-size: 0.7rem;
     font-weight: 400;
     margin: 0.1rem 0;
   }
+
   h3 {
     color: #8d99b2;
     font-size: 0.78rem;
@@ -222,29 +225,29 @@ const Demand = styled.li`
   margin: 0.6rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid #999;
+
   & > span {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    & > span {
-      color: #999;
-    }
-    & > b {
-      color: #333;
-      font-weight: 600;
-    }
+    color: #999;
+  }
+
+  & > b {
+    color: #333;
+    font-weight: 600;
   }
 `
 
 const DemandInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
+
   & > span {
     color: #999999;
-    margin-top: 0.3rem;
   }
+`
+
+const DemandComment = styled.div`
+  margin-top: 0.2rem;
 `
 
 const StyledFacebookButton = styled(FacebookShareButton)`

@@ -40,6 +40,7 @@ const BackIcon = styled.img`
   width: auto;
   margin-left: 0.8rem;
   margin-top: 4px;
+  cursor: pointer;
 `
 
 const GoBack = styled.span`
