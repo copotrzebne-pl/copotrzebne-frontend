@@ -2,8 +2,7 @@ import {
   createContext,
   useContext,
   useState,
-  useCallback,
-  useMemo
+  useCallback
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -20,8 +19,8 @@ import { checkIfAuthorized } from '../utils/session'
 export const UserContext = createContext<UserContextValue | null>(null)
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [authorized, setAuthorized] = useState<boolean>(
-    useMemo(() => checkIfAuthorized(), [])
+  const [authorized, setAuthorized] = useState<boolean>(() =>
+    checkIfAuthorized()
   )
   const [userValue, setUserValue] = useState<User | null>(null)
   const [ownedPlaces, setOwnedPlaces] = useState<Place[]>([])

@@ -80,7 +80,7 @@ const Demand = ({
             <TextInput
               id="comment"
               type="text"
-              placeholder="Dodaj komentarz"
+              placeholder="Komentarz, np. buty rozmiar 36 "
               value={demandDTO.comment || ''}
               onChange={e =>
                 setDemandDTO({ ...demandDTO, comment: e.target.value })
