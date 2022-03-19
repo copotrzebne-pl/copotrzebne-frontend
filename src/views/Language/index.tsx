@@ -9,7 +9,6 @@ export default () => {
   return (
     <Container>
       <PageTitle>Zmień język</PageTitle>
-      <NotAvailableYet>Wkrótce dostępne</NotAvailableYet>
       <LanguageWrapper>
         <Language
           selected={language === 'pl'}
