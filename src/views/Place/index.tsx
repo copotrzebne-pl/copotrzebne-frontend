@@ -8,7 +8,7 @@ import marker from 'assets/marker.svg'
 import { Place } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
