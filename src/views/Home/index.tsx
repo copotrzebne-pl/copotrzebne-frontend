@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useCallback, useState } from 'react'
-import { Helmet } from 'react-helmet'
+import { Helmet } from 'react-helmet-async'
 import { usePanelContext } from 'contexts/panelContext'
 import { PlaceBox } from 'components/PlaceBox'
 import marker from 'assets/marker.svg'
