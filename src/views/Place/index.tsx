@@ -74,9 +74,9 @@ export default () => {
           Udostępnij zbiórkę tej organizacji
         </StyledFacebookButton>
         {selectedPlace !== null && demands.length > 0 && (
-          <DemansWrapper>
+          <DemandsWrapper>
             <DemandsListTitle>Lista potrzeb</DemandsListTitle>
-            <DemansList>
+            <DemandsList>
               {demands.map((demand, index) => (
                 <Demand key={index}>
                   <div>
@@ -90,8 +90,8 @@ export default () => {
                   </div>
                 </Demand>
               ))}
-            </DemansList>
-          </DemansWrapper>
+            </DemandsList>
+          </DemandsWrapper>
         )}
       </Container>
     </>
@@ -194,7 +194,7 @@ const LastUpdate = styled.div`
   }
 `
 
-const DemansWrapper = styled.div`
+const DemandsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2.2rem 1.2rem 3.2rem;
@@ -214,7 +214,7 @@ const DemandsListTitle = styled.h4`
   color: #333333;
 `
 
-const DemansList = styled.ol`
+const DemandsList = styled.ol`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -242,7 +242,7 @@ const DemandInfo = styled.div`
   justify-content: space-between;
 
   & > span {
-    color: #999999;
+    color: #333333;
   }
 `
 
