@@ -1,9 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useCallback
-} from 'react'
+import { createContext, useContext, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   User,
@@ -16,11 +11,16 @@ import { getRestClient } from 'clients/restClient'
 import { Page, routes } from 'routes'
 import { checkIfAuthorized } from '../utils/session'
 
+const DEFAULT_LANGUAGE = 'pl'
+
 export const UserContext = createContext<UserContextValue | null>(null)
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [authorized, setAuthorized] = useState<boolean>(() =>
     checkIfAuthorized()
+  )
+  const [language, setLanguage] = useState<string>(
+    () => localStorage.getItem('lang') || DEFAULT_LANGUAGE
   )
   const [userValue, setUserValue] = useState<User | null>(null)
   const [ownedPlaces, setOwnedPlaces] = useState<Place[]>([])
@@ -43,6 +43,11 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     },
     [errors, navigate]
   )
+  const changeLanguage = (lang: string) => {
+    setLanguage(lang)
+    window.localStorage.setItem('lang', lang)
+  }
+
   const fetchUser = useCallback(async () => {
     const client = await getRestClient(process.env.API_URL)
     const response = await client.get<null, User>(API.panel.getUser)
@@ -91,7 +96,9 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         fetchOwnedPlaces,
         login,
         savePlace,
-        authorized
+        authorized,
+        language,
+        changeLanguage
       }}
     >
       {children}

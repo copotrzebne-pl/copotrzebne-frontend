@@ -7,6 +7,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
+import TranslatedEntry from '../../../components/TranslatedEntry'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -50,8 +51,12 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                   {demands.map((demand, index) => (
                     <DemandBox key={index}>
                       <DemandTitle>
-                        <span>{demand.supply.namePl}</span>
-                        <PriorityLabel>{demand.priority.namePl}</PriorityLabel>
+                        <span>
+                          <TranslatedEntry entry={demand.supply} />
+                        </span>
+                        <PriorityLabel>
+                          <TranslatedEntry entry={demand.priority} />
+                        </PriorityLabel>
                       </DemandTitle>
                     </DemandBox>
                   ))}
