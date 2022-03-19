@@ -4,18 +4,19 @@ import { breakpoint } from 'themes/breakpoints'
 
 export default () => (
   <Container>
-    <PageTitle>Copotrzebne.pl</PageTitle>
+    <PageTitle>Copotrzebne.pl - O nas</PageTitle>
     <AboutUsText>
-      Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
-      wsparcie osobom uchodźczym z Ukrainy, z osobami, które chciałyby je w tej
+      {`Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
+      wsparcie osobom uchodźczym z Ukrainy - z osobami, które chciałyby je w tej
       pomocy wspierać. Ułatwiamy lokalizację zbiórek i pomagamy koordynować
       zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
       aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
-      można dane rzeczy dostarczyć.
+      można dane rzeczy dostarczyć.`}
     </AboutUsText>
     <ContactDetails>
-      Chcesz dodać zbiórkę w twojej organizacji? Napisz lub zadzwoń do nas!
-      Skontaktuj się z nami:
+      {`Chcesz dodać zbiórkę w twojej organizacji?
+      Skontaktuj się z nami:`}
+
       <StyledLink href="mailto:copotrzebne@gmail.com">
         copotrzebne@gmail.com
       </StyledLink>
@@ -42,6 +43,8 @@ const AboutUsText = styled.p`
   font-size: 0.89rem;
   color: ${({ theme }) => theme.colors.black};
   line-height: 1.4rem;
+  text-align: justify;
+  text-justify: inter-character;
 `
 
 const ContactDetails = styled.div`
@@ -51,6 +54,7 @@ const ContactDetails = styled.div`
   font-size: 0.89rem;
   color: ${({ theme }) => theme.colors.black};
   line-height: 1.4rem;
+  white-space: pre-line;
 `
 
 const StyledLink = styled.a`
