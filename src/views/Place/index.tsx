@@ -248,6 +248,7 @@ const DemandInfo = styled.div`
 
 const DemandComment = styled.div`
   margin-top: 0.2rem;
+  color: #999999;
 `
 
 const StyledFacebookButton = styled(FacebookShareButton)`
