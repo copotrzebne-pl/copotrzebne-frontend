@@ -8,6 +8,11 @@ const errorInterceptor = (error: AxiosError) => {
     console.error('Status:', error.response.status)
     console.error('Data:', error.response.data)
     console.error('Headers:', error.response.headers)
+
+    if (error.response.status === 401) {
+      window.localStorage.removeItem('_token')
+      window.location.href = '/'
+    }
   } else {
     console.error('Error Message:', error.message)
   }
