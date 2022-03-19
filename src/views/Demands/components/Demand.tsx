@@ -2,6 +2,7 @@ import Button from 'components/Button'
 import { DemandDTO, Priority, Supply } from 'contexts/types'
 import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
+import TranslatedEntry from '../../../components/TranslatedEntry'
 
 const Demand = ({
   className,
@@ -49,7 +50,10 @@ const Demand = ({
         isSelected={isSelected}
       >
         <Title>
-          {addedToList && <CheckIcon />} <span>{supply.namePl}</span>
+          {addedToList && <CheckIcon />}{' '}
+          <span>
+            <TranslatedEntry entry={supply} />
+          </span>
         </Title>
         <AddIcon>+</AddIcon>
       </DemandTitle>
@@ -70,7 +74,7 @@ const Demand = ({
                   readOnly
                 />
                 <PriorityInputLabel htmlFor={priority.id}>
-                  {priority.namePl}
+                  <TranslatedEntry entry={priority} />
                 </PriorityInputLabel>
               </PriorityWrapper>
             ))}

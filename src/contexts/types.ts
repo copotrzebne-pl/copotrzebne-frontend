@@ -14,6 +14,8 @@ export type UserContextValue = {
   fetchOwnedPlaces: () => void
   savePlace: (place: Place) => void
   authorized: boolean
+  language: string
+  changeLanguage: (lang: string) => void
 }
 
 export type UserContextProviderProps = {
