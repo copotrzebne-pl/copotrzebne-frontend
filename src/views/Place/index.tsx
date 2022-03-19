@@ -9,6 +9,7 @@ import { Place } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet'
+import TranslatedEntry from '../../components/TranslatedEntry'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -81,8 +82,10 @@ export default () => {
                 <Demand key={index}>
                   <div>
                     <DemandInfo>
-                      <span>{demand?.supply?.namePl}</span>
-                      <b>{demand?.priority?.namePl}</b>
+                      <span>
+                        <TranslatedEntry entry={demand?.supply} />
+                      </span>
+                      <TranslatedEntry entry={demand?.priority} />
                     </DemandInfo>
                     {demand?.comment && (
                       <DemandComment>{demand?.comment}</DemandComment>

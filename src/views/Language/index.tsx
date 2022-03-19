@@ -1,30 +1,31 @@
-import { useState } from 'react'
 import PageTitle from 'components/PageTitle'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
+import { useUserContext } from '../../contexts/userContext'
 
 export default () => {
-  const [selected, setSelected] = useState<string>('')
+  const { language, changeLanguage } = useUserContext()
+
   return (
     <Container>
       <PageTitle>Zmień język</PageTitle>
       <NotAvailableYet>Wkrótce dostępne</NotAvailableYet>
       <LanguageWrapper>
         <Language
-          selected={selected === 'pl'}
-          onClick={() => setSelected('pl')}
+          selected={language === 'pl'}
+          onClick={() => changeLanguage('pl')}
         >
           Polski
         </Language>
         <Language
-          selected={selected === 'ua'}
-          onClick={() => setSelected('ua')}
+          selected={language === 'ua'}
+          onClick={() => changeLanguage('ua')}
         >
           український
         </Language>
         <Language
-          selected={selected === 'en'}
-          onClick={() => setSelected('en')}
+          selected={language === 'en'}
+          onClick={() => changeLanguage('en')}
         >
           English
         </Language>
@@ -57,9 +58,9 @@ const Language = styled.div<{ selected: boolean }>`
   margin: 0.45rem 0;
   border: 2px solid
     ${({ selected, theme }) =>
-      selected ? theme.colors.pink : theme.colors.grey};
+      selected ? theme.colors.grey /* theme.colors.pink */ : theme.colors.grey};
   color: ${({ selected, theme }) =>
-    selected ? theme.colors.pink : theme.colors.grey};
+    selected ? theme.colors.grey /* theme.colors.pink */ : theme.colors.grey};
   transition: border-color 0.3s, color 0.3s;
   border-radius: 50px;
   height: 48px;
