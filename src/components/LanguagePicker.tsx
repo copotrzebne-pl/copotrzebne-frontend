@@ -1,21 +1,30 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as PolandFlag } from '../assets/poland-flag-square.svg'
 import { ReactComponent as EnglandFlag } from '../assets/england-flag-square.svg'
 import { ReactComponent as UkraineFlag } from '../assets/ukraine-flag-square.svg'
+import { useUserContext } from '../contexts/userContext'
 
 export default () => {
-  const [selected, setSelected] = useState<string>('')
+  const { language, changeLanguage } = useUserContext()
 
   return (
     <>
-      <Language selected={selected === 'pl'} onClick={() => setSelected('pl')}>
+      <Language
+        selected={language === 'pl'}
+        onClick={() => changeLanguage('pl')}
+      >
         <PolandFlag />
       </Language>
-      <Language selected={selected === 'ua'} onClick={() => setSelected('ua')}>
+      <Language
+        selected={language === 'ua'}
+        onClick={() => changeLanguage('ua')}
+      >
         <UkraineFlag />
       </Language>
-      <Language selected={selected === 'en'} onClick={() => setSelected('en')}>
+      <Language
+        selected={language === 'en'}
+        onClick={() => changeLanguage('en')}
+      >
         <EnglandFlag />
       </Language>
     </>
