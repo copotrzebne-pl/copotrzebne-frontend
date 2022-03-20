@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import Demand from './components/Demand'
+import TranslatedText from 'components/TranslatedText'
 
 export default () => {
   const {
@@ -39,7 +40,9 @@ export default () => {
 
   return (
     <Container>
-      <PageTitle>Wybierz aktualne potrzeby</PageTitle>
+      <PageTitle>
+        <TranslatedText value="chooseCurrentDemands" />
+      </PageTitle>
       <SuppliesWrapper>
         {supplies.map((supply, index) => (
           <Demand

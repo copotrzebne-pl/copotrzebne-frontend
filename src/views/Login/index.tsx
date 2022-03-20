@@ -11,6 +11,7 @@ import {
 import { useUserContext } from 'contexts/userContext'
 import PageTitle from 'components/PageTitle'
 import { breakpoint } from 'themes/breakpoints'
+import TranslatedText from 'components/TranslatedText'
 
 export default () => {
   const [login, setLogin] = useState<string>('')
@@ -37,10 +38,14 @@ export default () => {
         />
       </Helmet>
       <Container>
-        <PageTitle>Zaloguj się</PageTitle>
+        <PageTitle>
+          <TranslatedText value="logIn" />
+        </PageTitle>
         <LoginForm onSubmit={handleLogin}>
           <FormGroup>
-            <Label>Email</Label>
+            <Label>
+              <TranslatedText value="email" />
+            </Label>
             <TextInput
               autoComplete="on"
               id="login"
@@ -51,7 +56,9 @@ export default () => {
             />
           </FormGroup>
           <FormGroup>
-            <Label>Hasło</Label>
+            <Label>
+              <TranslatedText value="password" />
+            </Label>
             <TextInput
               id="password"
               type="password"
@@ -60,7 +67,7 @@ export default () => {
               onChange={e => setPassword(e.target.value)}
             />
             <LoginButton type="submit" onClick={handleLogin}>
-              Zaloguj się
+              <TranslatedText value="logIn" />
             </LoginButton>
           </FormGroup>
         </LoginForm>

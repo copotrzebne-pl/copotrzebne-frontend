@@ -9,11 +9,16 @@ import { Place } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet-async'
-import TranslatedEntry from '../../components/TranslatedEntry'
+import TranslatedEntry from 'components/TranslatedEntry'
+import TranslatedText from 'components/TranslatedText'
+import { useUserContext } from 'contexts/userContext'
+import { getTranslation } from '../../utils/translation'
+import { translations } from '../../translations'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
     usePanelContext()
+  const { language } = useUserContext()
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
   useEffect(() => {
@@ -31,7 +36,7 @@ export default () => {
   return (
     <>
       <Helmet>
-        <title>Copotrzebne.pl - pomagamy pomagać</title>
+        <title>{getTranslation(language, translations.pageTitle)}</title>
         <meta
           property="og:title"
           content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy."
@@ -64,7 +69,9 @@ export default () => {
                   </PlaceAddress>
                 </PlaceAddressWrapper>
                 <LastUpdate>
-                  <span>Ostatnia aktualizacja:</span>
+                  <span>
+                    <TranslatedText value="lastUpdate" />
+                  </span>
                   <h3>---</h3>
                 </LastUpdate>
               </DetailsRow>
@@ -72,7 +79,7 @@ export default () => {
           </PlaceDetails>
         )}
         <StyledFacebookButton>
-          Udostępnij zbiórkę tej organizacji
+          <TranslatedText value="shareThisOrganizationCollection" />
         </StyledFacebookButton>
         {selectedPlace !== null && demands.length > 0 && (
           <DemandsWrapper>

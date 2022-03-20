@@ -7,6 +7,7 @@ import { useUserContext } from 'contexts/userContext'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
+import TranslatedText from 'components/TranslatedText'
 
 export default () => {
   const { id } = useParams()
@@ -63,7 +64,9 @@ export default () => {
       <PageTitle>{selectedPlace?.name || 'Dodaj nowe miejsce'}</PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
-          <Label>Nazwa</Label>
+          <Label>
+            <TranslatedText value="name" />
+          </Label>
           <TextInput
             id="name"
             type="text"
@@ -74,7 +77,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Miasto</Label>
+          <Label>
+            <TranslatedText value="city" />
+          </Label>
           <TextInput
             id="city"
             type="text"
@@ -85,7 +90,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Ulica</Label>
+          <Label>
+            <TranslatedText value="street" />
+          </Label>
           <TextInput
             id="street"
             type="text"
@@ -96,7 +103,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Numer budynku</Label>
+          <Label>
+            <TranslatedText value="buildingNumber" />
+          </Label>
           <TextInput
             id="buildingNumber"
             type="text"
@@ -107,7 +116,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Numer lokalu</Label>
+          <Label>
+            <TranslatedText value="apartmentNumber" />
+          </Label>
           <TextInput
             id="apartment"
             type="text"
@@ -117,7 +128,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Komentarz</Label>
+          <Label>
+            <TranslatedText value="comment" />
+          </Label>
           <TextInput
             id="comment"
             type="text"
@@ -127,7 +140,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Email</Label>
+          <Label>
+            <TranslatedText value="Email" />
+          </Label>
           <TextInput
             id="email"
             type="text"
@@ -137,7 +152,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Telefon</Label>
+          <Label>
+            <TranslatedText value="phone" />
+          </Label>
           <TextInput
             id="phone"
             type="text"
@@ -147,7 +164,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Latitude</Label>
+          <Label>
+            <TranslatedText value="latitude" />
+          </Label>
           <TextInput
             id="latitude"
             type="text"
@@ -157,7 +176,9 @@ export default () => {
           />
         </FormGroup>
         <FormGroup>
-          <Label>Longitude</Label>
+          <Label>
+            <TranslatedText value="longitude" />
+          </Label>
           <TextInput
             id="longitude"
             type="text"
@@ -168,7 +189,7 @@ export default () => {
         </FormGroup>
         <ButtonWrapper>
           <Button type="submit" onClick={handleSubmit}>
-            Zapisz
+            <TranslatedText value="save" />
           </Button>
         </ButtonWrapper>
       </Form>
