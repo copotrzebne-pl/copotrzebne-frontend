@@ -26,7 +26,7 @@ const PageHeader = ({ className }: { className?: string }) => {
       </Link>
       <Navigation>
         <MenuIcon
-          src={menuIcon}ś
+          src={menuIcon}
           alt="menu"
           onClick={() => setOpened(!opened)}
         />
