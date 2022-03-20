@@ -52,9 +52,6 @@ const PanelHeader = ({ className }: { className?: string }) => {
           />
         </MenuHeader>
         <MenuList>
-          <MenuItem to={routes[Page.LANGUAGE]} onClick={closeMenu}>
-            Zmień język
-          </MenuItem>
           <MenuItem to={routes[Page.HOME]} onClick={handleLogout}>
             Wyloguj się
           </MenuItem>
