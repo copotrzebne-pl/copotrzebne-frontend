@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 import { breakpoint } from 'themes/breakpoints'
 import { Place } from 'contexts/types'
 import FacebookShareButton from 'components/FacebookShareButton'
+import TranslatedText from 'components/TranslatedText'
 
 export default () => {
   const { fetchPlaces, places } = usePanelContext()
@@ -55,11 +56,11 @@ export default () => {
       </Helmet>
       <Container>
         <PageDesciption>
-          Nie wiesz gdzie potrzebna jest żywność, komu koce a gdzie zawieźć
-          środki higieniczne? Zobacz aktualne zbiórki dla Ukrainy w twoim
-          mieście.
+          <TranslatedText value="pageDescription" />
         </PageDesciption>
-        <StyledFacebookButton>Udostępnij aktywne zbiórki</StyledFacebookButton>
+        <StyledFacebookButton>
+          <TranslatedText value="shareActiveCollections" />
+        </StyledFacebookButton>
         {Object.keys(groupedPlaces).map((cityName, key) => (
           <div key={key}>
             <Title>

@@ -7,7 +7,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
-import TranslatedEntry from '../../../components/TranslatedEntry'
+import TranslatedEntry from 'components/TranslatedEntry'
+import TranslatedText from 'components/TranslatedText'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -33,7 +34,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
           <ButtonWrapper>
             {demands.length === 0 && (
               <SectionTitle>
-                Aktualne nie masz zgłoszonych żadnych potrzeb
+                <TranslatedText value="noDemandsReported" />
               </SectionTitle>
             )}
             <StyledButton
@@ -43,7 +44,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                 )
               }
             >
-              Dodaj potrzeby
+              <TranslatedText value="addDemands" />
             </StyledButton>
             {demands.length > 0 && (
               <>
@@ -65,7 +66,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                   <RemoveAllDemandsButton
                     onClick={() => removeAllDemands(ownedPlaces[0]?.id || '')}
                   >
-                    Zakończ zbiórkę
+                    <TranslatedText value="finishCollection" />
                   </RemoveAllDemandsButton>
                 )}
               </>

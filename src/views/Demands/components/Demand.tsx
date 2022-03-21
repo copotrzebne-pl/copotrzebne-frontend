@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import { DemandDTO, Priority, Supply } from 'contexts/types'
 import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import TranslatedEntry from '../../../components/TranslatedEntry'
+import TranslatedEntry from 'components/TranslatedEntry'
 
 const Demand = ({
   className,

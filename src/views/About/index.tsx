@@ -1,22 +1,16 @@
 import PageTitle from 'components/PageTitle'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
+import TranslatedText from 'components/TranslatedText'
 
 export default () => (
   <Container>
-    <PageTitle>Copotrzebne.pl - O nas</PageTitle>
+    <PageTitle><TranslatedText value="aboutUsPageTitle" /></PageTitle>
     <AboutUsText>
-      {`Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
-      wsparcie osobom uchodźczym z Ukrainy - z osobami, które chciałyby je w tej
-      pomocy wspierać. Ułatwiamy lokalizację zbiórek i pomagamy koordynować
-      zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
-      aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
-      można dane rzeczy dostarczyć.`}
+      <TranslatedText value="aboutUs" />
     </AboutUsText>
     <ContactDetails>
-      {`Chcesz dodać zbiórkę w twojej organizacji?
-      Skontaktuj się z nami:`}
-
+      <TranslatedText value="contactDetails" />
       <StyledLink href="mailto:copotrzebne@gmail.com">
         copotrzebne@gmail.com
       </StyledLink>

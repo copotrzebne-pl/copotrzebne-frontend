@@ -8,6 +8,7 @@ import { PlaceBox } from 'components/PlaceBox'
 import { breakpoint } from 'themes/breakpoints'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from 'components/Button'
+import TranslatedText from 'components/TranslatedText'
 
 const AdminPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -44,7 +45,7 @@ const AdminPanel = ({ className }: { className?: string }) => {
               navigate(routes[Page.MANAGE_PLACE].replace(':id', 'new'))
             }
           >
-            Dodaj miejsce
+            <TranslatedText value="addPlace" />
           </Button>
         </ButtonWrapper>
         {Object.keys(groupedPlaces).map((cityName, key) => (

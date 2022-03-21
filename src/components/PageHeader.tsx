@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 import menuIcon from 'assets/menu-icon.svg'
 import closeIcon from 'assets/close-icon.svg'
 import logoImage from 'assets/uk-heart.svg'
+import { breakpoint } from 'themes/breakpoints'
 
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
 import { useUserContext } from '../contexts/userContext'
+import LanguagePicker from './LanguagePicker'
 
 const PageHeader = ({ className }: { className?: string }) => {
   const [opened, setOpened] = useState<boolean>(false)
@@ -21,9 +23,12 @@ const PageHeader = ({ className }: { className?: string }) => {
   return (
     <header className={className}>
       <Link to={routes[Page.HOME]}>
-        <Logo src={logoImage}/>
+        <Logo src={logoImage} />
         <LogoText>copotrzebne.pl</LogoText>
       </Link>
+      <DesktopLanguagePickerWrapper>
+        <LanguagePicker />
+      </DesktopLanguagePickerWrapper>
       <Navigation>
         <MenuIcon
           src={menuIcon}
@@ -34,7 +39,7 @@ const PageHeader = ({ className }: { className?: string }) => {
       <Menu opened={opened} ref={menuRef}>
         <MenuHeader>
           <Link to={routes[Page.HOME]} onClick={closeMenu}>
-            <Logo src={logoImage}/>
+            <Logo src={logoImage} />
             <LogoText>copotrzebne.pl</LogoText>
           </Link>
           <MenuIcon
@@ -56,9 +61,9 @@ const PageHeader = ({ className }: { className?: string }) => {
               Zaloguj się
             </MenuItem>
           )}
-          <MenuItem to={routes[Page.LANGUAGE]} onClick={closeMenu}>
-            Zmień język
-          </MenuItem>
+          <MobileLanguagePickerWrapper>
+            <LanguagePicker />
+          </MobileLanguagePickerWrapper>
         </MenuList>
       </Menu>
     </header>
@@ -103,6 +108,28 @@ const MenuItem = styled(Link)`
   color: ${({ theme }) => theme.colors.text};
   font-weight: 700;
   padding: 0.6rem;
+`
+
+const MobileLanguagePickerWrapper = styled.div`
+  width: 100%;
+  justify-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+
+  ${breakpoint.sm`
+    display: none;  
+  `}
+`
+
+const DesktopLanguagePickerWrapper = styled.div`
+  padding: 1.2rem 1.6rem;
+  margin-left: auto;
+  display: none;
+
+  ${breakpoint.sm`
+    display: flex;
+  `}
 `
 
 const MenuIcon = styled.img`

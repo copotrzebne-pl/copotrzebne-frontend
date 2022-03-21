@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import TranslatedText from 'components/TranslatedText'
 
 const NotFoundPage = ({ className }: { className?: string }) => (
   <div className={className}>
-    <span>Page not found</span>
+    <span>
+      <TranslatedText value="pageNotFound" />
+    </span>
   </div>
 )
 
