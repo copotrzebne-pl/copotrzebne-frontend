@@ -28,7 +28,8 @@ const PlaceBoxComponent = ({
   <div className={className}>
     <PlaceName>{place.name || ''}</PlaceName>
     <PlaceDetails>
-      {place.city || ''}, {place.street || ''} {place.apartment || ''}
+      {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
+      {place.apartment ? `/${place.apartment}` : ''}
     </PlaceDetails>
   </div>
 )
