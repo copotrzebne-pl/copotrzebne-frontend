@@ -87,5 +87,8 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   lastUpdate: {
     namePl: 'Ostatnia aktualizacja:'
+  },
+  demandsList: {
+    namePl: 'Lista potrzeb'
   }
 }

@@ -122,7 +122,9 @@ export default () => {
         </StyledFacebookButton>
         {selectedPlace !== null && demands.length > 0 && (
           <DemandsWrapper>
-            <DemandsListTitle>Lista potrzeb</DemandsListTitle>
+            <DemandsListTitle>
+              <TranslatedText value="demandsList" />
+            </DemandsListTitle>
             <DemandsList>
               {Object.keys(groupedDemands).map((groupId, key) => (
                 <div key={key}>
@@ -327,7 +329,7 @@ const CategoryHeader = styled.span`
   width: 100%;
   padding: 0.6rem 0.6rem;
   margin: 0.8rem 0;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   color: #333333;
 
   border-radius: 6px;
