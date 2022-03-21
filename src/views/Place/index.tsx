@@ -36,7 +36,7 @@ export default () => {
   return (
     <>
       <Helmet>
-        <title>{getTranslation(language, translations.pageTitle)}</title>
+        <title>Copotrzebne.pl - pomagamy pomagać</title>
         <meta
           property="og:title"
           content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy."

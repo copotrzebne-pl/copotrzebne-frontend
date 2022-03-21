@@ -87,8 +87,5 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   lastUpdate: {
     namePl: 'Ostatnia aktualizacja:'
-  },
-  placePageTitle: {
-    namePl: 'Copotrzebne.pl - pomagamy pomagać'
   }
 }
