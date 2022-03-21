@@ -98,7 +98,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         savePlace,
         authorized,
         language,
-        changeLanguage
+        changeLanguage,
+        setAuthorized
       }}
     >
       {children}

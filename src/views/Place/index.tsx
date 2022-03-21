@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import format from 'date-fns/format'
 
 import marker from 'assets/marker.svg'
-import { Place } from 'contexts/types'
+import { Place, Demand } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet-async'
@@ -19,10 +19,30 @@ export default () => {
   const [lastTimeUpdated, setLastTimeUpdated] = useState<string>('')
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
+  const [groupedDemands, setGroupedDemands] = useState<
+    Record<string, Demand[]>
+  >({})
+
+  const groupDemands = useCallback(
+    (): Record<string, Demand[]> =>
+      demands.reduce(
+        (acc, item) => (
+          (acc[item.supply.category.id] = [
+            ...(acc[item.supply.category.id] || []),
+            item
+          ]),
+          acc
+        ),
+        {} as Record<string, Demand[]>
+      ),
+    [demands]
+  )
+
   useEffect(() => {
     fetchPlaces()
     return clearDemands
   }, [])
+
   useEffect(() => {
     const place = places.filter(elem => elem.id === id)[0]
     if (place && place.id) {
@@ -40,6 +60,7 @@ export default () => {
     if (sortedDates[0]) {
       setLastTimeUpdated(format(Date.parse(sortedDates[0]), 'd. MMM Y H:m'))
     }
+    setGroupedDemands(groupDemands())
   }, [demands])
 
   return (
@@ -103,20 +124,29 @@ export default () => {
           <DemandsWrapper>
             <DemandsListTitle>Lista potrzeb</DemandsListTitle>
             <DemandsList>
-              {demands.map((demand, index) => (
-                <Demand key={index}>
-                  <div>
-                    <DemandInfo>
-                      <span>
-                        <TranslatedEntry entry={demand?.supply} />
-                      </span>
-                      <TranslatedEntry entry={demand?.priority} />
-                    </DemandInfo>
-                    {demand?.comment && (
-                      <DemandComment>{demand?.comment}</DemandComment>
-                    )}
-                  </div>
-                </Demand>
+              {Object.keys(groupedDemands).map((groupId, key) => (
+                <div key={key}>
+                  <CategoryHeader>
+                    <TranslatedEntry
+                      entry={groupedDemands[groupId][0].supply?.category}
+                    />
+                  </CategoryHeader>
+                  {groupedDemands[groupId].map((demand, index) => (
+                    <DemandComponent key={index}>
+                      <div>
+                        <DemandInfo>
+                          <span>
+                            <TranslatedEntry entry={demand?.supply} />
+                          </span>
+                          <TranslatedEntry entry={demand?.priority} />
+                        </DemandInfo>
+                        {demand?.comment && (
+                          <DemandComment>{demand?.comment}</DemandComment>
+                        )}
+                      </div>
+                    </DemandComponent>
+                  ))}
+                </div>
               ))}
             </DemandsList>
           </DemandsWrapper>
@@ -252,7 +282,7 @@ const DemandsList = styled.ol`
   padding: 0 1.2rem;
 `
 
-const Demand = styled.li`
+const DemandComponent = styled.li`
   margin: 0.6rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid #999;
@@ -290,4 +320,17 @@ const StyledFacebookButton = styled(FacebookShareButton)`
     max-width: 450px;
     margin: 1.2rem auto;
   `}
+`
+
+const CategoryHeader = styled.span`
+  display: flex;
+  width: 100%;
+  padding: 0.6rem 0.6rem;
+  margin: 0.8rem 0;
+  background-color: #EEEEEE;
+  color: #333333;
+
+  border-radius: 6px;
+  font-size: 0.95rem;
+  border: 2px solid ${({ theme }) => theme.colors.blue};
 `
