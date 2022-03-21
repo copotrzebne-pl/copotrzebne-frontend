@@ -11,14 +11,10 @@ import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
-import { useUserContext } from 'contexts/userContext'
-import { getTranslation } from '../../utils/translation'
-import { translations } from '../../translations'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
     usePanelContext()
-  const { language } = useUserContext()
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
   useEffect(() => {
@@ -59,13 +55,20 @@ export default () => {
                 <PlaceDescription>{selectedPlace?.comment}</PlaceDescription>
               )}
               <DetailsRow>
-                <PlaceAddressWrapper>
-                  <MapLocation href={"https://www.google.com/maps/place/"+selectedPlace?.street+"+"+selectedPlace?.buildingNumber+"+"+selectedPlace?.city} target="_blank">
+                <PlaceAddressWrapper
+                  target="_blank"
+                  href={`https://www.google.com/maps/place/${selectedPlace?.street}+${selectedPlace?.buildingNumber}+${selectedPlace?.city}`}
+                >
+                  <MapLocation>
                     <Marker src={marker} alt="marker" />
                   </MapLocation>
                   <PlaceAddress>
                     <span>
-                      {selectedPlace?.street} {selectedPlace?.apartment}
+                      {selectedPlace.street || ''}{' '}
+                      {selectedPlace.buildingNumber || ''}
+                      {selectedPlace.apartment
+                        ? `/${selectedPlace.apartment}`
+                        : ''}
                     </span>
                     <span>{selectedPlace?.city}</span>
                   </PlaceAddress>
@@ -153,7 +156,7 @@ const PlaceDescription = styled.p`
   margin-bottom: 1rem;
 `
 
-const PlaceAddressWrapper = styled.div`
+const PlaceAddressWrapper = styled.a`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -168,7 +171,7 @@ const Marker = styled.img`
 
 const MapLocation = styled.a`
   width: auto;
-  `
+`
 
 const PlaceAddress = styled.div`
   display: flex;
