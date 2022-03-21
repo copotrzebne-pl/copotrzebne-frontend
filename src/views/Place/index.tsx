@@ -60,7 +60,9 @@ export default () => {
               )}
               <DetailsRow>
                 <PlaceAddressWrapper>
-                  <Marker src={marker} alt="marker" />
+                  <MapLocation href={"https://www.google.com/maps/place/"+selectedPlace?.street+"+"+selectedPlace?.buildingNumber+"+"+selectedPlace?.city} target="_blank">
+                    <Marker src={marker} alt="marker" />
+                  </MapLocation>
                   <PlaceAddress>
                     <span>
                       {selectedPlace?.street} {selectedPlace?.apartment}
@@ -162,8 +164,11 @@ const Marker = styled.img`
   width: auto;
   display: inline-block;
   margin-right: 0.7rem;
-  margin-bottom: 2px;
 `
+
+const MapLocation = styled.a`
+  width: auto;
+  `
 
 const PlaceAddress = styled.div`
   display: flex;
