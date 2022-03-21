@@ -3,6 +3,7 @@ import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
+import format from 'date-fns/format'
 
 import marker from 'assets/marker.svg'
 import { Place } from 'contexts/types'
@@ -15,6 +16,7 @@ import TranslatedText from 'components/TranslatedText'
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
     usePanelContext()
+  const [lastTimeUpdated, setLastTimeUpdated] = useState<string>('')
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
   useEffect(() => {
@@ -28,6 +30,17 @@ export default () => {
       fetchDemands(place.id)
     }
   }, [places])
+
+  useEffect(() => {
+    const sortedDates = demands
+      .map(demand => demand.updatedAt)
+      .sort((dateA, dateB) =>
+        Math.abs(new Date(dateB).getTime() - new Date(dateA).getTime())
+      )
+    if (sortedDates[0]) {
+      setLastTimeUpdated(format(Date.parse(sortedDates[0]), 'd. MMM Y H:m'))
+    }
+  }, [demands])
 
   return (
     <>
@@ -77,7 +90,7 @@ export default () => {
                   <span>
                     <TranslatedText value="lastUpdate" />
                   </span>
-                  <h3>---</h3>
+                  <h3>{lastTimeUpdated ? lastTimeUpdated : '---'}</h3>
                 </LastUpdate>
               </DetailsRow>
             </PlaceDetailsWrapper>
