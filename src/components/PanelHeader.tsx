@@ -7,9 +7,11 @@ import logoImage from 'assets/uk-heart.svg'
 
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
+import { useUserContext } from 'contexts/userContext'
 
 const PanelHeader = ({ className }: { className?: string }) => {
   const [opened, setOpened] = useState<boolean>(false)
+  const { setAuthorized } = useUserContext()
   const closeMenu = useCallback(() => {
     setOpened(false)
   }, [setOpened])
@@ -20,6 +22,7 @@ const PanelHeader = ({ className }: { className?: string }) => {
   const handleLogout = useCallback(() => {
     try {
       window.localStorage.removeItem('_token')
+      setAuthorized(false)
       navigate(routes[Page.HOME])
     } catch {
       console.error('logout error')

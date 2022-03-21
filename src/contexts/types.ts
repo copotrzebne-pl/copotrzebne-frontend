@@ -16,6 +16,7 @@ export type UserContextValue = {
   authorized: boolean
   language: string
   changeLanguage: (lang: string) => void
+  setAuthorized: (authorized: boolean) => void
 }
 
 export type UserContextProviderProps = {
@@ -29,8 +30,16 @@ export type Priority = {
   nameEn: string
 }
 
+export type Category = {
+  id: string
+  namePl: string
+  nameUa: string
+  nameEn: string
+}
+
 export type Supply = {
   id: string
+  category: Category
   namePl: string
   nameUa: string
   nameEn: string
