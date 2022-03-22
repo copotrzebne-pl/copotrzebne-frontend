@@ -8,6 +8,7 @@ import { breakpoint } from 'themes/breakpoints'
 import DemandComponent from './components/Demand'
 import TranslatedText from 'components/TranslatedText'
 import TranslatedEntry from 'components/TranslatedEntry'
+import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
 
 export default () => {
   const {
@@ -32,7 +33,10 @@ export default () => {
     (): Record<string, Supply[]> =>
       supplies.reduce(
         (acc, item) => (
-          (acc[item.category.id] = [...(acc[item.category.id] || []), item]),
+          (acc[item.category.nameEn] = [
+            ...(acc[item.category.nameEn] || []),
+            item
+          ]),
           acc
         ),
         {} as Record<string, Supply[]>
@@ -65,24 +69,34 @@ export default () => {
         <TranslatedText value="chooseCurrentDemands" />
       </PageTitle>
       <SuppliesWrapper>
-        {Object.keys(groupedSupplies).map((groupId, key) => (
-          <div key={key}>
-            <CategoryHeader>
-              <TranslatedEntry entry={groupedSupplies[groupId][0].category} />
-            </CategoryHeader>
-            {groupedSupplies[groupId].map((supply, index) => (
-              <DemandComponent
-                key={index}
-                placeId={selectedPlace?.id || ''}
-                supply={supply}
-                priorities={priorities}
-                saveDemand={saveDemand}
-                isSelected={supply.id === selectedSupplyId}
-                onSelected={(supplyId: string) => setSelectedSupplyId(supplyId)}
-              />
-            ))}
-          </div>
-        ))}
+        {[
+          ...SUPPLIES_CATEGORIES_ORDER,
+          ...Object.keys(groupedSupplies).filter(
+            nameEn => !SUPPLIES_CATEGORIES_ORDER.includes(nameEn)
+          )
+        ].map((nameEn, key) => {
+          if (!groupedSupplies[nameEn]) return null
+          return (
+            <div key={key}>
+              <CategoryHeader>
+                <TranslatedEntry entry={groupedSupplies[nameEn][0].category} />
+              </CategoryHeader>
+              {groupedSupplies[nameEn].map((supply, index) => (
+                <DemandComponent
+                  key={index}
+                  placeId={selectedPlace?.id || ''}
+                  supply={supply}
+                  priorities={priorities}
+                  saveDemand={saveDemand}
+                  isSelected={supply.id === selectedSupplyId}
+                  onSelected={(supplyId: string) =>
+                    setSelectedSupplyId(supplyId)
+                  }
+                />
+              ))}
+            </div>
+          )
+        })}
       </SuppliesWrapper>
     </Container>
   )
@@ -110,7 +124,7 @@ const CategoryHeader = styled.span`
   width: 100%;
   padding: 0.6rem 0.6rem;
   margin: 0.8rem 0;
-  background-color: #EEEEEE;
+  background-color: #eeeeee;
   color: #333333;
 
   border-radius: 6px;

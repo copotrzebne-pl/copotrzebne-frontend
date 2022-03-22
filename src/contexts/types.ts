@@ -46,6 +46,7 @@ export type Supply = {
 }
 
 export type Demand = {
+  id: string
   supply: Supply
   priority: Priority
   updatedAt: string
@@ -71,6 +72,7 @@ export type Place = {
   name: string
   phone: string
   street: string
+  lastUpdatedAt: string
 }
 
 export type PanelContextValue = {
@@ -84,6 +86,7 @@ export type PanelContextValue = {
   fetchPriorities: (placeId: string) => void
   fetchSupplies: (placeId: string) => void
   saveDemand: (demand: DemandDTO) => Promise<boolean>
+  removeDemand: (demandId: string) => void
   removeAllDemands: (placeId: string) => void
 }
 

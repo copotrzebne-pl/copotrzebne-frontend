@@ -5,7 +5,9 @@ import TranslatedText from 'components/TranslatedText'
 
 export default () => (
   <Container>
-    <PageTitle><TranslatedText value="aboutUsPageTitle" /></PageTitle>
+    <PageTitle>
+      <TranslatedText value="aboutUsPageTitle" />
+    </PageTitle>
     <AboutUsText>
       <TranslatedText value="aboutUs" />
     </AboutUsText>

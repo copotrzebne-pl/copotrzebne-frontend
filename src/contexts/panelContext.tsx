@@ -89,6 +89,21 @@ export const PanelContextProvider = ({
     []
   )
 
+  const removeDemand = useCallback(
+    async (demandId: string) => {
+      try {
+        const client = await getRestClient(process.env.API_URL)
+        setDemands(demands.filter(demand => demand.id !== demandId))
+        await client.delete<null, null>(
+          API.panel.removeDemand.replace(':id', demandId)
+        )
+      } catch {
+        setError({ ...errors, demands: 'Remove demands error' })
+      }
+    },
+    [demands]
+  )
+
   const removeAllDemands = useCallback(async (placeId: string) => {
     try {
       const client = await getRestClient(process.env.API_URL)
@@ -115,7 +130,8 @@ export const PanelContextProvider = ({
         fetchPriorities,
         fetchSupplies,
         saveDemand,
-        removeAllDemands
+        removeAllDemands,
+        removeDemand
       }}
     >
       {children}

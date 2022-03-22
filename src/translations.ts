@@ -5,7 +5,8 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: `Nie wiesz gdzie potrzebna jest żywność, komu koce a gdzie zawieźć
      środki higieniczne? Zobacz aktualne zbiórki dla Ukrainy w twoim 
      mieście.`,
-    nameEn: 'You have no idea where to donate food, who needs blankets and where to deliver hygienic supplies? Check the ongoing collections for ukrainian refugees in your city.'
+    nameEn:
+      'You have no idea where to donate food, who needs blankets and where to deliver hygienic supplies? Check the ongoing collections for ukrainian refugees in your city.'
   },
   shareActiveCollections: {
     namePl: 'Udostępnij aktywne zbiórki',
@@ -26,8 +27,8 @@ export const translations: { [value: string]: DictionaryEntry } = {
       zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
       aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
       można dane rzeczy dostarczyć.`,
-    nameEn: 'We are helping others help by connecting charity aid places and foundations, providing support to refugees from Ukraine - with people who would like to donate goods or items. We make it easier to locate the ongoing collections and coordinate demands for given supply. Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.'
-
+    nameEn:
+      'We are helping others help by connecting charity aid places and foundations, providing support to refugees from Ukraine - with people who would like to donate goods or items. We make it easier to locate the ongoing collections and coordinate demands for given supply. Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.'
   },
   contactDetails: {
     namePl: `Chcesz dodać zbiórkę w twojej organizacji?
@@ -98,6 +99,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
   addPlace: {
     namePl: 'Dodaj miejsce',
     nameEn: 'Add place'
+  },
+  placeLastUpdate: {
+    namePl: 'Aktualizacja',
+    nameEn: 'Last update'
   },
   noDemandsReported: {
     namePl: 'Aktualne nie masz zgłoszonych żadnych potrzeb',
