@@ -12,6 +12,7 @@ import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
+import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -27,8 +28,8 @@ export default () => {
     (): Record<string, Demand[]> =>
       demands.reduce(
         (acc, item) => (
-          (acc[item.supply.category.id] = [
-            ...(acc[item.supply.category.id] || []),
+          (acc[item.supply.category.nameEn] = [
+            ...(acc[item.supply.category.nameEn] || []),
             item
           ]),
           acc
@@ -126,30 +127,38 @@ export default () => {
               <TranslatedText value="demandsList" />
             </DemandsListTitle>
             <DemandsList>
-              {Object.keys(groupedDemands).map((groupId, key) => (
-                <div key={key}>
-                  <CategoryHeader>
-                    <TranslatedEntry
-                      entry={groupedDemands[groupId][0].supply?.category}
-                    />
-                  </CategoryHeader>
-                  {groupedDemands[groupId].map((demand, index) => (
-                    <DemandComponent key={index}>
-                      <div>
-                        <DemandInfo>
-                          <span>
-                            <TranslatedEntry entry={demand?.supply} />
-                          </span>
-                          <TranslatedEntry entry={demand?.priority} />
-                        </DemandInfo>
-                        {demand?.comment && (
-                          <DemandComment>{demand?.comment}</DemandComment>
-                        )}
-                      </div>
-                    </DemandComponent>
-                  ))}
-                </div>
-              ))}
+              {[
+                ...SUPPLIES_CATEGORIES_ORDER,
+                ...Object.keys(groupedDemands).filter(
+                  nameEn => !SUPPLIES_CATEGORIES_ORDER.includes(nameEn)
+                )
+              ].map((nameEn, key) => {
+                if (!groupedDemands[nameEn]) return null
+                return (
+                  <div key={key}>
+                    <CategoryHeader>
+                      <TranslatedEntry
+                        entry={groupedDemands[nameEn][0].supply?.category}
+                      />
+                    </CategoryHeader>
+                    {groupedDemands[nameEn].map((demand, index) => (
+                      <DemandComponent key={index}>
+                        <div>
+                          <DemandInfo>
+                            <span>
+                              <TranslatedEntry entry={demand?.supply} />
+                            </span>
+                            <TranslatedEntry entry={demand?.priority} />
+                          </DemandInfo>
+                          {demand?.comment && (
+                            <DemandComment>{demand?.comment}</DemandComment>
+                          )}
+                        </div>
+                      </DemandComponent>
+                    ))}
+                  </div>
+                )
+              })}
             </DemandsList>
           </DemandsWrapper>
         )}
