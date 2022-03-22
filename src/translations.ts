@@ -13,7 +13,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   shareThisOrganizationCollection: {
     namePl: 'Udostępnij zbiórkę tej organizacji',
-    nameEn: 'Share ongoing collections from this organisation'
+    nameEn: 'Share this collection'
   },
   aboutUsPageTitle: {
     namePl: 'Copotrzebne.pl - O nas',
@@ -41,7 +41,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   logIn: {
     namePl: 'Zaloguj się',
-    nameEN: 'Login'
+    nameEn: 'Login'
   },
   email: {
     namePl: 'Email',
