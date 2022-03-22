@@ -41,7 +41,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   logIn: {
     namePl: 'Zaloguj się',
-    nameEN: 'Login'
+    nameEn: 'Login'
   },
   email: {
     namePl: 'Email',
