@@ -192,13 +192,14 @@ const PlaceDetailsWrapper = styled.div`
 
 const PlaceDescription = styled.p`
   display: inline-block;
-  text-align: center;
+  text-align: left;
   line-height: 1.4;
   width: 100%;
   color: #999999;
   font-size: 0.76rem;
   font-weight: 400;
   margin-bottom: 1rem;
+  overflow-wrap: break-word;
 `
 
 const PlaceAddressWrapper = styled.a`
