@@ -28,6 +28,7 @@ export default () => {
   const { language } = useUserContext()
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
+  const [suppliesLoaded, setSuppliesLoaded] = useState<boolean>(false)
   const [selectedSupplyId, setSelectedSupplyId] = useState<string | null>(null)
   const [searchText, setSearchText] = useState<string>('')
   const [groupedSupplies, setGroupedSupplies] = useState<
@@ -65,6 +66,8 @@ export default () => {
   }, [places])
 
   useEffect(() => {
+    if (!supplies.length) return
+    setSuppliesLoaded(true)
     setGroupedSupplies(groupSupplies(supplies))
   }, [supplies])
 
@@ -83,8 +86,9 @@ export default () => {
   )
 
   useEffect(() => {
+    if (!suppliesLoaded) return
     searchDebounced(searchText)
-  }, [searchText])
+  }, [suppliesLoaded, searchText])
 
   return (
     <Container>
