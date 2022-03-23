@@ -12,6 +12,7 @@ const panel = {
   supplies: '/supplies',
   priorities: '/priorities',
   saveDemand: '/demands',
+  removeDemand: '/demands/:id',
   removeAllDemands: '/places/:id/demands'
 } as const
 

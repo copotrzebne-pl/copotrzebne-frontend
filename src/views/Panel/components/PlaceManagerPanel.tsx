@@ -6,13 +6,16 @@ import { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
+
+import trasnIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
-  const { demands, fetchDemands, removeAllDemands } = usePanelContext()
+  const { demands, fetchDemands, removeDemand, removeAllDemands } =
+    usePanelContext()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -29,7 +32,9 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
     <div className={className}>
       {ownedPlaces.length === 1 && (
         <>
-          <SectionTitle>jesteś zalogowany jako</SectionTitle>
+          <SectionTitle>
+            <TranslatedText value="loggedInAs" />
+          </SectionTitle>
           <PlaceTitle>{ownedPlaces[0]?.name}</PlaceTitle>
           <ButtonWrapper>
             {demands.length === 0 && (
@@ -52,12 +57,17 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                   {demands.map((demand, index) => (
                     <DemandBox key={index}>
                       <DemandTitle>
-                        <span>
+                        <DemandContnet>
+                          <PriorityLabel>
+                            <TranslatedEntry entry={demand.priority} />
+                          </PriorityLabel>
                           <TranslatedEntry entry={demand.supply} />
-                        </span>
-                        <PriorityLabel>
-                          <TranslatedEntry entry={demand.priority} />
-                        </PriorityLabel>
+                        </DemandContnet>
+                        <TrashIcon
+                          src={trasnIconUrl}
+                          alt="remove"
+                          onClick={() => removeDemand(demand.id)}
+                        />
                       </DemandTitle>
                     </DemandBox>
                   ))}
@@ -177,4 +187,17 @@ const RemoveAllDemandsButton = styled(Button)`
   background-color: transparent;
   color: ${({ theme }) => theme.colors.red};
   border: 1px solid ${({ theme }) => theme.colors.red};
+`
+
+const TrashIcon = styled.img`
+  display: inline-block;
+  padding: 0.3rem;
+  height: 28px;
+  width: auto;
+  cursor: pointer;
+`
+
+const DemandContnet = styled.div`
+  display: flex;
+  flex-direction: column;
 `

@@ -4,6 +4,7 @@ import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import format from 'date-fns/format'
+import DOMPurify from 'dompurify'
 
 import marker from 'assets/marker.svg'
 import { Place, Demand } from 'contexts/types'
@@ -12,6 +13,7 @@ import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
+import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -19,16 +21,32 @@ export default () => {
   const [lastTimeUpdated, setLastTimeUpdated] = useState<string>('')
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
+  const [formattedPlaceDescription, setFormattedPlaceDescription] =
+    useState<string>('')
   const [groupedDemands, setGroupedDemands] = useState<
     Record<string, Demand[]>
   >({})
+
+  useEffect(() => {
+    const URL_REGEX =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+    const formattedText = DOMPurify.sanitize(selectedPlace?.comment || '')
+      .split(' ')
+      .map(part =>
+        URL_REGEX.test(part)
+          ? `<a target='_blank' href=${part}>${part}</a>`
+          : `${part} `
+      )
+      .join('')
+    setFormattedPlaceDescription(formattedText)
+  }, [selectedPlace])
 
   const groupDemands = useCallback(
     (): Record<string, Demand[]> =>
       demands.reduce(
         (acc, item) => (
-          (acc[item.supply.category.id] = [
-            ...(acc[item.supply.category.id] || []),
+          (acc[item.supply.category.nameEn] = [
+            ...(acc[item.supply.category.nameEn] || []),
             item
           ]),
           acc
@@ -86,7 +104,11 @@ export default () => {
             <PageTitle>{selectedPlace?.name}</PageTitle>
             <PlaceDetailsWrapper>
               {selectedPlace?.comment && (
-                <PlaceDescription>{selectedPlace?.comment}</PlaceDescription>
+                <PlaceDescription
+                  dangerouslySetInnerHTML={{
+                    __html: formattedPlaceDescription
+                  }}
+                />
               )}
               <DetailsRow>
                 <PlaceAddressWrapper
@@ -126,30 +148,38 @@ export default () => {
               <TranslatedText value="demandsList" />
             </DemandsListTitle>
             <DemandsList>
-              {Object.keys(groupedDemands).map((groupId, key) => (
-                <div key={key}>
-                  <CategoryHeader>
-                    <TranslatedEntry
-                      entry={groupedDemands[groupId][0].supply?.category}
-                    />
-                  </CategoryHeader>
-                  {groupedDemands[groupId].map((demand, index) => (
-                    <DemandComponent key={index}>
-                      <div>
-                        <DemandInfo>
-                          <span>
-                            <TranslatedEntry entry={demand?.supply} />
-                          </span>
-                          <TranslatedEntry entry={demand?.priority} />
-                        </DemandInfo>
-                        {demand?.comment && (
-                          <DemandComment>{demand?.comment}</DemandComment>
-                        )}
-                      </div>
-                    </DemandComponent>
-                  ))}
-                </div>
-              ))}
+              {[
+                ...SUPPLIES_CATEGORIES_ORDER,
+                ...Object.keys(groupedDemands).filter(
+                  nameEn => !SUPPLIES_CATEGORIES_ORDER.includes(nameEn)
+                )
+              ].map((nameEn, key) => {
+                if (!groupedDemands[nameEn]) return null
+                return (
+                  <div key={key}>
+                    <CategoryHeader>
+                      <TranslatedEntry
+                        entry={groupedDemands[nameEn][0].supply?.category}
+                      />
+                    </CategoryHeader>
+                    {groupedDemands[nameEn].map((demand, index) => (
+                      <DemandComponent key={index}>
+                        <div>
+                          <DemandInfo>
+                            <span>
+                              <TranslatedEntry entry={demand?.supply} />
+                            </span>
+                            <TranslatedEntry entry={demand?.priority} />
+                          </DemandInfo>
+                          {demand?.comment && (
+                            <DemandComment>{demand?.comment}</DemandComment>
+                          )}
+                        </div>
+                      </DemandComponent>
+                    ))}
+                  </div>
+                )
+              })}
             </DemandsList>
           </DemandsWrapper>
         )}
@@ -200,6 +230,9 @@ const PlaceDescription = styled.p`
   font-weight: 400;
   margin-bottom: 1rem;
   overflow-wrap: break-word;
+  a {
+    color: ${({ theme }) => theme.colors.blue}
+  }
 `
 
 const PlaceAddressWrapper = styled.a`
