@@ -195,8 +195,6 @@ const TrashIcon = styled.img`
   height: 28px;
   width: auto;
   cursor: pointer;
-  /* uncomment when API is ready */
-  display: none;
 `
 
 const DemandContnet = styled.div`
