@@ -30,15 +30,19 @@ export const PlaceBox = styled(PlaceBoxComponent)`
   background-color: white;
   width: 100%;
   border-radius: 15px;
-  box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.8rem;
+  box-shadow: ${({ theme }) => theme.boxShadows.medium};
+  margin-bottom: 1rem;
   cursor: pointer;
-  width: 100%;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.grey100};
+  }
 `
 
 const PlaceName = styled.h3`
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.45;
   margin-bottom: 0.1rem;
   color: #1f2635;
@@ -49,7 +53,7 @@ const PlaceDetails = styled.span`
   width: 100%;
   font-size: 0.7rem;
   line-height: 1.2;
-  font-weight: 400;
+  font-weight: 500;
   color: #8d99b2;
 `
 

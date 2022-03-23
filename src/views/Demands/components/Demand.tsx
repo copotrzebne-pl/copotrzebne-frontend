@@ -3,6 +3,7 @@ import { DemandDTO, Priority, Supply } from 'contexts/types'
 import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import TranslatedEntry from 'components/TranslatedEntry'
+import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
 
 const Demand = ({
   className,
@@ -55,7 +56,9 @@ const Demand = ({
             <TranslatedEntry entry={supply} />
           </span>
         </Title>
-        <AddIcon>+</AddIcon>
+        <AddIcon>
+          <PlusIconStyled />
+        </AddIcon>
       </DemandTitle>
       {isSelected && (
         <DemandDetails>
@@ -102,8 +105,8 @@ export default styled(Demand)`
   padding: 1rem 1.2rem;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 0.8rem;
+  box-shadow: ${({ theme }) => theme.boxShadows.medium};
+  margin-bottom: 1rem;
   width: 100%;
 `
 
@@ -115,10 +118,21 @@ const DemandTitle = styled.div<{ isSelected: boolean }>`
   cursor: pointer;
   padding: 1rem 1.2rem;
   margin: -1rem -1.2rem;
+  transition: background-color 0.3s;
+  border-radius: 15px;
+  font-weight: lighter;
+
+  &:hover {
+    background: ${({ theme }) => theme.colors.grey100};
+  }
+
   ${({ isSelected }) =>
     isSelected &&
     `
-    cursor: auto;
+    &:hover {
+      cursor: auto;
+      background-color: transparent;
+    } 
   `}
 `
 
@@ -126,11 +140,15 @@ const AddIcon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
   color: #333;
   border: 1px solid #333;
   border-radius: 50%;
+  padding: 4px;
+`
+
+const PlusIconStyled = styled(PlusIcon)`
+  width: 16px;
+  height: 16px;
 `
 
 const DemandDetails = styled.div`
