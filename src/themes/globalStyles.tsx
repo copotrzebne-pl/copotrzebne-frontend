@@ -13,6 +13,6 @@ export default createGlobalStyle`
     color: #15141A;
     font-size: 16px;
     height: 100%;
-    width: 100%;
+    width: 100vw;
   }
 `
