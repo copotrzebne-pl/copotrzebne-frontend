@@ -32,7 +32,9 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
     <div className={className}>
       {ownedPlaces.length === 1 && (
         <>
-          <SectionTitle>jesteś zalogowany jako</SectionTitle>
+          <SectionTitle>
+            <TranslatedText value="loggedInAs" />
+          </SectionTitle>
           <PlaceTitle>{ownedPlaces[0]?.name}</PlaceTitle>
           <ButtonWrapper>
             {demands.length === 0 && (

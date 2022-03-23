@@ -123,5 +123,9 @@ export const translations: { [value: string]: DictionaryEntry } = {
   demandsList: {
     namePl: 'Lista potrzeb',
     nameEn: 'Demands list'
+  },
+  loggedInAs: {
+    namePl: 'Jesteś zalogowany jako',
+    nameEn: 'Loggen in as'
   }
 }

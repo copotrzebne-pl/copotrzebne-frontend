@@ -12,7 +12,9 @@
   "dependencies": {
     "axios": "^0.26.1",
     "date-fns": "^2.28.0",
+    "dompurify": "^2.3.6",
     "getenv": "^1.0.0",
+    "lodash.debounce": "^4.0.8",
     "p-memoize": "^6.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -32,6 +34,8 @@
     "@svgr/webpack": "^6.2.1",
     "@types/axios": "^0.14.0",
     "@types/date-fns": "^2.6.0",
+    "@types/dompurify": "^2.3.3",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/react": "^17.0.40",
     "@types/react-dom": "^17.0.13",
     "@types/react-helmet": "^6.1.5",

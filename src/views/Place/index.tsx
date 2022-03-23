@@ -4,6 +4,7 @@ import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import format from 'date-fns/format'
+import DOMPurify from 'dompurify'
 
 import marker from 'assets/marker.svg'
 import { Place, Demand } from 'contexts/types'
@@ -20,9 +21,25 @@ export default () => {
   const [lastTimeUpdated, setLastTimeUpdated] = useState<string>('')
   const { id } = useParams()
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
+  const [formattedPlaceDescription, setFormattedPlaceDescription] =
+    useState<string>('')
   const [groupedDemands, setGroupedDemands] = useState<
     Record<string, Demand[]>
   >({})
+
+  useEffect(() => {
+    const URL_REGEX =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
+    const formattedText = DOMPurify.sanitize(selectedPlace?.comment || '')
+      .split(' ')
+      .map(part =>
+        URL_REGEX.test(part)
+          ? `<a target='_blank' href=${part}>${part}</a>`
+          : `${part} `
+      )
+      .join('')
+    setFormattedPlaceDescription(formattedText)
+  }, [selectedPlace])
 
   const groupDemands = useCallback(
     (): Record<string, Demand[]> =>
@@ -87,7 +104,11 @@ export default () => {
             <PageTitle>{selectedPlace?.name}</PageTitle>
             <PlaceDetailsWrapper>
               {selectedPlace?.comment && (
-                <PlaceDescription>{selectedPlace?.comment}</PlaceDescription>
+                <PlaceDescription
+                  dangerouslySetInnerHTML={{
+                    __html: formattedPlaceDescription
+                  }}
+                />
               )}
               <DetailsRow>
                 <PlaceAddressWrapper
@@ -209,6 +230,9 @@ const PlaceDescription = styled.p`
   font-weight: 400;
   margin-bottom: 1rem;
   overflow-wrap: break-word;
+  a {
+    color: ${({ theme }) => theme.colors.blue}
+  }
 `
 
 const PlaceAddressWrapper = styled.a`
