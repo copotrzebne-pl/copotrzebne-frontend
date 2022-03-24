@@ -8,6 +8,7 @@ import logoImage from 'assets/uk-heart.svg'
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
 import { useUserContext } from 'contexts/userContext'
+import TranslatedText from './TranslatedText';
 import { breakpoint } from 'themes/breakpoints'
 
 const PanelHeader = ({ className }: { className?: string }) => {
@@ -56,8 +57,11 @@ const PanelHeader = ({ className }: { className?: string }) => {
           />
         </MenuHeader>
         <MenuList>
+          <MenuItem to={routes[Page.ABOUT]} onClick={closeMenu}>
+            <TranslatedText value="menuAboutUs" />
+          </MenuItem>
           <MenuItem to={routes[Page.HOME]} onClick={handleLogout}>
-            Wyloguj się
+            <TranslatedText value="menuLogout" />
           </MenuItem>
         </MenuList>
       </Menu>

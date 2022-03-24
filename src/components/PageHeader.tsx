@@ -10,6 +10,7 @@ import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
 import { useUserContext } from '../contexts/userContext'
 import LanguagePicker from './LanguagePicker'
+import TranslatedText from './TranslatedText'
 
 const PageHeader = ({ className }: { className?: string }) => {
   const [opened, setOpened] = useState<boolean>(false)
@@ -50,15 +51,15 @@ const PageHeader = ({ className }: { className?: string }) => {
         </MenuHeader>
         <MenuList>
           <MenuItem to={routes[Page.ABOUT]} onClick={closeMenu}>
-            O nas
+            <TranslatedText value="menuAboutUs" />
           </MenuItem>
           {authorized ? (
             <MenuItem to={routes[Page.PANEL]} onClick={closeMenu}>
-              Panel
+              <TranslatedText value="menuPanel" />
             </MenuItem>
           ) : (
             <MenuItem to={routes[Page.LOGIN]} onClick={closeMenu}>
-              Zaloguj się
+              <TranslatedText value="menuLogIn" />
             </MenuItem>
           )}
           <MobileLanguagePickerWrapper>

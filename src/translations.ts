@@ -32,8 +32,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
       zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
       aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
       można dane rzeczy dostarczyć.`,
-    nameEn:
-      `We are helping others help by connecting charity aid places and foundations,
+    nameEn: `We are helping others help by connecting charity aid places and foundations,
       providing support to refugees from Ukraine - with people who would like to donate goods or items.
       We make it easier to locate the ongoing collections and coordinate demands for given supply.
       Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.`,
@@ -108,7 +107,6 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Szerokość geograficzna',
     nameEn: 'Latitude',
     nameUa: 'Широта'
-
   },
   longitude: {
     namePl: 'Długość geograficzna',
@@ -164,5 +162,25 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Jesteś zalogowany jako',
     nameEn: 'Loggen in as',
     nameUa: 'Залогований як'
+  },
+  menuLogout: {
+    namePl: 'Wyloguj się',
+    nameEn: 'Log out',
+    nameUa: 'Вийти'
+  },
+  menuAboutUs: {
+    namePl: 'O nas',
+    nameEn: 'About us',
+    nameUa: 'Про нас'
+  },
+  menuPanel: {
+    namePl: 'Panel',
+    nameEn: 'Panel',
+    nameUa: 'Панель'
+  },
+  menuLogIn: {
+    namePl: 'Zaloguj się',
+    nameEn: 'Log in',
+    nameUa: 'Увійти'
   }
 }
