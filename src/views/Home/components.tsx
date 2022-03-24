@@ -38,8 +38,7 @@ export const PlaceBox = styled(PlaceBoxComponent)`
   background-color: white;
   width: 100%;
   border-radius: 15px;
-  box-shadow: 1px -5px 14px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: ${({ theme }) => theme.boxShadows.medium};
   margin-bottom: 0.8rem;
   cursor: pointer;
-  width: 100%;
 `

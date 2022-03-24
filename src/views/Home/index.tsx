@@ -132,6 +132,7 @@ const StyledLink = styled(Link)`
 const PageDesciption = styled.div`
   width: 100%;
   padding: 3.2rem 1.2rem 0;
+  font-weight: 500;
 `
 
 const StyledFacebookButton = styled(FacebookShareButton)`

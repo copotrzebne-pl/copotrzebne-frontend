@@ -23,10 +23,10 @@ const PageHeader = ({ className }: { className?: string }) => {
 
   return (
     <header className={className}>
-      <Link to={routes[Page.HOME]}>
+      <LogoLink to={routes[Page.HOME]}>
         <Logo src={logoImage} />
         <LogoText>copotrzebne.pl</LogoText>
-      </Link>
+      </LogoLink>
       <DesktopLanguagePickerWrapper>
         <LanguagePicker />
       </DesktopLanguagePickerWrapper>
@@ -39,10 +39,10 @@ const PageHeader = ({ className }: { className?: string }) => {
       </Navigation>
       <Menu opened={opened} ref={menuRef}>
         <MenuHeader>
-          <Link to={routes[Page.HOME]} onClick={closeMenu}>
+          <LogoLink to={routes[Page.HOME]} onClick={closeMenu}>
             <Logo src={logoImage} />
             <LogoText>copotrzebne.pl</LogoText>
-          </Link>
+          </LogoLink>
           <MenuIcon
             src={closeIcon}
             alt="menu"
@@ -80,22 +80,35 @@ export default styled(PageHeader)`
   align-items: center;
   justify-content: space-between;
   position: relative;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.boxShadows.small};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 `
+
+const LogoLink = styled(Link)`
+  display: flex;
+  align-items: center;
+`
+
 const Logo = styled.img`
   display: inline-block;
   float: left;
   height: 2.85rem;
   width: auto;
+  margin: 0 6px -4px 0;
 `
 
 const LogoText = styled.span`
   display: inline-block;
-  font-size: 1.85rem;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.black};
+  font-size: 1.6rem;
+  margin-top: -3px;
+
+  ${breakpoint.sm`
+    font-size: 1.85rem;
+    margin-top: -5px;
+`}
 `
 
 const Navigation = styled.nav`
@@ -159,7 +172,7 @@ const Menu = styled.div<{ opened: boolean }>`
   top: 0;
   right: 0;
   width: 100%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: ${({ theme }) => theme.boxShadows.small};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   z-index: 10;
