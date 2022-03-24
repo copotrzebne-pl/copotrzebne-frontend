@@ -157,15 +157,14 @@ const SuppliesWrapper = styled.div`
 `
 
 const CategoryHeader = styled.span`
+  font-weight: bold;
   display: flex;
   width: 100%;
-  padding: 0.6rem 0.6rem;
-  margin: 0.8rem 0;
+  padding: 0.7rem 1.2rem;
+  margin: 1rem 0;
   background-color: #eeeeee;
   color: #333333;
-
-  border-radius: 6px;
-  font-size: 0.95rem;
+  border-radius: 12px;
   border: 2px solid ${({ theme }) => theme.colors.blue};
 `
 
