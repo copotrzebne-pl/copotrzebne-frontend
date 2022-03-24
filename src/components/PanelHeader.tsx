@@ -8,6 +8,7 @@ import logoImage from 'assets/uk-heart.svg'
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
 import { useUserContext } from 'contexts/userContext'
+import TranslatedText from './TranslatedText';
 
 const PanelHeader = ({ className }: { className?: string }) => {
   const [opened, setOpened] = useState<boolean>(false)
@@ -32,7 +33,7 @@ const PanelHeader = ({ className }: { className?: string }) => {
   return (
     <header className={className}>
       <Link to={routes[Page.HOME]}>
-        <Logo src={logoImage}/>
+        <Logo src={logoImage} />
         <LogoText>copotrzebne.pl</LogoText>
       </Link>
       <Navigation>
@@ -45,7 +46,7 @@ const PanelHeader = ({ className }: { className?: string }) => {
       <Menu opened={opened} ref={menuRef}>
         <MenuHeader>
           <Link to={routes[Page.HOME]} onClick={closeMenu}>
-            <Logo src={logoImage}/>
+            <Logo src={logoImage} />
             <LogoText>copotrzebne.pl</LogoText>
           </Link>
           <MenuIcon
@@ -55,8 +56,11 @@ const PanelHeader = ({ className }: { className?: string }) => {
           />
         </MenuHeader>
         <MenuList>
+          <MenuItem to={routes[Page.ABOUT]} onClick={closeMenu}>
+            <TranslatedText value="menuAboutUs" />
+          </MenuItem>
           <MenuItem to={routes[Page.HOME]} onClick={handleLogout}>
-            Wyloguj się
+            <TranslatedText value="menuLogout" />
           </MenuItem>
         </MenuList>
       </Menu>

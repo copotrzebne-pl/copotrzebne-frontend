@@ -127,5 +127,25 @@ export const translations: { [value: string]: DictionaryEntry } = {
   loggedInAs: {
     namePl: 'Jesteś zalogowany jako',
     nameEn: 'Loggen in as'
+  },
+  menuLogout: {
+    namePl: 'Wyloguj się',
+    nameEn: 'Log out',
+    nameUa: 'Вийти'
+  },
+  menuAboutUs: {
+    namePl: 'O nas',
+    nameEn: 'About us',
+    nameUa: 'Про нас'
+  },
+  menuPanel: {
+    namePl: 'Panel',
+    nameEn: 'Panel',
+    nameUa: 'Панель'
+  },
+  menuLogIn: {
+    namePl: 'Zaloguj się',
+    nameEn: 'Log in',
+    nameUa: 'Увійти'
   }
 }
