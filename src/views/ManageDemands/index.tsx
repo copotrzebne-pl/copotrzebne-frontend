@@ -17,7 +17,7 @@ import PageTitle from '../../components/PageTitle'
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { ownedPlaces, fetchOwnedPlaces, savePlace } = useUserContext()
+  const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
   const { demands, fetchDemands, removeDemand, removeAllDemands } =
     usePanelContext()
   const [selectedPlace, setSelectedPlace] = useState<Place>({

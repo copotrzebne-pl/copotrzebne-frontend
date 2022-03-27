@@ -1,15 +1,13 @@
-import { useEffect, useState, useCallback, SyntheticEvent } from 'react'
+import { useEffect, useState } from 'react'
 import Button from 'components/Button'
-import { Form, FormGroup, Label, TextInput } from 'components/forms'
 import PageTitle from 'components/PageTitle'
 import { Place } from 'contexts/types'
 import { useUserContext } from 'contexts/userContext'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { Page, routes } from '../../routes'
-import { PlaceBox } from '../../components/PlaceBox'
 import { useNavigate } from 'react-router-dom'
 
 export default () => {

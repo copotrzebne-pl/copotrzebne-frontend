@@ -8,8 +8,6 @@ import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
-import { Page, routes } from '../../routes'
-import { PlaceBox } from '../../components/PlaceBox'
 
 export default () => {
   const { id } = useParams()
