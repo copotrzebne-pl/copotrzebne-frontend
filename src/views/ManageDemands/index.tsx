@@ -1,9 +1,8 @@
 import Button from 'components/Button'
-import { PlaceBox } from 'components/PlaceBox'
 import { usePanelContext } from 'contexts/panelContext'
 import { useUserContext } from 'contexts/userContext'
-import { useCallback, useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
 
