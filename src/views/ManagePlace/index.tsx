@@ -4,13 +4,17 @@ import { Form, FormGroup, Label, TextInput } from 'components/forms'
 import PageTitle from 'components/PageTitle'
 import { Place } from 'contexts/types'
 import { useUserContext } from 'contexts/userContext'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
+import { Page, routes } from '../../routes'
+import { PlaceBox } from '../../components/PlaceBox'
+import { useNavigate } from 'react-router-dom'
 
 export default () => {
   const { id } = useParams()
+  const navigate = useNavigate()
   const { ownedPlaces, fetchOwnedPlaces, savePlace } = useUserContext()
   const [selectedPlace, setSelectedPlace] = useState<Place>({
     id,
@@ -193,6 +197,15 @@ export default () => {
           </Button>
         </ButtonWrapper>
       </Form>
+      <StyledButton
+        onClick={() =>
+          navigate(
+            routes[Page.DEMANDS].replace(':id', selectedPlace.id || '')
+          )
+        }
+      >
+        <TranslatedText value="addDemands" />
+      </StyledButton>
     </Container>
   )
 }
@@ -211,4 +224,8 @@ const Container = styled.div`
 const ButtonWrapper = styled.div`
   width: 100%;
   padding: 2.2rem 2rem 2rem;
+`
+const StyledButton = styled(Button)`
+  width: 100%;
+  padding: 0.8rem 1.8rem;
 `
