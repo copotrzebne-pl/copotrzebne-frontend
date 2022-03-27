@@ -226,6 +226,7 @@ const ButtonWrapper = styled.div`
   padding: 2.2rem 2rem 2rem;
 `
 const StyledButton = styled(Button)`
-  width: 100%;
+  width: auto;
+  margin: 0 2.2rem;
   padding: 0.8rem 1.8rem;
 `
