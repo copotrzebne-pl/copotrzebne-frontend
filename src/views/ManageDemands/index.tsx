@@ -2,8 +2,8 @@ import Button from 'components/Button'
 import { PlaceBox } from 'components/PlaceBox'
 import { usePanelContext } from 'contexts/panelContext'
 import { useUserContext } from 'contexts/userContext'
-import { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useCallback, useEffect, useState } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
 
@@ -11,31 +11,47 @@ import trashIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
+import { Place } from '../../contexts/types'
+import PageTitle from '../../components/PageTitle'
 
-const PlaceManagerPanel = ({ className }: { className?: string }) => {
-  const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
+export default () => {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const { ownedPlaces, fetchOwnedPlaces, savePlace } = useUserContext()
   const { demands, fetchDemands, removeDemand, removeAllDemands } =
     usePanelContext()
-  const navigate = useNavigate()
+  const [selectedPlace, setSelectedPlace] = useState<Place>({
+    id,
+    name: '',
+    city: '',
+    street: '',
+    buildingNumber: '',
+    apartment: '',
+    comment: '',
+    email: '',
+    phone: '',
+    latitude: null,
+    longitude: null
+  })
 
   useEffect(() => {
     fetchOwnedPlaces()
   }, [])
 
   useEffect(() => {
-    if (ownedPlaces.length === 1 && ownedPlaces[0]?.id) {
-      fetchDemands(ownedPlaces[0].id)
+    const place = ownedPlaces.filter(elem => elem.id === id)[0]
+    if (place) {
+      setSelectedPlace(place)
     }
   }, [ownedPlaces])
 
+  useEffect(() => {
+      fetchDemands(selectedPlace.id)
+    },  [selectedPlace])
+
   return (
-    <div className={className}>
-      {ownedPlaces.length === 1 && (
-        <>
-          <SectionTitle>
-            <TranslatedText value="loggedInAs" />
-          </SectionTitle>
-          <PlaceTitle>{ownedPlaces[0]?.name}</PlaceTitle>
+    <Container>
+      <PageTitle>{selectedPlace?.name || 'Dodaj nowe potrzeby'}</PageTitle>
           <ButtonWrapper>
             {demands.length === 0 && (
               <SectionTitle>
@@ -45,7 +61,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
             <StyledButton
               onClick={() =>
                 navigate(
-                  routes[Page.DEMANDS].replace(':id', ownedPlaces[0]?.id || '')
+                  routes[Page.DEMANDS].replace(':id', selectedPlace?.id || '')
                 )
               }
             >
@@ -57,12 +73,12 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                   {demands.map((demand, index) => (
                     <DemandBox key={index}>
                       <DemandTitle>
-                        <DemandContnet>
+                        <DemandContent>
                           <PriorityLabel>
                             <TranslatedEntry entry={demand.priority} />
                           </PriorityLabel>
                           <TranslatedEntry entry={demand.supply} />
-                        </DemandContnet>
+                        </DemandContent>
                         <TrashIcon
                           src={trashIconUrl}
                           alt="remove"
@@ -72,9 +88,9 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                     </DemandBox>
                   ))}
                 </DemandsWrapper>
-                {ownedPlaces[0]?.id && (
+                {selectedPlace?.id && (
                   <RemoveAllDemandsButton
-                    onClick={() => removeAllDemands(ownedPlaces[0]?.id || '')}
+                    onClick={() => removeAllDemands(selectedPlace?.id || '')}
                   >
                     <TranslatedText value="finishCollection" />
                   </RemoveAllDemandsButton>
@@ -82,28 +98,10 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
               </>
             )}
           </ButtonWrapper>
-        </>
-      )}
-      {ownedPlaces.length > 1 && (
-        <PlacesWrapper>
-          {ownedPlaces.map((place, index) => (
-            <StyledLink
-              key={index}
-              to={`${routes[Page.DEMANDS].replace(':id', place?.id || '')}`}
-            >
-              <PlaceBox place={place} />
-            </StyledLink>
-          ))}
-        </PlacesWrapper>
-      )}
-    </div>
+    </Container>
   )
 }
 
-export default styled(PlaceManagerPanel)`
-  display: flex;
-  flex-direction: column;
-`
 
 const SectionTitle = styled.span`
   display: inline-block;
@@ -115,30 +113,14 @@ const SectionTitle = styled.span`
   margin: 2.8rem 0 0.4rem;
 `
 
-const PlaceTitle = styled.h3`
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  line-height: 1.3;
-  font-size: 1.9rem;
-  color: #f6ce01;
-  margin: 0 0 1.2rem 0;
-  padding: 0 1.2rem;
-`
-
-const StyledLink = styled(Link)`
-  width: 100%;
-`
-
-const PlacesWrapper = styled.div`
+const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 100%;
-  padding: 0 1rem;
-  padding-bottom: 2.2rem;
+  height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
+  flex-direction: column;
   ${breakpoint.sm`
-    padding-bottom: 1.2rem;
+    max-width: 450px;
+    margin: 0 auto;
   `}
 `
 
@@ -197,7 +179,7 @@ const TrashIcon = styled.img`
   cursor: pointer;
 `
 
-const DemandContnet = styled.div`
+const DemandContent = styled.div`
   display: flex;
   flex-direction: column;
 `

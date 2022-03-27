@@ -56,7 +56,7 @@ export default () => {
       <StyledButton
         onClick={() =>
           navigate(
-            routes[Page.DEMANDS].replace(':id', selectedPlace.id || '')
+            routes[Page.MANAGE_DEMANDS].replace(':id', selectedPlace.id || '')
           )
         }
       >
