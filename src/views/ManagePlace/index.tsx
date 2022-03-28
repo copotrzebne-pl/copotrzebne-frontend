@@ -58,7 +58,7 @@ export default () => {
           )
         }
       >
-        <TranslatedText value="addDemands" />
+        <TranslatedText value="editDemands" />
       </StyledButton>
     </Container>
   )
