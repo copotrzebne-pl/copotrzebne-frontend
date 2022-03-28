@@ -16,6 +16,8 @@ import Panel from 'views/Panel'
 import Place from 'views/Place'
 import ManagePlace from 'views/ManagePlace'
 import Demands from 'views/Demands'
+import ManageAddress from 'views/ManageAddress'
+import ManageDemands from 'views/ManageDemands'
 
 export default () => (
   <HelmetProvider>
@@ -31,7 +33,15 @@ export default () => (
                     path={routes[Page.MANAGE_PLACE]}
                     element={<ManagePlace />}
                   />
+                  <Route
+                    path={routes[Page.MANAGE_ADDRESS]}
+                    element={<ManageAddress />}
+                  />
                   <Route path={routes[Page.DEMANDS]} element={<Demands />} />
+                  <Route
+                    path={routes[Page.MANAGE_DEMANDS]}
+                    element={<ManageDemands />}
+                  />
                   <Route />
                 </Route>
               </Route>

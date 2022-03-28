@@ -182,5 +182,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Zaloguj się',
     nameEn: 'Log in',
     nameUa: 'Увійти'
+  },
+  editPlaceData: {
+    namePl: 'Edytuj dane organizacji',
+    nameEn: 'Edit data',
+    nameUa: ''
   }
 }

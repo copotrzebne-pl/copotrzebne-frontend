@@ -9,7 +9,9 @@ export enum Page { //eslint-disable-line no-shadow
   ABOUT,
   PANEL,
   MANAGE_PLACE,
-  DEMANDS
+  MANAGE_ADDRESS,
+  DEMANDS,
+  MANAGE_DEMANDS
 }
 
 export const routes: { [key in Page]: string } = {
@@ -19,7 +21,9 @@ export const routes: { [key in Page]: string } = {
   [Page.ABOUT]: '/about',
   [Page.PANEL]: '/panel',
   [Page.MANAGE_PLACE]: '/panel/manage-place/:id',
+  [Page.MANAGE_ADDRESS]: '/panel/manage-address/:id',
   [Page.DEMANDS]: '/panel/demands/:id',
+  [Page.MANAGE_DEMANDS]: '/panel/manage_demands/:id',
   [Page.NOTFOUND]: '*'
 }
 
