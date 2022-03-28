@@ -187,5 +187,15 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Edytuj dane organizacji',
     nameEn: 'Edit data',
     nameUa: ''
+  },
+  editDemands: {
+    namePl: 'Edytuj listę potrzeb',
+    nameEn: 'Edit current demands',
+    nameUa: ''
+  },
+  noOngoingCollections: {
+    namePl: 'Brak aktualnych zbiórek',
+    nameEn: 'No ongoing collections',
+    nameUa: ''
   }
 }
