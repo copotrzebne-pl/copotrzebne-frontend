@@ -43,7 +43,7 @@ export default () => {
         </title>
         <meta
           property="og:title"
-          content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Strona główna"
+          content="Copotrzebne.pl - pomagamy pomagać. Strona główna"
         />
         <meta
           name="description"
@@ -51,7 +51,11 @@ export default () => {
         />
         <meta
           property="og:description"
-          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+          content="Znajdź organizacje pomocowe i zobacz aktualne zbiórki rzeczowe w Twoim mieście! Razem dla Ukrainy."
+        />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1491929007750-dce8ba76e610?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467&q=80"
         />
       </Helmet>
       <Container>
