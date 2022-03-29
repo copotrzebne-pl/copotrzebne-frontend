@@ -10,6 +10,7 @@ import { breakpoint } from 'themes/breakpoints'
 import { Place } from 'contexts/types'
 import FacebookShareButton from 'components/FacebookShareButton'
 import TranslatedText from 'components/TranslatedText'
+import fbShareImg from 'assets/fb-share-img.png'
 
 export default () => {
   const { fetchPlaces, places } = usePanelContext()
@@ -43,7 +44,7 @@ export default () => {
         </title>
         <meta
           property="og:title"
-          content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Strona główna"
+          content="Copotrzebne.pl - pomagamy pomagać. Strona główna"
         />
         <meta
           name="description"
@@ -51,7 +52,19 @@ export default () => {
         />
         <meta
           property="og:description"
-          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+          content="Znajdź organizacje pomocowe i zobacz aktualne zbiórki rzeczowe w Twoim mieście! Razem dla Ukrainy."
+        />
+        <meta
+          property="og:image"
+          content = {fbShareImg}
+        />
+        <meta
+          property="og:image:width" content="1200"
+        />
+        <meta
+          property="og:image:height" content="628"
+        />
+        <meta property="og:image:alt" content="Blue background with hearts in ukraine and polish flag patterns, saying check ongoing collections and help smarter with us"
         />
       </Helmet>
       <Container>

@@ -14,6 +14,7 @@ import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
+import fbShareImg from 'assets/fb-share-img.png'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -95,7 +96,19 @@ export default () => {
         />
         <meta
           property="og:description"
-          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
+          content="Zobacz aktualne zbiórki rzeczowe tej organizacji"
+        />
+        <meta
+          property="og:image"
+          content={fbShareImg}
+        />
+        <meta
+          property="og:image:width" content="1200"
+        />
+        <meta
+          property="og:image:height" content="628"
+        />
+        <meta property="og:image:alt" content="Blue background with hearts in ukraine and polish flag patterns, saying check ongoing collections and help smarter with us"
         />
       </Helmet>
       <Container>
