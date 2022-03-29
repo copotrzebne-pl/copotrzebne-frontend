@@ -97,6 +97,12 @@ export default () => {
           property="og:description"
           content="Zobacz aktualne zbiórki rzeczowe tej organizacji"
         />
+        <meta property="og:type" content="website"
+        />
+        <meta
+          property="og:image"
+          content="https://www.copotrzebne.pl/static/assets/fb-share-img.d8bafe035420bfa70482b8eaf8be7b6a.png"
+        />
         <meta
           property="og:image:secure_url"
           content="https://www.copotrzebne.pl/static/assets/fb-share-img.d8bafe035420bfa70482b8eaf8be7b6a.png"
