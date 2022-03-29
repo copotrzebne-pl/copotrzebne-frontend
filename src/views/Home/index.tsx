@@ -10,7 +10,6 @@ import { breakpoint } from 'themes/breakpoints'
 import { Place } from 'contexts/types'
 import FacebookShareButton from 'components/FacebookShareButton'
 import TranslatedText from 'components/TranslatedText'
-import fbShareImg from 'assets/fb-share-img.png'
 
 export default () => {
   const { fetchPlaces, places } = usePanelContext()
@@ -56,7 +55,7 @@ export default () => {
         />
         <meta
           property="og:image"
-          content = {fbShareImg}
+          content ="https://www.copotrzebne.pl/static/assets/fb-share-img.d8bafe035420bfa70482b8eaf8be7b6a.png"
         />
         <meta
           property="og:image:width" content="1200"
