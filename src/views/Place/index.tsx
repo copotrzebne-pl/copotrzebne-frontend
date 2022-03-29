@@ -14,7 +14,6 @@ import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
-import fbShareImg from 'assets/fb-share-img.png'
 
 export default () => {
   const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
@@ -100,7 +99,7 @@ export default () => {
         />
         <meta
           property="og:image"
-          content={fbShareImg}
+          content="https://www.copotrzebne.pl/static/assets/fb-share-img.d8bafe035420bfa70482b8eaf8be7b6a.png"
         />
         <meta
           property="og:image:width" content="1200"
