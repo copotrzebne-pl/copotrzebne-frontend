@@ -10,6 +10,7 @@ import { breakpoint } from 'themes/breakpoints'
 import { Place } from 'contexts/types'
 import FacebookShareButton from 'components/FacebookShareButton'
 import TranslatedText from 'components/TranslatedText'
+import fbShareImg from 'assets/fb-share-img.png'
 
 export default () => {
   const { fetchPlaces, places } = usePanelContext()
@@ -55,7 +56,15 @@ export default () => {
         />
         <meta
           property="og:image"
-          content="https://images.unsplash.com/photo-1491929007750-dce8ba76e610?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467&q=80"
+          content = {fbShareImg}
+        />
+        <meta
+          property="og:image:width" content="1200"
+        />
+        <meta
+          property="og:image:height" content="628"
+        />
+        <meta property="og:image:alt" content="Blue background with hearts in ukraine and polish flag patterns, saying check ongoing collections and help smarter with us"
         />
       </Helmet>
       <Container>
