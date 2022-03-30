@@ -43,27 +43,7 @@ export default () => {
         </title>
         <meta
           property="og:title"
-          content="Copotrzebne.pl - pomagamy pomagać. Strona główna"
-        />
-        <meta
-          property="og:image"
-          content="https://www.copotrzebne.pl/static/assets/fb-share-img.d8bafe035420bfa70482b8eaf8be7b6a.png"
-        />
-        <meta
-          property="og:image:secure_url"
-          content="https://www.copotrzebne.pl/static/assets/fb-share-img.d8bafe035420bfa70482b8eaf8be7b6a.png"
-        />
-        <meta
-          property="og:image:type"
-          content="image/png"
-        />
-        <meta
-          property="og:image:width" content="1200"
-        />
-        <meta
-          property="og:image:height" content="628"
-        />
-        <meta property="og:image:alt" content="Blue background with hearts in ukraine and polish flag patterns, saying check ongoing collections and help smarter with us"
+          content="Copotrzebne.pl - pomagamy pomagać."
         />
         <meta
           name="description"
@@ -71,9 +51,10 @@ export default () => {
         />
         <meta
           property="og:description"
-          content="Znajdź organizacje pomocowe i zobacz aktualne zbiórki rzeczowe w Twoim mieście! Razem dla Ukrainy."
+          content="Zobacz aktualne zbiórki rzeczowe i organizacje, które potrzebują Twojego wsparcia!"
         />
-        <meta property="og:type" content="website"
+        <meta
+          property="og:type" content="website"
         />
       </Helmet>
       <Container>
