@@ -51,7 +51,7 @@ export default () => {
         />
         <meta
           property="og:description"
-          content="Zobacz aktualne zbiórki rzeczowe i organizacje, które potrzebują Twojego wsparcia!"
+          content="Zobacz aktualne zbiórki rzeczowe i pomagaj z nami!"
         />
         <meta
           property="og:type" content="website"
