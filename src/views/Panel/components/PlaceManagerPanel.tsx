@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import { PlaceBox } from 'components/PlaceBox'
 import { usePanelContext } from 'contexts/panelContext'
 import { useUserContext } from 'contexts/userContext'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
@@ -11,6 +11,8 @@ import trashIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
+import PageTitle from '../../../components/PageTitle'
+import { Place } from '../../../contexts/types'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -37,6 +39,17 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
           </SectionTitle>
           <PlaceTitle>{ownedPlaces[0]?.name}</PlaceTitle>
           <ButtonWrapper>
+           <StyledButton
+              onClick={() =>
+                navigate(
+                  routes[Page.MANAGE_ADDRESS].replace(':id', ownedPlaces[0].id || '')
+                )
+              }
+            >
+             <TranslatedText value="editPlaceData" />
+           </StyledButton>
+          </ButtonWrapper>
+          <ButtonWrapper>
             {demands.length === 0 && (
               <SectionTitle>
                 <TranslatedText value="noDemandsReported" />
@@ -57,12 +70,12 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                   {demands.map((demand, index) => (
                     <DemandBox key={index}>
                       <DemandTitle>
-                        <DemandContnet>
+                        <DemandContent>
                           <PriorityLabel>
                             <TranslatedEntry entry={demand.priority} />
                           </PriorityLabel>
                           <TranslatedEntry entry={demand.supply} />
-                        </DemandContnet>
+                        </DemandContent>
                         <TrashIcon
                           src={trashIconUrl}
                           alt="remove"
@@ -197,7 +210,7 @@ const TrashIcon = styled.img`
   cursor: pointer;
 `
 
-const DemandContnet = styled.div`
+const DemandContent = styled.div`
   display: flex;
   flex-direction: column;
 `
