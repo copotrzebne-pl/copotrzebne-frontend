@@ -16,6 +16,7 @@ const PlaceBoxComponent = ({
       {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
       {place.apartment ? `/${place.apartment}` : ''}
     </PlaceDetails>
+    <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
     {place.lastUpdatedAt && (
       <LastUpdate>
         <TranslatedText value="placeLastUpdate" />{' '}

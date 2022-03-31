@@ -22,6 +22,7 @@ export default () => {
     comment: '',
     email: '',
     phone: '',
+    workingHours: '',
     latitude: null,
     longitude: null
   })
@@ -125,6 +126,18 @@ export default () => {
             placeholder="apartment"
             value={selectedPlace.apartment || ''}
             onChange={e => setValue('apartment', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="workingHours" />
+          </Label>
+          <TextInput
+            id="workingHours"
+            type="text"
+            placeholder="workingHours"
+            value={selectedPlace.workingHours || ''}
+            onChange={e => setValue('workingHours', e.target.value)}
           />
         </FormGroup>
         <FormGroup>

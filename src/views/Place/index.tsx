@@ -128,6 +128,7 @@ export default () => {
                         : ''}
                     </span>
                     <span>{selectedPlace?.city}</span>
+                    <span>{selectedPlace?.workingHours || ''}</span>
                   </PlaceAddress>
                 </PlaceAddressWrapper>
                 <LastUpdate>

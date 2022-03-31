@@ -93,6 +93,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Flat',
     nameUa: 'Номер квартири'
   },
+  workingHours: {
+    namePl: 'Godziny otwarcia',
+    nameEn: 'Working hours',
+    nameUa: 'Робочі години'
+  },
   comment: {
     namePl: 'Komentarz',
     nameEn: 'Comment',
