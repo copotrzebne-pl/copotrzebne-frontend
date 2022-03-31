@@ -73,6 +73,7 @@ export type Place = {
   phone: string
   street: string
   lastUpdatedAt: string
+  workingHours: string
 }
 
 export type PanelContextValue = {

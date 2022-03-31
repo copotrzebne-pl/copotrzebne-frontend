@@ -8,7 +8,7 @@ import logoImage from 'assets/uk-heart.svg'
 import { Page, routes } from 'routes'
 import { useClickOutside } from 'hooks/useClickOutside'
 import { useUserContext } from 'contexts/userContext'
-import TranslatedText from './TranslatedText';
+import TranslatedText from './TranslatedText'
 import { breakpoint } from 'themes/breakpoints'
 
 const PanelHeader = ({ className }: { className?: string }) => {

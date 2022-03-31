@@ -97,9 +97,7 @@ export default () => {
           property="og:description"
           content="Zobacz aktualne zbiórki rzeczowe i pomagaj z nami!"
         />
-        <meta
-          property="og:type" content="website"
-        />
+        <meta property="og:type" content="website" />
       </Helmet>
       <Container>
         {selectedPlace !== null && (
@@ -130,6 +128,7 @@ export default () => {
                         : ''}
                     </span>
                     <span>{selectedPlace?.city}</span>
+                    <span>{selectedPlace?.workingHours || ''}</span>
                   </PlaceAddress>
                 </PlaceAddressWrapper>
                 <LastUpdate>
@@ -234,7 +233,7 @@ const PlaceDescription = styled.p`
   margin-bottom: 1rem;
   overflow-wrap: break-word;
   a {
-    color: ${({ theme }) => theme.colors.blue}
+    color: ${({ theme }) => theme.colors.blue};
   }
 `
 

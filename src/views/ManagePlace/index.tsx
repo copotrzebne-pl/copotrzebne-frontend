@@ -24,6 +24,7 @@ export default () => {
     comment: '',
     email: '',
     phone: '',
+    workingHours: '',
     latitude: null,
     longitude: null
   })
