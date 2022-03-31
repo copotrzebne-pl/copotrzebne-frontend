@@ -77,7 +77,7 @@ module.exports = (env, { mode } = { mode: MODE_PRODUCTION }) => ({
         { from: 'public/favicon.ico' },
         { from: 'public/favicon-16x16.png' },
         { from: 'public/favicon-32x32.png' },
-        { from: 'public/fb-share-img2.png'}
+        { from: 'public/fb-share-img2.png' }
       ]
     })
   ].filter(Boolean),

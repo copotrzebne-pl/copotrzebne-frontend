@@ -45,62 +45,61 @@ export default () => {
   }, [ownedPlaces])
 
   useEffect(() => {
-      fetchDemands(selectedPlace.id)
-    },  [selectedPlace])
+    fetchDemands(selectedPlace.id)
+  }, [selectedPlace])
 
   return (
     <Container>
       <PageTitle>{selectedPlace?.name || 'Dodaj nowe potrzeby'}</PageTitle>
-          <ButtonWrapper>
-            {demands.length === 0 && (
-              <SectionTitle>
-                <TranslatedText value="noDemandsReported" />
-              </SectionTitle>
+      <ButtonWrapper>
+        {demands.length === 0 && (
+          <SectionTitle>
+            <TranslatedText value="noDemandsReported" />
+          </SectionTitle>
+        )}
+        <StyledButton
+          onClick={() =>
+            navigate(
+              routes[Page.DEMANDS].replace(':id', selectedPlace?.id || '')
+            )
+          }
+        >
+          <TranslatedText value="addDemands" />
+        </StyledButton>
+        {demands.length > 0 && (
+          <>
+            <DemandsWrapper>
+              {demands.map((demand, index) => (
+                <DemandBox key={index}>
+                  <DemandTitle>
+                    <DemandContent>
+                      <PriorityLabel>
+                        <TranslatedEntry entry={demand.priority} />
+                      </PriorityLabel>
+                      <TranslatedEntry entry={demand.supply} />
+                    </DemandContent>
+                    <TrashIcon
+                      src={trashIconUrl}
+                      alt="remove"
+                      onClick={() => removeDemand(demand.id)}
+                    />
+                  </DemandTitle>
+                </DemandBox>
+              ))}
+            </DemandsWrapper>
+            {selectedPlace?.id && (
+              <RemoveAllDemandsButton
+                onClick={() => removeAllDemands(selectedPlace?.id || '')}
+              >
+                <TranslatedText value="finishCollection" />
+              </RemoveAllDemandsButton>
             )}
-            <StyledButton
-              onClick={() =>
-                navigate(
-                  routes[Page.DEMANDS].replace(':id', selectedPlace?.id || '')
-                )
-              }
-            >
-              <TranslatedText value="addDemands" />
-            </StyledButton>
-            {demands.length > 0 && (
-              <>
-                <DemandsWrapper>
-                  {demands.map((demand, index) => (
-                    <DemandBox key={index}>
-                      <DemandTitle>
-                        <DemandContent>
-                          <PriorityLabel>
-                            <TranslatedEntry entry={demand.priority} />
-                          </PriorityLabel>
-                          <TranslatedEntry entry={demand.supply} />
-                        </DemandContent>
-                        <TrashIcon
-                          src={trashIconUrl}
-                          alt="remove"
-                          onClick={() => removeDemand(demand.id)}
-                        />
-                      </DemandTitle>
-                    </DemandBox>
-                  ))}
-                </DemandsWrapper>
-                {selectedPlace?.id && (
-                  <RemoveAllDemandsButton
-                    onClick={() => removeAllDemands(selectedPlace?.id || '')}
-                  >
-                    <TranslatedText value="finishCollection" />
-                  </RemoveAllDemandsButton>
-                )}
-              </>
-            )}
-          </ButtonWrapper>
+          </>
+        )}
+      </ButtonWrapper>
     </Container>
   )
 }
-
 
 const SectionTitle = styled.span`
   display: inline-block;

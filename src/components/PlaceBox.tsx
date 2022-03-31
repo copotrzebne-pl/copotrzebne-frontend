@@ -5,7 +5,7 @@ import TranslatedText from 'components/TranslatedText'
 
 const PlaceBoxComponent = ({
   className,
-  place,
+  place
 }: {
   className?: string
   place: Place
@@ -19,7 +19,7 @@ const PlaceBoxComponent = ({
     {place.lastUpdatedAt && (
       <LastUpdate>
         <TranslatedText value="placeLastUpdate" />{' '}
-        { `${format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')}`}
+        {`${format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')}`}
       </LastUpdate>
     )}
     {!place.lastUpdatedAt && (
@@ -50,7 +50,7 @@ const PlaceName = styled.h3`
   font-weight: 500;
   line-height: 1.45;
   margin-bottom: 0.1rem;
-  color: ${props => props.place.lastUpdatedAt ? '#1f2635' : '#8d99b2'} 
+  color: ${props => (props.place.lastUpdatedAt ? '#1f2635' : '#8d99b2')};
 `
 
 const PlaceDetails = styled.span`

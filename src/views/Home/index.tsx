@@ -53,9 +53,7 @@ export default () => {
           property="og:description"
           content="Zobacz aktualne zbiórki rzeczowe i pomagaj z nami!"
         />
-        <meta
-          property="og:type" content="website"
-        />
+        <meta property="og:type" content="website" />
       </Helmet>
       <Container>
         <PageDesciption>
