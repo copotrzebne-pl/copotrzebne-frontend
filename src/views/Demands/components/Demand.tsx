@@ -31,6 +31,10 @@ const Demand = ({
   })
 
   useEffect(() => {
+    setDemandDTO({ ...demandDTO, supplyId: supply.id })
+  }, [supply]);
+
+  useEffect(() => {
     setDemandDTO({ ...demandDTO, priorityId: priorities[0]?.id })
   }, [priorities])
 
