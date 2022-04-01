@@ -8,13 +8,6 @@ type CookiesConsentType = {
   analysisEnabled: boolean
 }
 
-declare global {
-  interface Window {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dataLayer: any[]
-  }
-}
-
 export const CookieBar = () => {
   const [cookiesState, setCookiesState] = useLocalStorage<CookiesConsentType>(
     '_cookie_choices',
