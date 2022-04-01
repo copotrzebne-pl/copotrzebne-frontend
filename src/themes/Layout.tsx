@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from 'components/PageHeader'
 import Copyright from 'components/Copyright'
+import { CookieBar } from 'components/CookieBar'
 
 export default () => (
   <>
@@ -9,6 +10,7 @@ export default () => (
     <PageContent>
       <Outlet />
     </PageContent>
+    <CookieBar />
     <Copyright />
   </>
 )

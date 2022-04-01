@@ -201,5 +201,13 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Brak aktualnych zbiórek',
     nameEn: 'No ongoing collections',
     nameUa: 'Пункт допомоги не збирає речей'
+  },
+  cookiesBarDescription: {
+    namePl:
+      'Cześć! Zbieramy ciasteczka aby analizować ruch na stronie i usprawniać funkcjonowanie serwisu.',
+    nameEn:
+      'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.',
+    nameUa:
+      'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.'
   }
 }
