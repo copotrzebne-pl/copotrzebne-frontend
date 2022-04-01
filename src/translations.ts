@@ -7,8 +7,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
      mieście!`,
     nameEn:
       'You have no idea where to donate food, who needs blankets and where to deliver hygienic supplies? Check the ongoing collections for ukrainian refugees in your city!',
-    nameUa: `Не знаєте де можна пожертвувати їжу, кому потрібні ковдри і куди завести засоби особистої гігієни?
-        Перевірьте пункти збору допомоги для України в твоєму місті!`
+    nameUa: `Не знаєш, де потрібні продукти, кому треба ковдри, куди завезти засоби особистої гігієни? Перевір діючі пункти збирання допомоги для України у твоєму місті!`
   },
   shareActiveCollections: {
     namePl: 'Udostępnij aktywne zbiórki',
@@ -36,10 +35,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
       providing support to refugees from Ukraine - with people who would like to donate goods or items.
       We make it easier to locate the ongoing collections and coordinate demands for given supply.
       Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.`,
-    nameUa: `Помагаємо допомагати - з'єднуємо місця які пропонують благодійну допомогу, проживання, підтримку людям
-    з України - з людьми які хочуть їх в цій допомозі підтримати. Ми полегшуємо пошук пунктів зборів допомоги та 
-    координування попиту на основні потреби. Завдяки нам, ви дізнаєтеся, що найбільше потрібно в пункті допомоги
-    у вашому регіоні, а також де і коли можна доставити ці речі.`
+    nameUa: `Помагаємо допомагати! 
+    З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
+    Полегшуємо пошук пунктів збирання допомоги, координуємо в них попит на основні потреби.
+    Завдяки нам дізнаєшся, що цієї миті найнеобхідніше в пунктах твого міста,а також куди і коли можна доставити речі.`
   },
   contactDetails: {
     namePl: `Chcesz dodać zbiórkę w twojej organizacji?
@@ -191,16 +190,16 @@ export const translations: { [value: string]: DictionaryEntry } = {
   editPlaceData: {
     namePl: 'Edytuj dane organizacji',
     nameEn: 'Edit data',
-    nameUa: ''
+    nameUa: 'Редагуй дані про організацію'
   },
   editDemands: {
     namePl: 'Edytuj listę potrzeb',
     nameEn: 'Edit current demands',
-    nameUa: ''
+    nameUa: 'Редагуй список потребних речей'
   },
   noOngoingCollections: {
     namePl: 'Brak aktualnych zbiórek',
     nameEn: 'No ongoing collections',
-    nameUa: ''
+    nameUa: 'Пункт допомоги не збирає речей'
   }
 }
