@@ -87,6 +87,23 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     navigate(routes[Page.PANEL])
   }, [])
 
+  const deletePlace = useCallback(async (place: Place) => {
+    const client = await getRestClient(process.env.API_URL)
+    try {
+      if (place.id) {
+        await client.delete<null, Place>(
+          API.panel.deletePlace.replace(':id', place.id)
+        )
+      }
+    } catch {
+      console.error('Error: place delete error!')
+      return
+    }
+
+    navigate(routes[Page.PANEL])
+  }, [])
+
+
   return (
     <UserContext.Provider
       value={{
@@ -96,6 +113,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         fetchOwnedPlaces,
         login,
         savePlace,
+        deletePlace,
         authorized,
         language,
         changeLanguage,

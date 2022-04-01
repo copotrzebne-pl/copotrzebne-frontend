@@ -2,6 +2,8 @@ import { Place } from 'contexts/types'
 import styled from 'styled-components'
 import format from 'date-fns/format'
 import TranslatedText from 'components/TranslatedText'
+import trashIconUrl from '../assets/trash-icon.svg'
+import { useUserContext } from '../contexts/userContext'
 
 const PlaceBoxComponent = ({
   className,
@@ -9,9 +11,16 @@ const PlaceBoxComponent = ({
 }: {
   className?: string
   place: Place
-}) => (
+}) => {
+  const {deletePlace} = useUserContext()
+  return (
   <div className={className}>
     <PlaceName place={place}>{place.name || ''}</PlaceName>
+    <TrashIcon
+      src={trashIconUrl}
+      alt="remove"
+      onClick={() => deletePlace(place.id)}
+    />
     <PlaceDetails place={place}>
       {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
       {place.apartment ? `/${place.apartment}` : ''}
@@ -29,7 +38,7 @@ const PlaceBoxComponent = ({
       </LastUpdate>
     )}
   </div>
-)
+)}
 
 export const PlaceBox = styled(PlaceBoxComponent)`
   padding: 1rem 1.2rem;
@@ -70,4 +79,11 @@ const LastUpdate = styled.div`
   font-size: 0.65rem;
   color: #8d99b2;
   padding-top: 0.2rem;
+`
+const TrashIcon = styled.img`
+  display: inline-block;
+  padding: 0.3rem;
+  height: 28px;
+  width: auto;
+  cursor: pointer;
 `
