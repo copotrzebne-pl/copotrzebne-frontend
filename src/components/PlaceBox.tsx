@@ -60,6 +60,8 @@ const PlaceName = styled.h3`
   font-weight: 500;
   line-height: 1.45;
   margin-bottom: 0.1rem;
+  display: inline-block;
+  width: 92%;
   color: ${props => (props.place.lastUpdatedAt ? '#1f2635' : '#8d99b2')};
 `
 
