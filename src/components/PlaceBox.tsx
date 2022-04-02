@@ -4,7 +4,7 @@ import format from 'date-fns/format'
 import TranslatedText from 'components/TranslatedText'
 import trashIconUrl from '../assets/trash-icon.svg'
 import { useUserContext } from '../contexts/userContext'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { userContextProvider } from '../contexts/userContext'
 import { checkIfAuthorized } from '../utils/session'
 
@@ -16,19 +16,18 @@ const PlaceBoxComponent = ({
   place: Place
 }) => {
   const {deletePlace} = useUserContext()
-  const { user, fetchUser } = useUserContext()
-  const { authorized} = checkIfAuthorized()
-  useEffect(() => {
-    // whoimi - get logged in user data
-    authorized?.fetchUser()
-  }, [])
+  const { user} = useUserContext()
+  const [authorized] = useState<boolean>(() =>
+    checkIfAuthorized()
+  )
+
   return (
   <div className={className}>
     <PlaceName place={place}>{place.name || ''}</PlaceName>
-    {user?.role === 'admin' && <TrashIcon
+    {authorized && user?.role === 'admin' && <TrashIcon
       src={trashIconUrl}
       alt="remove"
-      onClick={() => window.confirm('Czy na pewno usunąć organizację?') ? deletePlace(place) : place}
+      onClick={() => window.confirm('Czy na pewno usunąć organizację?') ? deletePlace(place.id) : place.id}
     />}
     <PlaceDetails place={place}>
       {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}

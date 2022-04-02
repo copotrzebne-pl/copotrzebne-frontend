@@ -87,12 +87,12 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     navigate(routes[Page.PANEL])
   }, [])
 
-  const deletePlace = useCallback(async (place: Place) => {
+  const deletePlace = useCallback(async (placeId: string) => {
     const client = await getRestClient(process.env.API_URL)
     try {
-      if (place.id) {
-        await client.delete<null, >(
-          API.panel.deletePlace.replace(':id', place.id)
+      if (placeId) {
+        await client.delete<null, Place>(
+          API.panel.deletePlace.replace(':id', placeId)
         )
       }
     } catch {
