@@ -58,7 +58,7 @@ export default () => {
           <>
             <DemandsWrapper>
               {demands.map(demand => (
-                <DemandBox key={demand.supply.id}>
+                <DemandBox key={demand.supply?.id}>
                   <DemandTitle>
                     <DemandContent>
                       <PriorityLabel>
