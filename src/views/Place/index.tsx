@@ -29,18 +29,15 @@ export default () => {
   const { groupedDemands, demandsKeys } = useGroupDemands(demands)
 
   useEffect(() => {
-    id && fetchPlace(id)
+    if (id) {
+      fetchPlace(id)
+      fetchDemands(id)
+    }
     return () => {
       clearDemands()
       clearSelectedPlace()
     }
   }, [id])
-
-  useEffect(() => {
-    if (selectedPlace && selectedPlace.id) {
-      fetchDemands(selectedPlace.id)
-    }
-  }, [selectedPlace])
 
   return (
     <>

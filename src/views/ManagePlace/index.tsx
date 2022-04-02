@@ -25,18 +25,14 @@ export default () => {
       <PageTitle>{selectedPlace?.name || 'Dodaj nowe miejsce'}</PageTitle>
       <StyledButton
         onClick={() =>
-          navigate(
-            routes[Page.MANAGE_ADDRESS].replace(':id', selectedPlace?.id || '')
-          )
+          navigate(routes[Page.MANAGE_ADDRESS].replace(':id', id || ''))
         }
       >
         <TranslatedText value="editPlaceData" />
       </StyledButton>
       <StyledButton
         onClick={() =>
-          navigate(
-            routes[Page.MANAGE_DEMANDS].replace(':id', selectedPlace?.id || '')
-          )
+          navigate(routes[Page.MANAGE_DEMANDS].replace(':id', id || ''))
         }
       >
         <TranslatedText value="editDemands" />

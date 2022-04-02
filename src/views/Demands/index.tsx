@@ -31,20 +31,17 @@ export default () => {
   const savedSuppliesIds = demands.map(demand => demand.supplyId)
 
   useEffect(() => {
-    id && fetchPlace(id)
+    if (id) {
+      fetchPlace(id)
+      fetchDemands(id)
+      fetchPriorities(id)
+      fetchSupplies(id)
+    }
     return () => {
       clearDemands()
       clearSelectedPlace()
     }
   }, [id])
-
-  useEffect(() => {
-    if (selectedPlace && selectedPlace.id) {
-      fetchDemands(selectedPlace.id)
-      fetchPriorities(selectedPlace.id)
-      fetchSupplies(selectedPlace.id)
-    }
-  }, [selectedPlace])
 
   return (
     <Container>
