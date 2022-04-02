@@ -4,49 +4,49 @@ import format from 'date-fns/format'
 import TranslatedText from 'components/TranslatedText'
 import trashIconUrl from '../assets/trash-icon.svg'
 import { useUserContext } from '../contexts/userContext'
-import { useEffect, useState } from 'react'
-import { userContextProvider } from '../contexts/userContext'
+import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
 
 const PlaceBoxComponent = ({
-  className,
-  place
-}: {
+                             className,
+                             place
+                           }: {
   className?: string
   place: Place
 }) => {
-  const {deletePlace} = useUserContext()
-  const { user} = useUserContext()
+  const { deletePlace } = useUserContext()
+  const { user } = useUserContext()
   const [authorized] = useState<boolean>(() =>
     checkIfAuthorized()
   )
 
   return (
-  <div className={className}>
-    <PlaceName place={place}>{place.name || ''}</PlaceName>
-    {authorized && user?.role === 'admin' && <TrashIcon
-      src={trashIconUrl}
-      alt="remove"
-      onClick={() => window.confirm('Czy na pewno usunąć organizację?') ? deletePlace(place.id) : place.id}
-    />}
-    <PlaceDetails place={place}>
-      {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
-      {place.apartment ? `/${place.apartment}` : ''}
-    </PlaceDetails>
-    <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
-    {place.lastUpdatedAt && (
-      <LastUpdate>
-        <TranslatedText value="placeLastUpdate" />{' '}
-        {`${format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')}`}
-      </LastUpdate>
-    )}
-    {!place.lastUpdatedAt && (
-      <LastUpdate>
-        <TranslatedText value="noOngoingCollections" />
-      </LastUpdate>
-    )}
-  </div>
-)}
+    <div className={className}>
+      <PlaceName place={place}>{place.name || ''}</PlaceName>
+      {authorized && user?.role === 'admin' && <TrashIcon
+        src={trashIconUrl}
+        alt="remove"
+        onClick={() => window.confirm('Czy na pewno usunąć organizację?') ? deletePlace(place.id) : place.id}
+      />}
+      <PlaceDetails place={place}>
+        {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
+        {place.apartment ? `/${place.apartment}` : ''}
+      </PlaceDetails>
+      <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
+      {place.lastUpdatedAt && (
+        <LastUpdate>
+          <TranslatedText value="placeLastUpdate"/>{' '}
+          {`${format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')}`}
+        </LastUpdate>
+      )}
+      {!place.lastUpdatedAt && (
+        <LastUpdate>
+          <TranslatedText value="noOngoingCollections"/>
+        </LastUpdate>
+      )}
+    </div>
+  )
+}
 
 export const PlaceBox = styled(PlaceBoxComponent)`
   padding: 1rem 1.2rem;
