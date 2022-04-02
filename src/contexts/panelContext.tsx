@@ -99,14 +99,18 @@ export const PanelContextProvider = ({
     async (demand: DemandDTO): Promise<boolean> => {
       try {
         const client = await getRestClient(process.env.API_URL)
-        await client.post<null, Supply>(API.panel.saveDemand, demand)
+        const response = await client.post<null, Demand>(
+          API.panel.saveDemand,
+          demand
+        )
+        setDemands([...demands, response])
         return Promise.resolve(true)
       } catch {
         setError({ ...errors, places: 'Fetching priorities error' })
         return Promise.reject(false)
       }
     },
-    []
+    [demands, setDemands]
   )
 
   const removeDemand = useCallback(

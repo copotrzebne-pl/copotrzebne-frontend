@@ -69,10 +69,10 @@ export default () => {
               {cityName}
             </Title>
             <PlacesWrapper>
-              {groupedPlaces[cityName].map((place, index) => (
+              {groupedPlaces[cityName].map(place => (
                 <StyledLink
                   to={`${routes[Page.PLACE]}/${place.id}`}
-                  key={index}
+                  key={place.id}
                 >
                   <PlaceBox place={place} />
                 </StyledLink>

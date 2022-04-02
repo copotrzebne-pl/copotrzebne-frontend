@@ -49,6 +49,7 @@ export type Supply = {
 export type Demand = {
   id: string
   supply: Supply
+  supplyId: string
   priority: Priority
   updatedAt: string
   comment?: string
@@ -73,7 +74,7 @@ export type Place = {
   name: string
   phone: string
   street: string
-  lastUpdatedAt: string
+  lastUpdatedAt?: string
   workingHours: string
 }
 

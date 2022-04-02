@@ -7,6 +7,7 @@ export function useGroupDemands(demands: Demand[]) {
   >({})
   const [demandsKeys, setDemandsKeys] = useState<number[]>([])
 
+  //group demands by category priority
   const groupDemands = useCallback(
     (): Record<string, Demand[]> =>
       demands.reduce(

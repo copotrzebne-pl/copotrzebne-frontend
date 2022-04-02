@@ -1,44 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import Button from 'components/Button'
 import PageTitle from 'components/PageTitle'
-import { Place } from 'contexts/types'
-import { useUserContext } from 'contexts/userContext'
-import { useParams } from 'react-router-dom'
+import { usePanelContext } from 'contexts/panelContext'
+import { useParams, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { Page, routes } from '../../routes'
-import { useNavigate } from 'react-router-dom'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { ownedPlaces, fetchOwnedPlaces, savePlace } = useUserContext()
-  const [selectedPlace, setSelectedPlace] = useState<Place>({
-    id,
-    name: '',
-    city: '',
-    street: '',
-    buildingNumber: '',
-    apartment: '',
-    comment: '',
-    email: '',
-    phone: '',
-    workingHours: '',
-    latitude: null,
-    longitude: null
-  })
+  const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
 
   useEffect(() => {
-    fetchOwnedPlaces()
-  }, [])
-
-  useEffect(() => {
-    const place = ownedPlaces.filter(elem => elem.id === id)[0]
-    if (place) {
-      setSelectedPlace(place)
+    id && fetchPlace(id)
+    return () => {
+      clearSelectedPlace()
     }
-  }, [ownedPlaces])
+  }, [id])
 
   return (
     <Container>
@@ -46,7 +26,7 @@ export default () => {
       <StyledButton
         onClick={() =>
           navigate(
-            routes[Page.MANAGE_ADDRESS].replace(':id', selectedPlace.id || '')
+            routes[Page.MANAGE_ADDRESS].replace(':id', selectedPlace?.id || '')
           )
         }
       >
@@ -55,7 +35,7 @@ export default () => {
       <StyledButton
         onClick={() =>
           navigate(
-            routes[Page.MANAGE_DEMANDS].replace(':id', selectedPlace.id || '')
+            routes[Page.MANAGE_DEMANDS].replace(':id', selectedPlace?.id || '')
           )
         }
       >

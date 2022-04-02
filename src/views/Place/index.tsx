@@ -41,6 +41,7 @@ export default () => {
       fetchDemands(selectedPlace.id)
     }
   }, [selectedPlace])
+
   return (
     <>
       <Helmet>

@@ -4,15 +4,17 @@ import { Form, FormGroup, Label, TextInput } from 'components/forms'
 import PageTitle from 'components/PageTitle'
 import { Place } from 'contexts/types'
 import { useUserContext } from 'contexts/userContext'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
+import { usePanelContext } from 'contexts/panelContext'
 
 export default () => {
   const { id } = useParams()
-  const { ownedPlaces, fetchOwnedPlaces, savePlace } = useUserContext()
-  const [selectedPlace, setSelectedPlace] = useState<Place>({
+  const { savePlace } = useUserContext()
+  const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
+  const [editedPlace, setEditedPlace] = useState<Place>({
     id,
     name: '',
     city: '',
@@ -28,34 +30,34 @@ export default () => {
   })
 
   useEffect(() => {
-    fetchOwnedPlaces()
-  }, [])
+    id && fetchPlace(id)
+    return () => {
+      clearSelectedPlace()
+    }
+  }, [id])
 
   useEffect(() => {
-    const place = ownedPlaces.filter(elem => elem.id === id)[0]
-    if (place) {
-      setSelectedPlace(place)
-    }
-  }, [ownedPlaces])
+    selectedPlace && setEditedPlace(selectedPlace)
+  }, [selectedPlace])
 
   const setValue = useCallback(
     (name: string, value: string) => {
-      setSelectedPlace({ ...selectedPlace, [name]: value })
+      setEditedPlace({ ...editedPlace, [name]: value })
     },
-    [selectedPlace]
+    [editedPlace]
   )
 
   const handleSubmit = useCallback(
     (e: SyntheticEvent) => {
       e.preventDefault()
       if (
-        !selectedPlace.name ||
-        !selectedPlace.city ||
-        !selectedPlace.street ||
-        !selectedPlace.buildingNumber
+        !editedPlace.name ||
+        !editedPlace.city ||
+        !editedPlace.street ||
+        !editedPlace.buildingNumber
       )
         return
-      savePlace(selectedPlace)
+      savePlace(editedPlace)
     },
     [selectedPlace]
   )
@@ -73,7 +75,7 @@ export default () => {
             type="text"
             placeholder="name"
             required
-            value={selectedPlace.name || ''}
+            value={editedPlace.name || ''}
             onChange={e => setValue('name', e.target.value)}
           />
         </FormGroup>
@@ -86,7 +88,7 @@ export default () => {
             type="text"
             placeholder="city"
             required
-            value={selectedPlace.city || ''}
+            value={editedPlace.city || ''}
             onChange={e => setValue('city', e.target.value)}
           />
         </FormGroup>
@@ -99,7 +101,7 @@ export default () => {
             type="text"
             placeholder="street"
             required
-            value={selectedPlace.street || ''}
+            value={editedPlace.street || ''}
             onChange={e => setValue('street', e.target.value)}
           />
         </FormGroup>
@@ -112,7 +114,7 @@ export default () => {
             type="text"
             placeholder="buildingNumber"
             required
-            value={selectedPlace.buildingNumber || ''}
+            value={editedPlace.buildingNumber || ''}
             onChange={e => setValue('buildingNumber', e.target.value)}
           />
         </FormGroup>
@@ -124,7 +126,7 @@ export default () => {
             id="apartment"
             type="text"
             placeholder="apartment"
-            value={selectedPlace.apartment || ''}
+            value={editedPlace.apartment || ''}
             onChange={e => setValue('apartment', e.target.value)}
           />
         </FormGroup>
@@ -136,7 +138,7 @@ export default () => {
             id="workingHours"
             type="text"
             placeholder="workingHours"
-            value={selectedPlace.workingHours || ''}
+            value={editedPlace.workingHours || ''}
             onChange={e => setValue('workingHours', e.target.value)}
           />
         </FormGroup>
@@ -148,19 +150,19 @@ export default () => {
             id="comment"
             type="text"
             placeholder="comment"
-            value={selectedPlace.comment || ''}
+            value={editedPlace.comment || ''}
             onChange={e => setValue('comment', e.target.value)}
           />
         </FormGroup>
         <FormGroup>
           <Label>
-            <TranslatedText value="Email" />
+            <TranslatedText value="email" />
           </Label>
           <TextInput
             id="email"
             type="text"
             placeholder="email"
-            value={selectedPlace.email || ''}
+            value={editedPlace.email || ''}
             onChange={e => setValue('email', e.target.value)}
           />
         </FormGroup>
@@ -172,7 +174,7 @@ export default () => {
             id="phone"
             type="text"
             placeholder="phone"
-            value={selectedPlace.phone || ''}
+            value={editedPlace.phone || ''}
             onChange={e => setValue('phone', e.target.value)}
           />
         </FormGroup>
@@ -184,7 +186,7 @@ export default () => {
             id="latitude"
             type="text"
             placeholder="latitude"
-            value={selectedPlace.latitude || ''}
+            value={editedPlace.latitude || ''}
             onChange={e => setValue('latitude', e.target.value)}
           />
         </FormGroup>
@@ -196,7 +198,7 @@ export default () => {
             id="longitude"
             type="text"
             placeholder="longitude"
-            value={selectedPlace.longitude || ''}
+            value={editedPlace.longitude || ''}
             onChange={e => setValue('longitude', e.target.value)}
           />
         </FormGroup>
