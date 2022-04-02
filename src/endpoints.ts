@@ -5,6 +5,7 @@ const main = {
 const panel = {
   login: '/login',
   getPlaces: '/places',
+  getPlace: '/places/:id',
   getPlaceDemands: '/places/:id/demands',
   getUser: '/users/whoami',
   getOwnedPlaces: '/users-places/owned',
