@@ -4,6 +4,9 @@ import format from 'date-fns/format'
 import TranslatedText from 'components/TranslatedText'
 import trashIconUrl from '../assets/trash-icon.svg'
 import { useUserContext } from '../contexts/userContext'
+import { useEffect } from 'react'
+import { userContextProvider } from '../contexts/userContext'
+import { checkIfAuthorized } from '../utils/session'
 
 const PlaceBoxComponent = ({
   className,
@@ -13,14 +16,20 @@ const PlaceBoxComponent = ({
   place: Place
 }) => {
   const {deletePlace} = useUserContext()
+  const { user, fetchUser } = useUserContext()
+  const { authorized} = checkIfAuthorized()
+  useEffect(() => {
+    // whoimi - get logged in user data
+    authorized?.fetchUser()
+  }, [])
   return (
   <div className={className}>
     <PlaceName place={place}>{place.name || ''}</PlaceName>
-    <TrashIcon
+    {user?.role === 'admin' && <TrashIcon
       src={trashIconUrl}
       alt="remove"
-      onClick={() => deletePlace(place.id)}
-    />
+      onClick={() => deletePlace(place)}
+    />}
     <PlaceDetails place={place}>
       {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
       {place.apartment ? `/${place.apartment}` : ''}

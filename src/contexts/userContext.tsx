@@ -91,7 +91,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     const client = await getRestClient(process.env.API_URL)
     try {
       if (place.id) {
-        await client.delete<null, Place>(
+        await client.delete<null, >(
           API.panel.deletePlace.replace(':id', place.id)
         )
       }
