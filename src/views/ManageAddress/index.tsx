@@ -30,7 +30,7 @@ export default () => {
   })
 
   useEffect(() => {
-    id && fetchPlace(id)
+    if (id && id !== 'new') fetchPlace(id)
     return () => {
       clearSelectedPlace()
     }

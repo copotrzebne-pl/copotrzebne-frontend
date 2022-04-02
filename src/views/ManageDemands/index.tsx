@@ -26,7 +26,7 @@ export default () => {
   } = usePanelContext()
 
   useEffect(() => {
-    if (id) {
+    if (id && id !== 'new') {
       fetchPlace(id)
       fetchDemands(id)
     }

@@ -14,7 +14,7 @@ export default () => {
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
 
   useEffect(() => {
-    id && fetchPlace(id)
+    id && id !== 'new' && fetchPlace(id)
     return () => {
       clearSelectedPlace()
     }
@@ -30,13 +30,15 @@ export default () => {
       >
         <TranslatedText value="editPlaceData" />
       </StyledButton>
-      <StyledButton
-        onClick={() =>
-          navigate(routes[Page.MANAGE_DEMANDS].replace(':id', id || ''))
-        }
-      >
-        <TranslatedText value="editDemands" />
-      </StyledButton>
+      {id && id !== 'new' && (
+        <StyledButton
+          onClick={() =>
+            navigate(routes[Page.MANAGE_DEMANDS].replace(':id', id || ''))
+          }
+        >
+          <TranslatedText value="editDemands" />
+        </StyledButton>
+      )}
     </Container>
   )
 }
