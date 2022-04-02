@@ -1,7 +1,6 @@
 import Button from 'components/Button'
 import { usePanelContext } from 'contexts/panelContext'
-import { useUserContext } from 'contexts/userContext'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
@@ -10,44 +9,32 @@ import trashIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
-import { Place } from '../../contexts/types'
-import PageTitle from '../../components/PageTitle'
+import PageTitle from 'components/PageTitle'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
-  const { demands, fetchDemands, removeDemand, removeAllDemands } =
-    usePanelContext()
-  const [selectedPlace, setSelectedPlace] = useState<Place>({
-    id,
-    name: '',
-    city: '',
-    street: '',
-    buildingNumber: '',
-    apartment: '',
-    comment: '',
-    email: '',
-    phone: '',
-    workingHours: '',
-    latitude: null,
-    longitude: null
-  })
+  const {
+    demands,
+    selectedPlace,
+    fetchPlace,
+    clearDemands,
+    clearSelectedPlace,
+    fetchDemands,
+    removeDemand,
+    removeAllDemands
+  } = usePanelContext()
 
   useEffect(() => {
-    fetchOwnedPlaces()
-  }, [])
-
-  useEffect(() => {
-    const place = ownedPlaces.filter(elem => elem.id === id)[0]
-    if (place) {
-      setSelectedPlace(place)
+    if (id && id !== 'new') {
+      fetchPlace(id)
+      fetchDemands(id)
     }
-  }, [ownedPlaces])
-
-  useEffect(() => {
-    fetchDemands(selectedPlace.id)
-  }, [selectedPlace])
+    return () => {
+      clearDemands()
+      clearSelectedPlace()
+    }
+  }, [id])
 
   return (
     <Container>
@@ -70,8 +57,8 @@ export default () => {
         {demands.length > 0 && (
           <>
             <DemandsWrapper>
-              {demands.map((demand, index) => (
-                <DemandBox key={index}>
+              {demands.map(demand => (
+                <DemandBox key={demand.supply?.id}>
                   <DemandTitle>
                     <DemandContent>
                       <PriorityLabel>

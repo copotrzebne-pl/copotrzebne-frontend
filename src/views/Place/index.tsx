@@ -1,85 +1,43 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect } from 'react'
 import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
 import { useParams } from 'react-router-dom'
 import format from 'date-fns/format'
-import DOMPurify from 'dompurify'
-
 import marker from 'assets/marker.svg'
-import { Place, Demand } from 'contexts/types'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
 import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
-import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
+import { useTextTransformToHTML } from 'hooks/useTextTransformToHTML'
+import { useGroupDemands } from 'hooks/useGroupDemands'
 
 export default () => {
-  const { fetchPlaces, fetchDemands, clearDemands, places, demands } =
-    usePanelContext()
-  const [lastTimeUpdated, setLastTimeUpdated] = useState<string>('')
+  const {
+    selectedPlace,
+    demands,
+    fetchPlace,
+    fetchDemands,
+    clearDemands,
+    clearSelectedPlace
+  } = usePanelContext()
   const { id } = useParams()
-  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
-  const [formattedPlaceDescription, setFormattedPlaceDescription] =
-    useState<string>('')
-  const [groupedDemands, setGroupedDemands] = useState<
-    Record<string, Demand[]>
-  >({})
-
-  useEffect(() => {
-    const URL_REGEX =
-      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/
-    const formattedText = DOMPurify.sanitize(selectedPlace?.comment || '')
-      .split(' ')
-      .map(part =>
-        URL_REGEX.test(part)
-          ? `<a target='_blank' href=${part}>${part}</a>`
-          : `${part} `
-      )
-      .join('')
-    setFormattedPlaceDescription(formattedText)
-  }, [selectedPlace])
-
-  const groupDemands = useCallback(
-    (): Record<string, Demand[]> =>
-      demands.reduce(
-        (acc, item) => (
-          (acc[item.supply.category.nameEn] = [
-            ...(acc[item.supply.category.nameEn] || []),
-            item
-          ]),
-          acc
-        ),
-        {} as Record<string, Demand[]>
-      ),
-    [demands]
+  const formattedPlaceDescription = useTextTransformToHTML(
+    selectedPlace?.comment
   )
+  const { groupedDemands, demandsKeys } = useGroupDemands(demands)
 
   useEffect(() => {
-    fetchPlaces()
-    return clearDemands
-  }, [])
-
-  useEffect(() => {
-    const place = places.filter(elem => elem.id === id)[0]
-    if (place && place.id) {
-      setSelectedPlace(place)
-      fetchDemands(place.id)
+    if (id) {
+      fetchPlace(id)
+      fetchDemands(id)
     }
-  }, [places])
-
-  useEffect(() => {
-    const sortedDates = demands
-      .map(demand => demand.updatedAt)
-      .sort((dateA, dateB) =>
-        Math.abs(new Date(dateB).getTime() - new Date(dateA).getTime())
-      )
-    if (sortedDates[0]) {
-      setLastTimeUpdated(format(Date.parse(sortedDates[0]), 'd. MMM Y H:m'))
+    return () => {
+      clearDemands()
+      clearSelectedPlace()
     }
-    setGroupedDemands(groupDemands())
-  }, [demands])
+  }, [id])
 
   return (
     <>
@@ -104,7 +62,7 @@ export default () => {
           <PlaceDetails>
             <PageTitle>{selectedPlace?.name}</PageTitle>
             <PlaceDetailsWrapper>
-              {selectedPlace?.comment && (
+              {formattedPlaceDescription && (
                 <PlaceDescription
                   dangerouslySetInnerHTML={{
                     __html: formattedPlaceDescription
@@ -135,7 +93,14 @@ export default () => {
                   <span>
                     <TranslatedText value="lastUpdate" />
                   </span>
-                  <h3>{lastTimeUpdated ? lastTimeUpdated : '---'}</h3>
+                  <h3>
+                    {selectedPlace.lastUpdatedAt
+                      ? format(
+                          Date.parse(selectedPlace.lastUpdatedAt),
+                          'd. MMM Y H:m'
+                        )
+                      : '---'}
+                  </h3>
                 </LastUpdate>
               </DetailsRow>
             </PlaceDetailsWrapper>
@@ -150,21 +115,18 @@ export default () => {
               <TranslatedText value="demandsList" />
             </DemandsListTitle>
             <DemandsList>
-              {[
-                ...SUPPLIES_CATEGORIES_ORDER,
-                ...Object.keys(groupedDemands).filter(
-                  nameEn => !SUPPLIES_CATEGORIES_ORDER.includes(nameEn)
-                )
-              ].map((nameEn, key) => {
-                if (!groupedDemands[nameEn]) return null
+              {demandsKeys.map((priorityNumber, key) => {
+                if (!groupedDemands[priorityNumber]) return null
                 return (
                   <div key={key}>
                     <CategoryHeader>
                       <TranslatedEntry
-                        entry={groupedDemands[nameEn][0].supply?.category}
+                        entry={
+                          groupedDemands[priorityNumber][0].supply?.category
+                        }
                       />
                     </CategoryHeader>
-                    {groupedDemands[nameEn].map((demand, index) => (
+                    {groupedDemands[priorityNumber].map((demand, index) => (
                       <DemandComponent key={index}>
                         <div>
                           <DemandInfo>
