@@ -2,14 +2,15 @@ import styled from 'styled-components'
 import { useCallback, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { useClickOutside } from '../hooks/useClickOutside'
+import menuIcon from 'assets/menu-icon.svg'
+import closeIcon from 'assets/close-icon.svg'
+import { breakpoint } from 'themes/breakpoints'
+import { ItemMenu } from 'types/types'
+import { useClickOutside } from 'hooks/useClickOutside'
 import MainLogo from './MainLogo'
 import TranslatedText from './TranslatedText'
 import LanguagePicker from './LanguagePicker'
-import menuIcon from '../assets/menu-icon.svg'
-import closeIcon from '../assets/close-icon.svg'
-import { breakpoint } from '../themes/breakpoints'
-import { ItemMenu } from '../types/types'
+
 
 const PageHeader = ({
   className,

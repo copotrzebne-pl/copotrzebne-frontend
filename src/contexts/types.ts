@@ -32,6 +32,7 @@ export type Priority = {
 
 export type Category = {
   id: string
+  priority: number
   namePl: string
   nameUa: string
   nameEn: string
@@ -48,6 +49,7 @@ export type Supply = {
 export type Demand = {
   id: string
   supply: Supply
+  supplyId: string
   priority: Priority
   updatedAt: string
   comment?: string
@@ -72,18 +74,21 @@ export type Place = {
   name: string
   phone: string
   street: string
-  lastUpdatedAt: string
+  lastUpdatedAt?: string
   workingHours: string
 }
 
 export type PanelContextValue = {
   places: Place[]
+  selectedPlace: Place | null
   demands: Demand[]
   supplies: Supply[]
   priorities: Priority[]
   fetchPlaces: () => void
+  fetchPlace: (placeId: string) => void
   fetchDemands: (placeId: string) => void
   clearDemands: () => void
+  clearSelectedPlace: () => void
   fetchPriorities: (placeId: string) => void
   fetchSupplies: (placeId: string) => void
   saveDemand: (demand: DemandDTO) => Promise<boolean>

@@ -17,6 +17,7 @@ export const PanelContextProvider = ({
   children
 }: PanelContextProviderProps) => {
   const [places, setPlaces] = useState<Place[]>([])
+  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
   const [demands, setDemands] = useState<Demand[]>([])
   const [supplies, setSupplies] = useState<Supply[]>([])
   const [priorities, setPriorities] = useState<Priority[]>([])
@@ -33,6 +34,25 @@ export const PanelContextProvider = ({
       setError({ ...errors, places: 'Fetching places error' })
     }
   }, [errors])
+
+  const fetchPlace = useCallback(
+    async (placeId: string) => {
+      try {
+        const client = await getRestClient(process.env.API_URL)
+        const response = await client.get<null, Record<string, string>>(
+          API.panel.getPlace.replace(':id', placeId)
+        )
+        setSelectedPlace(response as Place)
+      } catch {
+        setError({ ...errors, places: 'Fetching places error' })
+      }
+    },
+    [errors]
+  )
+
+  const clearSelectedPlace = useCallback(async () => {
+    setSelectedPlace(null)
+  }, [])
 
   const fetchDemands = useCallback(
     async (placeId: string) => {
@@ -79,14 +99,18 @@ export const PanelContextProvider = ({
     async (demand: DemandDTO): Promise<boolean> => {
       try {
         const client = await getRestClient(process.env.API_URL)
-        await client.post<null, Supply>(API.panel.saveDemand, demand)
+        const response = await client.post<null, Demand>(
+          API.panel.saveDemand,
+          demand
+        )
+        setDemands([...demands, response])
         return Promise.resolve(true)
       } catch {
         setError({ ...errors, places: 'Fetching priorities error' })
         return Promise.reject(false)
       }
     },
-    []
+    [demands, setDemands]
   )
 
   const removeDemand = useCallback(
@@ -121,12 +145,15 @@ export const PanelContextProvider = ({
     <PanelContext.Provider
       value={{
         places,
+        selectedPlace,
         demands,
-        fetchDemands,
-        fetchPlaces,
-        clearDemands,
         supplies,
         priorities,
+        fetchDemands,
+        fetchPlaces,
+        fetchPlace,
+        clearDemands,
+        clearSelectedPlace,
         fetchPriorities,
         fetchSupplies,
         saveDemand,

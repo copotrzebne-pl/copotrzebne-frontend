@@ -12,7 +12,8 @@ const Demand = ({
   saveDemand,
   priorities,
   onSelected,
-  isSelected
+  isSelected,
+  isSaved
 }: {
   className?: string
   supply: Supply
@@ -21,8 +22,8 @@ const Demand = ({
   saveDemand: (demand: DemandDTO) => Promise<boolean>
   onSelected: (supplyId: string) => void
   isSelected: boolean
+  isSaved: boolean
 }) => {
-  const [addedToList, setAddedToList] = useState<boolean>(false)
   const [demandDTO, setDemandDTO] = useState<DemandDTO>({
     placeId,
     supplyId: supply.id,
@@ -41,10 +42,7 @@ const Demand = ({
   const handleDemandSave = useCallback(() => {
     if (!demandDTO.priorityId && !demandDTO.placeId) return
     saveDemand({ ...demandDTO, placeId }).then((saved: boolean) => {
-      if (saved) {
-        onSelected('')
-        setAddedToList(true)
-      }
+      if (saved) onSelected('')
     })
   }, [demandDTO, placeId])
 
@@ -55,7 +53,7 @@ const Demand = ({
         isSelected={isSelected}
       >
         <Title>
-          {addedToList && <CheckIcon />}{' '}
+          {isSaved && <CheckIcon />}{' '}
           <span>
             <TranslatedEntry entry={supply} />
           </span>

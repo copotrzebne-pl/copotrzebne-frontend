@@ -1,11 +1,11 @@
+import { useCallback } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import Header from 'components/PageHeader'
-import { useCallback } from 'react'
-import { Page, routes } from '../routes'
-import { useUserContext } from '../contexts/userContext'
-import { getPanelMenuItems } from '../utils/menus'
+import { Page, routes } from 'routes'
+import { useUserContext } from 'contexts/userContext'
+import { getPanelMenuItems } from 'utils/menus'
 
 export default () => {
   const { authorized, setAuthorized } = useUserContext()

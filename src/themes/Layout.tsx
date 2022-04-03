@@ -2,10 +2,11 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from 'components/PageHeader'
 import Copyright from 'components/Copyright'
-import { useUserContext } from '../contexts/userContext'
-import { getDefaultMenuItems } from '../utils/menus'
+import { CookieBar } from 'components/CookieBar'
+import { useUserContext } from 'contexts/userContext'
+import { getDefaultMenuItems } from 'utils/menus'
 import { useCallback } from 'react'
-import { Page, routes } from '../routes'
+import { Page, routes } from 'routes'
 
 export default () => {
   const { authorized, setAuthorized } = useUserContext()
@@ -27,6 +28,7 @@ export default () => {
       <PageContent>
         <Outlet />
       </PageContent>
+      <CookieBar />
       <Copyright />
     </>
   )
