@@ -1,19 +1,38 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from 'components/PageHeader'
 import Copyright from 'components/Copyright'
 import { CookieBar } from 'components/CookieBar'
+import { useUserContext } from 'contexts/userContext'
+import { getDefaultMenuItems } from 'utils/menus'
+import { useCallback } from 'react'
+import { Page, routes } from 'routes'
 
-export default () => (
-  <>
-    <Header />
-    <PageContent>
-      <Outlet />
-    </PageContent>
-    <CookieBar />
-    <Copyright />
-  </>
-)
+export default () => {
+  const { authorized, setAuthorized } = useUserContext()
+  const navigate = useNavigate()
+
+  const handleLogout = useCallback(() => {
+    try {
+      window.localStorage.removeItem('_token')
+      setAuthorized(false)
+      navigate(routes[Page.HOME])
+    } catch {
+      console.error('logout error')
+    }
+  }, [navigate])
+
+  return (
+    <>
+      <Header menuItems={getDefaultMenuItems({ authorized, handleLogout })} />
+      <PageContent>
+        <Outlet />
+      </PageContent>
+      <CookieBar />
+      <Copyright />
+    </>
+  )
+}
 
 const PageContent = styled.div`
   display: flex;
