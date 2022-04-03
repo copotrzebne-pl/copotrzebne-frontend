@@ -13,6 +13,7 @@ const panel = {
   supplies: '/supplies',
   priorities: '/priorities',
   saveDemand: '/demands',
+  editDemand: '/demands/:id',
   removeDemand: '/demands/:id',
   removeAllDemands: '/places/:id/demands'
 } as const

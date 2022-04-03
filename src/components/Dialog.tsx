@@ -54,7 +54,7 @@ const Overlay = styled.div`
 `
 
 const Content = styled.div`
-  background-color: ${({ theme }) => theme.colors.base};
+  background-color: white;
   width: calc(100% - 45px);
   min-height: 300px;
   border-radius: 18px;
@@ -63,7 +63,7 @@ const Content = styled.div`
   padding-right: 3.2rem;
   padding-bottom: 2.8rem;
   line-height: 1.48;
-  font-size: ${({ theme }) => theme.fontSize.paragraph};
+  font-size: 0.85rem;
   position: relative;
   ${breakpoint.sm`
     max-width: 450px;

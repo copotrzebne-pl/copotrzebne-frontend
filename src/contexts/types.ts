@@ -56,6 +56,7 @@ export type Demand = {
 }
 
 export type DemandDTO = {
+  id?: string
   comment?: string | null
   placeId: string
   supplyId: string
@@ -91,7 +92,7 @@ export type PanelContextValue = {
   clearSelectedPlace: () => void
   fetchPriorities: (placeId: string) => void
   fetchSupplies: (placeId: string) => void
-  saveDemand: (demand: DemandDTO) => Promise<boolean>
+  saveDemand: (demand: DemandDTO, demandData?: Demand) => Promise<boolean>
   removeDemand: (demandId: string) => void
   removeAllDemands: (placeId: string) => void
 }

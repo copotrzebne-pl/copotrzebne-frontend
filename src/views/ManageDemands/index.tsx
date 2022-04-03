@@ -1,6 +1,6 @@
 import Button from 'components/Button'
 import { usePanelContext } from 'contexts/panelContext'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
@@ -10,15 +10,21 @@ import { breakpoint } from 'themes/breakpoints'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import PageTitle from 'components/PageTitle'
+import Dialog from 'components/Dialog'
+import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [editedDemandId, setEditedDemandId] = useState<string>('')
   const {
     demands,
     selectedPlace,
+    priorities,
     fetchPlace,
     clearDemands,
+    saveDemand,
+    fetchPriorities,
     clearSelectedPlace,
     fetchDemands,
     removeDemand,
@@ -29,6 +35,7 @@ export default () => {
     if (id && id !== 'new') {
       fetchPlace(id)
       fetchDemands(id)
+      fetchPriorities(id)
     }
     return () => {
       clearDemands()
@@ -58,21 +65,50 @@ export default () => {
           <>
             <DemandsWrapper>
               {demands.map(demand => (
-                <DemandBox key={demand.supply?.id}>
-                  <DemandTitle>
-                    <DemandContent>
-                      <PriorityLabel>
-                        <TranslatedEntry entry={demand.priority} />
-                      </PriorityLabel>
-                      <TranslatedEntry entry={demand.supply} />
-                    </DemandContent>
-                    <TrashIcon
-                      src={trashIconUrl}
-                      alt="remove"
-                      onClick={() => removeDemand(demand.id)}
-                    />
-                  </DemandTitle>
-                </DemandBox>
+                <>
+                  <DemandBox
+                    key={demand.supply?.id}
+                    onClick={() => setEditedDemandId(demand.id)}
+                  >
+                    <DemandTitle>
+                      <DemandContent>
+                        <PriorityLabel>
+                          <TranslatedEntry entry={demand.priority} />
+                        </PriorityLabel>
+                        <TranslatedEntry entry={demand.supply} />
+                        {demand.comment && (
+                          <PriorityLabel>{demand.comment}</PriorityLabel>
+                        )}
+                      </DemandContent>
+                      <TrashIcon
+                        src={trashIconUrl}
+                        alt="remove"
+                        onClick={() => removeDemand(demand.id)}
+                      />
+                    </DemandTitle>
+                  </DemandBox>
+                  {editedDemandId === demand.id && (
+                    <Dialog onClose={() => setEditedDemandId('')}>
+                      <div>
+                        <DemandComponentStyled
+                          placeId={selectedPlace?.id || ''}
+                          supply={demand.supply}
+                          priorities={priorities}
+                          saveDemand={(demandDto, demandData) =>
+                            saveDemand(demandDto, demandData).then(() =>
+                              setEditedDemandId('')
+                            )
+                          }
+                          isSelected
+                          isSaved
+                          demand={demand}
+                          onSelected={console.log}
+                          buttonText="Zapisz"
+                        />
+                      </div>
+                    </Dialog>
+                  )}
+                </>
               ))}
             </DemandsWrapper>
             {selectedPlace?.id && (
@@ -168,4 +204,11 @@ const TrashIcon = styled.img`
 const DemandContent = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+const DemandComponentStyled = styled(DemandComponent)`
+  box-shadow: none;
+  ${AddIcon} {
+    display: none;
+  }
 `

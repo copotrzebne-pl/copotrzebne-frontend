@@ -9,6 +9,7 @@ import DemandComponent from './components/Demand'
 import TranslatedText from 'components/TranslatedText'
 import TranslatedEntry from 'components/TranslatedEntry'
 import { useGroupSupplies } from 'hooks/useGroupSupplies'
+import { Demand } from 'contexts/types'
 
 export default () => {
   const {
@@ -27,8 +28,8 @@ export default () => {
   const { id } = useParams()
   const { groupedSupplies, suppliesKeys, searchText, setSearchText } =
     useGroupSupplies(supplies)
+  const [demandsMap, setDemandsMap] = useState<Record<string, Demand>>({})
   const [selectedSupplyId, setSelectedSupplyId] = useState<string | null>(null)
-  const savedSuppliesIds = demands.map(demand => demand.supplyId)
 
   useEffect(() => {
     if (id) {
@@ -42,6 +43,15 @@ export default () => {
       clearSelectedPlace()
     }
   }, [id])
+
+  useEffect(() => {
+    // prepare demands map for O1 access
+    const map = demands.reduce(
+      (acc, item) => ({ ...acc, [item.supply.id]: item }),
+      {} as Record<string, Demand>
+    )
+    setDemandsMap(map)
+  }, [demands])
 
   return (
     <Container>
@@ -76,7 +86,8 @@ export default () => {
                   priorities={priorities}
                   saveDemand={saveDemand}
                   isSelected={supply.id === selectedSupplyId}
-                  isSaved={savedSuppliesIds.includes(supply.id)}
+                  isSaved={!!demandsMap[supply.id]}
+                  demand={demandsMap[supply.id]}
                   onSelected={(supplyId: string) =>
                     setSelectedSupplyId(supplyId)
                   }
