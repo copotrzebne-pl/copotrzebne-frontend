@@ -76,6 +76,9 @@ export default () => {
                           <TranslatedEntry entry={demand.priority} />
                         </PriorityLabel>
                         <TranslatedEntry entry={demand.supply} />
+                        {demand.comment && (
+                          <PriorityLabel>{demand.comment}</PriorityLabel>
+                        )}
                       </DemandContent>
                       <TrashIcon
                         src={trashIconUrl}
