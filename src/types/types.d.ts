@@ -11,3 +11,10 @@ export type DictionaryEntry = {
   nameUa?: string
   nameEn?: string
 }
+
+export type ItemMenu = {
+  route: string
+  translationKey: string
+  action?: () => void
+  hidden?: boolean
+}
