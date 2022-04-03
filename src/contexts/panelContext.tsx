@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback } from 'react'
+import omit from 'lodash.omit'
 import {
   PanelContextValue,
   PanelContextProviderProps,
@@ -96,14 +97,26 @@ export const PanelContextProvider = ({
   }, [])
 
   const saveDemand = useCallback(
-    async (demand: DemandDTO): Promise<boolean> => {
+    async (demandDto: DemandDTO, demandData?: Demand): Promise<boolean> => {
       try {
         const client = await getRestClient(process.env.API_URL)
-        const response = await client.post<null, Demand>(
-          API.panel.saveDemand,
-          demand
-        )
-        setDemands([...demands, response])
+        const response = demandDto.id
+          ? await client.patch<null, Demand>(
+              API.panel.editDemand.replace(':id', demandDto.id),
+              omit(demandDto, ['id'])
+            )
+          : await client.post<null, Demand>(API.panel.saveDemand, demandDto)
+        //update demands list
+        //nasty hack ;) remove when demand response from PATCH request has all necessary data
+        const demandToUpdate = {
+          ...response,
+          ...demandData,
+          comment: demandDto.comment || ''
+        }
+        setDemands([
+          ...demands.filter(demand => demand?.id !== demandDto.id),
+          demandToUpdate
+        ])
         return Promise.resolve(true)
       } catch {
         setError({ ...errors, places: 'Fetching priorities error' })

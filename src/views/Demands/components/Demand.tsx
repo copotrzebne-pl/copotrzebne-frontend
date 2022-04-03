@@ -1,28 +1,35 @@
 import Button from 'components/Button'
-import { DemandDTO, Priority, Supply } from 'contexts/types'
+import { Demand, DemandDTO, Priority, Supply } from 'contexts/types'
 import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import TranslatedEntry from 'components/TranslatedEntry'
 import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
 
-const Demand = ({
+const DemandComponent = ({
   className,
   supply,
   placeId,
-  saveDemand,
-  priorities,
-  onSelected,
   isSelected,
-  isSaved
+  isSaved,
+  demand,
+  priorities,
+  buttonText,
+  saveDemand,
+  onSelected
 }: {
   className?: string
   supply: Supply
   placeId: string
   priorities: Priority[]
-  saveDemand: (demand: DemandDTO) => Promise<boolean>
+  saveDemand: (
+    demandObject: DemandDTO,
+    demandData?: Demand
+  ) => Promise<boolean | void>
   onSelected: (supplyId: string) => void
   isSelected: boolean
   isSaved: boolean
+  demand?: Demand
+  buttonText?: string
 }) => {
   const [demandDTO, setDemandDTO] = useState<DemandDTO>({
     placeId,
@@ -39,11 +46,24 @@ const Demand = ({
     setDemandDTO({ ...demandDTO, priorityId: priorities[0]?.id })
   }, [priorities])
 
+  useEffect(() => {
+    if (isSelected && demand) {
+      setDemandDTO(state => ({
+        ...state,
+        id: demand.id,
+        comment: demand.comment || '',
+        priorityId: demand.priority.id
+      }))
+    }
+  }, [isSelected, demand])
+
   const handleDemandSave = useCallback(() => {
     if (!demandDTO.priorityId && !demandDTO.placeId) return
-    saveDemand({ ...demandDTO, placeId }).then((saved: boolean) => {
-      if (saved) onSelected('')
-    })
+    saveDemand({ ...demandDTO, placeId }, demand).then(
+      (saved: boolean | void) => {
+        if (saved) onSelected('')
+      }
+    )
   }, [demandDTO, placeId])
 
   return (
@@ -62,6 +82,9 @@ const Demand = ({
           <PlusIconStyled />
         </AddIcon>
       </DemandTitle>
+      {demand?.comment && !isSelected && (
+        <DemandComment>{demand?.comment}</DemandComment>
+      )}
       {isSelected && (
         <DemandDetails>
           <PrioritiesWrapper>
@@ -96,14 +119,16 @@ const Demand = ({
               }
             />
           </FormGroup>
-          <StyledButton onClick={handleDemandSave}>Dodaj do listy</StyledButton>
+          <StyledButton onClick={handleDemandSave}>
+            {buttonText || 'Dodaj do listy'}
+          </StyledButton>
         </DemandDetails>
       )}
     </div>
   )
 }
 
-export default styled(Demand)`
+export default styled(DemandComponent)`
   padding: 1rem 1.2rem;
   background-color: white;
   border-radius: 15px;
@@ -138,7 +163,7 @@ const DemandTitle = styled.div<{ isSelected: boolean }>`
   `}
 `
 
-const AddIcon = styled.span`
+export const AddIcon = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,4 +258,10 @@ const CheckIcon = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+`
+
+const DemandComment = styled.div`
+  margin-top: 0.2rem;
+  font-size: 0.85rem;
+  color: #999999;
 `
