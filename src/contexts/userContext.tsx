@@ -103,7 +103,6 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     navigate(routes[Page.PANEL])
   }, [])
 
-
   return (
     <UserContext.Provider
       value={{

@@ -8,26 +8,30 @@ import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
 
 const PlaceBoxComponent = ({
-                             className,
-                             place
-                           }: {
+  className,
+  place
+}: {
   className?: string
   place: Place
 }) => {
   const { deletePlace } = useUserContext()
   const { user } = useUserContext()
-  const [authorized] = useState<boolean>(() =>
-    checkIfAuthorized()
-  )
+  const [authorized] = useState<boolean>(() => checkIfAuthorized())
 
   return (
     <div className={className}>
       <PlaceName place={place}>{place.name || ''}</PlaceName>
-      {authorized && user?.role === 'admin' && <TrashIcon
-        src={trashIconUrl}
-        alt="remove"
-        onClick={() => window.confirm('Czy na pewno usunąć organizację?') ? deletePlace(place.id) : place.id}
-      />}
+      {authorized && user?.role === 'admin' && (
+        <TrashIcon
+          src={trashIconUrl}
+          alt="remove"
+          onClick={() =>
+            window.confirm('Czy na pewno usunąć organizację?')
+              ? deletePlace(place.id)
+              : place.id
+          }
+        />
+      )}
       <PlaceDetails place={place}>
         {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
         {place.apartment ? `/${place.apartment}` : ''}
@@ -35,13 +39,13 @@ const PlaceBoxComponent = ({
       <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
       {place.lastUpdatedAt && (
         <LastUpdate>
-          <TranslatedText value="placeLastUpdate"/>{' '}
+          <TranslatedText value="placeLastUpdate" />{' '}
           {`${format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')}`}
         </LastUpdate>
       )}
       {!place.lastUpdatedAt && (
         <LastUpdate>
-          <TranslatedText value="noOngoingCollections"/>
+          <TranslatedText value="noOngoingCollections" />
         </LastUpdate>
       )}
     </div>
