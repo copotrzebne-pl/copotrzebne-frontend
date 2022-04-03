@@ -1,16 +1,35 @@
-import { Outlet } from 'react-router-dom'
+import { useCallback } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
-import PanelHeader from 'components/PanelHeader'
+import Header from 'components/PageHeader'
+import { Page, routes } from 'routes'
+import { useUserContext } from 'contexts/userContext'
+import { getPanelMenuItems } from 'utils/menus'
 
-export default () => (
-  <>
-    <PanelHeader />
-    <PageContent>
-      <Outlet />
-    </PageContent>
-  </>
-)
+export default () => {
+  const { authorized, setAuthorized } = useUserContext()
+  const navigate = useNavigate()
+
+  const handleLogout = useCallback(() => {
+    try {
+      window.localStorage.removeItem('_token')
+      setAuthorized(false)
+      navigate(routes[Page.HOME])
+    } catch {
+      console.error('logout error')
+    }
+  }, [navigate])
+
+  return (
+    <>
+      <Header menuItems={getPanelMenuItems({ handleLogout, authorized })} />
+      <PageContent>
+        <Outlet />
+      </PageContent>
+    </>
+  )
+}
 
 const PageContent = styled.div`
   display: flex;

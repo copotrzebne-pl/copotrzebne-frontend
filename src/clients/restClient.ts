@@ -11,7 +11,7 @@ const errorInterceptor = (error: AxiosError) => {
 
     if (error.response.status === 401 || error.response.status === 403) {
       window.localStorage.removeItem('_token')
-      window.location.href = '/'
+      if (window.location.pathname !== '/login') window.location.href = '/'
     }
   } else {
     console.error('Error Message:', error.message)

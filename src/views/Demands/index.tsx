@@ -1,94 +1,57 @@
 import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
-import { Place, Supply } from 'contexts/types'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import debounce from 'lodash.debounce'
+
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import DemandComponent from './components/Demand'
 import TranslatedText from 'components/TranslatedText'
 import TranslatedEntry from 'components/TranslatedEntry'
-import { SUPPLIES_CATEGORIES_ORDER } from 'utils/supplies'
-import { useUserContext } from 'contexts/userContext'
-import { getTranslation } from 'utils/translation'
+import { useGroupSupplies } from 'hooks/useGroupSupplies'
+import { Demand } from 'contexts/types'
 
 export default () => {
   const {
-    places,
     priorities,
     supplies,
-    fetchPlaces,
+    selectedPlace,
+    demands,
+    fetchPlace,
     fetchDemands,
     fetchPriorities,
     fetchSupplies,
     saveDemand,
-    clearDemands
+    clearDemands,
+    clearSelectedPlace
   } = usePanelContext()
-  const { language } = useUserContext()
   const { id } = useParams()
-  const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
-  const [suppliesLoaded, setSuppliesLoaded] = useState<boolean>(false)
+  const { groupedSupplies, suppliesKeys, searchText, setSearchText } =
+    useGroupSupplies(supplies)
+  const [demandsMap, setDemandsMap] = useState<Record<string, Demand>>({})
   const [selectedSupplyId, setSelectedSupplyId] = useState<string | null>(null)
-  const [searchText, setSearchText] = useState<string>('')
-  const [groupedSupplies, setGroupedSupplies] = useState<
-    Record<string, Supply[]>
-  >({})
-
-  const groupSupplies = useCallback(
-    (suppliesList: Supply[]): Record<string, Supply[]> =>
-      suppliesList.reduce(
-        (acc, item) => (
-          (acc[item.category.nameEn] = [
-            ...(acc[item.category.nameEn] || []),
-            item
-          ]),
-          acc
-        ),
-        {} as Record<string, Supply[]>
-      ),
-    [supplies]
-  )
 
   useEffect(() => {
-    fetchPlaces()
-    return clearDemands
-  }, [])
-
-  useEffect(() => {
-    const place = places.filter(elem => elem.id === id)[0]
-    if (place && place.id) {
-      setSelectedPlace(place)
-      fetchDemands(place.id)
-      fetchPriorities(place.id)
-      fetchSupplies(place.id)
+    if (id) {
+      fetchPlace(id)
+      fetchDemands(id)
+      fetchPriorities(id)
+      fetchSupplies(id)
     }
-  }, [places])
+    return () => {
+      clearDemands()
+      clearSelectedPlace()
+    }
+  }, [id])
 
   useEffect(() => {
-    if (!supplies.length) return
-    setSuppliesLoaded(true)
-    setGroupedSupplies(groupSupplies(supplies))
-  }, [supplies])
-
-  const searchDebounced = useCallback(
-    debounce(text => {
-      if (!text) setGroupedSupplies(groupSupplies(supplies))
-      setGroupedSupplies(
-        groupSupplies(
-          supplies.filter(supply =>
-            getTranslation(language, supply).toLowerCase().includes(text)
-          )
-        )
-      )
-    }, 300),
-    [language, supplies]
-  )
-
-  useEffect(() => {
-    if (!suppliesLoaded) return
-    searchDebounced(searchText)
-  }, [suppliesLoaded, searchText])
+    // prepare demands map for O1 access
+    const map = demands.reduce(
+      (acc, item) => ({ ...acc, [item.supply.id]: item }),
+      {} as Record<string, Demand>
+    )
+    setDemandsMap(map)
+  }, [demands])
 
   return (
     <Container>
@@ -106,26 +69,25 @@ export default () => {
         />
       </FormGroup>
       <SuppliesWrapper>
-        {[
-          ...SUPPLIES_CATEGORIES_ORDER,
-          ...Object.keys(groupedSupplies).filter(
-            nameEn => !SUPPLIES_CATEGORIES_ORDER.includes(nameEn)
-          )
-        ].map((nameEn, key) => {
-          if (!groupedSupplies[nameEn]) return null
+        {suppliesKeys.map((priorityNumber, key) => {
+          if (!groupedSupplies[priorityNumber]) return null
           return (
             <div key={key}>
               <CategoryHeader>
-                <TranslatedEntry entry={groupedSupplies[nameEn][0].category} />
+                <TranslatedEntry
+                  entry={groupedSupplies[priorityNumber][0].category}
+                />
               </CategoryHeader>
-              {groupedSupplies[nameEn].map((supply, index) => (
+              {groupedSupplies[priorityNumber].map(supply => (
                 <DemandComponent
-                  key={index}
+                  key={supply.id}
                   placeId={selectedPlace?.id || ''}
                   supply={supply}
                   priorities={priorities}
                   saveDemand={saveDemand}
                   isSelected={supply.id === selectedSupplyId}
+                  isSaved={!!demandsMap[supply.id]}
+                  demand={demandsMap[supply.id]}
                   onSelected={(supplyId: string) =>
                     setSelectedSupplyId(supplyId)
                   }

@@ -67,7 +67,7 @@ export const PlaceBox = styled(PlaceBoxComponent)`
   }
 `
 
-const PlaceName = styled.h3`
+const PlaceName = styled.h3<{ place: Place }>`
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.45;

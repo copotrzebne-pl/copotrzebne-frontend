@@ -1,6 +1,5 @@
 import Button from 'components/Button'
 import { usePanelContext } from 'contexts/panelContext'
-import { useUserContext } from 'contexts/userContext'
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
@@ -10,44 +9,39 @@ import trashIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
-import { Place } from '../../contexts/types'
-import PageTitle from '../../components/PageTitle'
+import PageTitle from 'components/PageTitle'
+import Dialog from 'components/Dialog'
+import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
-  const { demands, fetchDemands, removeDemand, removeAllDemands } =
-    usePanelContext()
-  const [selectedPlace, setSelectedPlace] = useState<Place>({
-    id,
-    name: '',
-    city: '',
-    street: '',
-    buildingNumber: '',
-    apartment: '',
-    comment: '',
-    email: '',
-    phone: '',
-    workingHours: '',
-    latitude: null,
-    longitude: null
-  })
+  const [editedDemandId, setEditedDemandId] = useState<string>('')
+  const {
+    demands,
+    selectedPlace,
+    priorities,
+    fetchPlace,
+    clearDemands,
+    saveDemand,
+    fetchPriorities,
+    clearSelectedPlace,
+    fetchDemands,
+    removeDemand,
+    removeAllDemands
+  } = usePanelContext()
 
   useEffect(() => {
-    fetchOwnedPlaces()
-  }, [])
-
-  useEffect(() => {
-    const place = ownedPlaces.filter(elem => elem.id === id)[0]
-    if (place) {
-      setSelectedPlace(place)
+    if (id && id !== 'new') {
+      fetchPlace(id)
+      fetchDemands(id)
+      fetchPriorities(id)
     }
-  }, [ownedPlaces])
-
-  useEffect(() => {
-    fetchDemands(selectedPlace.id)
-  }, [selectedPlace])
+    return () => {
+      clearDemands()
+      clearSelectedPlace()
+    }
+  }, [id])
 
   return (
     <Container>
@@ -70,22 +64,51 @@ export default () => {
         {demands.length > 0 && (
           <>
             <DemandsWrapper>
-              {demands.map((demand, index) => (
-                <DemandBox key={index}>
-                  <DemandTitle>
-                    <DemandContent>
-                      <PriorityLabel>
-                        <TranslatedEntry entry={demand.priority} />
-                      </PriorityLabel>
-                      <TranslatedEntry entry={demand.supply} />
-                    </DemandContent>
-                    <TrashIcon
-                      src={trashIconUrl}
-                      alt="remove"
-                      onClick={() => removeDemand(demand.id)}
-                    />
-                  </DemandTitle>
-                </DemandBox>
+              {demands.map(demand => (
+                <>
+                  <DemandBox
+                    key={demand.supply?.id}
+                    onClick={() => setEditedDemandId(demand.id)}
+                  >
+                    <DemandTitle>
+                      <DemandContent>
+                        <PriorityLabel>
+                          <TranslatedEntry entry={demand.priority} />
+                        </PriorityLabel>
+                        <TranslatedEntry entry={demand.supply} />
+                        {demand.comment && (
+                          <PriorityLabel>{demand.comment}</PriorityLabel>
+                        )}
+                      </DemandContent>
+                      <TrashIcon
+                        src={trashIconUrl}
+                        alt="remove"
+                        onClick={() => removeDemand(demand.id)}
+                      />
+                    </DemandTitle>
+                  </DemandBox>
+                  {editedDemandId === demand.id && (
+                    <Dialog onClose={() => setEditedDemandId('')}>
+                      <div>
+                        <DemandComponentStyled
+                          placeId={selectedPlace?.id || ''}
+                          supply={demand.supply}
+                          priorities={priorities}
+                          saveDemand={(demandDto, demandData) =>
+                            saveDemand(demandDto, demandData).then(() =>
+                              setEditedDemandId('')
+                            )
+                          }
+                          isSelected
+                          isSaved
+                          demand={demand}
+                          onSelected={console.log}
+                          buttonText="Zapisz"
+                        />
+                      </div>
+                    </Dialog>
+                  )}
+                </>
               ))}
             </DemandsWrapper>
             {selectedPlace?.id && (
@@ -181,4 +204,11 @@ const TrashIcon = styled.img`
 const DemandContent = styled.div`
   display: flex;
   flex-direction: column;
+`
+
+const DemandComponentStyled = styled(DemandComponent)`
+  box-shadow: none;
+  ${AddIcon} {
+    display: none;
+  }
 `
