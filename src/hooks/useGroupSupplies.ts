@@ -50,7 +50,9 @@ export function useGroupSupplies(supplies: Supply[]) {
       setGroupedSupplies(
         groupSupplies(
           supplies.filter(supply =>
-            getTranslation(language, supply).toLowerCase().includes(text)
+            getTranslation(language, supply)
+              .toLowerCase()
+              .includes(text.toLowerCase())
           )
         )
       )
