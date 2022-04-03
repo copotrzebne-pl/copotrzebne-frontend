@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import Button from 'components/Button'
 import { Demand, DemandDTO, Priority, Supply } from 'contexts/types'
 import { useCallback, useEffect, useState } from 'react'
@@ -59,12 +60,23 @@ const DemandComponent = ({
 
   const handleDemandSave = useCallback(() => {
     if (!demandDTO.priorityId && !demandDTO.placeId) return
-    saveDemand({ ...demandDTO, placeId }, demand).then(
+    //hack to update demand priority, remove when API response contains priority
+    const updatedDemand = {
+      ...(demand || {}),
+      id: demand?.id || '',
+      supplyId: supply.id,
+      supply: supply,
+      updatedAt: '',
+      priority: priorities.filter(
+        priority => priority.id === demandDTO.priorityId
+      )[0]!
+    }
+    saveDemand({ ...demandDTO, placeId }, updatedDemand).then(
       (saved: boolean | void) => {
         if (saved) onSelected('')
       }
     )
-  }, [demandDTO, placeId])
+  }, [demandDTO, placeId, priorities, demand, supply])
 
   return (
     <div className={className}>
