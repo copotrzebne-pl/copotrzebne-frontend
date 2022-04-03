@@ -13,6 +13,7 @@ export type UserContextValue = {
   fetchUser: () => void
   fetchOwnedPlaces: () => void
   savePlace: (place: Place) => void
+  deletePlace: (placeId: string) => void
   authorized: boolean
   language: string
   changeLanguage: (lang: string) => void

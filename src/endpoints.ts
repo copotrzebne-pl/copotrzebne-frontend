@@ -10,6 +10,7 @@ const panel = {
   getUser: '/users/whoami',
   getOwnedPlaces: '/users-places/owned',
   savePlace: '/places',
+  deletePlace: '/places/:id',
   supplies: '/supplies',
   priorities: '/priorities',
   saveDemand: '/demands',
