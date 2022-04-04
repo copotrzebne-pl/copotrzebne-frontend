@@ -59,7 +59,7 @@ export default () => {
         return
       savePlace(editedPlace)
     },
-    [selectedPlace]
+    [selectedPlace, editedPlace]
   )
 
   return (
