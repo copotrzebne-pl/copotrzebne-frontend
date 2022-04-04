@@ -64,20 +64,27 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   const savePlace = useCallback(async (place: Place) => {
     const client = await getRestClient(process.env.API_URL)
+
     try {
+      const placeFormatted = {
+        ...place,
+        latitude: place.latitude ? parseFloat(place.latitude) : null,
+        longitude: place.longitude ? parseFloat(place.longitude) : null
+      }
       if (place.id !== 'new') {
         await client.patch<null, Place>(
           `${API.panel.savePlace}/${place.id}`,
-          place
+          placeFormatted
         )
       } else {
-        for (const key in place) {
-          if (place[key as keyof typeof place] === '') {
-            delete place[key as keyof typeof place]
+        //remove empty values
+        for (const key in placeFormatted) {
+          if (placeFormatted[key as keyof typeof placeFormatted] === '') {
+            delete placeFormatted[key as keyof typeof placeFormatted]
           }
         }
-        delete place.id
-        await client.post<null, Place>(`${API.panel.savePlace}`, place)
+        delete placeFormatted.id
+        await client.post<null, Place>(`${API.panel.savePlace}`, placeFormatted)
       }
     } catch {
       console.error('Error: place save error!')
