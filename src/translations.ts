@@ -209,5 +209,20 @@ export const translations: { [value: string]: DictionaryEntry } = {
       'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.',
     nameUa:
       'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.'
+  },
+  showMore: {
+    namePl: 'Pokaż więcej',
+    nameEn: 'Show more',
+    nameUa: 'Show more'
+  },
+  showLess: {
+    namePl: 'Pokaż mniej',
+    nameEn: 'Show less',
+    nameUa: 'Show less'
+  },
+  showOnMap: {
+    namePl: 'Zobacz na mapie',
+    nameEn: 'See on map',
+    nameUa: 'See on map'
   }
 }

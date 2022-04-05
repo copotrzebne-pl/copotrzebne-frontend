@@ -11,7 +11,6 @@ import MainLogo from './MainLogo'
 import TranslatedText from './TranslatedText'
 import LanguagePicker from './LanguagePicker'
 
-
 const PageHeader = ({
   className,
   menuItems
@@ -92,6 +91,8 @@ export default styled(PageHeader)`
   box-shadow: ${({ theme }) => theme.boxShadows.small};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
+  position: relative;
+  z-index: 1000;
 `
 
 const MenuDesktop = styled.div`

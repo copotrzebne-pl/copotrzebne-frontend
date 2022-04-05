@@ -60,8 +60,6 @@ const Content = styled.div`
   border-radius: 18px;
   box-sizing: border-box;
   padding: 1.6rem;
-  padding-right: 3.2rem;
-  padding-bottom: 2.8rem;
   line-height: 1.48;
   font-size: 0.85rem;
   position: relative;

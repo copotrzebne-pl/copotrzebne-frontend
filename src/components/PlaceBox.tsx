@@ -27,12 +27,12 @@ const PlaceBoxComponent = ({
           alt="remove"
           onClick={() =>
             window.confirm('Czy na pewno usunąć organizację?')
-              ? deletePlace(place.id)
+              ? deletePlace(place.id || '')
               : place.id
           }
         />
       )}
-      <PlaceDetails place={place}>
+      <PlaceDetails>
         {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
         {place.apartment ? `/${place.apartment}` : ''}
       </PlaceDetails>
