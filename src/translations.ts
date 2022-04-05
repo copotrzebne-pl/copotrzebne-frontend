@@ -208,21 +208,21 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn:
       'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.',
     nameUa:
-      'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.'
+      'Привіт! Ми збираємо файли cookies, щоб аналізувати рух на вебсайті та покращувати роботу нашого сервісу'
   },
   showMore: {
     namePl: 'Pokaż więcej',
     nameEn: 'Show more',
-    nameUa: 'Show more'
+    nameUa: 'Показати більше'
   },
   showLess: {
     namePl: 'Pokaż mniej',
     nameEn: 'Show less',
-    nameUa: 'Show less'
+    nameUa: 'Показати меньше'
   },
   showOnMap: {
     namePl: 'Zobacz na mapie',
     nameEn: 'See on map',
-    nameUa: 'See on map'
+    nameUa: 'Подивитися на карті'
   }
 }
