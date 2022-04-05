@@ -39,11 +39,18 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
             width={50}
             anchor={[parseFloat(place.latitude!), parseFloat(place.longitude!)]}
             color={selectedPlace?.id === place.id ? '#00e676' : '#0076FF'}
-            onClick={() => setSelectedPlace(place)}
+            onClick={() => {
+              setSelectedPlace(place)
+              setMapCenter([
+                parseFloat(place.latitude!),
+                parseFloat(place.longitude!)
+              ])
+            }}
           />
         ))}
       {selectedPlace !== null && (
         <Overlay
+          offset={[110, 0]}
           anchor={[
             parseFloat(selectedPlace.latitude!),
             parseFloat(selectedPlace.longitude!)
