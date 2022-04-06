@@ -10,6 +10,7 @@ import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
 import { Page, routes } from 'routes'
 import { checkIfAuthorized } from '../utils/session'
+import omit from 'lodash.omit'
 
 const DEFAULT_LANGUAGE = 'pl'
 
@@ -66,11 +67,14 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     const client = await getRestClient(process.env.API_URL)
 
     try {
-      const placeFormatted = {
-        ...place,
-        latitude: place.latitude ? parseFloat(place.latitude) : null,
-        longitude: place.longitude ? parseFloat(place.longitude) : null
-      }
+      const placeFormatted = omit(
+        {
+          ...place,
+          latitude: place.latitude ? parseFloat(place.latitude) : null,
+          longitude: place.longitude ? parseFloat(place.longitude) : null
+        },
+        ['lastUpdatedAt', 'priority']
+      )
       if (place.id !== 'new') {
         await client.patch<null, Place>(
           `${API.panel.savePlace}/${place.id}`,
