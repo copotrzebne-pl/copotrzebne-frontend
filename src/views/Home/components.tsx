@@ -8,20 +8,20 @@ import { PlaceBox as PlaceDetailedBox } from 'components/PlaceBox'
 import TranslatedText from 'components/TranslatedText'
 
 const PlaceName = styled.h3`
+  margin-bottom: 0.1rem;
+  color: #1f2635;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.45;
-  margin-bottom: 0.1rem;
-  color: #1f2635;
 `
 
 const PlaceDetails = styled.span`
   display: inline-block;
   width: 100%;
+  color: #8d99b2;
   font-size: 0.7rem;
   line-height: 1.2;
   font-weight: 400;
-  color: #8d99b2;
 `
 
 const PlaceBoxComponent = ({
@@ -63,17 +63,22 @@ export const PlaceBoxDetailedStyled = styled(PlaceDetailedBox)`
   `}
 `
 
-const ShowMore = styled.span`
-  display: inline-block;
+const ShowMore = styled.button`
+  display: block;
   width: 100%;
-  padding: 0.3rem 0;
+  max-width: 250px;
+  margin: 0 auto;
+  padding: 0.8em;
+  border: 1px solid #fed500;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #fed500;
   font-size: 0.85rem;
-  color: black;
-  cursor: pointer;
   font-weight: 500;
-  margin-left: 0.3rem;
+  cursor: pointer;
   &:hover {
-    text-decoration: underline;
+    background-color: #fed500;
+    color: #fff;
   }
 `
 
@@ -88,21 +93,27 @@ export const WrappedPlacesComponent = ({
 }) => {
   const [showMore, setShowMore] = useState<boolean>(false)
   return (
-    <div className={className}>
-      {places.slice(0, showMore ? places.length : initialNumber).map(place => (
-        <StyledLink to={`${routes[Page.PLACE]}/${place.id}`} key={place.id}>
-          <PlaceBoxDetailedStyled place={place} />
-        </StyledLink>
-      ))}
-      {places.length > initialNumber && (
-        <ShowMore onClick={() => setShowMore(!showMore)}>
-          {showMore ? (
-            <TranslatedText value="showLess" />
-          ) : (
-            <TranslatedText value="showMore" />
-          )}
-        </ShowMore>
-      )}
+    <div>
+      <div className={className}>
+        {places
+          .slice(0, showMore ? places.length : initialNumber)
+          .map(place => (
+            <StyledLink to={`${routes[Page.PLACE]}/${place.id}`} key={place.id}>
+              <PlaceBoxDetailedStyled place={place} />
+            </StyledLink>
+          ))}
+      </div>
+      <div>
+        {places.length > initialNumber && (
+          <ShowMore onClick={() => setShowMore(!showMore)}>
+            {showMore ? (
+              <TranslatedText value="showLess" />
+            ) : (
+              <TranslatedText value="showMore" />
+            )}
+          </ShowMore>
+        )}
+      </div>
     </div>
   )
 }
@@ -111,12 +122,13 @@ export const WrappedPlaces = styled(WrappedPlacesComponent)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   padding: 0 1rem;
   padding-bottom: 2.2rem;
   ${breakpoint.sm`
-    padding-bottom: 1.2rem;
     flex-direction: row;
     flex-wrap: wrap;
+    padding-bottom: 1.2rem;
   `}
 `
