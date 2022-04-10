@@ -97,7 +97,7 @@ export default () => {
                     {selectedPlace.lastUpdatedAt
                       ? format(
                           Date.parse(selectedPlace.lastUpdatedAt),
-                          'd. MMM Y H:m'
+                          'd MMM Y H:m'
                         )
                       : '---'}
                   </h3>

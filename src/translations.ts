@@ -192,6 +192,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Edit data',
     nameUa: 'Редагуй дані про організацію'
   },
+  updatePlaceLastUpdatedDate: {
+    namePl: 'Lista potrzeb jest nadal aktualna',
+    nameEn: 'The demands list is up to date',
+    nameUa: 'Список потреб залишається актуальним'
+  },
   editDemands: {
     namePl: 'Edytuj listę potrzeb',
     nameEn: 'Edit current demands',

@@ -74,7 +74,7 @@ const PlaceName = styled.h3<{ place: Place }>`
   margin-bottom: 0.1rem;
   display: inline-block;
   width: 90%;
-  color: ${props => (props.place.lastUpdatedAt ? '#1f2635' : '#8d99b2')};
+  color: ${props => (props.place.priority !== 0 ? '#1f2635' : '#8d99b2')};
 `
 
 const PlaceDetails = styled.span`

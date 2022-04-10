@@ -6,12 +6,18 @@ import { useParams, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
+import format from 'date-fns/format'
 import { Page, routes } from '../../routes'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
+  const {
+    selectedPlace,
+    fetchPlace,
+    clearSelectedPlace,
+    updatePlaceLastUpdate
+  } = usePanelContext()
 
   useEffect(() => {
     id && id !== 'new' && fetchPlace(id)
@@ -39,6 +45,19 @@ export default () => {
           <TranslatedText value="editDemands" />
         </StyledButton>
       )}
+      {id && id !== 'new' && selectedPlace && (
+        <>
+          <LastUpdate>
+            <span>
+              <TranslatedText value="lastUpdate" />{' '}
+            </span>
+            {format(Date.parse(selectedPlace.lastUpdatedAt), 'd MMM Y H:m')}
+          </LastUpdate>
+          <StyledButton onClick={() => updatePlaceLastUpdate(id)}>
+            <TranslatedText value="updatePlaceLastUpdatedDate" />
+          </StyledButton>
+        </>
+      )}
     </Container>
   )
 }
@@ -58,4 +77,9 @@ const StyledButton = styled(Button)`
   width: auto;
   margin: 1.2rem 2.2rem;
   padding: 0.8rem 1.8rem;
+`
+
+const LastUpdate = styled.div`
+  width: auto;
+  margin: 1.2rem 2.2rem 0.2rem;
 `

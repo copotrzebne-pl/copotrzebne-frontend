@@ -13,6 +13,7 @@ import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import Dialog from 'components/Dialog'
 import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
+import format from 'date-fns/format'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -23,7 +24,8 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
     fetchDemands,
     saveDemand,
     removeDemand,
-    removeAllDemands
+    removeAllDemands,
+    updatePlaceLastUpdate
   } = usePanelContext()
   const [editedDemandId, setEditedDemandId] = useState<string>('')
   const navigate = useNavigate()
@@ -75,6 +77,20 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
               }
             >
               <TranslatedText value="addDemands" />
+            </StyledButton>
+            <LastUpdate>
+              <span>
+                <TranslatedText value="lastUpdate" />{' '}
+              </span>
+              {format(Date.parse(ownedPlaces[0].lastUpdatedAt), 'd MMM Y H:m')}
+            </LastUpdate>
+            <StyledButton
+              onClick={async () => {
+                await updatePlaceLastUpdate(ownedPlaces[0].id)
+                await fetchOwnedPlaces()
+              }}
+            >
+              <TranslatedText value="updatePlaceLastUpdatedDate" />
             </StyledButton>
             {demands.length > 0 && (
               <>
@@ -261,4 +277,9 @@ const DemandComponentStyled = styled(DemandComponent)`
   ${AddIcon} {
     display: none;
   }
+`
+
+const LastUpdate = styled.div`
+  width: auto;
+  margin: 1.2rem 0 0.2rem;
 `
