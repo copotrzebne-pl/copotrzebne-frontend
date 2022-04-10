@@ -152,6 +152,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Finish current collection',
     nameUa: 'Завершити збирання речей'
   },
+  removeDemands: {
+    namePl: 'Usuń wszystkie potrzeby',
+    nameEn: 'Remove all demands',
+    nameUa: 'Remove all demands'
+  },
   lastUpdate: {
     namePl: 'Ostatnia aktualizacja:',
     nameEn: 'Last modified at:',
@@ -162,9 +167,19 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Demands list',
     nameUa: 'Список потрібних речей'
   },
+  addToList: {
+    namePl: 'Dodaj do listy',
+    nameEn: 'Add to list',
+    nameUa: 'Add to list'
+  },
+  saveChanges: {
+    namePl: 'Zapisz zmiany',
+    nameEn: 'Save changes',
+    nameUa: 'Save changes'
+  },
   loggedInAs: {
     namePl: 'Jesteś zalogowany jako',
-    nameEn: 'Loggen in as',
+    nameEn: 'Logged in as',
     nameUa: 'Залогований як'
   },
   menuLogout: {

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import TranslatedEntry from 'components/TranslatedEntry'
 import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
+import TranslatedText from '../../../components/TranslatedText'
 
 const DemandComponent = ({
   className,
@@ -132,7 +133,11 @@ const DemandComponent = ({
             />
           </FormGroup>
           <StyledButton onClick={handleDemandSave}>
-            {buttonText || 'Dodaj do listy'}
+            {isSaved ? (
+              buttonText || <TranslatedText value="addToList" />
+            ) : (
+              <TranslatedText value="saveChanges" />
+            )}
           </StyledButton>
         </DemandDetails>
       )}
