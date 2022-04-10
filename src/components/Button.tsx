@@ -15,4 +15,7 @@ export default styled.button`
   justify-content: center;
   font-size: 0.85rem;
   font-weight: 500;
+  &:disabled {
+    background-color: #bababa;
+  }
 `

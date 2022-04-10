@@ -205,9 +205,9 @@ const PlacesWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 0 1rem;
-  padding-bottom: 2.2rem;
+  padding: 2.2rem 1rem 2.2rem;
   ${breakpoint.sm`
+    padding-top: 1.2rem;
     padding-bottom: 1.2rem;
   `}
 `

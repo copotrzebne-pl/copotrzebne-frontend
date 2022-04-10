@@ -187,6 +187,49 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Log in',
     nameUa: 'Увійти'
   },
+  requestPlace: {
+    namePl: 'Dodaj nowe miejsce',
+    nameEn: 'Add new place',
+    nameUa: 'додати нове місце'
+  },
+  userEmail: {
+    namePl: 'Email użytkownika - do stworzenia konta',
+    nameEn: 'User email - for creating an account',
+    nameUa: 'Електронна адреса користувача - для створення облікового запису'
+  },
+  fulfillRequiredFields: {
+    namePl: 'Należy wypełnić wszystkie wymagane pola oznaczone znakiem *',
+    nameEn: 'All required fields marked with * must be completed',
+    nameUa: 'Усі обов’язкові поля, позначені *, необхідно заповнити'
+  },
+  thanksForRequestingPlace: {
+    namePl: 'Dziękujemy za zgłoszenie nowego miejsca zbiórek.',
+    nameEn: 'Thank you for creating a new place.',
+    nameUa: 'Дякуємо, що повідомили про новий пункт збору.'
+  },
+  credentialsWillBeSent: {
+    namePl: 'Dane do logowania prześlemy po weryfikacji miejsca.',
+    nameEn: 'We will send login credentials after the data verification.',
+    nameUa: 'Ми надішлемо дані для входу після перевірки місця.'
+  },
+  requestPlaceFailed: {
+    namePl: 'Wystąpił nieznany błąd podczas zgłaszania miejsca.',
+    nameEn: 'An unknown error has occurred during the creation of the place.',
+    nameUa: 'Під час повідомлення про місце сталася невідома помилка.'
+  },
+  addNewPlace: {
+    namePl: 'Dodaj nowe miejsce',
+    nameEn: 'Add new place',
+    nameUa: 'додати нове місце'
+  },
+  addNewPlaceDescription: {
+    namePl:
+      'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i uworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
+    nameEn:
+      'Are you running a charity collection? Do you want to report a new place? Fill out the form and enter your email address. We will receive your application, check it and create an account for you. You will receive the login details at the e-mail address provided.',
+    nameUa:
+      'Ви проводите збір коштів? Ви хочете повідомити про місце зустрічі? Заповніть форму та введіть свою електронну адресу. Ми отримаємо вашу заявку, перевіримо її та створимо для вас обліковий запис. Ви отримаєте дані для входу на вказану адресу електронної пошти.'
+  },
   editPlaceData: {
     namePl: 'Edytuj dane organizacji',
     nameEn: 'Edit data',
@@ -229,5 +272,15 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Zobacz na mapie',
     nameEn: 'See on map',
     nameUa: 'Подивитися на карті'
+  },
+  stateActive: {
+    namePl: 'Aktywne',
+    nameEn: 'Active',
+    nameUa: 'активний'
+  },
+  stateInactive: {
+    namePl: 'Nieaktywne',
+    nameEn: 'Inactive',
+    nameUa: 'неактивний'
   }
 }

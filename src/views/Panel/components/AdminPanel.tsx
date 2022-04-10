@@ -13,25 +13,37 @@ import TranslatedText from 'components/TranslatedText'
 const AdminPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
   const navigate = useNavigate()
-  const [groupedPlaces, setGroupedPlaces] = useState<Record<string, Place[]>>(
-    {}
-  )
+  const [groupedPlaces, setGroupedPlaces] = useState<
+    Record<'inactive' | 'active', Record<string, Place[]>>
+  >({ inactive: {}, active: {} })
+  const [placeType, setPlaceType] = useState<'active' | 'inactive'>('active')
 
   useEffect(() => {
     fetchOwnedPlaces()
-  }, [])
+  }, [placeType])
 
   useEffect(() => {
     setGroupedPlaces(groupOwnedPlaces())
-  }, [ownedPlaces])
+  }, [ownedPlaces, placeType])
 
   const groupOwnedPlaces = useCallback(
-    (): Record<string, Place[]> =>
+    (): Record<'inactive' | 'active', Record<string, Place[]>> =>
       ownedPlaces.reduce(
-        (acc, item) => (
-          (acc[item.city] = [...(acc[item.city] || []), item]), acc
-        ),
-        {} as Record<string, Place[]>
+        (acc, item) => {
+          if (item?.state === 1) {
+            acc.active[item.city] = [...(acc.active[item.city] || []), item]
+          }
+
+          if (item?.state === 2) {
+            acc.inactive[item.city] = [...(acc.inactive[item.city] || []), item]
+          }
+
+          return acc
+        },
+        { inactive: {}, active: {} } as Record<
+          'inactive' | 'active',
+          Record<string, Place[]>
+        >
       ),
     [ownedPlaces]
   )
@@ -48,16 +60,26 @@ const AdminPanel = ({ className }: { className?: string }) => {
             <TranslatedText value="addPlace" />
           </Button>
         </ButtonWrapper>
-        {Object.keys(groupedPlaces).map((cityName, key) => (
-          <PlaceWrapper key={key}>
+        <PlacesWrapper>
+          <TypeFilterWrapper>
+            <Button onClick={() => setPlaceType('active')} disabled={placeType === 'active'}>
+              <TranslatedText value="stateActive" />
+            </Button>
+            <Button onClick={() => setPlaceType('inactive')} disabled={placeType === 'inactive'}>
+              <TranslatedText value="stateInactive" />
+            </Button>
+          </TypeFilterWrapper>
+        </PlacesWrapper>
+        {Object.keys(groupedPlaces[placeType]).map((cityName, key) => (
+          <PlaceWrapper key={`${placeType}_${key}`}>
             <Title>
               <Marker src={marker} alt="marker" />
               {cityName}
             </Title>
             <PlacesWrapper>
-              {groupedPlaces[cityName].map((place, index) => (
+              {groupedPlaces[placeType][cityName].map((place, index) => (
                 <StyledLink
-                  key={index}
+                  key={`${placeType}_${index}`}
                   to={`${routes[Page.MANAGE_PLACE].replace(
                     ':id',
                     place?.id || ''
@@ -119,4 +141,15 @@ const ButtonWrapper = styled.div`
   width: 100%;
   margin-top: 2.2rem;
   padding: 0 1.2rem;
+`
+
+const TypeFilterWrapper = styled(ButtonWrapper)`
+  flex-direction: row;
+  justify-content: space-between;
+  display: flex;
+  padding: 0;
+  button {
+    background-color: #ff3e61;
+    width: 45%;
+  }
 `
