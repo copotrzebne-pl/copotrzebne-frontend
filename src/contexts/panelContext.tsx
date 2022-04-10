@@ -154,20 +154,23 @@ export const PanelContextProvider = ({
     }
   }, [])
 
-  const updatePlaceLastUpdate = useCallback(async (placeId: string): Promise<void> => {
-    try {
-      const client = await getRestClient(process.env.API_URL)
+  const updatePlaceLastUpdate = useCallback(
+    async (placeId: string): Promise<void> => {
+      try {
+        const client = await getRestClient(process.env.API_URL)
 
-      const response = await client.patch<null, Place>(
-        `${API.panel.savePlace}/${placeId}`,
-        { lastUpdatedAt: new Date().toISOString() }
-      )
-      setSelectedPlace(response)
-    } catch {
-      setError({ ...errors, place: 'Update place error' })
-      return Promise.reject(false)
-    }
-  }, [])
+        const response = await client.patch<null, Place>(
+          `${API.panel.savePlace}/${placeId}`,
+          { lastUpdatedAt: new Date().toISOString() }
+        )
+        setSelectedPlace(response)
+      } catch {
+        setError({ ...errors, places: 'Update place last updated at failed' })
+        return Promise.reject(false)
+      }
+    },
+    []
+  )
 
   return (
     <PanelContext.Provider
