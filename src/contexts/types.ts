@@ -8,7 +8,7 @@ export type User = {
 
 export type UserContextValue = {
   user: User | null
-  ownedPlaces: Place[]
+  ownedPlaces: (Place & { id: string })[]
   login: (login: string, password: string) => void
   fetchUser: () => void
   fetchOwnedPlaces: () => void
@@ -76,7 +76,7 @@ export type Place = {
   name: string
   phone: string
   street: string
-  lastUpdatedAt?: string
+  lastUpdatedAt: string
   workingHours: string
 }
 

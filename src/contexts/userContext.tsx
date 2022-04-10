@@ -24,7 +24,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     () => localStorage.getItem('lang') || DEFAULT_LANGUAGE
   )
   const [userValue, setUserValue] = useState<User | null>(null)
-  const [ownedPlaces, setOwnedPlaces] = useState<Place[]>([])
+  const [ownedPlaces, setOwnedPlaces] = useState<(Place & { id: string })[]>([])
   const [errors, setError] = useState<Record<string, string>>({})
   const navigate = useNavigate()
   const login = useCallback(
@@ -58,7 +58,9 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   const fetchOwnedPlaces = useCallback(async () => {
     const client = await getRestClient(process.env.API_URL)
-    const response = await client.get<null, Place[]>(API.panel.getOwnedPlaces)
+    const response = await client.get<null, (Place & { id: string })[]>(
+      API.panel.getOwnedPlaces
+    )
 
     setOwnedPlaces(response)
   }, [])

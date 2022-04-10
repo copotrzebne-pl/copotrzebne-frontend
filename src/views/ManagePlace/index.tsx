@@ -45,7 +45,7 @@ export default () => {
           <TranslatedText value="editDemands" />
         </StyledButton>
       )}
-      {id && id !== 'new' && selectedPlace?.lastUpdatedAt && (
+      {id && id !== 'new' && selectedPlace && (
         <>
           <LastUpdate>
             <span>
