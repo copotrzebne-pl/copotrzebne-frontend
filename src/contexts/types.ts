@@ -88,6 +88,7 @@ export type PanelContextValue = {
   priorities: Priority[]
   fetchPlaces: () => void
   fetchPlace: (placeId: string) => void
+  updatePlaceLastUpdate: (placeId: string) => Promise<void>
   fetchDemands: (placeId: string) => void
   clearDemands: () => void
   clearSelectedPlace: () => void
