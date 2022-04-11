@@ -282,5 +282,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Nieaktywne',
     nameEn: 'Inactive',
     nameUa: 'неактивний'
+  },
+  notAnEmail: {
+    namePl: 'Adres email nie jest poprawny',
+    nameEn: 'Email address is not valid',
+    nameUa: 'Адреса електронної пошти недійсна'
   }
 }

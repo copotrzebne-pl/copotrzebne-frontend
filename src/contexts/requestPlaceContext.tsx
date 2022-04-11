@@ -57,7 +57,7 @@ export const RequestPlaceContextProvider = ({
 
         lastUpdatedAt: new Date().toISOString(),
 
-        userEmail,
+        userEmail: userEmail.trim(),
 
         apartment: place.apartment || undefined,
         comment: place.comment || undefined,
