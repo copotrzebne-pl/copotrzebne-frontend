@@ -122,12 +122,11 @@ const CategoryHeader = styled.span`
   font-weight: bold;
   display: flex;
   width: 100%;
+  font-size: 1.45rem;
   padding: 0.7rem 1.2rem;
   margin: 1rem 0;
-  background-color: #eeeeee;
   color: #333333;
   border-radius: 12px;
-  border: 2px solid ${({ theme }) => theme.colors.blue};
 `
 
 export const TextInput = styled.input`

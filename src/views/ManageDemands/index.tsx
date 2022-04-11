@@ -115,7 +115,7 @@ export default () => {
               <RemoveAllDemandsButton
                 onClick={() => removeAllDemands(selectedPlace?.id || '')}
               >
-                <TranslatedText value="finishCollection" />
+                <TranslatedText value="removeDemands" />
               </RemoveAllDemandsButton>
             )}
           </>
@@ -191,6 +191,11 @@ const RemoveAllDemandsButton = styled(Button)`
   background-color: transparent;
   color: ${({ theme }) => theme.colors.red};
   border: 1px solid ${({ theme }) => theme.colors.red};
+  &:hover,
+  &:focus {
+    color: white;
+    background: ${({ theme }) => theme.colors.red};
+  }
 `
 
 const TrashIcon = styled.img`

@@ -34,7 +34,11 @@ export default () => {
           navigate(routes[Page.MANAGE_ADDRESS].replace(':id', id || ''))
         }
       >
-        <TranslatedText value="editPlaceData" />
+        {selectedPlace?.name ? (
+          <TranslatedText value="editPlaceData" />
+        ) : (
+          <TranslatedText value="addPlace" />
+        )}
       </StyledButton>
       {id && id !== 'new' && (
         <StyledButton

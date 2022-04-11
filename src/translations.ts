@@ -152,6 +152,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Finish current collection',
     nameUa: 'Завершити збирання речей'
   },
+  removeDemands: {
+    namePl: 'Usuń wszystkie potrzeby',
+    nameEn: 'Remove all demands',
+    nameUa: 'Remove all demands'
+  },
   lastUpdate: {
     namePl: 'Ostatnia aktualizacja:',
     nameEn: 'Last modified at:',
@@ -162,9 +167,19 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Demands list',
     nameUa: 'Список потрібних речей'
   },
+  addToList: {
+    namePl: 'Dodaj do listy',
+    nameEn: 'Add to list',
+    nameUa: 'Add to list'
+  },
+  saveChanges: {
+    namePl: 'Zapisz zmiany',
+    nameEn: 'Save changes',
+    nameUa: 'Save changes'
+  },
   loggedInAs: {
     namePl: 'Jesteś zalogowany jako',
-    nameEn: 'Loggen in as',
+    nameEn: 'Logged in as',
     nameUa: 'Залогований як'
   },
   menuLogout: {
@@ -224,7 +239,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   addNewPlaceDescription: {
     namePl:
-      'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i uworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
+      'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i utworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
     nameEn:
       'Are you running a charity collection? Do you want to report a new place? Fill out the form and enter your email address. We will receive your application, check it and create an account for you. You will receive the login details at the e-mail address provided.',
     nameUa:

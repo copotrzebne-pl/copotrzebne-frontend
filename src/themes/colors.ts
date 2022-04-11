@@ -15,5 +15,5 @@ export default {
   blue: '#0076FF',
   grey: '#969393',
   pink: '#DC3673',
-  red: '#d70000'
+  red: '#FF3E61'
 }
