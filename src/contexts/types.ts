@@ -78,7 +78,7 @@ export type Place = {
   street: string
   lastUpdatedAt: string
   workingHours: string
-  state?: number,
+  state?: number
   priority?: number
 }
 

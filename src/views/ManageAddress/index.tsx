@@ -1,6 +1,12 @@
 import { useEffect, useState, useCallback, SyntheticEvent } from 'react'
 import Button from 'components/Button'
-import { Form, FormGroup, Label, TextInput } from 'components/forms'
+import {
+  Form,
+  FormGroup,
+  Label,
+  RequiredDecorator,
+  TextInput
+} from 'components/forms'
 import PageTitle from 'components/PageTitle'
 import { Place } from 'contexts/types'
 import { useUserContext } from 'contexts/userContext'
@@ -70,6 +76,7 @@ export default () => {
         <FormGroup>
           <Label>
             <TranslatedText value="name" />
+            <RequiredDecorator>*</RequiredDecorator>
           </Label>
           <TextInput
             id="name"
@@ -83,6 +90,7 @@ export default () => {
         <FormGroup>
           <Label>
             <TranslatedText value="city" />
+            <RequiredDecorator>*</RequiredDecorator>
           </Label>
           <TextInput
             id="city"
@@ -96,6 +104,7 @@ export default () => {
         <FormGroup>
           <Label>
             <TranslatedText value="street" />
+            <RequiredDecorator>*</RequiredDecorator>
           </Label>
           <TextInput
             id="street"
@@ -109,6 +118,7 @@ export default () => {
         <FormGroup>
           <Label>
             <TranslatedText value="buildingNumber" />
+            <RequiredDecorator>*</RequiredDecorator>
           </Label>
           <TextInput
             id="buildingNumber"
