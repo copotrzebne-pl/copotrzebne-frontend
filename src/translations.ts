@@ -239,7 +239,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   addNewPlaceDescription: {
     namePl:
-      'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i uworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
+      'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i utworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
     nameEn:
       'Are you running a charity collection? Do you want to report a new place? Fill out the form and enter your email address. We will receive your application, check it and create an account for you. You will receive the login details at the e-mail address provided.',
     nameUa:
