@@ -34,3 +34,14 @@ export const Form = styled.form`
   flex-direction: column;
   margin-top: 0.8rem;
 `
+
+export const FormError = styled.div`
+  display: inline-block;
+  color: red;
+  margin: 1rem 0;
+`
+
+export const RequiredDecorator = styled.span`
+  color: red;
+  font-size: 0.9rem;
+`

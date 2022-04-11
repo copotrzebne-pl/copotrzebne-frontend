@@ -12,7 +12,7 @@ export type UserContextValue = {
   login: (login: string, password: string) => void
   fetchUser: () => void
   fetchOwnedPlaces: () => void
-  savePlace: (place: Place) => void
+  savePlace: (place: Omit<Place, 'lastUpdatedAt'>) => void
   deletePlace: (placeId: string) => void
   authorized: boolean
   language: string
@@ -78,6 +78,8 @@ export type Place = {
   street: string
   lastUpdatedAt: string
   workingHours: string
+  state?: number,
+  priority?: number
 }
 
 export type PanelContextValue = {
@@ -101,4 +103,18 @@ export type PanelContextValue = {
 
 export type PanelContextProviderProps = {
   children: ReactNode
+}
+
+export type RequestPlaceContextValue = {
+  isPlaceCreated: boolean
+  place: Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>
+  setPlaceValue: (
+    key: keyof Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>,
+    value: string
+  ) => void
+  userEmail: string
+  setUserEmail: (email: string) => void
+  error: string | null
+  setError: (error: string | null) => void
+  savePlace: () => void
 }

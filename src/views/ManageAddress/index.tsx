@@ -14,7 +14,7 @@ export default () => {
   const { id } = useParams()
   const { savePlace } = useUserContext()
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
-  const [editedPlace, setEditedPlace] = useState<Place>({
+  const [editedPlace, setEditedPlace] = useState<Omit<Place, 'lastUpdatedAt'>>({
     id,
     name: '',
     city: '',
@@ -55,8 +55,9 @@ export default () => {
         !editedPlace.city ||
         !editedPlace.street ||
         !editedPlace.buildingNumber
-      )
+      ) {
         return
+      }
       savePlace(editedPlace)
     },
     [selectedPlace, editedPlace]

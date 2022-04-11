@@ -8,6 +8,10 @@ export const getDefaultMenuItems = ({
   handleLogout: () => void
 }) => [
   {
+    route: routes[Page.REQUEST_NEW_PLACE],
+    translationKey: 'requestPlace'
+  },
+  {
     route: routes[Page.PANEL],
     translationKey: 'menuPanel',
     hidden: !authorized
@@ -36,6 +40,10 @@ export const getPanelMenuItems = ({
   authorized: boolean
   handleLogout: () => void
 }) => [
+  {
+    route: routes[Page.REQUEST_NEW_PLACE],
+    translationKey: 'requestPlace'
+  },
   {
     route: routes[Page.PANEL],
     translationKey: 'menuPanel',
