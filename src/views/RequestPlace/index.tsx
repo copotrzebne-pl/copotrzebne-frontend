@@ -1,4 +1,4 @@
-import { useCallback, SyntheticEvent } from 'react'
+import { useCallback, SyntheticEvent, useState } from 'react'
 import styled from 'styled-components'
 
 import Button from 'components/Button'
@@ -14,6 +14,7 @@ import PageTitle from 'components/PageTitle'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { useRequestPlaceContext } from 'contexts/requestPlaceContext'
+import { isEmail } from '../../utils/validators'
 
 export default () => {
   const {
@@ -27,12 +28,22 @@ export default () => {
     savePlace
   } = useRequestPlaceContext()
 
+  const [userEmailValid, setUserEmailValid] = useState<boolean>(true)
+
   const handleSubmit = useCallback(
     (e: SyntheticEvent) => {
       e.preventDefault()
       if (isPlaceCreated) {
         return
       }
+
+      if (!isEmail(userEmail)) {
+        setError('notAnEmail')
+        setUserEmailValid(false)
+        return
+      }
+      setUserEmailValid(true)
+
 
       if (
         !userEmail ||
@@ -72,9 +83,16 @@ export default () => {
               value={userEmail}
               onChange={e => {
                 setUserEmail(e.target.value)
+                setUserEmailValid(true)
                 setError(null)
               }}
             />
+            {!userEmailValid && (
+              <RequiredDecorator>
+                <br />
+                <TranslatedText value="notAnEmail" />
+              </RequiredDecorator>
+            )}
           </FormGroup>
           <FormGroup>
             <Label>

@@ -62,10 +62,16 @@ const AdminPanel = ({ className }: { className?: string }) => {
         </ButtonWrapper>
         <PlacesWrapper>
           <TypeFilterWrapper>
-            <Button onClick={() => setPlaceType('active')} disabled={placeType === 'active'}>
+            <Button
+              onClick={() => setPlaceType('active')}
+              disabled={placeType === 'active'}
+            >
               <TranslatedText value="stateActive" />
             </Button>
-            <Button onClick={() => setPlaceType('inactive')} disabled={placeType === 'inactive'}>
+            <Button
+              onClick={() => setPlaceType('inactive')}
+              disabled={placeType === 'inactive'}
+            >
               <TranslatedText value="stateInactive" />
             </Button>
           </TypeFilterWrapper>
