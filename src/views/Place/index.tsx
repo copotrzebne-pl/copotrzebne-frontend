@@ -160,14 +160,13 @@ const Container = styled.div`
 `
 
 const PlaceDetails = styled.div`
-  width: calc(100% - 0.8rem);
+  width: 100%;
   display: flex;
   flex-direction: column;
-  margin: 0 0.4rem;
   background-color: rgba(199, 199, 199, 0.1);
   padding: 1rem;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   ${breakpoint.sm`
     max-width: 450px;
     margin: 0 auto;
@@ -258,7 +257,7 @@ const LastUpdate = styled.div`
 const DemandsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2.2rem 1.2rem 3.2rem;
+  padding: 1rem 1.2rem 3.2rem;
   width: 100%;
   ${breakpoint.sm`
     max-width: 450px;
@@ -280,6 +279,7 @@ const DemandsList = styled.ol`
   flex-direction: column;
   width: 100%;
   padding: 0 1.2rem;
+  margin: 0;
 `
 
 const DemandComponent = styled.li`
@@ -327,10 +327,9 @@ const CategoryHeader = styled.span`
   width: 100%;
   padding: 0.6rem 0.6rem;
   margin: 0.8rem 0;
-  background-color: #eeeeee;
-  color: #333333;
-
-  border-radius: 6px;
-  font-size: 0.95rem;
-  border: 2px solid ${({ theme }) => theme.colors.blue};
+  color: #8cb134;
+  border-bottom: 1px solid #8cb134;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 1rem;
 `

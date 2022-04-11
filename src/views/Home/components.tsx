@@ -67,7 +67,7 @@ const ShowMore = styled.button`
   display: block;
   width: 100%;
   max-width: 250px;
-  margin: 0 auto;
+  margin: 0 auto 1em auto;
   padding: 0.8em;
   border: 1px solid #fed500;
   border-radius: 10px;

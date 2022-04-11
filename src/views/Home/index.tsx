@@ -130,10 +130,10 @@ const IntroductionWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-top: -15px;
   padding: 3em 1.5em 2.1em 1.5em;
-  background-color: #f3f3f3;
-  border-radius: 10px;
+  background-color: rgba(199, 199, 199, 0.1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   ${breakpoint.sm`
     width: 100%;
   `}
@@ -141,8 +141,9 @@ const IntroductionWrapper = styled.div`
 
 const Title = styled.span`
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 1.2rem 1.8rem;
+  padding: 1rem 1em 1.5rem 1rem;
   color: ${({ theme }) => theme.colors.black};
   font-size: 1.68rem;
   font-weight: 500;
@@ -181,7 +182,7 @@ const ShowMapButton = styled.button`
   max-width: 500px;
   width: calc(100% - 2.4rem);
   height: 48px;
-  margin: 1.5em auto;
+  margin: 1.5em auto 0 auto;
   padding: 0.8rem 1.8rem;
   outline: none;
   background-color: transparent;
