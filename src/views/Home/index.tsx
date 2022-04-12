@@ -81,7 +81,7 @@ export default () => {
                 </Title>
                 <WrappedPlaces
                   places={groupedPlaces[cityName]}
-                  initialNumber={3}
+                  initialNumber={4}
                 />
               </div>
             ))}
@@ -100,18 +100,18 @@ export default () => {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
-  flex-direction: column;
   padding-bottom: 4.6rem;
   ${breakpoint.sm`
-    width: 100%;
-    margin: 0 auto;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     height: calc(100vh - ${({ theme }) => theme.dimensions.headerHeight});
-    overflow: hidden;
+    margin: 0 auto;
     padding-bottom: 0;
+    overflow: hidden;
   `}
 `
 
@@ -122,67 +122,77 @@ const ContentWrapper = styled.div`
   ${breakpoint.sm`
     height: 100%;
     overflow-y: auto;
-    padding-left: 3.2rem;
   `}
 `
 
 const IntroductionWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+  padding: 3em 1.5em 2.1em 1.5em;
+  background-color: rgba(199, 199, 199, 0.1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   ${breakpoint.sm`
-    width: 80%;
+    width: 100%;
   `}
 `
 
 const Title = styled.span`
   display: flex;
+  justify-content: center;
   align-items: center;
-  font-size: 1.68rem;
-  padding: 1rem 1.2rem 1.8rem;
-  font-weight: 500;
+  padding: 1rem 1em 1.5rem 1rem;
   color: ${({ theme }) => theme.colors.black};
+  font-size: 1.68rem;
+  font-weight: 500;
 `
 
 const Marker = styled.img`
-  height: 25px;
-  width: auto;
   display: inline-block;
+  width: auto;
+  height: 25px;
   margin-right: 0.7rem;
   margin-bottom: 2px;
 `
 
 const PageDesciption = styled.div`
   width: 100%;
-  padding: 3.2rem 1.2rem 0;
+  max-width: 600px;
   font-weight: 500;
+  font-size: 17px;
+  text-align: center;
+  line-height: 1.5;
 `
 
 const StyledFacebookButton = styled(FacebookShareButton)`
-  margin: 1.2rem;
   width: calc(100% - 2.4rem);
+  max-width: 500px;
+  margin-top: 1.2em;
   cursor: pointer;
 `
 
 const ShowMapButton = styled.button`
-  border: 2px solid ${({ theme }) => theme.colors.blue};
-  outline: none;
-  padding: 0.8rem 1.8rem;
-  background-color: transparent;
-  color: black;
-  border-radius: 10px;
-  height: 48px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative;
+  max-width: 500px;
+  width: calc(100% - 2.4rem);
+  height: 48px;
+  margin: 1.5em auto 0 auto;
+  padding: 0.8rem 1.8rem;
+  outline: none;
+  background-color: transparent;
+  border-radius: 10px;
+  border: 2px solid ${({ theme }) => theme.colors.blue};
+  color: black;
   font-size: 0.85rem;
   font-weight: 500;
-  position: relative;
-  margin: 1.2rem;
-  width: calc(100% - 2.4rem);
 `
 
 const PlacesList = styled.div`
-  padding-bottom: 3.2rem;
+  padding: 1em 1em 2.1em 1em;
 `
