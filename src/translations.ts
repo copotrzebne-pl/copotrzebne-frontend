@@ -302,5 +302,20 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Adres email nie jest poprawny',
     nameEn: 'Email address is not valid',
     nameUa: 'Адреса електронної пошти недійсна'
+  },
+  searchPlaceByName: {
+    namePl: 'Szukaj miejsc po produktach',
+    nameEn: 'Search place by name',
+    nameUa: 'Шукати місце за назвою'
+  },
+  inputProductName: {
+    namePl: 'Wpisz nazwę produktu',
+    nameEn: 'Enter a product name',
+    nameUa: 'Введіть назву продукту'
+  },
+  removeAll: {
+    namePl: 'Usuń wszystkie',
+    nameEn: 'Remove all',
+    nameUa: 'Видалити всі'
   }
 }

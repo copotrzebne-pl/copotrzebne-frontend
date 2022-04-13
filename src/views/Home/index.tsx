@@ -10,9 +10,10 @@ import TranslatedText from 'components/TranslatedText'
 import { OrganizationsMap } from './Map'
 import { WrappedPlaces } from './components'
 import Dialog from 'components/Dialog'
+import SupplySearch from 'views/Home/SupplySearch'
 
 export default () => {
-  const { fetchPlaces, places } = usePanelContext()
+  const { fetchPlaces, places, selectedSupplies } = usePanelContext()
   const [groupedPlaces, setGroupedPlaces] = useState<Record<string, Place[]>>(
     {}
   )
@@ -20,7 +21,7 @@ export default () => {
   const mobileViewport = window.matchMedia('screen and (max-width: 992px)')
   useEffect(() => {
     fetchPlaces()
-  }, [])
+  }, [selectedSupplies])
 
   useEffect(() => {
     setGroupedPlaces(groupPlaces())
@@ -72,6 +73,7 @@ export default () => {
               <TranslatedText value="showOnMap" />
             </ShowMapButton>
           )}
+          <SupplySearch />
           <PlacesList>
             {Object.keys(groupedPlaces).map((cityName, key) => (
               <div key={key}>
