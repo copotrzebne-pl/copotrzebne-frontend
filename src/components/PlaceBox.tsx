@@ -40,7 +40,10 @@ const PlaceBoxComponent = ({
       {place.lastUpdatedAt && (
         <LastUpdate>
           <TranslatedText value="placeLastUpdate" />{' '}
-          {`${format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')}`}
+          {`${
+            place.lastUpdatedAt &&
+            format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')
+          }`}
         </LastUpdate>
       )}
       {!place.lastUpdatedAt && (
