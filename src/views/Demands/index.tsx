@@ -36,7 +36,7 @@ export default () => {
       fetchPlace(id)
       fetchDemands(id)
       fetchPriorities(id)
-      fetchSupplies(id)
+      fetchSupplies()
     }
     return () => {
       clearDemands()

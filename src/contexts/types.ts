@@ -88,6 +88,7 @@ export type PanelContextValue = {
   demands: Demand[]
   supplies: Supply[]
   priorities: Priority[]
+  selectedSupplies: Record<string, Supply>
   fetchPlaces: () => void
   fetchPlace: (placeId: string) => void
   updatePlaceLastUpdate: (placeId: string) => Promise<void>
@@ -95,10 +96,11 @@ export type PanelContextValue = {
   clearDemands: () => void
   clearSelectedPlace: () => void
   fetchPriorities: (placeId: string) => void
-  fetchSupplies: (placeId: string) => void
+  fetchSupplies: () => void
   saveDemand: (demand: DemandDTO, demandData?: Demand) => Promise<boolean>
   removeDemand: (demandId: string) => void
   removeAllDemands: (placeId: string) => void
+  setSelectedSupplies: (selectedSupplies: Record<string, Supply>) => void
 }
 
 export type PanelContextProviderProps = {

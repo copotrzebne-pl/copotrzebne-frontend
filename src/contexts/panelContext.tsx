@@ -23,27 +23,33 @@ export const PanelContextProvider = ({
   const [supplies, setSupplies] = useState<Supply[]>([])
   const [priorities, setPriorities] = useState<Priority[]>([])
   const [errors, setError] = useState<Record<string, string>>({})
+  const [selectedSupplies, setSelectedSupplies] = useState<
+    Record<string, Supply>
+  >({})
 
   const fetchPlaces = useCallback(async () => {
     try {
       const client = await getRestClient(process.env.API_URL)
+      const suppliesKeys = Object.keys(selectedSupplies)
       const response = await client.get<null, Record<string, string>>(
-        API.panel.getPlaces
+        `${API.panel.getPlaces}${
+          suppliesKeys.length > 0 ? `?supplyId=${suppliesKeys.join(',')}` : ''
+        }`
       )
       Array.isArray(response) ? setPlaces(response) : setPlaces([])
     } catch {
       setError({ ...errors, places: 'Fetching places error' })
     }
-  }, [errors])
+  }, [errors, selectedSupplies])
 
   const fetchPlace = useCallback(
     async (placeId: string) => {
       try {
         const client = await getRestClient(process.env.API_URL)
-        const response = await client.get<null, Record<string, string>>(
+        const response = await client.get<null, Place>(
           API.panel.getPlace.replace(':id', placeId)
         )
-        setSelectedPlace(response as Place)
+        setSelectedPlace(response)
       } catch {
         setError({ ...errors, places: 'Fetching places error' })
       }
@@ -180,6 +186,7 @@ export const PanelContextProvider = ({
         demands,
         supplies,
         priorities,
+        selectedSupplies,
         fetchDemands,
         fetchPlaces,
         fetchPlace,
@@ -190,7 +197,8 @@ export const PanelContextProvider = ({
         fetchSupplies,
         saveDemand,
         removeAllDemands,
-        removeDemand
+        removeDemand,
+        setSelectedSupplies
       }}
     >
       {children}
