@@ -82,7 +82,8 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
               <span>
                 <TranslatedText value="lastUpdate" />{' '}
               </span>
-              {format(Date.parse(ownedPlaces[0].lastUpdatedAt), 'd MMM Y H:m')}
+              {ownedPlaces[0].lastUpdatedAt &&
+                format(Date.parse(ownedPlaces[0].lastUpdatedAt), 'd MMM Y H:m')}
             </LastUpdate>
             <StyledButton
               onClick={async () => {

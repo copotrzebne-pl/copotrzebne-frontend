@@ -55,7 +55,8 @@ export default () => {
             <span>
               <TranslatedText value="lastUpdate" />{' '}
             </span>
-            {format(Date.parse(selectedPlace.lastUpdatedAt), 'd MMM Y H:m')}
+            {selectedPlace.lastUpdatedAt &&
+              format(Date.parse(selectedPlace.lastUpdatedAt), 'd MMM Y H:m')}
           </LastUpdate>
           <StyledButton onClick={() => updatePlaceLastUpdate(id)}>
             <TranslatedText value="updatePlaceLastUpdatedDate" />
