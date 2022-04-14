@@ -13,7 +13,9 @@ import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import Dialog from 'components/Dialog'
 import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
-import format from 'date-fns/format'
+import UpdateDateButton from '../../../components/UpdateDateButton'
+import LastUpdateDate from '../../../components/LastUpdateDate'
+import PanelButton from '../../../components/PanelButton'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -49,50 +51,42 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
             <TranslatedText value="loggedInAs" />
           </SectionTitle>
           <PlaceTitle>{ownedPlaces[0]?.name}</PlaceTitle>
-          <ButtonWrapper>
-            <StyledButton
-              onClick={() =>
-                navigate(
-                  routes[Page.MANAGE_ADDRESS].replace(
-                    ':id',
-                    ownedPlaces[0].id || ''
-                  )
+          <PanelButton
+            onClick={() =>
+              navigate(
+                routes[Page.MANAGE_ADDRESS].replace(
+                  ':id',
+                  ownedPlaces[0].id || ''
                 )
-              }
-            >
-              <TranslatedText value="editPlaceData" />
-            </StyledButton>
-          </ButtonWrapper>
-          <ButtonWrapper>
-            {demands.length === 0 && (
-              <SectionTitle>
-                <TranslatedText value="noDemandsReported" />
-              </SectionTitle>
-            )}
-            <StyledButton
-              onClick={() =>
-                navigate(
-                  routes[Page.DEMANDS].replace(':id', ownedPlaces[0]?.id || '')
-                )
-              }
-            >
-              <TranslatedText value="addDemands" />
-            </StyledButton>
-            <LastUpdate>
-              <span>
-                <TranslatedText value="lastUpdate" />{' '}
-              </span>
-              {ownedPlaces[0].lastUpdatedAt &&
-                format(Date.parse(ownedPlaces[0].lastUpdatedAt), 'd MMM Y H:m')}
-            </LastUpdate>
-            <StyledButton
-              onClick={async () => {
-                await updatePlaceLastUpdate(ownedPlaces[0].id)
-                await fetchOwnedPlaces()
-              }}
-            >
-              <TranslatedText value="updatePlaceLastUpdatedDate" />
-            </StyledButton>
+              )
+            }
+          >
+            <TranslatedText value="editPlaceData" />
+          </PanelButton>
+          {demands.length === 0 && (
+            <SectionTitle>
+              <TranslatedText value="noDemandsReported" />
+            </SectionTitle>
+          )}
+          <PanelButton
+            onClick={() =>
+              navigate(
+                routes[Page.DEMANDS].replace(':id', ownedPlaces[0]?.id || '')
+              )
+            }
+          >
+            <TranslatedText value="addDemands" />
+          </PanelButton>
+          <LastUpdateDate lastUpdatedAt={ownedPlaces[0].lastUpdatedAt} />
+          <UpdateDateButton
+            onClick={async () => {
+              await updatePlaceLastUpdate(ownedPlaces[0].id)
+              await fetchOwnedPlaces()
+            }}
+            isDisabled={ownedPlaces[0].priority === 0}
+          />
+
+          <Demands>
             {demands.length > 0 && (
               <>
                 <DemandsWrapper>
@@ -152,7 +146,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                 )}
               </>
             )}
-          </ButtonWrapper>
+          </Demands>
         </>
       )}
       {ownedPlaces.length > 1 && (
@@ -213,15 +207,10 @@ const PlacesWrapper = styled.div`
   `}
 `
 
-const ButtonWrapper = styled.div`
+const Demands = styled.div`
   width: 100%;
   margin-top: 2.2rem;
-  padding: 0 1.2rem;
-`
-
-const StyledButton = styled(Button)`
-  margin-top: 0.8rem;
-  margin-bottom: 2.2rem;
+  padding: 0 2.2rem;
 `
 
 const DemandsWrapper = styled.div`
@@ -278,9 +267,4 @@ const DemandComponentStyled = styled(DemandComponent)`
   ${AddIcon} {
     display: none;
   }
-`
-
-const LastUpdate = styled.div`
-  width: auto;
-  margin: 1.2rem 0 0.2rem;
 `

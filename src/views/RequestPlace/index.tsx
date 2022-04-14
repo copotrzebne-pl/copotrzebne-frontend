@@ -44,7 +44,6 @@ export default () => {
       }
       setUserEmailValid(true)
 
-
       if (
         !userEmail ||
         !place.name ||

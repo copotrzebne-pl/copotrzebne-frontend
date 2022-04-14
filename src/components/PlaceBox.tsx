@@ -6,6 +6,7 @@ import trashIconUrl from '../assets/trash-icon.svg'
 import { useUserContext } from '../contexts/userContext'
 import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
+import { formatDateWithTime } from '../utils/date'
 
 const PlaceBoxComponent = ({
   className,
@@ -40,10 +41,7 @@ const PlaceBoxComponent = ({
       {place.lastUpdatedAt && (
         <LastUpdate>
           <TranslatedText value="placeLastUpdate" />{' '}
-          {`${
-            place.lastUpdatedAt &&
-            format(Date.parse(place.lastUpdatedAt), 'd. MMM Y H:mm')
-          }`}
+          {`${place.lastUpdatedAt && formatDateWithTime(place.lastUpdatedAt)}`}
         </LastUpdate>
       )}
       {!place.lastUpdatedAt && (
