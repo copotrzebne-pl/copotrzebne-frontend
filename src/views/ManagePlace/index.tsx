@@ -6,8 +6,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
-import format from 'date-fns/format'
 import { Page, routes } from '../../routes'
+import LastUpdateDate from '../../components/LastUpdateDate'
+import UpdateDateButton from '../../components/UpdateDateButton'
 
 export default () => {
   const { id } = useParams()
@@ -51,16 +52,11 @@ export default () => {
       )}
       {id && id !== 'new' && selectedPlace && (
         <>
-          <LastUpdate>
-            <span>
-              <TranslatedText value="lastUpdate" />{' '}
-            </span>
-            {selectedPlace.lastUpdatedAt &&
-              format(Date.parse(selectedPlace.lastUpdatedAt), 'd MMM Y H:m')}
-          </LastUpdate>
-          <StyledButton onClick={() => updatePlaceLastUpdate(id)}>
-            <TranslatedText value="updatePlaceLastUpdatedDate" />
-          </StyledButton>
+          <LastUpdateDate lastUpdatedAt={selectedPlace.lastUpdatedAt} />
+          <UpdateDateButton
+            onClick={() => updatePlaceLastUpdate(id)}
+            isDisabled={selectedPlace.priority === 0}
+          />
         </>
       )}
     </Container>
@@ -82,9 +78,4 @@ const StyledButton = styled(Button)`
   width: auto;
   margin: 1.2rem 2.2rem;
   padding: 0.8rem 1.8rem;
-`
-
-const LastUpdate = styled.div`
-  width: auto;
-  margin: 1.2rem 2.2rem 0.2rem;
 `
