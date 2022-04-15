@@ -58,7 +58,7 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
         >
           <InfoBox>
             <CloseIcon onClick={() => setSelectedPlace(null)} />
-            <Link to={`${routes[Page.PLACE]}/${selectedPlace.id}`}>
+            <Link to={`${routes[Page.PLACE]}/${selectedPlace.nameSlug}`}>
               <PlaceBoxDetailedStyled place={selectedPlace} />
             </Link>
           </InfoBox>
