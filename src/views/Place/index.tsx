@@ -22,22 +22,29 @@ export default () => {
     clearDemands,
     clearSelectedPlace
   } = usePanelContext()
-  const { id } = useParams()
+  const { idOrSlug } = useParams()
   const formattedPlaceDescription = useTextTransformToHTML(
     selectedPlace?.comment
   )
   const { groupedDemands, demandsKeys } = useGroupDemands(demands)
 
   useEffect(() => {
-    if (id) {
-      fetchPlace(id)
-      fetchDemands(id)
+    if (idOrSlug) {
+      fetchPlace(idOrSlug)
+    }
+    return () => {
+      clearSelectedPlace()
+    }
+  }, [idOrSlug])
+
+  useEffect(() => {
+    if (selectedPlace?.id) {
+      fetchDemands(selectedPlace.id)
     }
     return () => {
       clearDemands()
-      clearSelectedPlace()
     }
-  }, [id])
+  }, [selectedPlace?.id])
 
   return (
     <>

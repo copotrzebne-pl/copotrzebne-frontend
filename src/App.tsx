@@ -51,7 +51,7 @@ export default () => (
                 <Route path={routes[Page.HOME]} element={<Layout />}>
                   <Route path="" element={<Home />} />
                   <Route
-                    path={`${routes[Page.PLACE]}/:id`}
+                    path={`${routes[Page.PLACE]}/:idOrSlug`}
                     element={<Place />}
                   />
                   <Route path={routes[Page.LOGIN]} element={<Login />} />
