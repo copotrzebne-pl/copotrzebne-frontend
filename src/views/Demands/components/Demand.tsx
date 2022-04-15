@@ -23,10 +23,7 @@ const DemandComponent = ({
   supply: Supply
   placeId: string
   priorities: Priority[]
-  saveDemand: (
-    demandObject: DemandDTO,
-    demandData?: Demand
-  ) => Promise<boolean | void>
+  saveDemand: (demandObject: DemandDTO) => Promise<boolean | void>
   onSelected: (supplyId: string) => void
   isSelected: boolean
   isSaved: boolean
@@ -61,22 +58,9 @@ const DemandComponent = ({
 
   const handleDemandSave = useCallback(() => {
     if (!demandDTO.priorityId && !demandDTO.placeId) return
-    //hack to update demand priority, remove when API response contains priority
-    const updatedDemand = {
-      ...(demand || {}),
-      id: demand?.id || '',
-      supplyId: supply.id,
-      supply: supply,
-      updatedAt: '',
-      priority: priorities.filter(
-        priority => priority.id === demandDTO.priorityId
-      )[0]!
-    }
-    saveDemand({ ...demandDTO, placeId }, updatedDemand).then(
-      (saved: boolean | void) => {
-        if (saved) onSelected('')
-      }
-    )
+    saveDemand({ ...demandDTO, placeId }).then((saved: boolean | void) => {
+      if (saved) onSelected('')
+    })
   }, [demandDTO, placeId, priorities, demand, supply])
 
   return (

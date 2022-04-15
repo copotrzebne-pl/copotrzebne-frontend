@@ -103,7 +103,7 @@ export const PanelContextProvider = ({
   }, [])
 
   const saveDemand = useCallback(
-    async (demandDto: DemandDTO, demandData?: Demand): Promise<boolean> => {
+    async (demandDto: DemandDTO): Promise<boolean> => {
       try {
         const client = await getRestClient(process.env.API_URL)
         const response = demandDto.id
@@ -112,16 +112,9 @@ export const PanelContextProvider = ({
               omit(demandDto, ['id'])
             )
           : await client.post<null, Demand>(API.panel.saveDemand, demandDto)
-        //update demands list
-        //nasty hack ;) remove when demand response from PATCH request has all necessary data
-        const demandToUpdate = {
-          ...response,
-          ...demandData,
-          comment: demandDto.comment || ''
-        }
         setDemands([
           ...demands.filter(demand => demand?.id !== demandDto.id),
-          demandToUpdate
+          response
         ])
         return Promise.resolve(true)
       } catch {
