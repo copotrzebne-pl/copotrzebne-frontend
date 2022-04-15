@@ -80,6 +80,7 @@ export type Place = {
   workingHours: string
   state?: number
   priority?: number
+  nameSlug: string
 }
 
 export type PanelContextValue = {

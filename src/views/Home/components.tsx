@@ -7,48 +7,6 @@ import { breakpoint } from 'themes/breakpoints'
 import { PlaceBox as PlaceDetailedBox } from 'components/PlaceBox'
 import TranslatedText from 'components/TranslatedText'
 
-const PlaceName = styled.h3`
-  margin-bottom: 0.1rem;
-  color: #1f2635;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.45;
-`
-
-const PlaceDetails = styled.span`
-  display: inline-block;
-  width: 100%;
-  color: #8d99b2;
-  font-size: 0.7rem;
-  line-height: 1.2;
-  font-weight: 400;
-`
-
-const PlaceBoxComponent = ({
-  className,
-  place
-}: {
-  className?: string
-  place: Place
-}) => (
-  <div className={className}>
-    <PlaceName>{place.name}</PlaceName>
-    <PlaceDetails>
-      {place.city}, {place.street} {place.apartment}
-    </PlaceDetails>
-  </div>
-)
-
-export const PlaceBox = styled(PlaceBoxComponent)`
-  padding: 1rem 1.2rem;
-  background-color: white;
-  width: 100%;
-  border-radius: 15px;
-  box-shadow: ${({ theme }) => theme.boxShadows.medium};
-  margin-bottom: 0.8rem;
-  cursor: pointer;
-`
-
 const StyledLink = styled(Link)`
   width: 100%;
   ${breakpoint.sm`
@@ -98,7 +56,10 @@ export const WrappedPlacesComponent = ({
         {places
           .slice(0, showMore ? places.length : initialNumber)
           .map(place => (
-            <StyledLink to={`${routes[Page.PLACE]}/${place.id}`} key={place.id}>
+            <StyledLink
+              to={`${routes[Page.PLACE]}/${place.nameSlug}`}
+              key={place.id}
+            >
               <PlaceBoxDetailedStyled place={place} />
             </StyledLink>
           ))}
