@@ -112,8 +112,9 @@ export const PanelContextProvider = ({
               omit(demandDto, ['id'])
             )
           : await client.post<null, Demand>(API.panel.saveDemand, demandDto)
-        setDemands([
-          ...demands.filter(demand => demand?.id !== demandDto.id),
+
+        setDemands(demandsList => [
+          ...demandsList.filter(demand => demand?.id !== response.id),
           response
         ])
         return Promise.resolve(true)
@@ -122,7 +123,7 @@ export const PanelContextProvider = ({
         return Promise.reject(false)
       }
     },
-    [demands, setDemands]
+    []
   )
 
   const removeDemand = useCallback(
