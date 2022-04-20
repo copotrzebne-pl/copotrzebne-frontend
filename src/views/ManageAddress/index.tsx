@@ -192,6 +192,18 @@ export default () => {
         </FormGroup>
         <FormGroup>
           <Label>
+            <TranslatedText value="bankAccount" />
+          </Label>
+          <TextInput
+            id="bankAccount"
+            type="text"
+            placeholder="Bank Account"
+            value={editedPlace.bankAccount || ''}
+            onChange={e => setValue('bankAccount', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
             <TranslatedText value="latitude" />
           </Label>
           <TextInput
