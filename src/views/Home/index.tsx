@@ -83,7 +83,7 @@ export default () => {
                 </Title>
                 <WrappedPlaces
                   places={groupedPlaces[cityName]}
-                  initialNumber={4}
+                  initialNumber={6}
                 />
               </div>
             ))}

@@ -4,7 +4,8 @@ import {
   User,
   UserContextValue,
   UserContextProviderProps,
-  Place
+  Place,
+  PlaceDto
 } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
@@ -65,7 +66,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     setOwnedPlaces(response)
   }, [])
 
-  const savePlace = useCallback(async (place: Place) => {
+  const savePlace = useCallback(async (place: PlaceDto) => {
     const client = await getRestClient(process.env.API_URL)
 
     try {
@@ -75,7 +76,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
           latitude: place.latitude ? parseFloat(place.latitude) : null,
           longitude: place.longitude ? parseFloat(place.longitude) : null
         },
-        ['lastUpdatedAt', 'priority']
+        ['lastUpdatedAt', 'priority', 'nameSlug']
       )
       if (place.id !== 'new') {
         await client.patch<null, Place>(

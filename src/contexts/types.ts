@@ -12,7 +12,7 @@ export type UserContextValue = {
   login: (login: string, password: string) => void
   fetchUser: () => void
   fetchOwnedPlaces: () => void
-  savePlace: (place: Omit<Place, 'lastUpdatedAt'>) => void
+  savePlace: (place: PlaceDto) => void
   deletePlace: (placeId: string) => void
   authorized: boolean
   language: string
@@ -81,7 +81,26 @@ export type Place = {
   state?: number
   priority?: number
   nameSlug: string
+  bankAccount: string | null
 }
+
+export type PlaceDto = {
+  id?: string
+  apartment: string
+  buildingNumber: string
+  city: string
+  comment: string
+  email: string
+  latitude: string | null
+  longitude: string | null
+  name: string
+  phone: string
+  street: string
+  workingHours: string
+  bankAccount: string | null
+}
+
+export type DraftPlaceDto = Omit<PlaceDto, 'id' | 'latitude' | 'longitude'>
 
 export type PanelContextValue = {
   places: Place[]
@@ -110,7 +129,7 @@ export type PanelContextProviderProps = {
 
 export type RequestPlaceContextValue = {
   isPlaceCreated: boolean
-  place: Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>
+  place: DraftPlaceDto
   setPlaceValue: (
     key: keyof Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>,
     value: string
