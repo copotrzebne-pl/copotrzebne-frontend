@@ -110,6 +110,13 @@ export default () => {
                   </h3>
                 </LastUpdate>
               </DetailsRow>
+              <DetailsRow>
+                <BankAccount>
+                  <TranslatedText value="bankAccount" />
+                  <br />
+                  <span>{selectedPlace.bankAccount || '-'}</span>
+                </BankAccount>
+              </DetailsRow>
             </PlaceDetailsWrapper>
           </PlaceDetails>
         )}
@@ -258,6 +265,21 @@ const LastUpdate = styled.div`
     font-size: 0.78rem;
     font-weight: 500;
     margin: 0.1rem 0;
+  }
+`
+
+const BankAccount = styled.div`
+  margin-top: 1.6rem;
+  color: #8d99b2;
+  font-size: 0.8rem;
+  font-weight: 400;
+
+  span {
+    display: inline-block;
+    color: #8d99b2;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin: 0.2rem 0;
   }
 `
 
