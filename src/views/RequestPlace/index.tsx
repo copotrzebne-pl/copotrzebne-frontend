@@ -209,6 +209,18 @@ export default () => {
               onChange={e => setPlaceValue('phone', e.target.value)}
             />
           </FormGroup>
+          <FormGroup>
+            <Label>
+              <TranslatedText value="bankAccount" />
+            </Label>
+            <TextInput
+              id="bankAccount"
+              type="text"
+              placeholder="Bank Account"
+              value={place.bankAccount || ''}
+              onChange={e => setPlaceValue('bankAccount', e.target.value)}
+            />
+          </FormGroup>
           <Wrapper>
             {error && (
               <FormError>

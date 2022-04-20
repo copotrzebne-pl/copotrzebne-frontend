@@ -117,6 +117,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Longitude',
     nameUa: 'Довгота'
   },
+  bankAccount: {
+    namePl: 'Numer konta bankowego do wpłat darowizn',
+    nameEn: 'Bank account number for donations',
+    nameUa: 'Номер банківського рахунку для внесення пожертв'
+  },
   save: {
     namePl: 'Zapisz',
     nameEn: 'Save',

@@ -5,7 +5,7 @@ import {
   useCallback,
   ReactNode
 } from 'react'
-import { RequestPlaceContextValue, Place } from './types'
+import { RequestPlaceContextValue, Place, DraftPlaceDto } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
 
@@ -18,9 +18,7 @@ export const RequestPlaceContextProvider = ({
   children: ReactNode
 }) => {
   const [isPlaceCreated, setPlaceCreated] = useState<boolean>(false)
-  const [place, setPlace] = useState<
-    Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>
-  >({
+  const [place, setPlace] = useState<DraftPlaceDto>({
     name: '',
     city: '',
     street: '',
@@ -29,7 +27,8 @@ export const RequestPlaceContextProvider = ({
     comment: '',
     email: '',
     phone: '',
-    workingHours: ''
+    workingHours: '',
+    bankAccount: ''
   })
   const [userEmail, setUserEmail] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
@@ -55,14 +54,14 @@ export const RequestPlaceContextProvider = ({
         buildingNumber: place.buildingNumber,
         city: place.city,
 
-        lastUpdatedAt: new Date().toISOString(),
-
         userEmail: userEmail.trim(),
 
         apartment: place.apartment || undefined,
         comment: place.comment || undefined,
         email: place.email || undefined,
-        phone: place.phone || undefined
+        phone: place.phone || undefined,
+        bankAccount: place.bankAccount || undefined,
+        workingHours: place.workingHours || undefined
       }
 
       await client.post<null, Place>(

@@ -8,7 +8,7 @@ import {
   TextInput
 } from 'components/forms'
 import PageTitle from 'components/PageTitle'
-import { Place } from 'contexts/types'
+import { PlaceDto } from 'contexts/types'
 import { useUserContext } from 'contexts/userContext'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -20,7 +20,7 @@ export default () => {
   const { id } = useParams()
   const { savePlace } = useUserContext()
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
-  const [editedPlace, setEditedPlace] = useState<Omit<Place, 'lastUpdatedAt'>>({
+  const [editedPlace, setEditedPlace] = useState<PlaceDto>({
     id,
     name: '',
     city: '',
@@ -32,7 +32,8 @@ export default () => {
     phone: '',
     workingHours: '',
     latitude: null,
-    longitude: null
+    longitude: null,
+    bankAccount: ''
   })
 
   useEffect(() => {
