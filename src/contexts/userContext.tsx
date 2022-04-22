@@ -66,40 +66,46 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     setOwnedPlaces(response)
   }, [])
 
-  const savePlace = useCallback(async (place: PlaceDto) => {
-    const client = await getRestClient(process.env.API_URL)
+  const savePlace = useCallback(
+    async (place: PlaceDto, redirectPath: string) => {
+      const client = await getRestClient(process.env.API_URL)
 
-    try {
-      const placeFormatted = omit(
-        {
-          ...place,
-          latitude: place.latitude ? parseFloat(place.latitude) : null,
-          longitude: place.longitude ? parseFloat(place.longitude) : null
-        },
-        ['lastUpdatedAt', 'priority', 'nameSlug']
-      )
-      if (place.id !== 'new') {
-        await client.patch<null, Place>(
-          `${API.panel.savePlace}/${place.id}`,
-          placeFormatted
+      try {
+        const placeFormatted = omit(
+          {
+            ...place,
+            latitude: place.latitude ? parseFloat(place.latitude) : null,
+            longitude: place.longitude ? parseFloat(place.longitude) : null
+          },
+          ['lastUpdatedAt', 'priority', 'nameSlug']
         )
-      } else {
-        //remove empty values
-        for (const key in placeFormatted) {
-          if (placeFormatted[key as keyof typeof placeFormatted] === '') {
-            delete placeFormatted[key as keyof typeof placeFormatted]
+        if (place.id !== 'new') {
+          await client.patch<null, Place>(
+            `${API.panel.savePlace}/${place.id}`,
+            placeFormatted
+          )
+        } else {
+          //remove empty values
+          for (const key in placeFormatted) {
+            if (placeFormatted[key as keyof typeof placeFormatted] === '') {
+              delete placeFormatted[key as keyof typeof placeFormatted]
+            }
           }
+          delete placeFormatted.id
+          await client.post<null, Place>(
+            `${API.panel.savePlace}`,
+            placeFormatted
+          )
         }
-        delete placeFormatted.id
-        await client.post<null, Place>(`${API.panel.savePlace}`, placeFormatted)
+      } catch {
+        console.error('Error: place save error!')
+        return
       }
-    } catch {
-      console.error('Error: place save error!')
-      return
-    }
 
-    navigate(routes[Page.PANEL])
-  }, [])
+      navigate(redirectPath)
+    },
+    []
+  )
 
   const deletePlace = useCallback(async (placeId: string) => {
     const client = await getRestClient(process.env.API_URL)

@@ -120,8 +120,8 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                               placeId={ownedPlaces[0].id || ''}
                               supply={demand.supply}
                               priorities={priorities}
-                              saveDemand={(demandDto, demandData) =>
-                                saveDemand(demandDto, demandData).then(() =>
+                              saveDemand={demandDto =>
+                                saveDemand(demandDto).then(() =>
                                   setEditedDemandId('')
                                 )
                               }
@@ -149,12 +149,19 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
           </Demands>
         </>
       )}
+
       {ownedPlaces.length > 1 && (
         <PlacesWrapper>
+          <MultipPlaceTitle>
+            <TranslatedText value="managePlaces" />
+          </MultipPlaceTitle>
           {ownedPlaces.map((place, index) => (
             <StyledLink
               key={index}
-              to={`${routes[Page.DEMANDS].replace(':id', place?.id || '')}`}
+              to={`${routes[Page.MANAGE_PLACE].replace(
+                ':id',
+                place?.id || ''
+              )}`}
             >
               <PlaceBox place={place} />
             </StyledLink>
@@ -188,6 +195,16 @@ const PlaceTitle = styled.h3`
   font-size: 1.9rem;
   color: #f6ce01;
   margin: 0 0 1.2rem 0;
+  padding: 0 1.2rem;
+`
+
+const MultipPlaceTitle = styled.h3`
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #1f2635;
+  margin: 1rem 0 1.2rem 0;
   padding: 0 1.2rem;
 `
 

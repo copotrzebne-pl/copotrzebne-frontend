@@ -12,7 +12,7 @@ export type UserContextValue = {
   login: (login: string, password: string) => void
   fetchUser: () => void
   fetchOwnedPlaces: () => void
-  savePlace: (place: PlaceDto) => void
+  savePlace: (place: PlaceDto, redirectRoute: string) => void
   deletePlace: (placeId: string) => void
   authorized: boolean
   language: string

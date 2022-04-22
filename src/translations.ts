@@ -324,5 +324,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Usuń wszystkie',
     nameEn: 'Remove all',
     nameUa: 'Видалити всі'
+  },
+  managePlaces: {
+    namePl: 'Zarządzaj miejscami',
+    nameEn: 'Manage places',
+    nameUa: 'Керуйте місцями'
   }
 }
