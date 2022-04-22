@@ -15,10 +15,11 @@ import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { usePanelContext } from 'contexts/panelContext'
+import { Page, routes } from 'routes'
 
 export default () => {
   const { id } = useParams()
-  const { savePlace } = useUserContext()
+  const { savePlace, ownedPlaces, fetchOwnedPlaces } = useUserContext()
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
   const [editedPlace, setEditedPlace] = useState<PlaceDto>({
     id,
@@ -44,6 +45,10 @@ export default () => {
   }, [id])
 
   useEffect(() => {
+    fetchOwnedPlaces()
+  }, [])
+
+  useEffect(() => {
     selectedPlace && setEditedPlace(selectedPlace)
   }, [selectedPlace])
 
@@ -65,9 +70,14 @@ export default () => {
       ) {
         return
       }
-      savePlace(editedPlace)
+      const redirectRoute =
+        ownedPlaces.length < 2 || id === 'new'
+          ? routes[Page.PANEL]
+          : routes[Page.MANAGE_PLACE].replace(':id', id as string)
+
+      savePlace(editedPlace, redirectRoute)
     },
-    [selectedPlace, editedPlace]
+    [selectedPlace, editedPlace, id]
   )
 
   return (
