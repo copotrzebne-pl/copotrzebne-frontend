@@ -94,8 +94,8 @@ export default () => {
                           placeId={selectedPlace?.id || ''}
                           supply={demand.supply}
                           priorities={priorities}
-                          saveDemand={(demandDto, demandData) =>
-                            saveDemand(demandDto, demandData).then(() =>
+                          saveDemand={demandDto =>
+                            saveDemand(demandDto).then(() =>
                               setEditedDemandId('')
                             )
                           }
