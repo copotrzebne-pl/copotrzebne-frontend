@@ -54,6 +54,7 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
         <SearchRow>
           <TextInput
             id="search"
+            name="searchFilter"
             type="text"
             placeholder={getTranslation(
               language,
@@ -82,13 +83,16 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
               {Object.keys(selectedSupplies).map(supplyId => (
                 <Row>
                   <Checkbox
+                    id={`selected_supply_${supplyId}`}
                     value=""
                     checked={!!selectedSupplies[supplyId]}
                     onChange={_ =>
                       toggleSelectedSupply(selectedSupplies[supplyId])
                     }
                   />{' '}
-                  <TranslatedEntry entry={selectedSupplies[supplyId]} />
+                  <SupplyLabel htmlFor={`selected_supply_${supplyId}`}>
+                    <TranslatedEntry entry={selectedSupplies[supplyId]} />
+                  </SupplyLabel>
                 </Row>
               ))}
               <RemoveAll onClick={() => unselectAllSelectedSupplies()}>
@@ -113,11 +117,14 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
                   {groupedSupplies[priorityNumber].map(supply => (
                     <SupplyWrapper key={supply.id}>
                       <Checkbox
+                        id={`search_supply_${supply.id}`}
                         value=""
                         checked={!!selectedSupplies[supply.id]}
                         onChange={_ => toggleSelectedSupply(supply)}
                       />{' '}
-                      <TranslatedEntry entry={supply} />
+                      <SupplyLabel htmlFor={`search_supply_${supply.id}`}>
+                        <TranslatedEntry entry={supply} />
+                      </SupplyLabel>
                     </SupplyWrapper>
                   ))}
                 </div>
@@ -131,7 +138,11 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
 }
 
 export default styled(SupplySearchComponent)`
-  margin-top: 2.2rem;
+  margin: 0;
+  padding: 1rem 1.5em 0 1.5em;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `
 
 const Label = styled.label`
@@ -145,8 +156,10 @@ const Label = styled.label`
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 8% 0;
   position: relative;
+  padding-top: 1rem;
+  width: calc(100% - 2.4rem);
+  max-width: 500px;
 `
 
 const TextInput = styled.input`
@@ -183,7 +196,8 @@ const CategoryHeader = styled.span`
   font-weight: bold;
   display: flex;
   width: 100%;
-  font-size: 1.45rem;
+  font-size: 1.05rem;
+  padding-top: 0.7rem;
   padding-bottom: 0.7rem;
   color: #333333;
   border-radius: 12px;
@@ -210,7 +224,7 @@ const SelectedSuppliesIcon = styled.div<{ active: boolean }>`
   justify-content: center;
   height: 46px;
   width: 46px;
-  border-radius: 50%;
+  border-radius: 30%;
   background-color: ${({ theme }) => theme.colors.blue};
   cursor: pointer;
   position: relative;
@@ -299,4 +313,8 @@ const CloseIcon = styled.button`
   &:focus {
     color: rgba(0, 0, 0, 0.4);
   }
+`
+
+const SupplyLabel = styled.label`
+  cursor: pointer;
 `

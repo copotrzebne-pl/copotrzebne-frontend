@@ -69,9 +69,11 @@ export default () => {
             </StyledFacebookButton>
           </IntroductionWrapper>
           {mobileViewport.matches && (
-            <ShowMapButton onClick={() => setMobileMapOpened(true)}>
-              <TranslatedText value="showOnMap" />
-            </ShowMapButton>
+            <MapButtonWrapper>
+              <ShowMapButton onClick={() => setMobileMapOpened(true)}>
+                <TranslatedText value="showOnMap" />
+              </ShowMapButton>
+            </MapButtonWrapper>
           )}
           <SupplySearch />
           <PlacesList>
@@ -197,4 +199,10 @@ const ShowMapButton = styled.button`
 
 const PlacesList = styled.div`
   padding: 1em 1em 2.1em 1em;
+`
+
+const MapButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 0 1.5em 0 1.5em;
 `
