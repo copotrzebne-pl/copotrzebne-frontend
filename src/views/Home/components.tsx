@@ -9,15 +9,9 @@ import TranslatedText from 'components/TranslatedText'
 
 const StyledLink = styled(Link)`
   width: 100%;
+  height: 100%;
   ${breakpoint.sm`
-    max-width: 220px;
     margin-right: 0.8rem;
-  `}
-`
-
-export const PlaceBoxDetailedStyled = styled(PlaceDetailedBox)`
-  ${breakpoint.sm`
-    min-height: 160px;
   `}
 `
 
@@ -60,7 +54,7 @@ export const WrappedPlacesComponent = ({
               to={`${routes[Page.PLACE]}/${place.nameSlug}`}
               key={place.id}
             >
-              <PlaceBoxDetailedStyled place={place} />
+              <PlaceDetailedBox place={place} />
             </StyledLink>
           ))}
       </div>
@@ -80,16 +74,31 @@ export const WrappedPlacesComponent = ({
 }
 
 export const WrappedPlaces = styled(WrappedPlacesComponent)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
   padding: 0 1rem;
   padding-bottom: 2.2rem;
+  display: grid;
+  grid-auto-rows: max-content;
+  grid-column-gap: 1rem;
+  grid-row-gap: 1.6rem;
+  grid-template-columns: 1fr;
+
+  ${breakpoint.xs`
+    grid-template-columns: 1fr 1fr;
+  `}
+
+  ${breakpoint.s`
+    grid-template-columns: 1fr 1fr 1fr;
+  `}
+  
   ${breakpoint.sm`
-    flex-direction: row;
-    flex-wrap: wrap;
-    padding-bottom: 1.2rem;
+    grid-template-columns: 1fr;
+  `}
+  
+  ${breakpoint.xm`
+    grid-template-columns: 1fr 1fr;
+  `}
+  
+  ${breakpoint.l`
+    grid-template-columns: 1fr 1fr 1fr;
   `}
 `
