@@ -21,32 +21,34 @@ const PlaceBoxComponent = ({
 
   return (
     <div className={className}>
-      <PlaceName place={place}>{place.name || ''}</PlaceName>
-      {authorized && user?.role === 'admin' && (
-        <TrashIcon
-          src={trashIconUrl}
-          alt="remove"
-          onClick={() =>
-            window.confirm('Czy na pewno usunąć organizację?')
-              ? deletePlace(place.id || '')
-              : place.id
-          }
-        />
+      <PlaceNameAndAddress>
+        <PlaceName place={place}>{place.name || ''}</PlaceName>
+        {authorized && user?.role === 'admin' && (
+          <TrashIcon
+            src={trashIconUrl}
+            alt="remove"
+            onClick={() =>
+              window.confirm('Czy na pewno usunąć organizację?')
+                ? deletePlace(place.id || '')
+                : place.id
+            }
+          />
+        )}
+        <PlaceDetails>
+          {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
+          {place.apartment ? `/${place.apartment}` : ''}
+        </PlaceDetails>
+        <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
+      </PlaceNameAndAddress>
+      {!place.lastUpdatedAt && (
+        <LastUpdate>
+          <TranslatedText value="noOngoingCollections" />
+        </LastUpdate>
       )}
-      <PlaceDetails>
-        {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
-        {place.apartment ? `/${place.apartment}` : ''}
-      </PlaceDetails>
-      <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
       {place.lastUpdatedAt && (
         <LastUpdate>
           <TranslatedText value="placeLastUpdate" />{' '}
           {`${place.lastUpdatedAt && formatDateWithTime(place.lastUpdatedAt)}`}
-        </LastUpdate>
-      )}
-      {!place.lastUpdatedAt && (
-        <LastUpdate>
-          <TranslatedText value="noOngoingCollections" />
         </LastUpdate>
       )}
     </div>
@@ -54,9 +56,15 @@ const PlaceBoxComponent = ({
 }
 
 export const PlaceBox = styled(PlaceBoxComponent)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   padding: 1rem 1.2rem;
   background-color: white;
   width: 100%;
+  height: 100%;
+
   border-radius: 15px;
   box-shadow: ${({ theme }) => theme.boxShadows.medium};
   margin-bottom: 1rem;
@@ -102,3 +110,5 @@ const TrashIcon = styled.img`
   width: auto;
   cursor: pointer;
 `
+
+const PlaceNameAndAddress = styled.div``

@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import { PlaceBoxDetailedStyled } from './components'
 import { Link } from 'react-router-dom'
 import { Page, routes } from 'routes'
+import { PlaceBox } from '../../components/PlaceBox'
 
 export const OrganizationsMap = ({ places }: { places: Place[] }) => {
   const [mapHeight, setMapHeight] = useState<number>(600)
@@ -59,7 +60,7 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
           <InfoBox>
             <CloseIcon onClick={() => setSelectedPlace(null)} />
             <Link to={`${routes[Page.PLACE]}/${selectedPlace.nameSlug}`}>
-              <PlaceBoxDetailedStyled place={selectedPlace} />
+              <PlaceBox place={selectedPlace} />
             </Link>
           </InfoBox>
         </Overlay>
