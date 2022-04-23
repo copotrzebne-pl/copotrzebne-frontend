@@ -63,6 +63,8 @@ export default () => {
         <TextInput
           id="search"
           type="text"
+          name="searchFilter"
+          autoComplete="false"
           placeholder="Szukaj"
           value={searchText}
           onChange={e => setSearchText(e.target.value)}

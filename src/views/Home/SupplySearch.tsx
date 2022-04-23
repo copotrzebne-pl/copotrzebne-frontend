@@ -54,6 +54,7 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
         <SearchRow>
           <TextInput
             id="search"
+            name="searchFilter"
             type="text"
             placeholder={getTranslation(
               language,
@@ -82,13 +83,16 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
               {Object.keys(selectedSupplies).map(supplyId => (
                 <Row>
                   <Checkbox
+                    id={`selected_supply_${supplyId}`}
                     value=""
                     checked={!!selectedSupplies[supplyId]}
                     onChange={_ =>
                       toggleSelectedSupply(selectedSupplies[supplyId])
                     }
                   />{' '}
-                  <TranslatedEntry entry={selectedSupplies[supplyId]} />
+                  <SupplyLabel htmlFor={`selected_supply_${supplyId}`}>
+                    <TranslatedEntry entry={selectedSupplies[supplyId]} />
+                  </SupplyLabel>
                 </Row>
               ))}
               <RemoveAll onClick={() => unselectAllSelectedSupplies()}>
@@ -113,11 +117,14 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
                   {groupedSupplies[priorityNumber].map(supply => (
                     <SupplyWrapper key={supply.id}>
                       <Checkbox
+                        id={`search_supply_${supply.id}`}
                         value=""
                         checked={!!selectedSupplies[supply.id]}
                         onChange={_ => toggleSelectedSupply(supply)}
                       />{' '}
-                      <TranslatedEntry entry={supply} />
+                      <SupplyLabel htmlFor={`search_supply_${supply.id}`}>
+                        <TranslatedEntry entry={supply} />
+                      </SupplyLabel>
                     </SupplyWrapper>
                   ))}
                 </div>
@@ -300,3 +307,7 @@ const CloseIcon = styled.button`
     color: rgba(0, 0, 0, 0.4);
   }
 `
+
+const SupplyLabel = styled.label`
+  cursor: pointer;
+`;

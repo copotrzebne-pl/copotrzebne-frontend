@@ -12,6 +12,7 @@ export type CheckboxProps = {
 export default forwardRef(
   (
     {
+      id,
       value,
       label,
       onChange,
@@ -22,6 +23,7 @@ export default forwardRef(
   ) => (
     <Label role="checkbox" aria-checked={checked}>
       <Input
+        id={id}
         type="checkbox"
         name={name}
         value={value}
