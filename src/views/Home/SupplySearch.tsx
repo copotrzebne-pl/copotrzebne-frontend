@@ -310,4 +310,4 @@ const CloseIcon = styled.button`
 
 const SupplyLabel = styled.label`
   cursor: pointer;
-`;
+`
