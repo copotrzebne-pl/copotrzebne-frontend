@@ -20,6 +20,7 @@ import Demands from 'views/Demands'
 import ManageAddress from 'views/ManageAddress'
 import ManageDemands from 'views/ManageDemands'
 import RequestPlace from 'views/RequestPlace'
+import CreateUser from 'views/CreateUser'
 
 export default () => (
   <HelmetProvider>
@@ -46,6 +47,10 @@ export default () => (
                       element={<ManageDemands />}
                     />
                     <Route />
+                    <Route
+                      path={routes[Page.CREATE_USER]}
+                      element={<CreateUser />}
+                    />
                   </Route>
                 </Route>
                 <Route path={routes[Page.HOME]} element={<Layout />}>

@@ -12,7 +12,8 @@ export enum Page { //eslint-disable-line no-shadow
   MANAGE_ADDRESS,
   DEMANDS,
   MANAGE_DEMANDS,
-  REQUEST_NEW_PLACE
+  REQUEST_NEW_PLACE,
+  CREATE_USER
 }
 
 export const routes: { [key in Page]: string } = {
@@ -26,6 +27,7 @@ export const routes: { [key in Page]: string } = {
   [Page.MANAGE_ADDRESS]: '/panel/manage-address/:id',
   [Page.DEMANDS]: '/panel/demands/:id',
   [Page.MANAGE_DEMANDS]: '/panel/manage_demands/:id',
+  [Page.CREATE_USER]: '/panel/users/create',
   [Page.NOTFOUND]: '*'
 }
 

@@ -329,5 +329,20 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Zarządzaj miejscami',
     nameEn: 'Manage places',
     nameUa: 'Керуйте місцями'
+  },
+  placeId: {
+    namePl: 'ID miejsca',
+    nameEn: 'Place ID',
+    nameUa: 'Place ID'
+  },
+  createUser: {
+    namePl: 'Dodaj użytkownika',
+    nameEn: 'Create user',
+    nameUa: 'Create user'
+  },
+  login: {
+    namePl: 'Login',
+    nameEn: 'Login',
+    nameUa: 'Login'
   }
 }
