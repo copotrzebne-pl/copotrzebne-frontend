@@ -47,6 +47,10 @@ export default () => (
                       element={<ManageDemands />}
                     />
                     <Route />
+                    <Route
+                      path={routes[Page.CREATE_USER]}
+                      element={<CreateUser />}
+                    />
                   </Route>
                 </Route>
                 <Route path={routes[Page.HOME]} element={<Layout />}>
@@ -60,10 +64,6 @@ export default () => (
                   <Route
                     path={routes[Page.REQUEST_NEW_PLACE]}
                     element={<RequestPlace />}
-                  />
-                  <Route
-                    path={routes[Page.CREATE_USER]}
-                    element={<CreateUser />}
                   />
 
                   <Route path={routes[Page.NOTFOUND]} element={<NotFound />} />
