@@ -1,31 +1,32 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { useCallback, useEffect, useRef, useState } from 'react'
-import styled, { css } from 'styled-components'
+import { useCallback, useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { useGroupSupplies } from 'hooks/useGroupSupplies'
 import { usePanelContext } from 'contexts/panelContext'
 import TranslatedEntry from 'components/TranslatedEntry'
 import Checkbox from 'components/Checkbox'
 import omit from 'lodash.omit'
-import { useClickOutside } from 'hooks/useClickOutside'
 import { Supply } from 'contexts/types'
-import { ReactComponent as FilterIcon } from 'assets/filter-icon.svg'
 import TranslatedText from 'components/TranslatedText'
 import { getTranslation } from 'utils/translation'
 import { translations } from 'translations'
 import { useUserContext } from 'contexts/userContext'
+import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
+import mapPlaceholderUrl from 'assets/map-background.svg'
 
-const SupplySearchComponent = ({ className }: { className?: string }) => {
-  const [inputFocused, setInputFocused] = useState<boolean>(false)
+const SupplySearchComponent = ({
+  className,
+  placesNumber
+}: {
+  className?: string
+  placesNumber: number
+}) => {
   const [contextMenuOpened, setContextMenuOpened] = useState<boolean>(false)
   const { supplies, selectedSupplies, setSelectedSupplies, fetchSupplies } =
     usePanelContext()
   const { language } = useUserContext()
   const { groupedSupplies, suppliesKeys, searchText, setSearchText } =
     useGroupSupplies(supplies)
-  const searchRef = useRef(null)
-  const contextMenuRef = useRef(null)
-  useClickOutside(searchRef, () => setInputFocused(false))
-  useClickOutside(contextMenuRef, () => setContextMenuOpened(false))
 
   useEffect(() => {
     fetchSupplies()
@@ -41,13 +42,13 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
     [selectedSupplies]
   )
 
-  const unselectAllSelectedSupplies = useCallback(() => {
-    setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
-  }, [selectedSupplies])
+  // const unselectAllSelectedSupplies = useCallback(() => {
+  //   setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
+  // }, [selectedSupplies])
 
   return (
     <div className={className}>
-      <FormGroup ref={searchRef}>
+      <FormGroup>
         <Label>
           <TranslatedText value="searchPlaceByName" />
         </Label>
@@ -58,99 +59,96 @@ const SupplySearchComponent = ({ className }: { className?: string }) => {
             type="text"
             placeholder={getTranslation(
               language,
-              translations['inputProductName']
+              translations['searchPlacePlaceholder']
             )}
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
             onFocus={() => {
               setContextMenuOpened(false)
-              setInputFocused(true)
             }}
           />
           <SelectedSuppliesIcon
-            active={Object.keys(selectedSupplies).length > 0}
             onClick={() => {
               setContextMenuOpened(!contextMenuOpened)
-              setInputFocused(false)
             }}
           >
-            <FilterIcon />
-            <span>{Object.keys(selectedSupplies).length}</span>
+            <SearchIcon height="20px" color="white" />
           </SelectedSuppliesIcon>
-          {contextMenuOpened && Object.keys(selectedSupplies).length > 0 && (
-            <SuppliesContextList ref={contextMenuRef}>
-              <CloseIcon onClick={() => setContextMenuOpened(false)} />
-              {Object.keys(selectedSupplies).map(supplyId => (
-                <Row>
-                  <Checkbox
-                    id={`selected_supply_${supplyId}`}
-                    value=""
-                    checked={!!selectedSupplies[supplyId]}
-                    onChange={_ =>
+        </SearchRow>
+        {Object.keys(selectedSupplies).length > 0 && (
+          <SelectedTags>
+            {Object.keys(selectedSupplies).map(supplyId => (
+              <Row>
+                <SelectedItem>
+                  <TranslatedEntry entry={selectedSupplies[supplyId]} />
+                  <CloseIcon
+                    onClick={() =>
                       toggleSelectedSupply(selectedSupplies[supplyId])
                     }
-                  />{' '}
-                  <SupplyLabel htmlFor={`selected_supply_${supplyId}`}>
-                    <TranslatedEntry entry={selectedSupplies[supplyId]} />
-                  </SupplyLabel>
-                </Row>
-              ))}
-              <RemoveAll onClick={() => unselectAllSelectedSupplies()}>
-                x <TranslatedText value="removeAll" />
-              </RemoveAll>
-            </SuppliesContextList>
-          )}
-        </SearchRow>
-
-        {inputFocused && (
-          <SuppliesList>
-            <CloseIcon onClick={() => setInputFocused(false)} />
-            {suppliesKeys.map((priorityNumber, key) => {
-              if (!groupedSupplies[priorityNumber]) return null
-              return (
-                <div key={`supply-${priorityNumber}`}>
-                  <CategoryHeader>
-                    <TranslatedEntry
-                      entry={groupedSupplies[priorityNumber][0].category}
-                    />
-                  </CategoryHeader>
-                  {groupedSupplies[priorityNumber].map(supply => (
-                    <SupplyWrapper key={supply.id}>
-                      <Checkbox
-                        id={`search_supply_${supply.id}`}
-                        value=""
-                        checked={!!selectedSupplies[supply.id]}
-                        onChange={_ => toggleSelectedSupply(supply)}
-                      />{' '}
-                      <SupplyLabel htmlFor={`search_supply_${supply.id}`}>
-                        <TranslatedEntry entry={supply} />
-                      </SupplyLabel>
-                    </SupplyWrapper>
-                  ))}
-                </div>
-              )
-            })}
-          </SuppliesList>
+                  />
+                </SelectedItem>
+              </Row>
+            ))}
+          </SelectedTags>
         )}
       </FormGroup>
+      <SuppliesList>
+        {suppliesKeys.map((priorityNumber, key) => {
+          if (!groupedSupplies[priorityNumber]) return null
+          return (
+            <div key={`supply-${priorityNumber}`}>
+              <CategoryHeader>
+                <TranslatedEntry
+                  entry={groupedSupplies[priorityNumber][0].category}
+                />
+              </CategoryHeader>
+              {groupedSupplies[priorityNumber].map(supply => (
+                <SupplyWrapper key={supply.id}>
+                  <Checkbox
+                    id={`search_supply_${supply.id}`}
+                    value=""
+                    checked={!!selectedSupplies[supply.id]}
+                    onChange={_ => toggleSelectedSupply(supply)}
+                  />{' '}
+                  <SupplyLabel htmlFor={`search_supply_${supply.id}`}>
+                    <TranslatedEntry entry={supply} />
+                  </SupplyLabel>
+                </SupplyWrapper>
+              ))}
+            </div>
+          )
+        })}
+      </SuppliesList>
+      <ButtonWrapper>
+        <ShowOnMapButton>
+          {placesNumber > 0
+            ? `Zobacz na mapie (${placesNumber})`
+            : `Nie znaleziono`}
+        </ShowOnMapButton>
+      </ButtonWrapper>
     </div>
   )
 }
 
 export default styled(SupplySearchComponent)`
   margin: 0;
-  padding: 1rem 1.5em 0 1.5em;
+  padding: 1rem 0.4rem;
+  margin-top: 2rem;
   width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
 `
 
 const Label = styled.label`
   display: inline-block;
-  margin-bottom: 0.6rem;
-  color: ${({ theme }) => theme.colors.grey900};
-  font-size: 0.9rem;
-  font-weight: 400;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.grey600};
+  margin-bottom: 0.4rem;
 `
 
 const FormGroup = styled.div`
@@ -168,28 +166,26 @@ const TextInput = styled.input`
   border: 1px solid rgba(150, 147, 147, 0.8);
   border-radius: 10px;
   color: ${({ theme }) => theme.colors.grey900};
-  height: 45px;
+  height: 42px;
   padding: 0 1rem;
   ::placeholder {
     color: ${({ theme }) => theme.colors.grey};
     opacity: 0.7;
   }
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.grey600};
+  margin-bottom: 0.4rem;
 `
 
 const SuppliesList = styled.div`
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 80px;
-  width: 84%;
-  min-height: 120px;
-  max-height: 320px;
-  overflow-y: auto;
+  width: 100%;
   background-color: white;
-  border-radius: 12px;
-  box-shadow: ${({ theme }) => theme.boxShadows.small};
-  border-top: 1px solid ${({ theme }) => theme.colors.grey400};
-  padding: 1.2rem;
+  max-height: calc(100% - 80px);
+  overflow-y: auto;
+  padding: 0 1.2rem 8rem 1.2rem;
 `
 
 const CategoryHeader = styled.span`
@@ -218,93 +214,52 @@ const SearchRow = styled.div`
   position: relative;
 `
 
-const SelectedSuppliesIcon = styled.div<{ active: boolean }>`
+const SelectedSuppliesIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 46px;
-  width: 46px;
-  border-radius: 30%;
-  background-color: ${({ theme }) => theme.colors.blue};
-  cursor: pointer;
-  position: relative;
-  ${({ active }) =>
-    !active &&
-    css`
-      pointer-events: none;
-    `}
-  svg {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    fill: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-60%, -60%);
-  }
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: ${({ theme }) => theme.colors.blue};
-    background-color: white;
-    font-weight: 600;
-    font-size: 12px;
-    padding: 2px;
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 24px;
-    left: 24px;
-  }
-`
-const SuppliesContextList = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 50px;
-  right: 0;
-  min-width: 140px;
-  min-height: 120px;
-  max-height: 320px;
-  overflow-y: auto;
-  background-color: white;
+  height: 42px;
+  width: 42px;
   border-radius: 12px;
-  box-shadow: ${({ theme }) => theme.boxShadows.small};
-  border-top: 1px solid ${({ theme }) => theme.colors.grey400};
-  padding: 1.2rem;
-  padding-top: 2rem;
+  background-color: ${({ theme }) => theme.colors.blue};
+  svg {
+    fill: white;
+  }
 `
 
 const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 0.6rem;
 `
 
-const RemoveAll = styled(Row)`
-  margin-top: 0.4rem;
+const SupplyLabel = styled.label`
   cursor: pointer;
-  font-size: 0.85rem;
-  margin-bottom: 0;
+`
+
+const SelectedItem = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: #0076ff87;
+  border-radius: 16px;
+  padding: 0.4rem;
+  padding-left: 0.8rem;
+  margin-right: 1rem;
+  white-space: nowrap;
 `
 
 const CloseIcon = styled.button`
   display: inline-block;
-  position: absolute;
-  right: 8px;
-  top: 8px;
   width: 24px;
   height: 24px;
+  border-radius: 50%;
   cursor: pointer;
   z-index: 100;
   border: none;
-  background-color: transparent;
+  background: white;
   color: black;
   transition: color 0.6s;
+  margin-left: 0.4rem;
   &:after {
     content: '✕';
     font-size: 16px;
@@ -315,6 +270,42 @@ const CloseIcon = styled.button`
   }
 `
 
-const SupplyLabel = styled.label`
-  cursor: pointer;
+const SelectedTags = styled.div`
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  flex-direction: row;
+  margin-top: 0.8rem;
+  min-height: 50px;
+  align-items: center;
+`
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 0 1.2rem 3.4rem;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+`
+
+const ShowOnMapButton = styled.button`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 48px;
+  padding: 0.8rem 1.8rem;
+  outline: none;
+  background-color: transparent;
+  background-image: url(${mapPlaceholderUrl});
+  background-position: center center;
+  background-size: cover;
+  color: black;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 12px;
 `

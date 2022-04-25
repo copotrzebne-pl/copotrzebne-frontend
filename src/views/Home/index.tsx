@@ -2,15 +2,17 @@ import styled from 'styled-components'
 import { useEffect, useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { usePanelContext } from 'contexts/panelContext'
+import mapPlaceholderUrl from 'assets/map-background.svg'
 import marker from 'assets/marker.svg'
+import { ReactComponent as MapIcon } from 'assets/map-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
 import { Place } from 'contexts/types'
-import FacebookShareButton from 'components/FacebookShareButton'
 import TranslatedText from 'components/TranslatedText'
 import { OrganizationsMap } from './Map'
-import { WrappedPlaces } from './components'
+import { TextInputPlaceholder, WrappedPlaces } from './components'
 import Dialog from 'components/Dialog'
-import SupplySearch from 'views/Home/SupplySearch'
+import SupplySearch from './SupplySearch'
+//import FacebookShareButton from 'components/FacebookShareButton'
 
 export default () => {
   const { fetchPlaces, places, selectedSupplies } = usePanelContext()
@@ -19,6 +21,8 @@ export default () => {
   )
   const [openMobileMap, setMobileMapOpened] = useState<boolean>(false)
   const mobileViewport = window.matchMedia('screen and (max-width: 992px)')
+  const [openOrganisationSearch, setOpenOrganisationSearch] =
+    useState<boolean>(false)
   useEffect(() => {
     fetchPlaces()
   }, [selectedSupplies])
@@ -64,18 +68,24 @@ export default () => {
             <PageDesciption>
               <TranslatedText value="pageDescription" />
             </PageDesciption>
-            <StyledFacebookButton>
+            {/* <StyledFacebookButton>
               <TranslatedText value="shareActiveCollections" />
-            </StyledFacebookButton>
+            </StyledFacebookButton> */}
+            <TextInputPlaceholder
+              onClick={() => setOpenOrganisationSearch(true)}
+            />
+            {openOrganisationSearch && (
+              <Dialog onClose={() => setOpenOrganisationSearch(false)}>
+                <SupplySearch placesNumber={places.length} />
+              </Dialog>
+            )}
           </IntroductionWrapper>
           {mobileViewport.matches && (
-            <MapButtonWrapper>
-              <ShowMapButton onClick={() => setMobileMapOpened(true)}>
-                <TranslatedText value="showOnMap" />
-              </ShowMapButton>
-            </MapButtonWrapper>
+            <ShowMapButton onClick={() => setMobileMapOpened(true)}>
+              <TranslatedText value="showOnMap" />{' '}
+              <MapIcon height="22px" style={{ marginLeft: '8px' }} />
+            </ShowMapButton>
           )}
-          <SupplySearch />
           <PlacesList>
             {Object.keys(groupedPlaces).map((cityName, key) => (
               <div key={key}>
@@ -134,10 +144,8 @@ const IntroductionWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 3em 1.5em 2.1em 1.5em;
-  background-color: rgba(199, 199, 199, 0.1);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  padding: 3rem 2.6rem 1rem;
+  background-color: ${({ theme }) => theme.colors.grey200};
   ${breakpoint.sm`
     width: 100%;
   `}
@@ -170,39 +178,26 @@ const PageDesciption = styled.div`
   line-height: 1.5;
 `
 
-const StyledFacebookButton = styled(FacebookShareButton)`
-  width: calc(100% - 2.4rem);
-  max-width: 500px;
-  margin-top: 1.2em;
-  cursor: pointer;
-`
-
 const ShowMapButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
-  max-width: 500px;
-  width: calc(100% - 2.4rem);
+  width: 100%;
   height: 48px;
-  margin: 1.5em auto 0 auto;
   padding: 0.8rem 1.8rem;
   outline: none;
   background-color: transparent;
-  border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.colors.blue};
+  background-image: url(${mapPlaceholderUrl});
+  background-position: center center;
+  background-size: cover;
+  border-top: 2px solid white;
   color: black;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
 `
 
 const PlacesList = styled.div`
   padding: 1em 1em 2.1em 1em;
-`
-
-const MapButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 0 1.5em 0 1.5em;
 `

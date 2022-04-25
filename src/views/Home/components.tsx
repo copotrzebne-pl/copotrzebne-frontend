@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import { PlaceBox as PlaceDetailedBox } from 'components/PlaceBox'
 import TranslatedText from 'components/TranslatedText'
+import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
 
 const StyledLink = styled(Link)`
   width: 100%;
@@ -101,4 +102,74 @@ export const WrappedPlaces = styled(WrappedPlacesComponent)`
   ${breakpoint.l`
     grid-template-columns: 1fr 1fr 1fr;
   `}
+`
+
+const TextInputPlaceholderComponent = ({
+  className,
+  onClick
+}: {
+  className?: string
+  onClick: () => void
+}) => (
+  <div className={className} onClick={onClick}>
+    <PlaceholderTitle>
+      <TranslatedText value="searchPlaceByName" />
+    </PlaceholderTitle>
+    <Row>
+      <InputPlaceholder>
+        <TranslatedText value="searchPlacePlaceholder" />
+      </InputPlaceholder>
+      <ButtonPlaceholder>
+        <SearchIcon height="20px" color="white" />
+      </ButtonPlaceholder>
+    </Row>
+  </div>
+)
+
+export const TextInputPlaceholder = styled(TextInputPlaceholderComponent)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 2rem 0 1.2rem 0;
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const PlaceholderTitle = styled.span`
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.grey600};
+  margin-bottom: 0.4rem;
+`
+
+const InputPlaceholder = styled.div`
+  display: flex;
+  align-items: center;
+  width: calc(100% - 52px);
+  height: 42px;
+  background-color: white;
+  border-radius: 8px;
+  color: ${({ theme }) => theme.colors.grey400};
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding-left: 1rem;
+`
+
+const ButtonPlaceholder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  width: 42px;
+  border-radius: 12px;
+  background-color: ${({ theme }) => theme.colors.blue};
+  svg {
+    fill: white;
+  }
 `

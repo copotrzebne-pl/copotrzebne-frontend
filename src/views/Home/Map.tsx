@@ -4,7 +4,6 @@ import { Map, Marker, Overlay } from 'pigeon-maps'
 import { stamenToner } from 'pigeon-maps/providers'
 import { Place } from 'contexts/types'
 import styled from 'styled-components'
-import { PlaceBoxDetailedStyled } from './components'
 import { Link } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import { PlaceBox } from '../../components/PlaceBox'
@@ -18,7 +17,7 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
   const [mapZoom, setMapZoom] = useState<number>(12)
 
   useEffect(() => {
-    setMapHeight(document.body.clientHeight - 84)
+    setMapHeight(document.body.clientHeight)
   }, [])
   return (
     <Map
@@ -86,7 +85,7 @@ const CloseIcon = styled.button`
   cursor: pointer;
   z-index: 100;
   border: none;
-  background-color: transparent;
+  background: transparent;
   color: black;
   transition: color 0.6s;
   &:after {
