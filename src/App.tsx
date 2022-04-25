@@ -20,6 +20,7 @@ import Demands from 'views/Demands'
 import ManageAddress from 'views/ManageAddress'
 import ManageDemands from 'views/ManageDemands'
 import RequestPlace from 'views/RequestPlace'
+import CreateUser from 'views/CreateUser'
 
 export default () => (
   <HelmetProvider>
@@ -59,6 +60,10 @@ export default () => (
                   <Route
                     path={routes[Page.REQUEST_NEW_PLACE]}
                     element={<RequestPlace />}
+                  />
+                  <Route
+                    path={routes[Page.CREATE_USER]}
+                    element={<CreateUser />}
                   />
 
                   <Route path={routes[Page.NOTFOUND]} element={<NotFound />} />

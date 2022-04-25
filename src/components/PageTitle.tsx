@@ -5,16 +5,18 @@ import { useNavigate } from 'react-router-dom'
 
 const PageTitle = ({
   className,
-  children
+  children,
+  hasBackIcon = true
 }: {
   className?: string
   children: ReactNode
+  hasBackIcon?: boolean
 }) => {
   const navigate = useNavigate()
   return (
     <div className={className}>
       <GoBack onClick={() => navigate(-1)}>
-        <BackIcon src={backArrow} alt="go back" />
+        {hasBackIcon && <BackIcon src={backArrow} alt="go back" />}
       </GoBack>
       {children}
     </div>

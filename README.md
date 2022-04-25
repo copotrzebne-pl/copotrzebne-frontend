@@ -21,6 +21,6 @@ After successful upload cache in Cloud Front Distribution is invalidated.
 
 Workflows
 
-* `deploy` - Deployment from branch `main` to production (old AWS Account)
-* `deploy-dev` - Deployment from branch `develop` to new Dev AWS Account
-* `deploy-pro` - Deployment from branch `main` to new Pro AWS Account
+- `deploy` - Deployment from branch `main` to production (old AWS Account)
+- `deploy-dev` - Deployment from branch `develop` to new Dev AWS Account
+- `deploy-pro` - Deployment from branch `main` to new Pro AWS Account

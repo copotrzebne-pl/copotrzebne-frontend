@@ -8,6 +8,7 @@ const panel = {
   getPlace: '/places/:id',
   getPlaceDemands: '/places/:id/demands',
   getUser: '/users/whoami',
+  users: '/users',
   getOwnedPlaces: '/users-places/owned',
   savePlace: '/places',
   saveDraftPlace: '/places/draft',
