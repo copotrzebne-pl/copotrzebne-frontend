@@ -131,6 +131,7 @@ export const TextInputPlaceholder = styled(TextInputPlaceholderComponent)`
   flex-direction: column;
   width: 100%;
   margin: 2rem 0 1.2rem 0;
+  cursor: pointer;
 `
 
 const Row = styled.div`
@@ -159,6 +160,7 @@ const InputPlaceholder = styled.div`
   font-size: 0.85rem;
   font-weight: 500;
   padding-left: 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.grey300};
 `
 
 const ButtonPlaceholder = styled.div`

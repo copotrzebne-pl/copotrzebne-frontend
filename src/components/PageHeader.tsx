@@ -146,7 +146,7 @@ const Dropdown = styled.div<{ opened: boolean }>`
   box-shadow: ${({ theme }) => theme.boxShadows.small};
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  z-index: 10;
+  z-index: 120;
 `
 
 const MenuItem = styled(Link)`

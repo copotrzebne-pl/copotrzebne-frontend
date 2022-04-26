@@ -13,13 +13,16 @@ import { translations } from 'translations'
 import { useUserContext } from 'contexts/userContext'
 import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
 import mapPlaceholderUrl from 'assets/map-background.svg'
+import { breakpoint } from 'themes/breakpoints'
 
 const SupplySearchComponent = ({
   className,
-  placesNumber
+  placesNumber,
+  handleSeeOnMap
 }: {
   className?: string
   placesNumber: number
+  handleSeeOnMap: () => void
 }) => {
   const [contextMenuOpened, setContextMenuOpened] = useState<boolean>(false)
   const { supplies, selectedSupplies, setSelectedSupplies, fetchSupplies } =
@@ -42,9 +45,9 @@ const SupplySearchComponent = ({
     [selectedSupplies]
   )
 
-  // const unselectAllSelectedSupplies = useCallback(() => {
-  //   setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
-  // }, [selectedSupplies])
+  const unselectAllSelectedSupplies = useCallback(() => {
+    setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
+  }, [selectedSupplies])
 
   return (
     <div className={className}>
@@ -76,20 +79,11 @@ const SupplySearchComponent = ({
           </SelectedSuppliesIcon>
         </SearchRow>
         {Object.keys(selectedSupplies).length > 0 && (
-          <SelectedTags>
-            {Object.keys(selectedSupplies).map(supplyId => (
-              <Row>
-                <SelectedItem>
-                  <TranslatedEntry entry={selectedSupplies[supplyId]} />
-                  <CloseIcon
-                    onClick={() =>
-                      toggleSelectedSupply(selectedSupplies[supplyId])
-                    }
-                  />
-                </SelectedItem>
-              </Row>
-            ))}
-          </SelectedTags>
+          <SelectedSupplies
+            selectedSupplies={selectedSupplies}
+            unselectAll={unselectAllSelectedSupplies}
+            toggleSelectedSupply={toggleSelectedSupply}
+          />
         )}
       </FormGroup>
       <SuppliesList>
@@ -120,7 +114,7 @@ const SupplySearchComponent = ({
         })}
       </SuppliesList>
       <ButtonWrapper>
-        <ShowOnMapButton>
+        <ShowOnMapButton onClick={handleSeeOnMap}>
           {placesNumber > 0
             ? `Zobacz na mapie (${placesNumber})`
             : `Nie znaleziono`}
@@ -133,7 +127,6 @@ const SupplySearchComponent = ({
 export default styled(SupplySearchComponent)`
   margin: 0;
   padding: 1rem 0.4rem;
-  margin-top: 2rem;
   width: 100%;
   height: 100%;
   display: flex;
@@ -141,6 +134,10 @@ export default styled(SupplySearchComponent)`
   overflow: hidden;
   position: relative;
   align-items: center;
+  margin-top: 2rem;
+  ${breakpoint.sm`
+    margin-top: 1rem;
+  `}
 `
 
 const Label = styled.label`
@@ -175,7 +172,6 @@ const TextInput = styled.input`
   font-size: 0.8rem;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.grey600};
-  margin-bottom: 0.4rem;
 `
 
 const SuppliesList = styled.div`
@@ -212,6 +208,7 @@ const SearchRow = styled.div`
   align-items: center;
   justify-content: space-between;
   position: relative;
+  align-items: center;
 `
 
 const SelectedSuppliesIcon = styled.div`
@@ -246,6 +243,7 @@ const SelectedItem = styled.div`
   padding-left: 0.8rem;
   margin-right: 1rem;
   white-space: nowrap;
+  flex-shrink: 0;
 `
 
 const CloseIcon = styled.button`
@@ -275,9 +273,9 @@ const SelectedTags = styled.div`
   width: 100%;
   overflow-x: auto;
   flex-direction: row;
-  margin-top: 0.8rem;
   min-height: 50px;
   align-items: center;
+  margin-bottom: 0.4rem;
 `
 
 const ButtonWrapper = styled.div`
@@ -309,3 +307,44 @@ const ShowOnMapButton = styled.button`
   font-weight: 600;
   border-radius: 12px;
 `
+
+const RemoveAllButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.grey800};
+  border-radius: 50%;
+  flex-shrink: 0;
+  & > button {
+    margin-left: 0;
+  }
+`
+
+export const SelectedSupplies = ({
+  selectedSupplies,
+  toggleSelectedSupply,
+  unselectAll
+}: {
+  selectedSupplies: Record<string, Supply>
+  toggleSelectedSupply: (supply: Supply) => void
+  unselectAll: () => void
+}) => (
+  <SelectedTags>
+    <RemoveAllButton>
+      <CloseIcon onClick={() => unselectAll()} />
+    </RemoveAllButton>
+    {Object.keys(selectedSupplies).map(supplyId => (
+      <Row>
+        <SelectedItem>
+          <TranslatedEntry entry={selectedSupplies[supplyId]} />
+          <CloseIcon
+            onClick={() => toggleSelectedSupply(selectedSupplies[supplyId])}
+          />
+        </SelectedItem>
+      </Row>
+    ))}
+  </SelectedTags>
+)

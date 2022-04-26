@@ -3,19 +3,19 @@ import { useEffect, useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { usePanelContext } from 'contexts/panelContext'
 import mapPlaceholderUrl from 'assets/map-background.svg'
-import marker from 'assets/marker.svg'
 import { ReactComponent as MapIcon } from 'assets/map-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
-import { Place } from 'contexts/types'
+import { Place, Supply } from 'contexts/types'
 import TranslatedText from 'components/TranslatedText'
 import { OrganizationsMap } from './Map'
 import { TextInputPlaceholder, WrappedPlaces } from './components'
 import Dialog from 'components/Dialog'
-import SupplySearch from './SupplySearch'
-//import FacebookShareButton from 'components/FacebookShareButton'
+import SupplySearch, { SelectedSupplies } from './SupplySearch'
+import omit from 'lodash.omit'
+import FacebookShareButton from 'components/FacebookShareButton'
 
 export default () => {
-  const { fetchPlaces, places, selectedSupplies } = usePanelContext()
+  const { fetchPlaces, places, selectedSupplies, setSelectedSupplies } = usePanelContext()
   const [groupedPlaces, setGroupedPlaces] = useState<Record<string, Place[]>>(
     {}
   )
@@ -42,6 +42,20 @@ export default () => {
     [places]
   )
 
+  const toggleSelectedSupply = useCallback(
+    (supply: Supply) => {
+      const obj = selectedSupplies[supply.id]
+        ? omit(selectedSupplies, [supply.id])
+        : { ...selectedSupplies, [supply.id]: supply }
+      setSelectedSupplies(obj)
+    },
+    [selectedSupplies]
+  )
+
+  const unselectAllSelectedSupplies = useCallback(() => {
+    setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
+  }, [selectedSupplies])
+
   return (
     <>
       <Helmet>
@@ -65,19 +79,29 @@ export default () => {
       <Container>
         <ContentWrapper>
           <IntroductionWrapper>
-            <PageDesciption>
-              <TranslatedText value="pageDescription" />
-            </PageDesciption>
-            {/* <StyledFacebookButton>
+            <StyledFacebookButton>
               <TranslatedText value="shareActiveCollections" />
-            </StyledFacebookButton> */}
-            <TextInputPlaceholder
-              onClick={() => setOpenOrganisationSearch(true)}
-            />
+            </StyledFacebookButton>
+            <IntroductionTexts>
+              <PageDesciption>
+                <TranslatedText value="pageDescription" />
+              </PageDesciption>
+              <TextInputPlaceholder
+                onClick={() => setOpenOrganisationSearch(true)}
+              />
+            </IntroductionTexts>
             {openOrganisationSearch && (
-              <Dialog onClose={() => setOpenOrganisationSearch(false)}>
-                <SupplySearch placesNumber={places.length} />
-              </Dialog>
+              <DialogSupplySearch
+                onClose={() => setOpenOrganisationSearch(false)}
+              >
+                <SupplySearch
+                  placesNumber={places.length}
+                  handleSeeOnMap={() => {
+                    setOpenOrganisationSearch(false)
+                    mobileViewport.matches && setMobileMapOpened(true)
+                  }}
+                />
+              </DialogSupplySearch>
             )}
           </IntroductionWrapper>
           {mobileViewport.matches && (
@@ -86,11 +110,21 @@ export default () => {
               <MapIcon height="22px" style={{ marginLeft: '8px' }} />
             </ShowMapButton>
           )}
+          {Object.keys(selectedSupplies).length > 0 && (
+            <SelectedSuppliesWrapper>
+              <SelectedSupplies
+                selectedSupplies={selectedSupplies}
+                unselectAll={unselectAllSelectedSupplies}
+                toggleSelectedSupply={toggleSelectedSupply}
+              />
+              <FoundPlacesNumber>Znaleziono: {places.length}</FoundPlacesNumber>
+            </SelectedSuppliesWrapper>
+          )}
           <PlacesList>
             {Object.keys(groupedPlaces).map((cityName, key) => (
               <div key={key}>
                 <Title>
-                  <Marker src={marker} alt="marker" />
+                  <MapIcon height="22px" style={{ marginRight: '8px' }} />
                   {cityName}
                 </Title>
                 <WrappedPlaces
@@ -133,9 +167,14 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
   ${breakpoint.sm`
     height: 100%;
     overflow-y: auto;
+    min-width: 58vw;
+    box-shadow: ${({ theme }) => theme.boxShadows.medium};
+    position: relative;
+    z-index: 110;
   `}
 `
 
@@ -146,6 +185,7 @@ const IntroductionWrapper = styled.div`
   width: 100%;
   padding: 3rem 2.6rem 1rem;
   background-color: ${({ theme }) => theme.colors.grey200};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey300};
   ${breakpoint.sm`
     width: 100%;
   `}
@@ -153,20 +193,11 @@ const IntroductionWrapper = styled.div`
 
 const Title = styled.span`
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 1rem 1em 1.5rem 1rem;
+  padding: 0.8rem 1rem 1.5rem 1rem;
   color: ${({ theme }) => theme.colors.black};
   font-size: 1.68rem;
   font-weight: 500;
-`
-
-const Marker = styled.img`
-  display: inline-block;
-  width: auto;
-  height: 25px;
-  margin-right: 0.7rem;
-  margin-bottom: 2px;
 `
 
 const PageDesciption = styled.div`
@@ -200,4 +231,50 @@ const ShowMapButton = styled.button`
 
 const PlacesList = styled.div`
   padding: 1em 1em 2.1em 1em;
+`
+
+const DialogSupplySearch = styled(Dialog)`
+  & > div {
+    background-color: transparent;
+    & > div {
+      ${breakpoint.sm`
+        width: 450px;
+        max-height: 80%;
+        box-shadow: ${({ theme }) => theme.boxShadows.medium};
+      `}
+    }
+  }
+`
+
+const IntroductionTexts = styled.div`
+  max-width: 4580px;
+`
+
+const SelectedSuppliesWrapper = styled.div`
+  margin-top: 1.2rem;
+  padding: 0 1rem;
+  width: 100%;
+`
+
+const FoundPlacesNumber = styled.span`
+  display: inline-block;
+  text-decoration: underline;
+`
+
+const StyledFacebookButton = styled(FacebookShareButton)`
+  max-width: 90%;
+  cursor: pointer;
+  z-index: 130;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  ${breakpoint.sm`
+    bottom: unset;
+    right: 1rem;
+    left: unset;
+    transform: unset;
+    top: calc(${({ theme }) => theme.dimensions.headerHeight} + 0.8rem);
+    max-width: 35%;
+  `}
 `
