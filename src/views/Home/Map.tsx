@@ -38,7 +38,13 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
             key={index}
             width={50}
             anchor={[parseFloat(place.latitude!), parseFloat(place.longitude!)]}
-            color={selectedPlace?.id === place.id ? '#00e676' : '#0076FF'}
+            color={
+              selectedPlace?.id === place.id
+                ? '#00e676'
+                : place.demands && place.demands.length > 0
+                ? '#0076FF'
+                : '#bdbdbd'
+            }
             onClick={() => {
               setSelectedPlace(place)
               setMapCenter([
@@ -70,7 +76,6 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
 
 const InfoBox = styled.div`
   width: 220px;
-  height: 160px;
   background-color: white;
   position: relative;
 `

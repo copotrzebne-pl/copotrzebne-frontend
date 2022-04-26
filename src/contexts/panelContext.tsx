@@ -31,12 +31,18 @@ export const PanelContextProvider = ({
     try {
       const client = await getRestClient(process.env.API_URL)
       const suppliesKeys = Object.keys(selectedSupplies)
-      const response = await client.get<null, Record<string, string>>(
+      const response = await client.get<null, Place[]>(
         `${API.panel.getPlaces}${
           suppliesKeys.length > 0 ? `?supplyId=${suppliesKeys.join(',')}` : ''
         }`
       )
-      Array.isArray(response) ? setPlaces(response) : setPlaces([])
+      const placesWithUrgentDemands = response.map(val => ({
+        ...val,
+        urgentDemands: (val.demands || []).filter(
+          demand => demand.priority.importance === 2
+        )
+      }))
+      setPlaces(placesWithUrgentDemands)
     } catch {
       setError({ ...errors, places: 'Fetching places error' })
     }

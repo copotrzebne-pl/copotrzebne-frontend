@@ -116,7 +116,10 @@ const SupplySearchComponent = ({
       <ButtonWrapper>
         <ShowOnMapButton onClick={handleSeeOnMap}>
           {placesNumber > 0
-            ? `Zobacz na mapie (${placesNumber})`
+            ? `${getTranslation(
+                language,
+                translations['showOnMap']
+              )} (${placesNumber})`
             : `Nie znaleziono`}
         </ShowOnMapButton>
       </ButtonWrapper>

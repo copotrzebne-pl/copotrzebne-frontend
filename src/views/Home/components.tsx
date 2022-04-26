@@ -11,6 +11,7 @@ import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
 const StyledLink = styled(Link)`
   width: 100%;
   height: 100%;
+  display: inline-grid;
   ${breakpoint.sm`
     margin-right: 0.8rem;
   `}

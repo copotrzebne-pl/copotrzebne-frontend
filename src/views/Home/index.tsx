@@ -269,12 +269,12 @@ const StyledFacebookButton = styled(FacebookShareButton)`
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
+  box-shadow: ${({ theme }) => theme.boxShadows.medium};
   ${breakpoint.sm`
-    bottom: unset;
+    bottom: 2rem;
     right: 1rem;
     left: unset;
     transform: unset;
-    top: calc(${({ theme }) => theme.dimensions.headerHeight} + 0.8rem);
     max-width: 35%;
   `}
 `

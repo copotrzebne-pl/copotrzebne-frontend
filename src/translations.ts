@@ -349,5 +349,15 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Login',
     nameEn: 'Login',
     nameUa: 'Login'
+  },
+  urgentlyNeeded: {
+    namePl: 'Pilnie potrzebne!',
+    nameEn: 'Urgently needed',
+    nameUa: 'Терміново потрібна'
+  },
+  notFound: {
+    namePl: 'Nie znaleziono',
+    nameEn: 'Not found',
+    nameUa: 'Не знайдено'
   }
 }

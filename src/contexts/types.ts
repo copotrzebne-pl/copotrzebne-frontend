@@ -26,6 +26,7 @@ export type UserContextProviderProps = {
 
 export type Priority = {
   id: string
+  importance: number
   namePl: string
   nameUa: string
   nameEn: string
@@ -82,6 +83,8 @@ export type Place = {
   priority?: number
   nameSlug: string
   bankAccount: string | null
+  demands?: Demand[]
+  urgentDemands?: Demand[]
 }
 
 export type PlaceDto = {
