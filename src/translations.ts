@@ -311,9 +311,14 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Адреса електронної пошти недійсна'
   },
   searchPlaceByName: {
-    namePl: 'Szukaj miejsc po produktach',
-    nameEn: 'Search place by name',
-    nameUa: 'Шукати місце за назвою'
+    namePl: 'Szukaj po potrzebnych produktach',
+    nameEn: 'Search by the products needed',
+    nameUa: 'Пошук за потрібними продуктами'
+  },
+  searchPlacePlaceholder: {
+    namePl: 'Np koce, kanapki, żywność',
+    nameEn: 'blankets, sandwiches, food',
+    nameUa: 'ковдри, бутерброди, їжа'
   },
   inputProductName: {
     namePl: 'Wpisz nazwę produktu',
@@ -344,5 +349,15 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Login',
     nameEn: 'Login',
     nameUa: 'Login'
+  },
+  urgentlyNeeded: {
+    namePl: 'Pilnie potrzebne!',
+    nameEn: 'Urgently needed',
+    nameUa: 'Терміново потрібна'
+  },
+  notFound: {
+    namePl: 'Nie znaleziono',
+    nameEn: 'Not found',
+    nameUa: 'Не знайдено'
   }
 }
