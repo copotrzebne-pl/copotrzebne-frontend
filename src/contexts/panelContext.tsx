@@ -7,7 +7,8 @@ import {
   Demand,
   Supply,
   Priority,
-  DemandDTO
+  DemandDTO,
+  SupplyGroup
 } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
@@ -26,14 +27,20 @@ export const PanelContextProvider = ({
   const [selectedSupplies, setSelectedSupplies] = useState<
     Record<string, Supply>
   >({})
+  const [selectedSuppliesGroup, setSelectedSuppliesGroup] = useState<
+    Record<string, SupplyGroup>
+  >({})
 
   const fetchPlaces = useCallback(async () => {
     try {
       const client = await getRestClient(process.env.API_URL)
       const suppliesKeys = Object.keys(selectedSupplies)
+      const suppliesGroupKeys = Object.keys(selectedSuppliesGroup)
+
+      const batchedKeys = [...suppliesKeys, ...suppliesGroupKeys]
       const response = await client.get<null, Place[]>(
         `${API.panel.getPlaces}${
-          suppliesKeys.length > 0 ? `?supplyId=${suppliesKeys.join(',')}` : ''
+          batchedKeys.length > 0 ? `?supplyId=${batchedKeys.join(',')}` : ''
         }`
       )
       const placesWithUrgentDemands = response.map(val => ({
@@ -46,7 +53,7 @@ export const PanelContextProvider = ({
     } catch {
       setError({ ...errors, places: 'Fetching places error' })
     }
-  }, [errors, selectedSupplies])
+  }, [errors, selectedSupplies, selectedSuppliesGroup])
 
   const fetchPlace = useCallback(
     async (placeId: string) => {
@@ -187,6 +194,7 @@ export const PanelContextProvider = ({
         supplies,
         priorities,
         selectedSupplies,
+        selectedSuppliesGroup,
         fetchDemands,
         fetchPlaces,
         fetchPlace,
@@ -198,7 +206,8 @@ export const PanelContextProvider = ({
         saveDemand,
         removeAllDemands,
         removeDemand,
-        setSelectedSupplies
+        setSelectedSupplies,
+        setSelectedSuppliesGroup
       }}
     >
       {children}

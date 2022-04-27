@@ -40,6 +40,11 @@ export type Category = {
   nameEn: string
 }
 
+export type SupplyGroup = {
+  categoryProductsIds: string
+  supplies: Supply[]
+}
+
 export type Supply = {
   id: string
   category: Category
@@ -112,6 +117,7 @@ export type PanelContextValue = {
   supplies: Supply[]
   priorities: Priority[]
   selectedSupplies: Record<string, Supply>
+  selectedSuppliesGroup: Record<string, SupplyGroup>
   fetchPlaces: () => void
   fetchPlace: (placeId: string) => void
   updatePlaceLastUpdate: (placeId: string) => Promise<void>
@@ -124,6 +130,9 @@ export type PanelContextValue = {
   removeDemand: (demandId: string) => void
   removeAllDemands: (placeId: string) => void
   setSelectedSupplies: (selectedSupplies: Record<string, Supply>) => void
+  setSelectedSuppliesGroup: (
+    selectedSuppliesGroup: React.SetStateAction<Record<string, SupplyGroup>>
+  ) => void
 }
 
 export type PanelContextProviderProps = {

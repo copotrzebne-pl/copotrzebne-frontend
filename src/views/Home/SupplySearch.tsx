@@ -6,7 +6,7 @@ import { usePanelContext } from 'contexts/panelContext'
 import TranslatedEntry from 'components/TranslatedEntry'
 import Checkbox from 'components/Checkbox'
 import omit from 'lodash.omit'
-import { Supply } from 'contexts/types'
+import { Supply, SupplyGroup } from 'contexts/types'
 import TranslatedText from 'components/TranslatedText'
 import { getTranslation } from 'utils/translation'
 import { translations } from 'translations'
@@ -25,8 +25,14 @@ const SupplySearchComponent = ({
   handleSeeOnMap: () => void
 }) => {
   const [contextMenuOpened, setContextMenuOpened] = useState<boolean>(false)
-  const { supplies, selectedSupplies, setSelectedSupplies, fetchSupplies } =
-    usePanelContext()
+  const {
+    supplies,
+    selectedSupplies,
+    selectedSuppliesGroup,
+    setSelectedSupplies,
+    setSelectedSuppliesGroup,
+    fetchSupplies
+  } = usePanelContext()
   const { language } = useUserContext()
   const { groupedSupplies, suppliesKeys, searchText, setSearchText } =
     useGroupSupplies(supplies)
@@ -45,9 +51,26 @@ const SupplySearchComponent = ({
     [selectedSupplies]
   )
 
-  const unselectAllSelectedSupplies = useCallback(() => {
+  const toggleSelectedSupplyGroup = useCallback(
+    (supplyGroup: SupplyGroup) => {
+      setSelectedSuppliesGroup(val =>
+        val[supplyGroup.categoryProductsIds]
+          ? omit(val, [supplyGroup.categoryProductsIds])
+          : {
+              ...val,
+              [supplyGroup.categoryProductsIds]: supplyGroup
+            }
+      )
+    },
+    [selectedSuppliesGroup]
+  )
+
+  const unselectAllSelected = useCallback(() => {
     setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
-  }, [selectedSupplies])
+    setSelectedSuppliesGroup(
+      omit(selectedSuppliesGroup, Object.keys(selectedSuppliesGroup))
+    )
+  }, [selectedSupplies, selectedSuppliesGroup])
 
   return (
     <div className={className}>
@@ -78,13 +101,16 @@ const SupplySearchComponent = ({
             <SearchIcon height="20px" color="white" />
           </SelectedSuppliesIcon>
         </SearchRow>
-        {Object.keys(selectedSupplies).length > 0 && (
-          <SelectedSupplies
-            selectedSupplies={selectedSupplies}
-            unselectAll={unselectAllSelectedSupplies}
-            toggleSelectedSupply={toggleSelectedSupply}
-          />
-        )}
+        {Object.keys(selectedSupplies).length > 0 ||
+          (Object.keys(selectedSuppliesGroup).length > 0 && (
+            <SelectedSupplies
+              selectedSupplies={selectedSupplies}
+              selectedSuppliesGroup={selectedSuppliesGroup}
+              unselectAll={unselectAllSelected}
+              toggleSelectedSupply={toggleSelectedSupply}
+              toggleSelectedSupplyGroup={toggleSelectedSupplyGroup}
+            />
+          ))}
       </FormGroup>
       <SuppliesList>
         {suppliesKeys.map((priorityNumber, key) => {
@@ -92,11 +118,23 @@ const SupplySearchComponent = ({
           return (
             <div key={`supply-${priorityNumber}`}>
               <CategoryHeader>
+                <Checkbox
+                  id={`search_supply_group_${groupedSupplies[priorityNumber].categoryProductsIds}`}
+                  value=""
+                  checked={
+                    !!selectedSuppliesGroup[
+                      groupedSupplies[priorityNumber].categoryProductsIds
+                    ]
+                  }
+                  onChange={_ =>
+                    toggleSelectedSupplyGroup(groupedSupplies[priorityNumber])
+                  }
+                />{' '}
                 <TranslatedEntry
-                  entry={groupedSupplies[priorityNumber][0].category}
+                  entry={groupedSupplies[priorityNumber].supplies[0].category}
                 />
               </CategoryHeader>
-              {groupedSupplies[priorityNumber].map(supply => (
+              {groupedSupplies[priorityNumber].supplies.map(supply => (
                 <SupplyWrapper key={supply.id}>
                   <Checkbox
                     id={`search_supply_${supply.id}`}
@@ -120,7 +158,7 @@ const SupplySearchComponent = ({
                 language,
                 translations['showOnMap']
               )} (${placesNumber})`
-            : `Nie znaleziono`}
+            : getTranslation(language, translations['notFound'])}
         </ShowOnMapButton>
       </ButtonWrapper>
     </div>
@@ -196,6 +234,9 @@ const CategoryHeader = styled.span`
   padding-bottom: 0.7rem;
   color: #333333;
   border-radius: 12px;
+  background-color: #0076ff1f;
+  margin: 0.4rem -10px;
+  padding-left: 10px;
 `
 
 const SupplyWrapper = styled.div`
@@ -328,19 +369,37 @@ const RemoveAllButton = styled.div`
 
 export const SelectedSupplies = ({
   selectedSupplies,
+  selectedSuppliesGroup,
   toggleSelectedSupply,
+  toggleSelectedSupplyGroup,
   unselectAll
 }: {
   selectedSupplies: Record<string, Supply>
+  selectedSuppliesGroup: Record<string, SupplyGroup>
   toggleSelectedSupply: (supply: Supply) => void
+  toggleSelectedSupplyGroup: (supply: SupplyGroup) => void
   unselectAll: () => void
 }) => (
   <SelectedTags>
     <RemoveAllButton>
       <CloseIcon onClick={() => unselectAll()} />
     </RemoveAllButton>
-    {Object.keys(selectedSupplies).map(supplyId => (
-      <Row>
+    {Object.keys(selectedSuppliesGroup).map((groupId, key) => (
+      <Row key={key}>
+        <SelectedItem>
+          <TranslatedEntry
+            entry={selectedSuppliesGroup[groupId].supplies[0].category}
+          />
+          <CloseIcon
+            onClick={() =>
+              toggleSelectedSupplyGroup(selectedSuppliesGroup[groupId])
+            }
+          />
+        </SelectedItem>
+      </Row>
+    ))}
+    {Object.keys(selectedSupplies).map((supplyId, key) => (
+      <Row key={key}>
         <SelectedItem>
           <TranslatedEntry entry={selectedSupplies[supplyId]} />
           <CloseIcon

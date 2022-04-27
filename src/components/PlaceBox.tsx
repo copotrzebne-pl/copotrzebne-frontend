@@ -55,8 +55,8 @@ const PlaceBoxComponent = ({
             {place.urgentDemands.length})
           </UrgentDemandsTitle>
           <UrgentDemandsList>
-            {place.urgentDemands.map(demand => (
-              <UrgentDemand>
+            {place.urgentDemands.map((demand, key) => (
+              <UrgentDemand key={key}>
                 <TranslatedEntry entry={demand.supply} />
               </UrgentDemand>
             ))}

@@ -5,7 +5,7 @@ import { usePanelContext } from 'contexts/panelContext'
 import mapPlaceholderUrl from 'assets/map-background.svg'
 import { ReactComponent as MapIcon } from 'assets/map-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
-import { Place, Supply } from 'contexts/types'
+import { Place, Supply, SupplyGroup } from 'contexts/types'
 import TranslatedText from 'components/TranslatedText'
 import { OrganizationsMap } from './Map'
 import { TextInputPlaceholder, WrappedPlaces } from './components'
@@ -15,7 +15,14 @@ import omit from 'lodash.omit'
 import FacebookShareButton from 'components/FacebookShareButton'
 
 export default () => {
-  const { fetchPlaces, places, selectedSupplies, setSelectedSupplies } = usePanelContext()
+  const {
+    fetchPlaces,
+    places,
+    selectedSupplies,
+    selectedSuppliesGroup,
+    setSelectedSupplies,
+    setSelectedSuppliesGroup
+  } = usePanelContext()
   const [groupedPlaces, setGroupedPlaces] = useState<Record<string, Place[]>>(
     {}
   )
@@ -25,7 +32,7 @@ export default () => {
     useState<boolean>(false)
   useEffect(() => {
     fetchPlaces()
-  }, [selectedSupplies])
+  }, [selectedSupplies, selectedSuppliesGroup])
 
   useEffect(() => {
     setGroupedPlaces(groupPlaces())
@@ -52,8 +59,25 @@ export default () => {
     [selectedSupplies]
   )
 
+  const toggleSelectedSupplyGroup = useCallback(
+    (supplyGroup: SupplyGroup) => {
+      setSelectedSuppliesGroup(val =>
+        val[supplyGroup.categoryProductsIds]
+          ? omit(val, [supplyGroup.categoryProductsIds])
+          : {
+              ...val,
+              [supplyGroup.categoryProductsIds]: supplyGroup
+            }
+      )
+    },
+    [selectedSuppliesGroup]
+  )
+
   const unselectAllSelectedSupplies = useCallback(() => {
     setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
+    setSelectedSuppliesGroup(
+      omit(selectedSuppliesGroup, Object.keys(selectedSuppliesGroup))
+    )
   }, [selectedSupplies])
 
   return (
@@ -110,12 +134,15 @@ export default () => {
               <MapIcon height="22px" style={{ marginLeft: '8px' }} />
             </ShowMapButton>
           )}
-          {Object.keys(selectedSupplies).length > 0 && (
+          {(Object.keys(selectedSupplies).length > 0 ||
+            Object.keys(selectedSuppliesGroup).length > 0) && (
             <SelectedSuppliesWrapper>
               <SelectedSupplies
                 selectedSupplies={selectedSupplies}
+                selectedSuppliesGroup={selectedSuppliesGroup}
                 unselectAll={unselectAllSelectedSupplies}
                 toggleSelectedSupply={toggleSelectedSupply}
+                toggleSelectedSupplyGroup={toggleSelectedSupplyGroup}
               />
               <FoundPlacesNumber>Znaleziono: {places.length}</FoundPlacesNumber>
             </SelectedSuppliesWrapper>

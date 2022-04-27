@@ -1,4 +1,4 @@
-import { Supply } from 'contexts/types'
+import { Supply, SupplyGroup } from 'contexts/types'
 import { useState, useCallback, useEffect } from 'react'
 import debounce from 'lodash.debounce'
 import { getTranslation } from 'utils/translation'
@@ -6,7 +6,7 @@ import { useUserContext } from 'contexts/userContext'
 
 export function useGroupSupplies(supplies: Supply[]) {
   const [groupedSupplies, setGroupedSupplies] = useState<
-    Record<number, Supply[]>
+    Record<number, SupplyGroup>
   >({})
   const { language } = useUserContext()
   const [suppliesKeys, setSuppliesKeys] = useState<number[]>([])
@@ -15,17 +15,28 @@ export function useGroupSupplies(supplies: Supply[]) {
 
   //group supplies by category priority
   const groupSupplies = useCallback(
-    (items: Supply[]): Record<string, Supply[]> =>
-      items.reduce(
+    (items: Supply[]): Record<number, SupplyGroup> => {
+      const grouped = items.reduce(
         (acc, item) => (
-          (acc[item.category.priority] = [
-            ...(acc[item.category.priority] || []),
-            item
-          ]),
+          (acc[item.category.priority] = {
+            categoryProductsIds: '',
+            supplies: [...(acc[item.category.priority]?.supplies || []), item]
+          }),
           acc
         ),
-        {} as Record<number, Supply[]>
-      ),
+        {} as Record<string, SupplyGroup>
+      )
+      const groupedWithProductsIds = Object.keys(grouped).reduce((acc, val) => {
+        acc[val] = {
+          ...grouped[val],
+          categoryProductsIds: grouped[val].supplies
+            .map(supply => supply.id)
+            .join(',')
+        }
+        return acc
+      }, {} as Record<string, SupplyGroup>)
+      return groupedWithProductsIds
+    },
     []
   )
 
