@@ -33,11 +33,8 @@ export const RequestPlaceContextProvider = ({
   const [userEmail, setUserEmail] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
 
-  const setPlaceValue = useCallback(
-    (
-      key: keyof Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>,
-      value: string
-    ) => {
+  const setPlaceValue: RequestPlaceContextValue['setPlaceValue'] = useCallback(
+    (key, value) => {
       setError(null)
       setPlace({ ...place, [key]: value })
     },
@@ -61,8 +58,11 @@ export const RequestPlaceContextProvider = ({
         email: place.email || undefined,
         phone: place.phone || undefined,
         bankAccount: place.bankAccount || undefined,
-        workingHours: place.workingHours || undefined
+        workingHours: place.workingHours || undefined,
+        placeLink: place.placeLink || undefined
       }
+
+      console.log(placeFormatted)
 
       await client.post<null, Place>(
         `${API.panel.saveDraftPlace}`,

@@ -124,6 +124,26 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Bank account number for donations',
     nameUa: 'Номер банківського рахунку для внесення пожертв'
   },
+  homepageLink: {
+    namePl: 'Link do strony głównej',
+    nameEn: 'Home page link',
+    nameUa: 'Посилання на домашню сторінку'
+  },
+  facebookLink: {
+    namePl: 'Link do Facebooka',
+    nameEn: 'Facebook link',
+    nameUa: 'Посилання на фейсбук'
+  },
+  signupLink: {
+    namePl: 'Link do zapisu',
+    nameEn: 'Sign up link',
+    nameUa: 'посилання для реєстрації'
+  },
+  fundraisingLink: {
+    namePl: 'Link do zbiórki',
+    nameEn: 'Fundraising link',
+    nameUa: 'Посилання на збір коштів'
+  },
   save: {
     namePl: 'Zapisz',
     nameEn: 'Save',
