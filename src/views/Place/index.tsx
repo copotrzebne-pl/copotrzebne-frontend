@@ -46,6 +46,13 @@ export default () => {
     }
   }, [selectedPlace?.id])
 
+  const shouldRenderLinksSection = (): boolean =>
+    !!selectedPlace?.placeLink &&
+    (!!selectedPlace?.placeLink.homepage ||
+      !!selectedPlace?.placeLink.facebook ||
+      !!selectedPlace?.placeLink.signup ||
+      !!selectedPlace?.placeLink.fundraising)
+
   return (
     <>
       <Helmet>
@@ -119,54 +126,56 @@ export default () => {
                   </BankAccount>
                 </DetailsRow>
               )}
-              <DetailsRow>
-                <Links>
-                  {selectedPlace.placeLink?.homepage && (
-                    <div>
-                      <a
-                        href={selectedPlace.placeLink?.homepage || '/'}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        &#8594; <TranslatedText value="homepageLink" />
-                      </a>
-                    </div>
-                  )}
-                  {selectedPlace.placeLink?.facebook && (
-                    <div>
-                      <a
-                        href={selectedPlace.placeLink?.facebook || '/'}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        &#8594; <TranslatedText value="facebookLink" />
-                      </a>
-                    </div>
-                  )}
-                  {selectedPlace.placeLink?.signup && (
-                    <div>
-                      <a
-                        href={selectedPlace.placeLink?.signup || '/'}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        &#8594; <TranslatedText value="signupLink" />
-                      </a>
-                    </div>
-                  )}
-                  {selectedPlace.placeLink?.fundraising && (
-                    <div>
-                      <a
-                        href={selectedPlace.placeLink?.fundraising || '/'}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        &#8594; <TranslatedText value="fundraisingLink" />
-                      </a>
-                    </div>
-                  )}
-                </Links>
-              </DetailsRow>
+              {shouldRenderLinksSection() && (
+                <DetailsRow>
+                  <Links>
+                    {selectedPlace.placeLink?.homepage && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.homepage || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="homepageLink" />
+                        </a>
+                      </div>
+                    )}
+                    {selectedPlace.placeLink?.facebook && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.facebook || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="facebookLink" />
+                        </a>
+                      </div>
+                    )}
+                    {selectedPlace.placeLink?.signup && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.signup || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="signupLink" />
+                        </a>
+                      </div>
+                    )}
+                    {selectedPlace.placeLink?.fundraising && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.fundraising || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="fundraisingLink" />
+                        </a>
+                      </div>
+                    )}
+                  </Links>
+                </DetailsRow>
+              )}
             </PlaceDetailsWrapper>
           </PlaceDetails>
         )}
