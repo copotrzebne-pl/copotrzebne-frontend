@@ -90,6 +90,7 @@ export type Place = {
   bankAccount: string | null
   demands?: Demand[]
   urgentDemands?: Demand[]
+  placeLink?: PlaceLink
 }
 
 export type PlaceDto = {
@@ -106,6 +107,16 @@ export type PlaceDto = {
   street: string
   workingHours: string
   bankAccount: string | null
+  placeLink?: PlaceLink
+}
+
+export type PlaceLink = {
+  id?: string
+  placeId?: string
+  homepage: string
+  facebook: string
+  signup: string
+  fundraising: string
 }
 
 export type DraftPlaceDto = Omit<PlaceDto, 'id' | 'latitude' | 'longitude'>

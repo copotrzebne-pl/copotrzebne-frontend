@@ -34,7 +34,8 @@ export default () => {
     workingHours: '',
     latitude: null,
     longitude: null,
-    bankAccount: ''
+    bankAccount: '',
+    placeLink: { homepage: '', facebook: '', signup: '', fundraising: '' }
   })
 
   useEffect(() => {
@@ -53,8 +54,17 @@ export default () => {
   }, [selectedPlace])
 
   const setValue = useCallback(
-    (name: string, value: string) => {
+    (name: string, value: string | Record<string, string>) => {
+      console.log(editedPlace)
       setEditedPlace({ ...editedPlace, [name]: value })
+    },
+    [editedPlace]
+  )
+
+  const setPlaceLink = useCallback(
+    (name: string, value: string) => {
+      const placeLink = { ...editedPlace.placeLink, [name]: value }
+      setValue('placeLink', placeLink)
     },
     [editedPlace]
   )
@@ -134,7 +144,7 @@ export default () => {
           <TextInput
             id="buildingNumber"
             type="text"
-            placeholder="buildingNumber"
+            placeholder="building number"
             required
             value={editedPlace.buildingNumber || ''}
             onChange={e => setValue('buildingNumber', e.target.value)}
@@ -159,7 +169,7 @@ export default () => {
           <TextInput
             id="workingHours"
             type="text"
-            placeholder="workingHours"
+            placeholder="working hours"
             value={editedPlace.workingHours || ''}
             onChange={e => setValue('workingHours', e.target.value)}
           />
@@ -207,9 +217,57 @@ export default () => {
           <TextInput
             id="bankAccount"
             type="text"
-            placeholder="Bank Account"
+            placeholder="bank account"
             value={editedPlace.bankAccount || ''}
             onChange={e => setValue('bankAccount', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="homepageLink" />
+          </Label>
+          <TextInput
+            id="homepageLink"
+            type="text"
+            placeholder="home page"
+            value={editedPlace.placeLink?.homepage || ''}
+            onChange={e => setPlaceLink('homepage', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="facebookLink" />
+          </Label>
+          <TextInput
+            id="facebooklink"
+            type="text"
+            placeholder="facebook link"
+            value={editedPlace.placeLink?.facebook || ''}
+            onChange={e => setPlaceLink('facebook', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="signupLink" />
+          </Label>
+          <TextInput
+            id="signuplink"
+            type="text"
+            placeholder="signup link"
+            value={editedPlace.placeLink?.signup || ''}
+            onChange={e => setPlaceLink('signup', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="fundraisingLink" />
+          </Label>
+          <TextInput
+            id="fundraisinglink"
+            type="text"
+            placeholder="fundraising link"
+            value={editedPlace.placeLink?.fundraising || ''}
+            onChange={e => setPlaceLink('fundraising', e.target.value)}
           />
         </FormGroup>
         <FormGroup>

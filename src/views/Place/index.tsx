@@ -46,6 +46,13 @@ export default () => {
     }
   }, [selectedPlace?.id])
 
+  const shouldRenderLinksSection = (): boolean =>
+    !!selectedPlace?.placeLink &&
+    (!!selectedPlace?.placeLink.homepage ||
+      !!selectedPlace?.placeLink.facebook ||
+      !!selectedPlace?.placeLink.signup ||
+      !!selectedPlace?.placeLink.fundraising)
+
   return (
     <>
       <Helmet>
@@ -110,13 +117,65 @@ export default () => {
                   </h3>
                 </LastUpdate>
               </DetailsRow>
-              <DetailsRow>
-                <BankAccount>
-                  <TranslatedText value="bankAccount" />
-                  <br />
-                  <span>{selectedPlace.bankAccount || '-'}</span>
-                </BankAccount>
-              </DetailsRow>
+              {selectedPlace.bankAccount && (
+                <DetailsRow>
+                  <BankAccount>
+                    <TranslatedText value="bankAccount" />
+                    <br />
+                    <span>{selectedPlace.bankAccount || '-'}</span>
+                  </BankAccount>
+                </DetailsRow>
+              )}
+              {shouldRenderLinksSection() && (
+                <DetailsRow>
+                  <Links>
+                    {selectedPlace.placeLink?.homepage && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.homepage || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="homepageLink" />
+                        </a>
+                      </div>
+                    )}
+                    {selectedPlace.placeLink?.facebook && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.facebook || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="facebookLink" />
+                        </a>
+                      </div>
+                    )}
+                    {selectedPlace.placeLink?.signup && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.signup || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="signupLink" />
+                        </a>
+                      </div>
+                    )}
+                    {selectedPlace.placeLink?.fundraising && (
+                      <div>
+                        <a
+                          href={selectedPlace.placeLink?.fundraising || '/'}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          &#8594; <TranslatedText value="fundraisingLink" />
+                        </a>
+                      </div>
+                    )}
+                  </Links>
+                </DetailsRow>
+              )}
             </PlaceDetailsWrapper>
           </PlaceDetails>
         )}
@@ -280,6 +339,28 @@ const BankAccount = styled.div`
     font-size: 0.9rem;
     font-weight: 500;
     margin: 0.2rem 0;
+  }
+`
+
+const Links = styled.div`
+  margin-top: 1.6rem;
+  color: #8d99b2;
+  font-size: 0.8rem;
+  font-weight: 400;
+
+  div {
+    margin: 0.5rem 0;
+  }
+
+  a {
+    color: #0076ff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.2rem 0;
+  }
+
+  a:hover {
+    color: #0055ff;
   }
 `
 
