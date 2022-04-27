@@ -2,26 +2,37 @@ import styled from 'styled-components'
 import { useEffect, useCallback, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { usePanelContext } from 'contexts/panelContext'
-import marker from 'assets/marker.svg'
+import mapPlaceholderUrl from 'assets/map-background.svg'
+import { ReactComponent as MapIcon } from 'assets/map-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
-import { Place } from 'contexts/types'
-import FacebookShareButton from 'components/FacebookShareButton'
+import { Place, Supply, SupplyGroup } from 'contexts/types'
 import TranslatedText from 'components/TranslatedText'
 import { OrganizationsMap } from './Map'
-import { WrappedPlaces } from './components'
+import { TextInputPlaceholder, WrappedPlaces } from './components'
 import Dialog from 'components/Dialog'
-import SupplySearch from 'views/Home/SupplySearch'
+import SupplySearch, { SelectedSupplies } from './SupplySearch'
+import omit from 'lodash.omit'
+import FacebookShareButton from 'components/FacebookShareButton'
 
 export default () => {
-  const { fetchPlaces, places, selectedSupplies } = usePanelContext()
+  const {
+    fetchPlaces,
+    places,
+    selectedSupplies,
+    selectedSuppliesGroup,
+    setSelectedSupplies,
+    setSelectedSuppliesGroup
+  } = usePanelContext()
   const [groupedPlaces, setGroupedPlaces] = useState<Record<string, Place[]>>(
     {}
   )
   const [openMobileMap, setMobileMapOpened] = useState<boolean>(false)
   const mobileViewport = window.matchMedia('screen and (max-width: 992px)')
+  const [openOrganisationSearch, setOpenOrganisationSearch] =
+    useState<boolean>(false)
   useEffect(() => {
     fetchPlaces()
-  }, [selectedSupplies])
+  }, [selectedSupplies, selectedSuppliesGroup])
 
   useEffect(() => {
     setGroupedPlaces(groupPlaces())
@@ -37,6 +48,37 @@ export default () => {
       ),
     [places]
   )
+
+  const toggleSelectedSupply = useCallback(
+    (supply: Supply) => {
+      const obj = selectedSupplies[supply.id]
+        ? omit(selectedSupplies, [supply.id])
+        : { ...selectedSupplies, [supply.id]: supply }
+      setSelectedSupplies(obj)
+    },
+    [selectedSupplies]
+  )
+
+  const toggleSelectedSupplyGroup = useCallback(
+    (supplyGroup: SupplyGroup) => {
+      setSelectedSuppliesGroup(val =>
+        val[supplyGroup.categoryProductsIds]
+          ? omit(val, [supplyGroup.categoryProductsIds])
+          : {
+              ...val,
+              [supplyGroup.categoryProductsIds]: supplyGroup
+            }
+      )
+    },
+    [selectedSuppliesGroup]
+  )
+
+  const unselectAllSelectedSupplies = useCallback(() => {
+    setSelectedSupplies(omit(selectedSupplies, Object.keys(selectedSupplies)))
+    setSelectedSuppliesGroup(
+      omit(selectedSuppliesGroup, Object.keys(selectedSuppliesGroup))
+    )
+  }, [selectedSupplies])
 
   return (
     <>
@@ -61,26 +103,55 @@ export default () => {
       <Container>
         <ContentWrapper>
           <IntroductionWrapper>
-            <PageDesciption>
-              <TranslatedText value="pageDescription" />
-            </PageDesciption>
             <StyledFacebookButton>
               <TranslatedText value="shareActiveCollections" />
             </StyledFacebookButton>
+            <IntroductionTexts>
+              <PageDesciption>
+                <TranslatedText value="pageDescription" />
+              </PageDesciption>
+              <TextInputPlaceholder
+                onClick={() => setOpenOrganisationSearch(true)}
+              />
+            </IntroductionTexts>
+            {openOrganisationSearch && (
+              <DialogSupplySearch
+                onClose={() => setOpenOrganisationSearch(false)}
+              >
+                <SupplySearch
+                  placesNumber={places.length}
+                  handleSeeOnMap={() => {
+                    setOpenOrganisationSearch(false)
+                    mobileViewport.matches && setMobileMapOpened(true)
+                  }}
+                />
+              </DialogSupplySearch>
+            )}
           </IntroductionWrapper>
           {mobileViewport.matches && (
-            <MapButtonWrapper>
-              <ShowMapButton onClick={() => setMobileMapOpened(true)}>
-                <TranslatedText value="showOnMap" />
-              </ShowMapButton>
-            </MapButtonWrapper>
+            <ShowMapButton onClick={() => setMobileMapOpened(true)}>
+              <TranslatedText value="showOnMap" />{' '}
+              <MapIcon height="22px" style={{ marginLeft: '8px' }} />
+            </ShowMapButton>
           )}
-          <SupplySearch />
+          {(Object.keys(selectedSupplies).length > 0 ||
+            Object.keys(selectedSuppliesGroup).length > 0) && (
+            <SelectedSuppliesWrapper>
+              <SelectedSupplies
+                selectedSupplies={selectedSupplies}
+                selectedSuppliesGroup={selectedSuppliesGroup}
+                unselectAll={unselectAllSelectedSupplies}
+                toggleSelectedSupply={toggleSelectedSupply}
+                toggleSelectedSupplyGroup={toggleSelectedSupplyGroup}
+              />
+              <FoundPlacesNumber>Znaleziono: {places.length}</FoundPlacesNumber>
+            </SelectedSuppliesWrapper>
+          )}
           <PlacesList>
             {Object.keys(groupedPlaces).map((cityName, key) => (
               <div key={key}>
                 <Title>
-                  <Marker src={marker} alt="marker" />
+                  <MapIcon height="22px" style={{ marginRight: '8px' }} />
                   {cityName}
                 </Title>
                 <WrappedPlaces
@@ -123,9 +194,14 @@ const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
   ${breakpoint.sm`
     height: 100%;
     overflow-y: auto;
+    min-width: 58vw;
+    box-shadow: ${({ theme }) => theme.boxShadows.medium};
+    position: relative;
+    z-index: 110;
   `}
 `
 
@@ -134,10 +210,9 @@ const IntroductionWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 3em 1.5em 2.1em 1.5em;
-  background-color: rgba(199, 199, 199, 0.1);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  padding: 3rem 2.6rem 1rem;
+  background-color: ${({ theme }) => theme.colors.grey200};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.grey300};
   ${breakpoint.sm`
     width: 100%;
   `}
@@ -145,20 +220,11 @@ const IntroductionWrapper = styled.div`
 
 const Title = styled.span`
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 1rem 1em 1.5rem 1rem;
+  padding: 0.8rem 1rem 1.5rem 1rem;
   color: ${({ theme }) => theme.colors.black};
   font-size: 1.68rem;
   font-weight: 500;
-`
-
-const Marker = styled.img`
-  display: inline-block;
-  width: auto;
-  height: 25px;
-  margin-right: 0.7rem;
-  margin-bottom: 2px;
 `
 
 const PageDesciption = styled.div`
@@ -170,39 +236,72 @@ const PageDesciption = styled.div`
   line-height: 1.5;
 `
 
-const StyledFacebookButton = styled(FacebookShareButton)`
-  width: calc(100% - 2.4rem);
-  max-width: 500px;
-  margin-top: 1.2em;
-  cursor: pointer;
-`
-
 const ShowMapButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   position: relative;
-  max-width: 500px;
-  width: calc(100% - 2.4rem);
+  width: 100%;
   height: 48px;
-  margin: 1.5em auto 0 auto;
   padding: 0.8rem 1.8rem;
   outline: none;
   background-color: transparent;
-  border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.colors.blue};
+  background-image: url(${mapPlaceholderUrl});
+  background-position: center center;
+  background-size: cover;
+  border-top: 2px solid white;
   color: black;
-  font-size: 0.85rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
 `
 
 const PlacesList = styled.div`
   padding: 1em 1em 2.1em 1em;
 `
 
-const MapButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 0 1.5em 0 1.5em;
+const DialogSupplySearch = styled(Dialog)`
+  & > div {
+    background-color: transparent;
+    & > div {
+      ${breakpoint.sm`
+        width: 450px;
+        max-height: 80%;
+        box-shadow: ${({ theme }) => theme.boxShadows.medium};
+      `}
+    }
+  }
+`
+
+const IntroductionTexts = styled.div`
+  max-width: 4580px;
+`
+
+const SelectedSuppliesWrapper = styled.div`
+  margin-top: 1.2rem;
+  padding: 0 1rem;
+  width: 100%;
+`
+
+const FoundPlacesNumber = styled.span`
+  display: inline-block;
+  text-decoration: underline;
+`
+
+const StyledFacebookButton = styled(FacebookShareButton)`
+  max-width: 90%;
+  cursor: pointer;
+  z-index: 130;
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: ${({ theme }) => theme.boxShadows.medium};
+  ${breakpoint.sm`
+    bottom: 2rem;
+    right: 1rem;
+    left: unset;
+    transform: unset;
+    max-width: 35%;
+  `}
 `

@@ -77,10 +77,10 @@ export default () => {
             <div key={key}>
               <CategoryHeader>
                 <TranslatedEntry
-                  entry={groupedSupplies[priorityNumber][0].category}
+                  entry={groupedSupplies[priorityNumber].supplies[0].category}
                 />
               </CategoryHeader>
-              {groupedSupplies[priorityNumber].map(supply => (
+              {groupedSupplies[priorityNumber].supplies.map(supply => (
                 <DemandComponent
                   key={supply.id}
                   placeId={selectedPlace?.id || ''}

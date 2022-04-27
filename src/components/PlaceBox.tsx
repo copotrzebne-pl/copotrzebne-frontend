@@ -1,12 +1,13 @@
 import { Place } from 'contexts/types'
 import styled from 'styled-components'
-import format from 'date-fns/format'
 import TranslatedText from 'components/TranslatedText'
 import trashIconUrl from '../assets/trash-icon.svg'
 import { useUserContext } from '../contexts/userContext'
 import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
 import { formatDateWithTime } from '../utils/date'
+import TranslatedEntry from './TranslatedEntry'
+import { breakpoint } from 'themes/breakpoints'
 
 const PlaceBoxComponent = ({
   className,
@@ -38,12 +39,29 @@ const PlaceBoxComponent = ({
           {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
           {place.apartment ? `/${place.apartment}` : ''}
         </PlaceDetails>
-        <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
+        {place.workingHours && (
+          <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
+        )}
       </PlaceNameAndAddress>
       {!place.lastUpdatedAt && (
         <LastUpdate>
           <TranslatedText value="noOngoingCollections" />
         </LastUpdate>
+      )}
+      {place.urgentDemands && place.urgentDemands.length > 0 && (
+        <UrgentDemandsWrapper>
+          <UrgentDemandsTitle>
+            <TranslatedText value="urgentlyNeeded" /> (
+            {place.urgentDemands.length})
+          </UrgentDemandsTitle>
+          <UrgentDemandsList>
+            {place.urgentDemands.map((demand, key) => (
+              <UrgentDemand key={key}>
+                <TranslatedEntry entry={demand.supply} />
+              </UrgentDemand>
+            ))}
+          </UrgentDemandsList>
+        </UrgentDemandsWrapper>
       )}
       {place.lastUpdatedAt && (
         <LastUpdate>
@@ -74,6 +92,7 @@ export const PlaceBox = styled(PlaceBoxComponent)`
   &:hover {
     background: ${({ theme }) => theme.colors.grey100};
   }
+  overflow: hidden;
 `
 
 const PlaceName = styled.h3<{ place: Place }>`
@@ -112,3 +131,33 @@ const TrashIcon = styled.img`
 `
 
 const PlaceNameAndAddress = styled.div``
+
+const UrgentDemandsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const UrgentDemandsTitle = styled(PlaceDetails)`
+  margin-top: 0.4rem;
+  color: ${({ theme }) => theme.colors.blue};
+`
+
+const UrgentDemandsList = styled.div`
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 0.6rem;
+  ${breakpoint.sm`
+    overflow-x: hidden;
+  `}
+`
+
+const UrgentDemand = styled.div`
+  display: flex;
+  padding: 0.2rem 0.4rem;
+  background-color: #0076ff2b;
+  border-radius: 8px;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  margin-right: 0.4rem;
+`

@@ -26,6 +26,7 @@ export type UserContextProviderProps = {
 
 export type Priority = {
   id: string
+  importance: number
   namePl: string
   nameUa: string
   nameEn: string
@@ -37,6 +38,11 @@ export type Category = {
   namePl: string
   nameUa: string
   nameEn: string
+}
+
+export type SupplyGroup = {
+  categoryProductsIds: string
+  supplies: Supply[]
 }
 
 export type Supply = {
@@ -82,6 +88,8 @@ export type Place = {
   priority?: number
   nameSlug: string
   bankAccount: string | null
+  demands?: Demand[]
+  urgentDemands?: Demand[]
 }
 
 export type PlaceDto = {
@@ -109,6 +117,7 @@ export type PanelContextValue = {
   supplies: Supply[]
   priorities: Priority[]
   selectedSupplies: Record<string, Supply>
+  selectedSuppliesGroup: Record<string, SupplyGroup>
   fetchPlaces: () => void
   fetchPlace: (placeId: string) => void
   updatePlaceLastUpdate: (placeId: string) => Promise<void>
@@ -121,6 +130,9 @@ export type PanelContextValue = {
   removeDemand: (demandId: string) => void
   removeAllDemands: (placeId: string) => void
   setSelectedSupplies: (selectedSupplies: Record<string, Supply>) => void
+  setSelectedSuppliesGroup: (
+    selectedSuppliesGroup: React.SetStateAction<Record<string, SupplyGroup>>
+  ) => void
 }
 
 export type PanelContextProviderProps = {

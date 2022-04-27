@@ -4,7 +4,6 @@ import { Map, Marker, Overlay } from 'pigeon-maps'
 import { stamenToner } from 'pigeon-maps/providers'
 import { Place } from 'contexts/types'
 import styled from 'styled-components'
-import { PlaceBoxDetailedStyled } from './components'
 import { Link } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import { PlaceBox } from '../../components/PlaceBox'
@@ -18,7 +17,7 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
   const [mapZoom, setMapZoom] = useState<number>(12)
 
   useEffect(() => {
-    setMapHeight(document.body.clientHeight - 84)
+    setMapHeight(document.body.clientHeight)
   }, [])
   return (
     <Map
@@ -39,7 +38,13 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
             key={index}
             width={50}
             anchor={[parseFloat(place.latitude!), parseFloat(place.longitude!)]}
-            color={selectedPlace?.id === place.id ? '#00e676' : '#0076FF'}
+            color={
+              selectedPlace?.id === place.id
+                ? '#00e676'
+                : place.demands && place.demands.length > 0
+                ? '#0076FF'
+                : '#bdbdbd'
+            }
             onClick={() => {
               setSelectedPlace(place)
               setMapCenter([
@@ -71,7 +76,6 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
 
 const InfoBox = styled.div`
   width: 220px;
-  height: 160px;
   background-color: white;
   position: relative;
 `
@@ -86,7 +90,7 @@ const CloseIcon = styled.button`
   cursor: pointer;
   z-index: 100;
   border: none;
-  background-color: transparent;
+  background: transparent;
   color: black;
   transition: color 0.6s;
   &:after {

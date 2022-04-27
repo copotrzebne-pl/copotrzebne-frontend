@@ -44,8 +44,7 @@ export default () => {
   }) => {
     const client = await getRestClient(process.env.API_URL)
 
-    const u = await client.post(API.panel.users, user)
-    console.log(u)
+    await client.post(API.panel.users, user)
   }
 
   const handleSubmit = useCallback(

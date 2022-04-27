@@ -15,6 +15,7 @@ export default styled(Copyright)`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 120;
   position: fixed;
   bottom: 0;
   left: 0;
