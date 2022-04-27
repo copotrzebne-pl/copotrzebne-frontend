@@ -110,13 +110,15 @@ export default () => {
                   </h3>
                 </LastUpdate>
               </DetailsRow>
-              <DetailsRow>
-                <BankAccount>
-                  <TranslatedText value="bankAccount" />
-                  <br />
-                  <span>{selectedPlace.bankAccount || '-'}</span>
-                </BankAccount>
-              </DetailsRow>
+              {selectedPlace.bankAccount && (
+                <DetailsRow>
+                  <BankAccount>
+                    <TranslatedText value="bankAccount" />
+                    <br />
+                    <span>{selectedPlace.bankAccount || '-'}</span>
+                  </BankAccount>
+                </DetailsRow>
+              )}
               <DetailsRow>
                 <Links>
                   {selectedPlace.placeLink?.homepage && (
