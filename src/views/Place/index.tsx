@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import format from 'date-fns/format'
 import marker from 'assets/marker.svg'
 import { breakpoint } from 'themes/breakpoints'
@@ -116,6 +116,38 @@ export default () => {
                   <br />
                   <span>{selectedPlace.bankAccount || '-'}</span>
                 </BankAccount>
+              </DetailsRow>
+              <DetailsRow>
+                <Links>
+                  {selectedPlace.placeLink?.homepage && (
+                    <div>
+                      <Link to={selectedPlace.placeLink?.homepage || '/'}>
+                        <TranslatedText value="homepageLink" />
+                      </Link>
+                    </div>
+                  )}
+                  {selectedPlace.placeLink?.facebook && (
+                    <div>
+                      <Link to={selectedPlace.placeLink?.facebook || '/'}>
+                        <TranslatedText value="facebookLink" />
+                      </Link>
+                    </div>
+                  )}
+                  {selectedPlace.placeLink?.signup && (
+                    <div>
+                      <Link to={selectedPlace.placeLink?.signup || '/'}>
+                        <TranslatedText value="signupLink" />
+                      </Link>
+                    </div>
+                  )}
+                  {selectedPlace.placeLink?.fundraising && (
+                    <div>
+                      <Link to={selectedPlace.placeLink?.fundraising || '/'}>
+                        <TranslatedText value="fundraisingLink" />
+                      </Link>
+                    </div>
+                  )}
+                </Links>
               </DetailsRow>
             </PlaceDetailsWrapper>
           </PlaceDetails>
@@ -280,6 +312,28 @@ const BankAccount = styled.div`
     font-size: 0.9rem;
     font-weight: 500;
     margin: 0.2rem 0;
+  }
+`
+
+const Links = styled.div`
+  margin-top: 1.6rem;
+  color: #8d99b2;
+  font-size: 0.8rem;
+  font-weight: 400;
+
+  div {
+    margin: 0.5rem 0;
+  }
+
+  a {
+    color: #0076ff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.2rem 0;
+  }
+
+  a:hover {
+    color: #0055ff;
   }
 `
 
