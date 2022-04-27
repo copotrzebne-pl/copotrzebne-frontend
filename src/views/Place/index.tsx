@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import PageTitle from 'components/PageTitle'
 import { usePanelContext } from 'contexts/panelContext'
 import styled from 'styled-components'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import format from 'date-fns/format'
 import marker from 'assets/marker.svg'
 import { breakpoint } from 'themes/breakpoints'
@@ -121,30 +121,46 @@ export default () => {
                 <Links>
                   {selectedPlace.placeLink?.homepage && (
                     <div>
-                      <Link to={selectedPlace.placeLink?.homepage || '/'}>
-                        <TranslatedText value="homepageLink" />
-                      </Link>
+                      <a
+                        href={selectedPlace.placeLink?.homepage || '/'}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        &#8594; <TranslatedText value="homepageLink" />
+                      </a>
                     </div>
                   )}
                   {selectedPlace.placeLink?.facebook && (
                     <div>
-                      <Link to={selectedPlace.placeLink?.facebook || '/'}>
-                        <TranslatedText value="facebookLink" />
-                      </Link>
+                      <a
+                        href={selectedPlace.placeLink?.facebook || '/'}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        &#8594; <TranslatedText value="facebookLink" />
+                      </a>
                     </div>
                   )}
                   {selectedPlace.placeLink?.signup && (
                     <div>
-                      <Link to={selectedPlace.placeLink?.signup || '/'}>
-                        <TranslatedText value="signupLink" />
-                      </Link>
+                      <a
+                        href={selectedPlace.placeLink?.signup || '/'}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        &#8594; <TranslatedText value="signupLink" />
+                      </a>
                     </div>
                   )}
                   {selectedPlace.placeLink?.fundraising && (
                     <div>
-                      <Link to={selectedPlace.placeLink?.fundraising || '/'}>
-                        <TranslatedText value="fundraisingLink" />
-                      </Link>
+                      <a
+                        href={selectedPlace.placeLink?.fundraising || '/'}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        &#8594; <TranslatedText value="fundraisingLink" />
+                      </a>
                     </div>
                   )}
                 </Links>

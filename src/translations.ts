@@ -125,23 +125,23 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Номер банківського рахунку для внесення пожертв'
   },
   homepageLink: {
-    namePl: 'Link do strony głównej',
-    nameEn: 'Home page link',
-    nameUa: 'Посилання на домашню сторінку'
+    namePl: 'Link do strony domowej organizacji',
+    nameEn: 'Link to the home page of the organization',
+    nameUa: 'Посилання на домашню сторінку організації'
   },
   facebookLink: {
-    namePl: 'Link do Facebooka',
-    nameEn: 'Facebook link',
-    nameUa: 'Посилання на фейсбук'
+    namePl: 'Link do strony organizacji na Facebooku',
+    nameEn: 'Link to the Facebook page of the organization',
+    nameUa: 'Посилання на сторінку організації у Facebook'
   },
   signupLink: {
-    namePl: 'Link do zapisu',
-    nameEn: 'Sign up link',
-    nameUa: 'посилання для реєстрації'
+    namePl: 'Link do zapisów na wolontariat w tym miejscu',
+    nameEn: 'Link to register for voluntary service at this location',
+    nameUa: 'Посилання для реєстрації на волонтерську службу тут'
   },
   fundraisingLink: {
-    namePl: 'Link do zbiórki',
-    nameEn: 'Fundraising link',
+    namePl: 'Link do zbiórki pieniężnej',
+    nameEn: 'Link to fundraising',
     nameUa: 'Посилання на збір коштів'
   },
   save: {
