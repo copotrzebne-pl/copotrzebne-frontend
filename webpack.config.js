@@ -8,7 +8,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const ENTRY_FILE = './src/index.tsx'
-const OUTPUT_FILE = 'index.js'
+const OUTPUT_FILE = 'index-[contenthash].js'
 const MODE_PRODUCTION = 'production'
 const MODE_DEVELOPMENT = 'development'
 
@@ -71,6 +71,14 @@ module.exports = (env, { mode } = { mode: MODE_PRODUCTION }) => ({
     }),
     mode === MODE_DEVELOPMENT && new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({ template: './public/index.html' }),
+    new HtmlWebpackPlugin({
+      template: './public/index_en.html',
+      filename: 'index_en.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: './public/index_ua.html',
+      filename: 'index_ua.html'
+    }),
     new CopyWebpackPlugin({
       patterns: [
         // relative path is from src
