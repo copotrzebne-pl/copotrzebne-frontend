@@ -22,7 +22,10 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     checkIfAuthorized()
   )
   const [language, setLanguage] = useState<string>(
-    () => localStorage.getItem('lang') || DEFAULT_LANGUAGE
+    () =>
+      localStorage.getItem('lang') ||
+      document?.documentElement?.lang ||
+      DEFAULT_LANGUAGE
   )
   const [userValue, setUserValue] = useState<User | null>(null)
   const [ownedPlaces, setOwnedPlaces] = useState<(Place & { id: string })[]>([])
