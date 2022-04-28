@@ -1,0 +1,40 @@
+name: Deploy to Dev on Convox
+
+on:
+  push:
+    branches:
+      - 'develop'
+      - 'chore/convox'
+
+env:
+  # Required by Convox actions
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+concurrency: deploy-dev-convox
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        id: checkout
+        uses: actions/checkout@v1
+      - name: login
+        id: login
+        uses: convox/action-login@v1
+        with:
+          password: ${{ secrets.CONVOX_DEPLOY_KEY }}
+          host: ${{ secrets.CONVOX_HOST }}
+      - name: build
+        id: build
+        uses: convox/action-build@v1
+        with:
+          rack: dev
+          app: front-copotrzebne-pl
+      - name: promote
+        id: promote
+        uses: convox/action-promote@v1
+        with:
+          rack: dev
+          app: front-copotrzebne-pl
+          release: ${{ steps.build.outputs.release }}

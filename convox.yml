@@ -1,0 +1,17 @@
+services:
+  web:
+    build: .
+    domain:
+      - ${DOMAIN}
+      - ${DOMAIN_PL}
+      - ${DOMAIN_EN}
+      - ${DOMAIN_UA}
+    health: /health
+    port: 3000
+    scale:
+      count: 1
+      cpu: 32
+      memory: 64
+    environment:
+      - PORT=3000
+      - "*"
