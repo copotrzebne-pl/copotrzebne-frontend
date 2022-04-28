@@ -1,18 +1,20 @@
-name: Deploy to Dev
+name: Deploy to Dev on Convox
 
 on:
   push:
     branches:
       - 'develop'
 
+env:
+  # Required by Convox actions
+  ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
 concurrency: deploy-dev
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
       API_URL: ${{ secrets.API_URL }}
       GTM_CONTAINER_ID: ${{ secrets.GTM_CONTAINER_ID }}
     steps:
@@ -24,12 +26,24 @@ jobs:
         run: yarn
       - name: Build
         run: yarn build
-      - name: Deploy
-        uses: reggionick/s3-deploy@v3
+      - name: Remove dev dependencies
+        run: yarn --production --frozen-lockfile
+      - name: login
+        id: login
+        uses: convox/action-login@v1
         with:
-          folder: build
-          bucket: ${{ secrets.S3_BUCKET_DEV }}
-          bucket-region: ${{ secrets.AWS_REGION }}
-          dist-id: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID_DEV }}
-          invalidation: /*
-          private: true
+          password: ${{ secrets.CONVOX_DEPLOY_KEY }}
+          host: ${{ secrets.CONVOX_HOST }}
+      - name: build
+        id: build
+        uses: convox/action-build@v1
+        with:
+          rack: dev
+          app: front-copotrzebne-pl
+      - name: promote
+        id: promote
+        uses: convox/action-promote@v1
+        with:
+          rack: dev
+          app: front-copotrzebne-pl
+          release: ${{ steps.build.outputs.release }}

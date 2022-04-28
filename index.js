@@ -1,8 +1,19 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const express = require('express')
+const winston = require('winston')
+const expressWinston = require('express-winston')
+
 const app = express()
 const PORT = process.env.PORT || 3000
 
 const buildDir = `${__dirname}/build`
+
+app.use(
+  expressWinston.logger({
+    transports: [new winston.transports.Console()],
+    ignoreRoute: req => req.path === '/health'
+  })
+)
 
 app.use(
   express.static(buildDir, { maxAge: 2629746, immutable: true, index: false })
@@ -31,5 +42,11 @@ app.use((req, res) => {
       break
   }
 })
+
+app.use(
+  expressWinston.errorLogger({
+    transports: [new winston.transports.Console()]
+  })
+)
 
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
