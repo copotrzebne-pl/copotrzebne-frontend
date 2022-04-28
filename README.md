@@ -5,20 +5,36 @@
 create .env file in the main project folder. Variables are read by `dotenv-webpack` plugin and accessible in the project
 by using `process.env.<VARIABLE_NAME>` syntax
 
+## Server
+
+Files are served by Express JS configured in `index.js` file.
+
 ## Hosting
 
-App is hosted on S3 and exposed to end users using Cloud Front Distribution responsible for caching.
+App is hosted on Convox, app: `front-copotrzebne-pl`, and exposed to end users using Cloud Front Distribution
+responsible for caching.
 
-Cache headers are forced by Cloud Front but could be set as metadata
-for each file on S3.
+Cache headers are set by application: small for HTML files, big for static files.
+
+To support multiple languages, Cloud Front pass header `Host`. Based on it, in `index.js` file, app detects language
+and proper index file is sent - one of:
+
+* `index.html`
+* `index_en.html`
+* `index_ua.html`
+
+## Logs
+
+To display logs you can use commands:
+
+```bash
+convox logs -a front-copotrzebne-pl -r copotrzebne-pl/dev
+convox logs -a front-copotrzebne-pl -r copotrzebne-pl/pro
+```
 
 ## Deployment
 
 Deployment is done using GitHub Actions.
-
-App is build and uploaded as static files to S3 bucket.
-
-After successful upload cache in Cloud Front Distribution is invalidated.
 
 Workflows
 
