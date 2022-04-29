@@ -11,8 +11,14 @@ Files are served by Express JS configured in `index.js` file.
 
 ## Hosting
 
-App is hosted on Convox, app: `front-copotrzebne-pl`, and exposed to end users using Cloud Front Distribution
-responsible for caching.
+App is hosted on one Convox rack `copotrzebne-pl/pro`, apps:
+
+- dev: `dev-front-copotrzebne-pl`
+- pro: `front-copotrzebne-pl`
+
+and exposed to end users using Cloud Front Distribution responsible for caching from 2 AWS accounts (dev and pro).
+
+We are using one Convox rack to minimize costs.
 
 Cache headers are set by application: small for HTML files, big for static files.
 
@@ -28,7 +34,7 @@ and proper index file is sent - one of:
 To display logs you can use commands:
 
 ```bash
-convox logs -a front-copotrzebne-pl -r copotrzebne-pl/dev
+convox logs -a dev-front-copotrzebne-pl -r copotrzebne-pl/pro
 convox logs -a front-copotrzebne-pl -r copotrzebne-pl/pro
 ```
 
