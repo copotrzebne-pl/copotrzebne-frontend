@@ -24,7 +24,7 @@ export default () => {
   } = usePanelContext()
   const { idOrSlug } = useParams()
   const formattedPlaceDescription = useTextTransformToHTML(
-    selectedPlace?.comment
+    selectedPlace?.additionalDescription
   )
   const { groupedDemands, demandsKeys } = useGroupDemands(demands)
 

@@ -175,14 +175,14 @@ export default () => {
           </FormGroup>
           <FormGroup>
             <Label>
-              <TranslatedText value="comment" />
+              <TranslatedText value="additionalDescription" />
             </Label>
             <TextInput
-              id="comment"
+              id="description"
               type="text"
-              placeholder="comment"
-              value={place.comment || ''}
-              onChange={e => setPlaceValue('comment', e.target.value)}
+              placeholder="description"
+              value={place.additionalDescription || ''}
+              onChange={e => setPlaceValue('additionalDescription', e.target.value)}
             />
           </FormGroup>
           <FormGroup>

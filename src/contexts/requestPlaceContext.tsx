@@ -24,7 +24,7 @@ export const RequestPlaceContextProvider = ({
     street: '',
     buildingNumber: '',
     apartment: '',
-    comment: '',
+    additionalDescription: '',
     email: '',
     phone: '',
     workingHours: '',
@@ -54,7 +54,7 @@ export const RequestPlaceContextProvider = ({
         userEmail: userEmail.trim(),
 
         apartment: place.apartment || undefined,
-        comment: place.comment || undefined,
+        comment: place.additionalDescription || undefined,
         email: place.email || undefined,
         phone: place.phone || undefined,
         bankAccount: place.bankAccount || undefined,

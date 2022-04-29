@@ -74,7 +74,7 @@ export type Place = {
   apartment: string
   buildingNumber: string
   city: string
-  comment: string
+  additionalDescription: string
   email: string
   id?: string
   latitude: string | null
@@ -98,7 +98,7 @@ export type PlaceDto = {
   apartment: string
   buildingNumber: string
   city: string
-  comment: string
+  additionalDescription: string
   email: string
   latitude: string | null
   longitude: string | null
