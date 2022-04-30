@@ -7,7 +7,6 @@ import format from 'date-fns/format'
 import marker from 'assets/marker.svg'
 import { breakpoint } from 'themes/breakpoints'
 import FacebookShareButton from 'components/FacebookShareButton'
-import { Helmet } from 'react-helmet-async'
 import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import { useTextTransformToHTML } from 'hooks/useTextTransformToHTML'
@@ -55,22 +54,6 @@ export default () => {
 
   return (
     <>
-      <Helmet>
-        <title>Copotrzebne.pl - pomagamy pomagać</title>
-        <meta
-          property="og:title"
-          content="Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy."
-        />
-        <meta
-          name="description"
-          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
-        />
-        <meta
-          property="og:description"
-          content="Zobacz aktualne zbiórki rzeczowe i pomagaj z nami!"
-        />
-        <meta property="og:type" content="website" />
-      </Helmet>
       <Container>
         {selectedPlace !== null && (
           <PlaceDetails>

@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { useState, useCallback, SyntheticEvent } from 'react'
-import { Helmet } from 'react-helmet-async'
 import {
   LoginForm,
   FormGroup,
@@ -12,6 +10,7 @@ import { useUserContext } from 'contexts/userContext'
 import PageTitle from 'components/PageTitle'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
+import { SyntheticEvent, useCallback, useState } from 'react'
 
 export default () => {
   const [login, setLogin] = useState<string>('')
@@ -28,15 +27,6 @@ export default () => {
 
   return (
     <>
-      <Helmet>
-        <title>
-          Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Panel logowania
-        </title>
-        <meta
-          name="description"
-          content="Panel logowania organizacji. Dodaj zbiórkę i zarządzaj aktualnymi potrzebami w twoim punkcie pomocowym."
-        />
-      </Helmet>
       <Container>
         <PageTitle>
           <TranslatedText value="logIn" />

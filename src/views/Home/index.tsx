@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { useEffect, useCallback, useState } from 'react'
-import { Helmet } from 'react-helmet-async'
 import { usePanelContext } from 'contexts/panelContext'
 import mapPlaceholderUrl from 'assets/map-background.svg'
 import { ReactComponent as MapIcon } from 'assets/map-icon.svg'
@@ -82,24 +81,6 @@ export default () => {
 
   return (
     <>
-      <Helmet>
-        <title>
-          Copotrzebne.pl - pomagamy pomagać. Razem dla Ukrainy. Strona główna
-        </title>
-        <meta
-          property="og:title"
-          content="Copotrzebne.pl - pomagamy pomagać."
-        />
-        <meta
-          name="description"
-          content="Lokalizator punktów pomocowych w twojej okolicy. Znajdź aktualne zbiórki rzeczowe i wesprzyj fundacje i prywatne firmy w niesieniu pomocy osobom uchodźczym z Ukrainy"
-        />
-        <meta
-          property="og:description"
-          content="Zobacz aktualne zbiórki rzeczowe i pomagaj z nami!"
-        />
-        <meta property="og:type" content="website" />
-      </Helmet>
       <Container>
         <ContentWrapper>
           <IntroductionWrapper>
