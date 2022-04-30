@@ -38,12 +38,12 @@ jobs:
         id: build
         uses: convox/action-build@v1
         with:
-          rack: dev
-          app: front-copotrzebne-pl
+          rack: pro
+          app: dev-front-copotrzebne-pl
       - name: promote
         id: promote
         uses: convox/action-promote@v1
         with:
-          rack: dev
-          app: front-copotrzebne-pl
+          rack: pro
+          app: dev-front-copotrzebne-pl
           release: ${{ steps.build.outputs.release }}
