@@ -42,6 +42,9 @@ const PlaceBoxComponent = ({
         {place.workingHours && (
           <PlaceDetails>{place.workingHours || ''}</PlaceDetails>
         )}
+        {place.additionalDescription && (
+          <PlaceDetails>{place.additionalDescription || ''}</PlaceDetails>
+        )}
       </PlaceNameAndAddress>
       {!place.lastUpdatedAt && (
         <LastUpdate>

@@ -379,5 +379,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Nie znaleziono',
     nameEn: 'Not found',
     nameUa: 'Не знайдено'
+  },
+  additionalDescription: {
+    namePl: 'Dodatkowy opis miejsca',
+    nameEn: 'Additional description',
+    nameUa: 'Additional description',
   }
 }
