@@ -405,11 +405,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   internalAnnouncementsSubtitle2: {
     namePl:
-      'Zamieszczaj ważne informacje dla ciebie i innych koordynatorów. Masz za dużo produktów w magazynie lub nie masz jak przewieźć produktów? Poinformuj innych i umówcie się na wzajemną pomoc.',
+      'Zamieszczaj ważne informacje dla ciebie i innych koordynatorów. Masz za dużo produktów w magazynie lub nie masz jak przewieźć produktów? Poinformuj innych i umówcie się na wzajemną pomoc. Potrzebujesz wolontariuszy? Umieść publiczne ogłoszenie.',
     nameEn:
-      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance.',
+      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.',
     nameUa:
-      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance.'
+      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.'
   },
   announcementTitle: {
     namePl: 'Tytuł ogłoszenia',

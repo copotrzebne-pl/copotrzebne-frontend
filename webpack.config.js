@@ -92,7 +92,7 @@ module.exports = (env, { mode } = { mode: MODE_PRODUCTION }) => ({
     })
   ].filter(Boolean),
   devServer: {
-    port: 3001,
+    port: 3000,
     hot: true,
     historyApiFallback: true
   },
