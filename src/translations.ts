@@ -384,5 +384,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Dodatkowy opis miejsca',
     nameEn: 'Additional description',
     nameUa: 'Additional description',
+  },
+  whatisneededPl: {
+    namePl: 'copotrzebne.pl',
+    nameEn: 'whatisneeded.pl',
+    nameUa: 'shchopotribno.pl',
   }
 }
