@@ -17,4 +17,33 @@ export type ItemMenu = {
   translationKey: string
   action?: () => void
   hidden?: boolean
+  highlighted?: boolean
+}
+
+export type AnnouncementComment = {
+  id: string
+  createdAt: string
+  message: string
+  updatedAt: string
+}
+
+export type InternalAnnouncement = {
+  title: string
+  message: string
+  contactInfo: string
+  startDate?: string
+  endDate?: string
+  createdAt: string
+  id: string
+  announcementComments: AnnouncementComment[]
+  placeId: string
+}
+
+export type PublicAnnouncement = {
+  id: string
+  title: string
+  message: string
+  contactInfo: string
+  placeId: string
+  createdAt: string
 }

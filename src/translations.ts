@@ -149,6 +149,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Save',
     nameUa: 'Зберегти'
   },
+  cancel: {
+    namePl: 'Anuluj',
+    nameEn: 'Cancel',
+    nameUa: 'Cancel'
+  },
   pageNotFound: {
     namePl: 'Nie znaleziono strony',
     nameEn: 'Page not found',
@@ -505,6 +510,127 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl:
       'Tutaj jest link do zapisu na wolontariat w naszych punktach: {link}',
     nameEn: 'Here is a link to signup for a volunteer work, link: {link}',
-    nameUa: ''
+    nameUa: 'Ось посилання для реєстрації на волонтерську роботу, посилання:'
+  },
+  menuInternalAnnouncements: {
+    namePl: 'Zobacz ogłoszenia',
+    nameEn: 'Browse announcements',
+    nameUa: 'Browse announcements'
+  },
+  internalAnnouncementsTitle: {
+    namePl: 'Lista ogłoszeń',
+    nameEn: 'Announcements list',
+    nameUa: 'Announcements list'
+  },
+  internalAnnouncementsSubtitle: {
+    namePl:
+      'Przeglądaj i dodawaj ogłoszenia. Możesz dodawać ogłoszenia publiczne widoczne na stronie głównej, oraz wewnętrzne, które są widoczne tylko dla innych zalogowanych osób koordynujących zbiórki.',
+    nameEn:
+      'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.',
+    nameUa:
+      'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.'
+  },
+  internalAnnouncementsSubtitle2: {
+    namePl:
+      'Zamieszczaj ważne informacje dla ciebie i innych koordynatorów. Masz za dużo produktów w magazynie lub nie masz jak przewieźć produktów? Poinformuj innych i umówcie się na wzajemną pomoc. Potrzebujesz wolontariuszy? Umieść publiczne ogłoszenie.',
+    nameEn:
+      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.',
+    nameUa:
+      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.'
+  },
+  announcementTitle: {
+    namePl: 'Tytuł ogłoszenia',
+    nameEn: 'Announcement title',
+    nameUa: 'Announcement title'
+  },
+  announcementMessage: {
+    namePl: 'Treść',
+    nameEn: 'Message',
+    nameUa: 'Message'
+  },
+  announcementStartDate: {
+    namePl: 'Data rozpoczęcia',
+    nameEn: 'Start date',
+    nameUa: 'Start date'
+  },
+  announcementEndDate: {
+    namePl: 'Data zakończenia',
+    nameEn: 'End date',
+    nameUa: 'End date'
+  },
+  failedToCreateAnnouncement: {
+    namePl: 'Nie udało się zapisać ogłoszenia',
+    nameEn: 'Failed to save the announcement',
+    nameUa: 'Failed to save the announcement'
+  },
+  announcementContact: {
+    namePl: 'Informacje kontaktowe',
+    nameEn: 'Contact info',
+    nameUa: 'Contact info'
+  },
+  announcementPlace: {
+    namePl: 'Miejsce',
+    nameEn: 'Place',
+    nameUa: 'Place'
+  },
+  addComment: {
+    namePl: 'Skomentuj',
+    nameEn: 'Add comment',
+    nameUa: 'Add comment'
+  },
+  hideComments: {
+    namePl: 'Ukryj komentarze',
+    nameEn: 'Hide comments',
+    nameUa: 'Hide comments'
+  },
+  showComments: {
+    namePl: 'Pokaż komentarze',
+    nameEn: 'Show comments',
+    nameUa: 'Show comments'
+  },
+  author: {
+    namePl: 'Autor',
+    nameEn: 'Author',
+    nameUa: 'Author'
+  },
+  addedAt: {
+    namePl: 'Dodano:',
+    nameEn: 'Added:',
+    nameUa: 'Added:'
+  },
+  validUntil: {
+    namePl: 'Ważne do:',
+    nameEn: 'Valid until:',
+    nameUa: 'Valid until:'
+  },
+  contactInformation: {
+    namePl: 'Dane kontaktowe:',
+    nameEn: 'Contact:',
+    nameUa: 'Contact:'
+  },
+  addInternalAnnouncement: {
+    namePl: 'Dodaj ogłoszenie wewnętrzne',
+    nameEn: 'Add internal announcement',
+    nameUa: 'Add internal announcement'
+  },
+  addPublicAnnouncement: {
+    namePl: 'Dodaj ogłoszenie publiczne',
+    nameEn: 'Add public announcement',
+    nameUa: 'Add public announcement'
+  },
+  publicAnnouncements: {
+    namePl: 'Ogłoszenia publiczne',
+    nameEn: 'Public announcements',
+    nameUa: 'Public announcements'
+  },
+  internalAnnouncements: {
+    namePl: 'Ogłoszenia wewnętrzne',
+    nameEn: 'Internal announcements',
+    nameUa: 'Internal announcements'
+  },
+  addAnnouncement: {
+    namePl: 'Dodaj ogłoszenie',
+    nameEn: 'Add announcement',
+    nameUa: 'Add announcement'
   }
 }
