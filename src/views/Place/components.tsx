@@ -424,7 +424,7 @@ export const FaqDialog = styled(Dialog)`
     & > div {
       padding: 4.2rem 1.2rem 0;
       overflow-y: auto;
-      padding-bottom: 2.2rem;
+      padding-bottom: 10rem;
       ${breakpoint.sm`
         width: 520px;
         max-height: 80%;
