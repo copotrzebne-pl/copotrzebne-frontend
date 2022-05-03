@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import sanitize from 'sanitize-html'
+import { isAfter } from 'date-fns'
 
 import { InternalAnnouncement, PublicAnnouncement } from '../../types/types'
 import { formatDate, formatDateWithTime } from '../../utils/date'
@@ -24,45 +25,52 @@ const Announcement = ({
       announcement: PublicAnnouncement
       place?: Place
       type: 'public'
-    }) => (
-  <div className={className}>
-    <Row>
-      <div>
-        <Title>{announcement.title}</Title>
-        <PlaceName>
-          <TranslatedText value="author" />: {place?.name || '-'}
-        </PlaceName>
-      </div>
+    }) => {
+  const isInactive =
+    type === 'internal' &&
+    announcement.endDate &&
+    isAfter(new Date(), new Date(announcement.endDate))
 
-      <Dates>
-        <DateText>
-          <TranslatedText value="addedAt" />{' '}
-          {formatDateWithTime(announcement.createdAt)}
-        </DateText>
-        {type === 'internal' && announcement.endDate && (
+  return (
+    <div className={`${className}${isInactive ? ' inactive' : ''}`}>
+      <Row>
+        <div>
+          <Title>{announcement.title}</Title>
+          <PlaceName>
+            <TranslatedText value="author" />: {place?.name || '-'}
+          </PlaceName>
+        </div>
+
+        <Dates>
           <DateText>
-            <TranslatedText value="validUntil" />{' '}
-            {formatDate(announcement.endDate)}
+            <TranslatedText value="addedAt" />{' '}
+            {formatDateWithTime(announcement.createdAt)}
           </DateText>
-        )}
-      </Dates>
-    </Row>
-    <Text>{sanitize(announcement.message)}</Text>
+          {type === 'internal' && announcement.endDate && (
+            <DateText>
+              <TranslatedText value="validUntil" />{' '}
+              {formatDate(announcement.endDate)}
+            </DateText>
+          )}
+        </Dates>
+      </Row>
+      <Text>{sanitize(announcement.message)}</Text>
 
-    <Text>
-      <b>
-        <TranslatedText value="contactInformation" />
-      </b>
-      <div>{sanitize(announcement.contactInfo)}</div>
-    </Text>
-    {type === 'internal' && (
-      <Comments
-        comments={announcement.announcementComments}
-        announcementId={announcement.id}
-      />
-    )}
-  </div>
-)
+      <Text>
+        <b>
+          <TranslatedText value="contactInformation" />
+        </b>
+        <div>{sanitize(announcement.contactInfo)}</div>
+      </Text>
+      {type === 'internal' && (
+        <Comments
+          comments={announcement.announcementComments}
+          announcementId={announcement.id}
+        />
+      )}
+    </div>
+  )
+}
 
 const Row = styled.div`
   display: inline-flex;
@@ -119,4 +127,12 @@ export default styled(Announcement)`
   border-radius: 15px;
   margin-bottom: 2rem;
   padding: 1rem 1.2rem 0;
+
+  &.inactive {
+    color: ${({ theme }) => theme.colors.grey300};
+
+    ${PlaceName}, ${Title}, ${Text} {
+      color: ${({ theme }) => theme.colors.grey400};
+    }
+  }
 `
