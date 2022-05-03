@@ -9,8 +9,8 @@ export function useGroupDemands(demands: Demand[]) {
 
   //group demands by category priority
   const groupDemands = useCallback(
-    (): Record<string, Demand[]> =>
-      demands.reduce(
+    (demandsList: Demand[]): Record<string, Demand[]> =>
+      demandsList.reduce(
         (acc, item) => (
           (acc[item.supply.category.priority] = [
             ...(acc[item.supply.category.priority] || []),
@@ -20,17 +20,19 @@ export function useGroupDemands(demands: Demand[]) {
         ),
         {} as Record<number, Demand[]>
       ),
-    [demands]
+    []
   )
 
   useEffect(() => {
-    const grouped = groupDemands()
-    setGroupedDemands(grouped)
-    setDemandsKeys(
-      Object.keys(grouped)
-        .map(key => parseInt(key))
-        .sort((a, b) => (a < b ? -1 : 1))
-    )
+    if (demands.length > 0) {
+      const grouped = groupDemands(demands)
+      setGroupedDemands(grouped)
+      setDemandsKeys(
+        Object.keys(grouped)
+          .map(key => parseInt(key))
+          .sort((a, b) => (a < b ? -1 : 1))
+      )
+    }
   }, [demands])
 
   return {
