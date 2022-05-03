@@ -5,12 +5,13 @@ import { Page, routes } from '../routes'
 import logoImage from '../assets/uk-heart.svg'
 import logoKok from '../assets/logo-kok.png'
 import { breakpoint } from '../themes/breakpoints'
+import TranslatedText from './TranslatedText'
 
 const MainLogo = ({ onClick }: { onClick: () => void }) => (
   <Container>
     <LogoLink to={routes[Page.HOME]} onClick={onClick}>
       <Logo src={logoImage} />
-      <LogoText>copotrzebne.pl</LogoText>
+      <LogoText><TranslatedText value="whatisneededPl"/></LogoText>
     </LogoLink>
     <KokWrapper target="_blank" href="https://otwarty.krakow.pl/">
       <LogoKok src={logoKok} />
