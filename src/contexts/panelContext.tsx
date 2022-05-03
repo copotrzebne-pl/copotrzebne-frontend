@@ -59,10 +59,19 @@ export const PanelContextProvider = ({
     async (placeId: string) => {
       try {
         const client = await getRestClient(process.env.API_URL)
-        const response = await client.get<null, Place>(
+        const fetchedPlace = await client.get<null, Place>(
           API.panel.getPlace.replace(':id', placeId)
         )
-        setSelectedPlace(response)
+        const fetchedDemands = await client.get<null, Demand[]>(
+          API.panel.getPlaceDemands.replace(':id', fetchedPlace.id || placeId)
+        )
+        setSelectedPlace({
+          ...fetchedPlace,
+          demands: fetchedDemands,
+          urgentDemands: (fetchedDemands || []).filter(
+            demand => demand.priority.importance === 2
+          )
+        })
       } catch {
         setError({ ...errors, places: 'Fetching places error' })
       }

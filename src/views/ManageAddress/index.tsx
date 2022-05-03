@@ -28,7 +28,7 @@ export default () => {
     street: '',
     buildingNumber: '',
     apartment: '',
-    comment: '',
+    additionalDescription: '',
     email: '',
     phone: '',
     workingHours: '',
@@ -176,14 +176,14 @@ export default () => {
         </FormGroup>
         <FormGroup>
           <Label>
-            <TranslatedText value="comment" />
+            <TranslatedText value="additionalDescription" />
           </Label>
           <TextInput
-            id="comment"
+            id="description"
             type="text"
-            placeholder="comment"
-            value={editedPlace.comment || ''}
-            onChange={e => setValue('comment', e.target.value)}
+            placeholder="description"
+            value={editedPlace.additionalDescription || ''}
+            onChange={e => setValue('additionalDescription', e.target.value)}
           />
         </FormGroup>
         <FormGroup>

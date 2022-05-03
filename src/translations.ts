@@ -385,6 +385,92 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Not found',
     nameUa: 'Не знайдено'
   },
+  additionalDescription: {
+    namePl: 'Dodatkowy opis miejsca',
+    nameEn: 'Additional description',
+    nameUa: 'Additional description'
+  },
+  howCanIHelp: {
+    namePl: 'Jak mogę pomóc?',
+    nameEn: 'How can I help?',
+    nameUa: 'Чим я можу допомогти?'
+  },
+  organizationLabel: {
+    namePl: 'Organizacja',
+    nameEn: 'Organization',
+    nameUa: 'Організація'
+  },
+  faqTitle_1: {
+    namePl: 'Chcę przekazać pieniądze, jak mogę to zrobić?',
+    nameEn: 'I want to donate money, how can I do it?',
+    nameUa: 'Я хочу пожертвувати гроші, як я можу це зробити?'
+  },
+  faqText_1: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
+  faqTitle_2: {
+    namePl: 'Chcę przekazać żywność, jak mogę to zrobić?',
+    nameEn: 'I want to donate goods, how can I do it?',
+    nameUa: 'Я хочу пожертвувати товари, як я можу це зробити?'
+  },
+  faqText_2: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
+  faqTitle_3: {
+    namePl: 'Mieszkam dość daleko od tej organizacji, jak mogę pomóc?',
+    nameEn: 'I live quite far away from this organisation, how can I help?',
+    nameUa: 'Я живу досить далеко від цієї організації, як я можу допомогти?'
+  },
+  faqText_3: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
+  faqTitle_4: {
+    namePl: 'Mieszkam za granicą, jak mogę pomóc?',
+    nameEn: 'I live abroad, how can I help?',
+    nameUa: 'Я живу за кордоном, як я можу допомогти?'
+  },
+  faqText_4: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
+  faqTitle_5: {
+    namePl: 'Nie mam dużo wolnego czasu, jak mogę pomóc?',
+    nameEn: 'I don’t have much free time, how can I help?',
+    nameUa: 'У мене мало вільного часу, чим я можу допомогти?'
+  },
+  faqText_5: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
+  faqTitle_6: {
+    namePl: 'Nie mam aktualnie środów, jak mogę pomóc?',
+    nameEn: 'I can’t afford to buy a lot of goods, how can I help?',
+    nameUa:
+      'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
+  },
+  faqText_6: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
+  faqTitle_7: {
+    namePl: 'Mam trochę wolnego czasu, jak mogę pomóc?',
+    nameEn: 'I have some spare time, how can I help?',
+    nameUa: 'У мене є вільний час, як я можу допомогти?'
+  },
+  faqText_7: {
+    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+  },
   menuInternalAnnouncements: {
     namePl: 'Zobacz ogłoszenia',
     nameEn: 'Browse announcements',
