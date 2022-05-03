@@ -3,6 +3,7 @@ import { createContext, ReactNode, useContext, useState } from 'react'
 import { InternalAnnouncement, PublicAnnouncement } from '../types/types'
 import { getRestClient } from '../clients/restClient'
 import { API } from '../endpoints'
+import { isAfter } from 'date-fns'
 
 type InternalAnnouncementDto = {
   title: string
@@ -139,11 +140,24 @@ export const AnnouncementsContextProvider = ({
         API.panel.internalAnnouncements
       )) as InternalAnnouncement[]
 
+      const sortedAnnouncementsInternal = announcementsInternal.sort(
+        (_a, b) => {
+          const isInactive =
+            b.endDate && isAfter(new Date(), new Date(b.endDate))
+
+          if (isInactive) {
+            return -1
+          }
+
+          return 1
+        }
+      )
+
       const announcementsPublic = (await client.get(
         API.panel.publicAnnouncements
       )) as PublicAnnouncement[]
 
-      setInternalAnnouncements(announcementsInternal)
+      setInternalAnnouncements(sortedAnnouncementsInternal)
       setPublicAnnouncements(announcementsPublic)
     } catch (e) {
       console.error(e)
