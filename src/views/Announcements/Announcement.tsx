@@ -1,47 +1,66 @@
 import styled from 'styled-components'
 import sanitize from 'sanitize-html'
 
-import { InternalAnnouncement } from '../../types/types'
+import { InternalAnnouncement, PublicAnnouncement } from '../../types/types'
 import { formatDate, formatDateWithTime } from '../../utils/date'
 import { Place } from '../../contexts/types'
 import Comments from './Comments'
+import TranslatedText from '../../components/TranslatedText'
 
 const Announcement = ({
   announcement,
   className,
-  place
-}: {
-  className?: string
-  announcement: InternalAnnouncement
-  place?: Place
-}) => (
+  place,
+  type
+}:
+  | {
+      className?: string
+      announcement: InternalAnnouncement
+      place?: Place
+      type: 'internal'
+    }
+  | {
+      className?: string
+      announcement: PublicAnnouncement
+      place?: Place
+      type: 'public'
+    }) => (
   <div className={className}>
     <Row>
       <div>
         <Title>{announcement.title}</Title>
-        <PlaceName>Autor: {place?.name || '-'}</PlaceName>
+        <PlaceName>
+          <TranslatedText value="author" />: {place?.name || '-'}
+        </PlaceName>
       </div>
 
       <Dates>
         <DateText>
-          Dodano: {formatDateWithTime(announcement.createdAt)}
+          <TranslatedText value="addedAt" />{' '}
+          {formatDateWithTime(announcement.createdAt)}
         </DateText>
-        {announcement.endDate && (
-          <DateText>Ważne do: {formatDate(announcement.endDate)}</DateText>
+        {type === 'internal' && announcement.endDate && (
+          <DateText>
+            <TranslatedText value="validUntil" />{' '}
+            {formatDate(announcement.endDate)}
+          </DateText>
         )}
       </Dates>
     </Row>
     <Text>{sanitize(announcement.message)}</Text>
 
     <Text>
-      <b>Dane kontaktowe: </b>
+      <b>
+        <TranslatedText value="contactInformation" />
+      </b>
       <div>{sanitize(announcement.contactInfo)}</div>
     </Text>
-
-    <Comments
-      comments={announcement.announcementComments}
-      announcementId={announcement.id}
-    />
+    {type === 'internal' && (
+      <Comments
+        comments={announcement.announcementComments}
+        announcementId={announcement.id}
+      />
+    )}
   </div>
 )
 

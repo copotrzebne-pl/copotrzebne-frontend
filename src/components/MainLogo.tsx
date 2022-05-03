@@ -11,7 +11,9 @@ const MainLogo = ({ onClick }: { onClick: () => void }) => (
   <Container>
     <LogoLink to={routes[Page.HOME]} onClick={onClick}>
       <Logo src={logoImage} />
-      <LogoText><TranslatedText value="whatisneededPl"/></LogoText>
+      <LogoText>
+        <TranslatedText value="whatisneededPl" />
+      </LogoText>
     </LogoLink>
     <KokWrapper target="_blank" href="https://otwarty.krakow.pl/">
       <LogoKok src={logoKok} />

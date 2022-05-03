@@ -63,6 +63,11 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
           >
             <TranslatedText value="editPlaceData" />
           </PanelButton>
+          <PanelButton
+            onClick={() => navigate(routes[Page.BROWSE_ANNOUNCEMENTS])}
+          >
+            <TranslatedText value="addAnnouncement" />
+          </PanelButton>
           {demands.length === 0 && (
             <SectionTitle>
               <TranslatedText value="noDemandsReported" />

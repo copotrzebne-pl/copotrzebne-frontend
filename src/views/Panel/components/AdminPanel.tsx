@@ -56,6 +56,10 @@ const AdminPanel = ({ className }: { className?: string }) => {
             <TranslatedText value="createUser" />
           </Button>
           <br />
+          <Button onClick={() => navigate(routes[Page.BROWSE_ANNOUNCEMENTS])}>
+            <TranslatedText value="addAnnouncement" />
+          </Button>
+          <br />
           <Button
             onClick={() =>
               navigate(routes[Page.MANAGE_PLACE].replace(':id', 'new'))
