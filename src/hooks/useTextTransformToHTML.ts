@@ -14,7 +14,7 @@ export function useTextTransformToHTML(value: string | undefined) {
       .split(' ')
       .map(part =>
         URL_REGEX.test(part)
-          ? `<a target='_blank' href=${part}>${part}</a>`
+          ? `<a target='_blank' href='${part}'>${part}</a>`
           : `${part} `
       )
       .join('')
@@ -29,7 +29,7 @@ export const linkify = (text: string): string =>
     .split(' ')
     .map(part =>
       URL_REGEX.test(part)
-        ? `<a target='_blank' href=${part}>${part}</a>`
+        ? `<a target='_blank' href='${part}'>${part}</a>`
         : `${part} `
     )
     .join('')

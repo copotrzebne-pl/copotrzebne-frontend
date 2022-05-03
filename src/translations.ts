@@ -632,5 +632,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Dodaj ogłoszenie',
     nameEn: 'Add announcement',
     nameUa: 'Add announcement'
+  },
+  whatisneededPl: {
+    namePl: 'copotrzebne.pl',
+    nameEn: 'whatisneeded.pl',
+    nameUa: 'shchopotribno.pl'
   }
 }
