@@ -26,7 +26,6 @@ const PageTitle = ({
 export default styled(PageTitle)`
   width: 100%;
   padding: 1.4rem 1.2rem;
-  padding-left: 3.6rem;
   position: relative;
   display: flex;
   flex-direction: row;
