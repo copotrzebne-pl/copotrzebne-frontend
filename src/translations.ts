@@ -586,5 +586,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Ogłoszenia wewnętrzne',
     nameEn: 'Internal announcements',
     nameUa: 'Internal announcements'
+  },
+  addAnnouncement: {
+    namePl: 'Dodaj ogłoszenie',
+    nameEn: 'Add announcement',
+    nameUa: 'Add announcement'
   }
 }
