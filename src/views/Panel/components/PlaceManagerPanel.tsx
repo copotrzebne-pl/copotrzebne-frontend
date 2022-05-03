@@ -193,7 +193,7 @@ const PlaceTitle = styled.h3`
   text-align: center;
   line-height: 1.3;
   font-size: 1.9rem;
-  color: #f6ce01;
+  color: ${({ theme }) => theme.colors.ink};
   margin: 0 0 1.2rem 0;
   padding: 0 1.2rem;
 `

@@ -25,20 +25,23 @@ const PageHeader = ({
   const menuRef = useRef(null)
   useClickOutside(menuRef, () => setOpened(false))
 
-  const items = menuItems.map(({ route, translationKey, hidden, action }) => {
-    const onClick = () => {
-      if (action) action()
-      closeMenu()
-    }
+  const items = menuItems.map(
+    ({ route, translationKey, hidden, action, highlighted }) => {
+      const onClick = () => {
+        if (action) action()
+        closeMenu()
+      }
 
-    return (
-      !hidden && (
-        <MenuItem to={route} onClick={onClick}>
-          <TranslatedText value={translationKey} />
-        </MenuItem>
+      const Item = highlighted ? HighlightedMenuItem : MenuItem
+      return (
+        !hidden && (
+          <Item to={route} onClick={onClick}>
+            <TranslatedText value={translationKey} />
+          </Item>
+        )
       )
-    )
-  })
+    }
+  )
 
   return (
     <header className={className}>
@@ -156,6 +159,10 @@ const MenuItem = styled(Link)`
   font-weight: 500;
   padding: 0.6rem;
   white-space: nowrap;
+`
+
+const HighlightedMenuItem = styled(MenuItem)`
+  color: ${({ theme }) => theme.colors.blue};
 `
 
 const MenuList = styled.div`

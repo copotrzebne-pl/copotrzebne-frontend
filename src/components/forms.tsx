@@ -14,6 +14,23 @@ export const TextInput = styled.input`
   }
 `
 
+export const TextArea = styled.textarea`
+  display: inline-block;
+  width: 100%;
+  border: 1px solid rgba(150, 147, 147, 0.8);
+  border-radius: 10px;
+  color: ${({ theme }) => theme.colors.grey900};
+  height: 45px;
+  padding: 1rem 1rem;
+  resize: vertical;
+  min-height: 5rem;
+
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.grey};
+    opacity: 0.7;
+  }
+`
+
 export const Label = styled.label`
   display: inline-block;
   margin-bottom: 0.6rem;
