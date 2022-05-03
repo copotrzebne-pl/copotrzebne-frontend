@@ -1,6 +1,7 @@
 import Calendar from 'react-calendar'
 import { SyntheticEvent, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { addDays } from 'date-fns'
 
 import PanelButton from '../../components/PanelButton'
 import {
@@ -15,11 +16,11 @@ import { formatDate } from '../../utils/date'
 import Button from '../../components/Button'
 import { useClickOutside } from '../../hooks/useClickOutside'
 import { useUserContext } from '../../contexts/userContext'
-import { useInternalAnnouncementsContext } from '../../contexts/internalAnnouncementsContext'
+import { useAnnouncementsContext } from '../../contexts/announcementsContext'
 import { breakpoint } from '../../themes/breakpoints'
 import { Select } from '../../components/Select'
 
-const AnnouncementForm = () => {
+const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
   const {
     isFormVisible,
     setFormVisible,
@@ -27,9 +28,8 @@ const AnnouncementForm = () => {
     formData,
     error,
     saveAnnouncement,
-    setOwnedPlaces,
     fetchAnnouncements
-  } = useInternalAnnouncementsContext()
+  } = useAnnouncementsContext()
 
   const { fetchOwnedPlaces, ownedPlaces } = useUserContext()
 
@@ -40,7 +40,6 @@ const AnnouncementForm = () => {
   useEffect(() => {
     if (ownedPlaces && ownedPlaces.length > 0) {
       setFormValue('placeId', ownedPlaces[0].id)
-      setOwnedPlaces(ownedPlaces)
     }
   }, [ownedPlaces])
 
@@ -74,7 +73,13 @@ const AnnouncementForm = () => {
   if (!isFormVisible) {
     return (
       <StyledPanelButton onClick={() => setFormVisible(true)}>
-        Dodaj ogłoszenie
+        <TranslatedText
+          value={
+            type === 'internal'
+              ? 'addInternalAnnouncement'
+              : 'addPublicAnnouncement'
+          }
+        />
       </StyledPanelButton>
     )
   }
@@ -130,78 +135,86 @@ const AnnouncementForm = () => {
           onChange={e => setFormValue('contactInfo', e.target.value)}
         />
       </FormGroup>
-      <FormGroup>
-        <Label>
-          <TranslatedText value="announcementStartDate" />
-          <RequiredDecorator>*</RequiredDecorator>
-        </Label>
-        <TextInput
-          id="announcementStartDate"
-          type="text"
-          placeholder="Start date"
-          autoComplete="off"
-          required
-          value={formData.startDate ? formatDate(formData.startDate) : ''}
-          onClick={() => setCurrentCalendar('start')}
-          onChange={e => {
-            if (e.target.value === '') {
-              setFormValue('startDate', '')
-            }
-          }}
-        />
-        {currentCalendar === 'start' && (
-          <CalendarWrapper>
-            <CalendarBox ref={calendarStartDateRef}>
-              <Calendar
-                minDate={new Date()}
-                maxDate={
-                  formData.endDate ? new Date(formData.endDate) : undefined
-                }
-                onChange={(date: Date) => {
-                  setCurrentCalendar(null)
-                  setFormValue('startDate', date.toISOString())
-                }}
-              />
-            </CalendarBox>
-          </CalendarWrapper>
-        )}
-      </FormGroup>
-      <FormGroup>
-        <Label>
-          <TranslatedText value="announcementEndDate" />
-          <RequiredDecorator>*</RequiredDecorator>
-        </Label>
-        <TextInput
-          id="announcementEndDate"
-          type="text"
-          placeholder="End date"
-          required
-          autoComplete="off"
-          value={formData.endDate ? formatDate(formData.endDate) : ''}
-          onClick={() => setCurrentCalendar('end')}
-          onChange={e => {
-            if (e.target.value === '') {
-              setFormValue('endDate', '')
-            }
-          }}
-        />
 
-        {currentCalendar === 'end' && (
-          <CalendarWrapper>
-            <CalendarBox ref={calendarEndDateRef}>
-              <Calendar
-                minDate={
-                  formData.startDate ? new Date(formData.startDate) : new Date()
+      {type === 'internal' && (
+        <>
+          <FormGroup>
+            <Label>
+              <TranslatedText value="announcementStartDate" />
+              <RequiredDecorator>*</RequiredDecorator>
+            </Label>
+            <TextInput
+              id="announcementStartDate"
+              type="text"
+              placeholder="Start date"
+              autoComplete="off"
+              required
+              value={formData.startDate ? formatDate(formData.startDate) : ''}
+              onClick={() => setCurrentCalendar('start')}
+              onChange={e => {
+                if (e.target.value === '') {
+                  setFormValue('startDate', '')
                 }
-                onChange={(date: Date) => {
-                  setCurrentCalendar(null)
-                  setFormValue('endDate', date.toISOString())
-                }}
-              />
-            </CalendarBox>
-          </CalendarWrapper>
-        )}
-      </FormGroup>
+              }}
+            />
+            {currentCalendar === 'start' && (
+              <CalendarWrapper>
+                <CalendarBox ref={calendarStartDateRef}>
+                  <Calendar
+                    minDate={new Date()}
+                    maxDate={
+                      formData.endDate ? new Date(formData.endDate) : undefined
+                    }
+                    onChange={(date: Date) => {
+                      setCurrentCalendar(null)
+                      setFormValue('startDate', date.toISOString())
+                    }}
+                  />
+                </CalendarBox>
+              </CalendarWrapper>
+            )}
+          </FormGroup>
+          <FormGroup>
+            <Label>
+              <TranslatedText value="announcementEndDate" />
+              <RequiredDecorator>*</RequiredDecorator>
+            </Label>
+            <TextInput
+              id="announcementEndDate"
+              type="text"
+              placeholder="End date"
+              required
+              autoComplete="off"
+              value={formData.endDate ? formatDate(formData.endDate) : ''}
+              onClick={() => setCurrentCalendar('end')}
+              onChange={e => {
+                if (e.target.value === '') {
+                  setFormValue('endDate', '')
+                }
+              }}
+            />
+
+            {currentCalendar === 'end' && (
+              <CalendarWrapper>
+                <CalendarBox ref={calendarEndDateRef}>
+                  <Calendar
+                    minDate={
+                      formData.startDate
+                        ? addDays(new Date(formData.startDate), 1)
+                        : addDays(new Date(), 1)
+                    }
+                    onChange={(date: Date) => {
+                      setCurrentCalendar(null)
+                      setFormValue('endDate', date.toISOString())
+                    }}
+                  />
+                </CalendarBox>
+              </CalendarWrapper>
+            )}
+          </FormGroup>
+        </>
+      )}
+
       <ButtonWrapper>
         <Button type="submit">
           <TranslatedText value="save" />

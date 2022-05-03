@@ -38,3 +38,12 @@ export type InternalAnnouncement = {
   announcementComments: AnnouncementComment[]
   placeId: string
 }
+
+export type PublicAnnouncement = {
+  id: string
+  title: string
+  message: string
+  contactInfo: string
+  placeId: string
+  createdAt: string
+}

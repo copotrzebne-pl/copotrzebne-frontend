@@ -41,7 +41,7 @@ export const getPanelMenuItems = ({
   handleLogout: () => void
 }) => [
   {
-    route: routes[Page.BROWSE_INTERNAL_ANNOUNCEMENTS],
+    route: routes[Page.BROWSE_ANNOUNCEMENTS],
     translationKey: 'menuInternalAnnouncements',
     hidden: !authorized,
     highlighted: true

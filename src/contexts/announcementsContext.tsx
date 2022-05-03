@@ -1,9 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
-import { Place } from './types'
-import { InternalAnnouncement } from '../types/types'
+
+import { InternalAnnouncement, PublicAnnouncement } from '../types/types'
 import { getRestClient } from '../clients/restClient'
 import { API } from '../endpoints'
-import { PanelContext } from './panelContext'
 
 type InternalAnnouncementDto = {
   title: string
@@ -19,24 +18,26 @@ type CommentDto = {
   message: string
 }
 
-type InternalAnnouncementsContextValue = {
+type AnnouncementsContextValue = {
   isFormVisible: boolean
   setFormVisible: (value: boolean) => void
   setFormValue: (key: keyof InternalAnnouncementDto, value: string) => void
   formData: InternalAnnouncementDto
   saveAnnouncement: () => Promise<void>
   error: string
-  ownedPlaces: Place[]
-  setOwnedPlaces: (places: Place[]) => void
   fetchAnnouncements: () => Promise<void>
-  announcements: InternalAnnouncement[]
+  internalAnnouncements: InternalAnnouncement[]
+  publicAnnouncements: PublicAnnouncement[]
   submitComment: (commentDto: CommentDto) => Promise<void>
+  currentAnnouncementsType: 'internal' | 'public'
+  setCurrentAnnouncementsType: (t: 'internal' | 'public') => void
+  resetContext: () => void
 }
 
-export const InternalAnnouncementsContext =
-  createContext<InternalAnnouncementsContextValue>(null)
+export const AnnouncementsContext =
+  createContext<AnnouncementsContextValue>(null)
 
-export const InternalAnnouncementsContextProvider = ({
+export const AnnouncementsContextProvider = ({
   children
 }: {
   children: ReactNode
@@ -51,8 +52,17 @@ export const InternalAnnouncementsContextProvider = ({
     endDate: ''
   })
   const [error, setError] = useState<string>('')
-  const [ownedPlaces, setOwnedPlaces] = useState<Place[]>([])
-  const [announcements, setAnnouncements] = useState<InternalAnnouncement[]>([])
+  const [internalAnnouncements, setInternalAnnouncements] = useState<
+    InternalAnnouncement[]
+  >([])
+
+  const [publicAnnouncements, setPublicAnnouncements] = useState<
+    PublicAnnouncement[]
+  >([])
+
+  const [currentAnnouncementsType, setCurrentAnnouncementsType] = useState<
+    'internal' | 'public'
+  >('internal')
 
   const setFormValue = (key: keyof InternalAnnouncementDto, value: string) => {
     setError('')
@@ -63,12 +73,49 @@ export const InternalAnnouncementsContextProvider = ({
     })
   }
 
+  const resetContext = () => {
+    setFormData({
+      title: '',
+      message: '',
+      contactInfo: '',
+      placeId: '',
+      startDate: '',
+      endDate: ''
+    })
+
+    setError('')
+
+    setFormVisible(false)
+
+    setInternalAnnouncements([])
+
+    setPublicAnnouncements([])
+  }
+
   const saveAnnouncement = async () => {
     const client = await getRestClient(process.env.API_URL)
     setError('')
 
+    const dto = {
+      title: formData.title,
+      message: formData.message,
+      contactInfo: formData.contactInfo,
+      placeId: formData.placeId,
+      startDate:
+        currentAnnouncementsType === 'internal'
+          ? formData.startDate
+          : undefined,
+      endDate:
+        currentAnnouncementsType === 'internal' ? formData.endDate : undefined
+    }
+
+    const endpoint =
+      currentAnnouncementsType === 'internal'
+        ? API.panel.internalAnnouncements
+        : API.panel.publicAnnouncements
+
     try {
-      await client.post(API.panel.internalAnnouncements, formData)
+      await client.post(endpoint, dto)
       setFormData({
         title: '',
         message: '',
@@ -88,12 +135,16 @@ export const InternalAnnouncementsContextProvider = ({
     const client = await getRestClient(process.env.API_URL)
 
     try {
-      const data = await client.get<InternalAnnouncement[]>(
-        API.panel.internalAnnouncementsActive
-      )
+      const announcementsInternal = (await client.get(
+        API.panel.internalAnnouncements
+      )) as InternalAnnouncement[]
 
-      console.log('DATA', data)
-      setAnnouncements(data)
+      const announcementsPublic = (await client.get(
+        API.panel.publicAnnouncements
+      )) as PublicAnnouncement[]
+
+      setInternalAnnouncements(announcementsInternal)
+      setPublicAnnouncements(announcementsPublic)
     } catch (e) {
       console.error(e)
     }
@@ -106,7 +157,7 @@ export const InternalAnnouncementsContextProvider = ({
   }
 
   return (
-    <InternalAnnouncementsContext.Provider
+    <AnnouncementsContext.Provider
       value={{
         isFormVisible,
         setFormVisible,
@@ -114,20 +165,22 @@ export const InternalAnnouncementsContextProvider = ({
         formData,
         saveAnnouncement,
         fetchAnnouncements,
-        setOwnedPlaces,
-        ownedPlaces,
         error,
         submitComment,
-        announcements
+        internalAnnouncements,
+        publicAnnouncements,
+        currentAnnouncementsType,
+        setCurrentAnnouncementsType,
+        resetContext
       }}
     >
       {children}
-    </InternalAnnouncementsContext.Provider>
+    </AnnouncementsContext.Provider>
   )
 }
 
-export const useInternalAnnouncementsContext = () => {
-  const ctx = useContext(InternalAnnouncementsContext)
+export const useAnnouncementsContext = () => {
+  const ctx = useContext(AnnouncementsContext)
   if (!ctx) {
     throw new Error(
       'You are outside InternalAnnouncementsContext! Make sure components are wrapped in proper provider.'

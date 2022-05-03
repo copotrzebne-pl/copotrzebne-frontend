@@ -20,14 +20,14 @@ import ManageAddress from 'views/ManageAddress'
 import ManageDemands from 'views/ManageDemands'
 import RequestPlace from 'views/RequestPlace'
 import CreateUser from 'views/CreateUser'
-import InternalAnnouncements from 'views/InternalAnnouncements'
-import { InternalAnnouncementsContextProvider } from './contexts/internalAnnouncementsContext'
+import { AnnouncementsContextProvider } from './contexts/announcementsContext'
+import Announcements from './views/Announcements'
 
 export default () => (
   <ThemeProvider>
     <RequestPlaceContextProvider>
       <PanelContextProvider>
-        <InternalAnnouncementsContextProvider>
+        <AnnouncementsContextProvider>
           <BrowserRouter>
             <UserContextProvider>
               <Routes>
@@ -48,8 +48,8 @@ export default () => (
                       element={<ManageDemands />}
                     />
                     <Route
-                      path={routes[Page.BROWSE_INTERNAL_ANNOUNCEMENTS]}
-                      element={<InternalAnnouncements />}
+                      path={routes[Page.BROWSE_ANNOUNCEMENTS]}
+                      element={<Announcements />}
                     />
                     <Route
                       path={routes[Page.CREATE_USER]}
@@ -75,7 +75,7 @@ export default () => (
               </Routes>
             </UserContextProvider>
           </BrowserRouter>
-        </InternalAnnouncementsContextProvider>
+        </AnnouncementsContextProvider>
       </PanelContextProvider>
     </RequestPlaceContextProvider>
   </ThemeProvider>

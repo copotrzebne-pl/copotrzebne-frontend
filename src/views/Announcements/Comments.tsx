@@ -8,7 +8,7 @@ import { AnnouncementComment } from '../../types/types'
 import { formatDateWithTime } from '../../utils/date'
 import Button from '../../components/Button'
 import { ChatIcon } from './ChatIcon'
-import { useInternalAnnouncementsContext } from '../../contexts/internalAnnouncementsContext'
+import { useAnnouncementsContext } from '../../contexts/announcementsContext'
 
 const Comments = ({
   comments,
@@ -17,8 +17,7 @@ const Comments = ({
   comments: AnnouncementComment[]
   announcementId: string
 }) => {
-  const { submitComment, fetchAnnouncements } =
-    useInternalAnnouncementsContext()
+  const { submitComment, fetchAnnouncements } = useAnnouncementsContext()
 
   const [comment, setComment] = useState('')
   const [commentsVisible, setCommentsVisible] = useState(false)
@@ -60,7 +59,8 @@ const Comments = ({
               </Icon>
               <div>
                 <TextCreated>
-                  Utworzono: {formatDateWithTime(c.updatedAt)}
+                  <TranslatedText value="addedAt" />{' '}
+                  {formatDateWithTime(c.updatedAt)}
                 </TextCreated>
                 <Text>{sanitize(c.message)}</Text>
               </div>

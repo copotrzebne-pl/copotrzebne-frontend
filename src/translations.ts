@@ -546,5 +546,45 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Pokaż komentarze',
     nameEn: 'Show comments',
     nameUa: 'Show comments'
+  },
+  author: {
+    namePl: 'Autor',
+    nameEn: 'Author',
+    nameUa: 'Author'
+  },
+  addedAt: {
+    namePl: 'Dodano:',
+    nameEn: 'Added:',
+    nameUa: 'Added:'
+  },
+  validUntil: {
+    namePl: 'Ważne do:',
+    nameEn: 'Valid until:',
+    nameUa: 'Valid until:'
+  },
+  contactInformation: {
+    namePl: 'Dane kontaktowe:',
+    nameEn: 'Contact:',
+    nameUa: 'Contact:'
+  },
+  addInternalAnnouncement: {
+    namePl: 'Dodaj ogłoszenie wewnętrzne',
+    nameEn: 'Add internal announcement',
+    nameUa: 'Add internal announcement'
+  },
+  addPublicAnnouncement: {
+    namePl: 'Dodaj ogłoszenie publiczne',
+    nameEn: 'Add public announcement',
+    nameUa: 'Add public announcement'
+  },
+  publicAnnouncements: {
+    namePl: 'Ogłoszenia publiczne',
+    nameEn: 'Public announcements',
+    nameUa: 'Public announcements'
+  },
+  internalAnnouncements: {
+    namePl: 'Ogłoszenia wewnętrzne',
+    nameEn: 'Internal announcements',
+    nameUa: 'Internal announcements'
   }
 }

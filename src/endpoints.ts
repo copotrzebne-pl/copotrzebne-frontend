@@ -21,7 +21,8 @@ const panel = {
   removeAllDemands: '/places/:id/demands',
   internalAnnouncements: '/announcements/internal',
   internalAnnouncementsActive: '/announcements/internal/active',
-  internalAnnouncementsComment: '/announcement-comments'
+  internalAnnouncementsComment: '/announcement-comments',
+  publicAnnouncements: '/announcements/public'
 } as const
 
 export const API = { main, panel }
