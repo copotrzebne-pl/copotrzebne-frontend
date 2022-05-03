@@ -4,7 +4,6 @@ import ThemeProvider from 'themes/ThemeProvider'
 import { PanelContextProvider } from 'contexts/panelContext'
 import { UserContextProvider } from 'contexts/userContext'
 import { RequestPlaceContextProvider } from 'contexts/requestPlaceContext'
-import { HelmetProvider } from 'react-helmet-async'
 
 import Layout from 'themes/Layout'
 import PanelLayout from 'themes/PanelLayout'
@@ -21,12 +20,14 @@ import ManageAddress from 'views/ManageAddress'
 import ManageDemands from 'views/ManageDemands'
 import RequestPlace from 'views/RequestPlace'
 import CreateUser from 'views/CreateUser'
+import { AnnouncementsContextProvider } from './contexts/announcementsContext'
+import Announcements from './views/Announcements'
 
 export default () => (
-  <HelmetProvider>
-    <ThemeProvider>
-      <RequestPlaceContextProvider>
-        <PanelContextProvider>
+  <ThemeProvider>
+    <RequestPlaceContextProvider>
+      <PanelContextProvider>
+        <AnnouncementsContextProvider>
           <BrowserRouter>
             <UserContextProvider>
               <Routes>
@@ -46,7 +47,10 @@ export default () => (
                       path={routes[Page.MANAGE_DEMANDS]}
                       element={<ManageDemands />}
                     />
-                    <Route />
+                    <Route
+                      path={routes[Page.BROWSE_ANNOUNCEMENTS]}
+                      element={<Announcements />}
+                    />
                     <Route
                       path={routes[Page.CREATE_USER]}
                       element={<CreateUser />}
@@ -71,8 +75,8 @@ export default () => (
               </Routes>
             </UserContextProvider>
           </BrowserRouter>
-        </PanelContextProvider>
-      </RequestPlaceContextProvider>
-    </ThemeProvider>
-  </HelmetProvider>
+        </AnnouncementsContextProvider>
+      </PanelContextProvider>
+    </RequestPlaceContextProvider>
+  </ThemeProvider>
 )

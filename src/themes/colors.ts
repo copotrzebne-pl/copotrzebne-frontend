@@ -12,6 +12,7 @@ export default {
   grey200: '#EEEEEE',
   grey100: '#F9F9FA',
   ink: '#180C3C',
+  blueLight: '#0076ff2b',
   blue: '#0076FF',
   grey: '#969393',
   pink: '#DC3673',

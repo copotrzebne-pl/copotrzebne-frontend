@@ -41,17 +41,15 @@ export const getPanelMenuItems = ({
   handleLogout: () => void
 }) => [
   {
-    route: routes[Page.REQUEST_NEW_PLACE],
-    translationKey: 'requestPlace'
+    route: routes[Page.BROWSE_ANNOUNCEMENTS],
+    translationKey: 'menuInternalAnnouncements',
+    hidden: !authorized,
+    highlighted: true
   },
   {
     route: routes[Page.PANEL],
     translationKey: 'menuPanel',
     hidden: !authorized
-  },
-  {
-    route: routes[Page.ABOUT],
-    translationKey: 'menuAboutUs'
   },
   {
     route: routes[Page.LOGIN],

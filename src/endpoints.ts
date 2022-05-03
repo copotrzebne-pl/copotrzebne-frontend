@@ -18,7 +18,11 @@ const panel = {
   saveDemand: '/demands',
   editDemand: '/demands/:id',
   removeDemand: '/demands/:id',
-  removeAllDemands: '/places/:id/demands'
+  removeAllDemands: '/places/:id/demands',
+  internalAnnouncements: '/announcements/internal',
+  internalAnnouncementsActive: '/announcements/internal/active',
+  internalAnnouncementsComment: '/announcement-comments',
+  publicAnnouncements: '/announcements/public'
 } as const
 
 export const API = { main, panel }

@@ -182,7 +182,9 @@ export default () => {
               type="text"
               placeholder="description"
               value={place.additionalDescription || ''}
-              onChange={e => setPlaceValue('additionalDescription', e.target.value)}
+              onChange={e =>
+                setPlaceValue('additionalDescription', e.target.value)
+              }
             />
           </FormGroup>
           <FormGroup>

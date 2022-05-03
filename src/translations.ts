@@ -149,6 +149,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Save',
     nameUa: 'Зберегти'
   },
+  cancel: {
+    namePl: 'Anuluj',
+    nameEn: 'Cancel',
+    nameUa: 'Cancel'
+  },
   pageNotFound: {
     namePl: 'Nie znaleziono strony',
     nameEn: 'Page not found',
@@ -383,11 +388,254 @@ export const translations: { [value: string]: DictionaryEntry } = {
   additionalDescription: {
     namePl: 'Dodatkowy opis miejsca',
     nameEn: 'Additional description',
-    nameUa: 'Additional description',
+    nameUa: 'Additional description'
+  },
+  howCanIHelp: {
+    namePl: 'Jak mogę pomóc?',
+    nameEn: 'How can I help?',
+    nameUa: 'Чим я можу допомогти?'
+  },
+  organizationLabel: {
+    namePl: 'Organizacja',
+    nameEn: 'Organization',
+    nameUa: 'Організація'
+  },
+  faqAccountNumberDescription: {
+    namePl:
+      'Aktualny numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
+    nameEn:
+      "Organization's current account number: <br /><b>{bankAccountNumber}</b>",
+    nameUa:
+      'Номер поточного рахунку організації: <br /><b>{bankAccountNumber}</b>'
+  },
+  faqFundraisingDescription: {
+    namePl: 'Strona gdzie można nas wspomóc: {fundraising}',
+    nameEn: 'Page where you can help us: {fundraising}',
+    nameUa: 'Сторінка, де ви можете нам допомогти: {fundraising}'
+  },
+  faqTitle_1: {
+    namePl: 'Chcę przekazać pieniądze, jak mogę to zrobić?',
+    nameEn: 'I want to donate money, how can I do it?',
+    nameUa: 'Я хочу пожертвувати гроші, як я можу це зробити?'
+  },
+  faqText_1: {
+    namePl:
+      'Weryfikujemy organizacje przed dodaniem ich do systemu. Numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
+    nameEn:
+      'We verify organizations before adding them to the system. Organization Account Number: <br /><b>{bankAccountNumber}</b>',
+    nameUa:
+      'Ми перевіряємо організації, перш ніж додати їх до системи. Номер рахунку організації: <br /><b>{bankAccountNumber}</b>'
+  },
+  faqTitle_2: {
+    namePl: 'Chcę przekazać żywność, jak mogę to zrobić?',
+    nameEn: 'I want to donate goods, how can I do it?',
+    nameUa: 'Я хочу пожертвувати товари, як я можу це зробити?'
+  },
+  faqText_2: {
+    namePl:
+      'Wszystkie dary można przywieść pod adres: <br /> <b>{address}</b> <br /> Godziny otwarcia: <b>{workingHours}</b>',
+    nameEn:
+      'All donations can be brought to: <br /> <b> {address} </b> <br /> Opening hours: <b> {workingHours} </b>',
+    nameUa: ''
+  },
+  faqTitle_3: {
+    namePl: 'Mieszkam dość daleko od tej organizacji, jak mogę pomóc?',
+    nameEn: 'I live quite far away from this organisation, how can I help?',
+    nameUa: 'Я живу досить далеко від цієї організації, як я можу допомогти?'
+  },
+  faqText_3: {
+    namePl: '',
+    nameEn: '',
+    nameUa: ''
+  },
+  faqTitle_4: {
+    namePl: 'Mieszkam za granicą, jak mogę pomóc?',
+    nameEn: 'I live abroad, how can I help?',
+    nameUa: 'Я живу за кордоном, як я можу допомогти?'
+  },
+  faqText_4: {
+    namePl: `Nawet będąc daleko możesz pomóc na wiele sposobów!<br /><br />
+      Część organizacji prowadzi zbiórki pieniężne, a dzięki wpłatom ma fundusze realizację bieżących potrzeb Osób które korzystają z ich pomocy.<br />
+      Jeżeli chcesz, możesz wesprzeć tą organizację finansowo: <br />
+      <b>{bankAccountNumber}</b>
+      <br />
+      {fundraising}
+      <br /><br />
+      Jeśli reprezentujesz firmę lub fundację, lub po prostu masz możliwość zorganizowana większej dostawy darów z zagranicy to świetnie! Prosimy Cię jedynie o kontakt z organizacją i uprzedzenie jej o wielkości i terminie dostawy <br /><b>{contact} {address} <br/> {workingHours}</b>
+      <br /><br />
+      Poza pomocą rzeczową i finansową, możesz także pomóc rozpowszechniając informację o potrzebach danej organizacji oraz możliwych sposobach jej wsparcia - być może dzięki Twojej sieci kontaktów dotrzemy do organizacji i firm, które będą w stanie wesprzeć organizację rzeczowo lub finansowo.<br />
+      A może sam(a) zorganizujesz zbiórkę wsród znajomych?`,
+    nameEn: `Even if you live far away, there are still quite a few ways of helping!<br /><br />
+      Some organisations have fundraising sites or collect funds on dedicated bank accounts; those funds are later used to buy needed supplies and provide them to People in need.
+      If you want you can support this organisation financially <br />
+      <b>{bankAccountNumber}</b>
+      <br />
+      {fundraising}
+      <br /><br />
+
+      If you represent a charity organisation, foundation or a company, or you just simply can organise a bigger transport with supplies - that’s great! We only kindly ask you to inform the organisation about incoming delivery, specifying the date of arrival and size of the package. You can find the organisation contact info here: <br /><b>{contact} {address} <br/> {workingHours}</b>
+      <br /><br />
+      Apart from delivering supplies and financial support, you can also help by spreading the information about the organisation’s needs and possible ways to provide help - perhaps thanks to your social network we will be able to reach companies and foundations able to support this organisation even more?<br />
+      Or maybe you can organise a fundraising or goods collection event among your friends? :)  
+      `,
+    nameUa: ''
+  },
+  faqTitle_5: {
+    namePl: 'Nie mam dużo wolnego czasu, jak mogę pomóc?',
+    nameEn: 'I don’t have much free time, how can I help?',
+    nameUa: 'У мене мало вільного часу, чим я можу допомогти?'
+  },
+  faqText_5: {
+    namePl: '',
+    nameEn: '',
+    nameUa: ''
+  },
+  faqTitle_6: {
+    namePl: 'Nie mam aktualnie środów, jak mogę pomóc?',
+    nameEn: 'I can’t afford to buy a lot of goods, how can I help?',
+    nameUa:
+      'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
+  },
+  faqText_6: {
+    namePl: '',
+    nameEn: '',
+    nameUa: ''
+  },
+  faqTitle_7: {
+    namePl: 'Mam trochę wolnego czasu, jak mogę pomóc?',
+    nameEn: 'I have some spare time, how can I help?',
+    nameUa: 'У мене є вільний час, як я можу допомогти?'
+  },
+  faqText_7: {
+    namePl:
+      'Tutaj jest link do zapisu na wolontariat w naszych punktach: {link}',
+    nameEn: 'Here is a link to signup for a volunteer work, link: {link}',
+    nameUa: 'Ось посилання для реєстрації на волонтерську роботу, посилання:'
+  },
+  menuInternalAnnouncements: {
+    namePl: 'Zobacz ogłoszenia',
+    nameEn: 'Browse announcements',
+    nameUa: 'Browse announcements'
+  },
+  internalAnnouncementsTitle: {
+    namePl: 'Lista ogłoszeń',
+    nameEn: 'Announcements list',
+    nameUa: 'Announcements list'
+  },
+  internalAnnouncementsSubtitle: {
+    namePl:
+      'Przeglądaj i dodawaj ogłoszenia. Możesz dodawać ogłoszenia publiczne widoczne na stronie głównej, oraz wewnętrzne, które są widoczne tylko dla innych zalogowanych osób koordynujących zbiórki.',
+    nameEn:
+      'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.',
+    nameUa:
+      'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.'
+  },
+  internalAnnouncementsSubtitle2: {
+    namePl:
+      'Zamieszczaj ważne informacje dla ciebie i innych koordynatorów. Masz za dużo produktów w magazynie lub nie masz jak przewieźć produktów? Poinformuj innych i umówcie się na wzajemną pomoc. Potrzebujesz wolontariuszy? Umieść publiczne ogłoszenie.',
+    nameEn:
+      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.',
+    nameUa:
+      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.'
+  },
+  announcementTitle: {
+    namePl: 'Tytuł ogłoszenia',
+    nameEn: 'Announcement title',
+    nameUa: 'Announcement title'
+  },
+  announcementMessage: {
+    namePl: 'Treść',
+    nameEn: 'Message',
+    nameUa: 'Message'
+  },
+  announcementStartDate: {
+    namePl: 'Data rozpoczęcia',
+    nameEn: 'Start date',
+    nameUa: 'Start date'
+  },
+  announcementEndDate: {
+    namePl: 'Data zakończenia',
+    nameEn: 'End date',
+    nameUa: 'End date'
+  },
+  failedToCreateAnnouncement: {
+    namePl: 'Nie udało się zapisać ogłoszenia',
+    nameEn: 'Failed to save the announcement',
+    nameUa: 'Failed to save the announcement'
+  },
+  announcementContact: {
+    namePl: 'Informacje kontaktowe',
+    nameEn: 'Contact info',
+    nameUa: 'Contact info'
+  },
+  announcementPlace: {
+    namePl: 'Miejsce',
+    nameEn: 'Place',
+    nameUa: 'Place'
+  },
+  addComment: {
+    namePl: 'Skomentuj',
+    nameEn: 'Add comment',
+    nameUa: 'Add comment'
+  },
+  hideComments: {
+    namePl: 'Ukryj komentarze',
+    nameEn: 'Hide comments',
+    nameUa: 'Hide comments'
+  },
+  showComments: {
+    namePl: 'Pokaż komentarze',
+    nameEn: 'Show comments',
+    nameUa: 'Show comments'
+  },
+  author: {
+    namePl: 'Autor',
+    nameEn: 'Author',
+    nameUa: 'Author'
+  },
+  addedAt: {
+    namePl: 'Dodano:',
+    nameEn: 'Added:',
+    nameUa: 'Added:'
+  },
+  validUntil: {
+    namePl: 'Ważne do:',
+    nameEn: 'Valid until:',
+    nameUa: 'Valid until:'
+  },
+  contactInformation: {
+    namePl: 'Dane kontaktowe:',
+    nameEn: 'Contact:',
+    nameUa: 'Contact:'
+  },
+  addInternalAnnouncement: {
+    namePl: 'Dodaj ogłoszenie wewnętrzne',
+    nameEn: 'Add internal announcement',
+    nameUa: 'Add internal announcement'
+  },
+  addPublicAnnouncement: {
+    namePl: 'Dodaj ogłoszenie publiczne',
+    nameEn: 'Add public announcement',
+    nameUa: 'Add public announcement'
+  },
+  publicAnnouncements: {
+    namePl: 'Ogłoszenia publiczne',
+    nameEn: 'Public announcements',
+    nameUa: 'Public announcements'
+  },
+  internalAnnouncements: {
+    namePl: 'Ogłoszenia wewnętrzne',
+    nameEn: 'Internal announcements',
+    nameUa: 'Internal announcements'
+  },
+  addAnnouncement: {
+    namePl: 'Dodaj ogłoszenie',
+    nameEn: 'Add announcement',
+    nameUa: 'Add announcement'
   },
   whatisneededPl: {
     namePl: 'copotrzebne.pl',
     nameEn: 'whatisneeded.pl',
-    nameUa: 'shchopotribno.pl',
+    nameUa: 'shchopotribno.pl'
   }
 }
