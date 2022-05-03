@@ -23,3 +23,13 @@ export function useTextTransformToHTML(value: string | undefined) {
 
   return formattedText
 }
+
+export const linkify = (text: string): string =>
+  DOMPurify.sanitize(text)
+    .split(' ')
+    .map(part =>
+      URL_REGEX.test(part)
+        ? `<a target='_blank' href=${part}>${part}</a>`
+        : `${part} `
+    )
+    .join('')

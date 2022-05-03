@@ -400,15 +400,31 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Organization',
     nameUa: 'Організація'
   },
+  faqAccountNumberDescription: {
+    namePl:
+      'Aktualny numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
+    nameEn:
+      "Organization's current account number: <br /><b>{bankAccountNumber}</b>",
+    nameUa:
+      'Номер поточного рахунку організації: <br /><b>{bankAccountNumber}</b>'
+  },
+  faqFundraisingDescription: {
+    namePl: 'Strona gdzie można nas wspomóc: {fundraising}',
+    nameEn: 'Page where you can help us: {fundraising}',
+    nameUa: 'Сторінка, де ви можете нам допомогти: {fundraising}'
+  },
   faqTitle_1: {
     namePl: 'Chcę przekazać pieniądze, jak mogę to zrobić?',
     nameEn: 'I want to donate money, how can I do it?',
     nameUa: 'Я хочу пожертвувати гроші, як я можу це зробити?'
   },
   faqText_1: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl:
+      'Weryfikujemy organizacje przed dodaniem ich do systemu. Numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
+    nameEn:
+      'We verify organizations before adding them to the system. Organization Account Number: <br /><b>{bankAccountNumber}</b>',
+    nameUa:
+      'Ми перевіряємо організації, перш ніж додати їх до системи. Номер рахунку організації: <br /><b>{bankAccountNumber}</b>'
   },
   faqTitle_2: {
     namePl: 'Chcę przekazać żywność, jak mogę to zrobić?',
@@ -416,9 +432,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Я хочу пожертвувати товари, як я можу це зробити?'
   },
   faqText_2: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl:
+      'Wszystkie dary można przywieść pod adres: <br /> <b>{address}</b> <br /> Godziny otwarcia: <b>{workingHours}</b>',
+    nameEn:
+      'All donations can be brought to: <br /> <b> {address} </b> <br /> Opening hours: <b> {workingHours} </b>',
+    nameUa: ''
   },
   faqTitle_3: {
     namePl: 'Mieszkam dość daleko od tej organizacji, jak mogę pomóc?',
@@ -426,9 +444,9 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Я живу досить далеко від цієї організації, як я можу допомогти?'
   },
   faqText_3: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl: '',
+    nameEn: '',
+    nameUa: ''
   },
   faqTitle_4: {
     namePl: 'Mieszkam za granicą, jak mogę pomóc?',
@@ -436,9 +454,31 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Я живу за кордоном, як я можу допомогти?'
   },
   faqText_4: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl: `Nawet będąc daleko możesz pomóc na wiele sposobów!<br /><br />
+      Część organizacji prowadzi zbiórki pieniężne, a dzięki wpłatom ma fundusze realizację bieżących potrzeb Osób które korzystają z ich pomocy.<br />
+      Jeżeli chcesz, możesz wesprzeć tą organizację finansowo: <br />
+      <b>{bankAccountNumber}</b>
+      <br />
+      {fundraising}
+      <br /><br />
+      Jeśli reprezentujesz firmę lub fundację, lub po prostu masz możliwość zorganizowana większej dostawy darów z zagranicy to świetnie! Prosimy Cię jedynie o kontakt z organizacją i uprzedzenie jej o wielkości i terminie dostawy <br /><b>{contact} {address} <br/> {workingHours}</b>
+      <br /><br />
+      Poza pomocą rzeczową i finansową, możesz także pomóc rozpowszechniając informację o potrzebach danej organizacji oraz możliwych sposobach jej wsparcia - być może dzięki Twojej sieci kontaktów dotrzemy do organizacji i firm, które będą w stanie wesprzeć organizację rzeczowo lub finansowo.<br />
+      A może sam(a) zorganizujesz zbiórkę wsród znajomych?`,
+    nameEn: `Even if you live far away, there are still quite a few ways of helping!<br /><br />
+      Some organisations have fundraising sites or collect funds on dedicated bank accounts; those funds are later used to buy needed supplies and provide them to People in need.
+      If you want you can support this organisation financially <br />
+      <b>{bankAccountNumber}</b>
+      <br />
+      {fundraising}
+      <br /><br />
+
+      If you represent a charity organisation, foundation or a company, or you just simply can organise a bigger transport with supplies - that’s great! We only kindly ask you to inform the organisation about incoming delivery, specifying the date of arrival and size of the package. You can find the organisation contact info here: <br /><b>{contact} {address} <br/> {workingHours}</b>
+      <br /><br />
+      Apart from delivering supplies and financial support, you can also help by spreading the information about the organisation’s needs and possible ways to provide help - perhaps thanks to your social network we will be able to reach companies and foundations able to support this organisation even more?<br />
+      Or maybe you can organise a fundraising or goods collection event among your friends? :)  
+      `,
+    nameUa: ''
   },
   faqTitle_5: {
     namePl: 'Nie mam dużo wolnego czasu, jak mogę pomóc?',
@@ -446,9 +486,9 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'У мене мало вільного часу, чим я можу допомогти?'
   },
   faqText_5: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl: '',
+    nameEn: '',
+    nameUa: ''
   },
   faqTitle_6: {
     namePl: 'Nie mam aktualnie środów, jak mogę pomóc?',
@@ -457,9 +497,9 @@ export const translations: { [value: string]: DictionaryEntry } = {
       'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
   },
   faqText_6: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl: '',
+    nameEn: '',
+    nameUa: ''
   },
   faqTitle_7: {
     namePl: 'Mam trochę wolnego czasu, jak mogę pomóc?',
@@ -467,9 +507,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'У мене є вільний час, як я можу допомогти?'
   },
   faqText_7: {
-    namePl: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameEn: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-    nameUa: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+    namePl:
+      'Tutaj jest link do zapisu na wolontariat w naszych punktach: {link}',
+    nameEn: 'Here is a link to signup for a volunteer work, link: {link}',
+    nameUa: 'Ось посилання для реєстрації на волонтерську роботу, посилання:'
   },
   menuInternalAnnouncements: {
     namePl: 'Zobacz ogłoszenia',
