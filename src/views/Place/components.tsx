@@ -107,8 +107,13 @@ export const PlaceDetails = styled.div`
   padding: 1rem;
   padding-bottom: 0.4rem;
   ${breakpoint.sm`
-    max-width: 450px;
-    margin: 0 auto;
+    width: 58%;
+    flex-shrink: 0;
+    padding: 3.2rem 8%;
+    border-right: 2px solid ${({ theme }) => theme.colors.grey200};
+  `}
+  ${breakpoint.lm`
+    padding: 3.2rem 10%;
   `}
 `
 export const PlaceDetailsWrapper = styled.div`
@@ -192,6 +197,9 @@ export const BankAccount = styled.div`
     font-size: 0.9rem;
     margin: 0;
     line-height: 1.2;
+  }
+  & > span {
+    width: 100%;
   }
 `
 
@@ -416,8 +424,9 @@ export const FaqDialog = styled(Dialog)`
     & > div {
       padding: 4.2rem 1.2rem 0;
       overflow-y: auto;
+      padding-bottom: 2.2rem;
       ${breakpoint.sm`
-        width: 450px;
+        width: 520px;
         max-height: 80%;
         box-shadow: ${({ theme }) => theme.boxShadows.medium};
       `}
