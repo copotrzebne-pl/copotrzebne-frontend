@@ -19,7 +19,7 @@ export const RequestPlaceContextProvider = ({
 }) => {
   const [isPlaceCreated, setPlaceCreated] = useState<boolean>(false)
   const [place, setPlace] = useState<DraftPlaceDto>({
-    name: '',
+    name: {},
     city: '',
     street: '',
     buildingNumber: '',

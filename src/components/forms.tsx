@@ -46,6 +46,21 @@ export const FormGroup = styled.div`
   padding: 0 1.8rem;
 `
 
+export const FormGroupRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.8rem;
+`
+
+export const RowLabel = styled.div`
+  display: inline-block;
+  margin-right: 0.6rem;
+  color: ${({ theme }) => theme.colors.grey900};
+  font-size: 0.9rem;
+  font-weight: 400;
+`
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
