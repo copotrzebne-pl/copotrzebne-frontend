@@ -58,6 +58,10 @@ export default () => {
   const formattedBankAccountDetails = useTextTransformToHTML(
     selectedPlace?.bankAccount || ''
   )
+  const formattedBankAccountDescription = useTextTransformToHTML(
+      selectedPlace?.bankAccountDescription || ''
+  )
+
   const { groupedDemands, demandsKeys } = useGroupDemands(
     selectedPlace?.demands || []
   )
@@ -148,6 +152,9 @@ export default () => {
                                 __html: formattedBankAccountDetails
                               }}
                             />
+                          </span>
+                          <span>
+                            {formattedBankAccountDescription}
                           </span>
                         </BankAccount>
                       )}

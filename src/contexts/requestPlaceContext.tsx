@@ -28,7 +28,8 @@ export const RequestPlaceContextProvider = ({
     email: '',
     phone: '',
     workingHours: '',
-    bankAccount: ''
+    bankAccount: '',
+    bankAccountDescription: ''
   })
   const [userEmail, setUserEmail] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
@@ -58,6 +59,7 @@ export const RequestPlaceContextProvider = ({
         email: place.email || undefined,
         phone: place.phone || undefined,
         bankAccount: place.bankAccount || undefined,
+        bankAccountDescription: place.bankAccountDescription || undefined,
         workingHours: place.workingHours || undefined,
         placeLink: place.placeLink || undefined
       }

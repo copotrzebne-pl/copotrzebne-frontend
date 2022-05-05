@@ -88,6 +88,7 @@ export type Place = {
   priority?: number
   nameSlug: string
   bankAccount: string | null
+  bankAccountDescription: string | null
   demands?: Demand[]
   urgentDemands?: Demand[]
   placeLink?: PlaceLink
@@ -107,6 +108,7 @@ export type PlaceDto = {
   street: string
   workingHours: string
   bankAccount: string | null
+  bankAccountDescription: string | null
   placeLink?: PlaceLink
 }
 

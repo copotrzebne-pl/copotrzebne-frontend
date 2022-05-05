@@ -35,6 +35,7 @@ export default () => {
     latitude: null,
     longitude: null,
     bankAccount: '',
+    bankAccountDescription: '',
     placeLink: { homepage: '', facebook: '', signup: '', fundraising: '' }
   })
 
@@ -220,6 +221,18 @@ export default () => {
             placeholder="bank account"
             value={editedPlace.bankAccount || ''}
             onChange={e => setValue('bankAccount', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="bankAccountDescription" />
+          </Label>
+          <TextInput
+              id="bankAccountDescription"
+              type="text"
+              placeholder="bank account description"
+              value={editedPlace.bankAccountDescription || ''}
+              onChange={e => setValue('bankAccountDescription', e.target.value)}
           />
         </FormGroup>
         <FormGroup>

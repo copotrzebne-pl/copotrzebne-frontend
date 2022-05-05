@@ -124,6 +124,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Bank account number for donations',
     nameUa: 'Номер банківського рахунку для внесення пожертв'
   },
+  bankAccountDescription: {
+    namePl: 'Szczegółowe informacje do nr konta (np. tytuł przelewu)',
+    nameEn: 'Additional information about bank account (eg. transfer title)',
+    nameUa: 'Additional information about bank account (eg. transfer title)',
+  },
   homepageLink: {
     namePl: 'Link do strony domowej organizacji',
     nameEn: 'Link to the home page of the organization',
@@ -491,7 +496,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: ''
   },
   faqTitle_6: {
-    namePl: 'Nie mam aktualnie środów, jak mogę pomóc?',
+    namePl: 'Nie mam aktualnie środków, jak mogę pomóc?',
     nameEn: 'I can’t afford to buy a lot of goods, how can I help?',
     nameUa:
       'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
