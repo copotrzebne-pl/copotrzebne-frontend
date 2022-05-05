@@ -10,6 +10,6 @@ provider:
 
 functions:
   api:
-    handler: index.handler
+    handler: serverless.handler
     events:
       - httpApi: '*'
