@@ -1,4 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const serverless = require('serverless-http')
 const express = require('express')
 const winston = require('winston')
 const expressWinston = require('express-winston')
@@ -50,3 +51,5 @@ app.use(
 )
 
 app.listen(PORT, () => console.log(`Server listening on port: ${PORT}`))
+
+module.exports.handler = serverless(app)

@@ -1,0 +1,15 @@
+service: copotrzebne-pl
+frameworkVersion: '3'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: '*'
