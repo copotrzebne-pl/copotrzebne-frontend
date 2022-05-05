@@ -35,6 +35,8 @@ import {
   PlaceDetailsWrapper,
   PlaceName,
   PlaceNameLabel,
+  ResourcesTitle,
+  ResourcesWrapper,
   ShowOnMapButton,
   StyledFacebookButton,
   StyledPageTitle,
@@ -151,6 +153,12 @@ export default () => {
                           </span>
                         </BankAccount>
                       )}
+                      <ResourcesWrapper>
+                        <ResourcesTitle>
+                          <TranslatedText value="resources" />
+                        </ResourcesTitle>
+                        <span>{selectedPlace.resources}</span>
+                      </ResourcesWrapper>
                     </PlaceAddress>
                   </PlaceAddressWrapper>
                 </DetailsRow>

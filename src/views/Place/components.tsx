@@ -343,6 +343,21 @@ export const UrgentDemandsTitle = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.blue};
 `
+export const ResourcesWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
+export const ResourcesTitle = styled.div`
+  margin-top: 0.4rem;
+  display: inline-block;
+  width: 100%;
+  font-size: 0.7rem;
+  line-height: 1.2;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.blue};
+`
 
 export const UrgentDemandsList = styled.div`
   display: flex;

@@ -45,6 +45,12 @@ const PlaceBoxComponent = ({
         {place.additionalDescription && (
           <PlaceDetails>{place.additionalDescription || ''}</PlaceDetails>
         )}
+        {place.resources !== undefined && (
+          <ResourcesTitle>
+            {' '}
+            <TranslatedText value="resources" />{' '}
+          </ResourcesTitle>
+        )}
       </PlaceNameAndAddress>
       {!place.lastUpdatedAt && (
         <LastUpdate>
@@ -134,6 +140,11 @@ const TrashIcon = styled.img`
 `
 
 const PlaceNameAndAddress = styled.div``
+
+const ResourcesTitle = styled(PlaceDetails)`
+  margin-top: 0.1rem;
+  color: ${({ theme }) => theme.colors.blue};
+`
 
 const UrgentDemandsWrapper = styled.div`
   display: flex;

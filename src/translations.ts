@@ -154,6 +154,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Cancel',
     nameUa: 'Cancel'
   },
+  resources: {
+    namePl: 'Dostępne zasoby',
+    nameEn: 'Resources available',
+    nameUa: 'Доступні ресурси'
+  },
   pageNotFound: {
     namePl: 'Nie znaleziono strony',
     nameEn: 'Page not found',
@@ -178,6 +183,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Dodaj potrzeby',
     nameEn: 'Add demands',
     nameUa: 'Додати потребні речі'
+  },
+  addResources: {
+    namePl: 'Dodaj zasoby',
+    nameEn: 'Add resources',
+    nameUa: 'Додайте ресурси'
   },
   finishCollection: {
     namePl: 'Zakończ zbiórkę',
@@ -291,6 +301,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Edytuj listę potrzeb',
     nameEn: 'Edit current demands',
     nameUa: 'Редагуй список потребних речей'
+  },
+  editResources: {
+    namePl: 'Edytuj swoją listę zasobów',
+    nameEn: 'Edit current resources',
+    nameUa: 'Відредагуйте список речей, які ви можете запропонувати'
   },
   noOngoingCollections: {
     namePl: 'Brak aktualnych zbiórek',
