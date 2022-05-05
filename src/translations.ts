@@ -637,5 +637,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'copotrzebne.pl',
     nameEn: 'whatisneeded.pl',
     nameUa: 'shchopotribno.pl'
-  }
+  },
+  found: {
+    namePl: 'Znaleziono',
+    nameEn: 'Found',
+    nameUa: 'знайдено'
+  },
 }
