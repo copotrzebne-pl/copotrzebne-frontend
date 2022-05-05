@@ -17,13 +17,13 @@ const PlaceBoxComponent = ({
   place: Place
 }) => {
   const { deletePlace } = useUserContext()
-  const { user } = useUserContext()
+  const { user, language } = useUserContext()
   const [authorized] = useState<boolean>(() => checkIfAuthorized())
 
   return (
     <div className={className}>
       <PlaceNameAndAddress>
-        <PlaceName place={place}>{place.name || ''}</PlaceName>
+        <PlaceName place={place}>{place.name[language] || ''}</PlaceName>
         {authorized && user?.role === 'admin' && (
           <TrashIcon
             src={trashIconUrl}

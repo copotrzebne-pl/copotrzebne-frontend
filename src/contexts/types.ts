@@ -79,7 +79,7 @@ export type Place = {
   id?: string
   latitude: string | null
   longitude: string | null
-  name: string
+  name: Record<string, string>
   phone: string
   street: string
   lastUpdatedAt: string
@@ -102,7 +102,7 @@ export type PlaceDto = {
   email: string
   latitude: string | null
   longitude: string | null
-  name: string
+  name: Record<string, string>
   phone: string
   street: string
   workingHours: string

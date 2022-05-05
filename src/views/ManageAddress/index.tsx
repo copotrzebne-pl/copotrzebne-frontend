@@ -17,13 +17,19 @@ import TranslatedText from 'components/TranslatedText'
 import { usePanelContext } from 'contexts/panelContext'
 import { Page, routes } from 'routes'
 
+
+export enum Language {
+  PL = 'pl',
+  UA = 'ua',
+  EN = 'en'
+}
 export default () => {
   const { id } = useParams()
-  const { savePlace, ownedPlaces, fetchOwnedPlaces } = useUserContext()
+  const { language, savePlace, ownedPlaces, fetchOwnedPlaces } = useUserContext()
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
   const [editedPlace, setEditedPlace] = useState<PlaceDto>({
     id,
-    name: '',
+    name: {},
     city: '',
     street: '',
     buildingNumber: '',
@@ -92,7 +98,7 @@ export default () => {
 
   return (
     <Container>
-      <PageTitle>{selectedPlace?.name || 'Dodaj nowe miejsce'}</PageTitle>
+      <PageTitle>{selectedPlace?.name[language] || 'Dodaj nowe miejsce'}</PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>
@@ -104,8 +110,24 @@ export default () => {
             type="text"
             placeholder="name"
             required
-            value={editedPlace.name || ''}
-            onChange={e => setValue('name', e.target.value)}
+            value={editedPlace.name[Language.PL] || ''}
+            onChange={e => setValue('name', {...editedPlace.name, pl: e.target.value})}
+          />
+          <TextInput
+              id="name"
+              type="text"
+              placeholder="name"
+              required
+              value={editedPlace.name[Language.EN] || ''}
+              onChange={e => setValue('name', {...editedPlace.name, en: e.target.value})}
+          />
+          <TextInput
+              id="name"
+              type="text"
+              placeholder="name"
+              required
+              value={editedPlace.name[Language.UA] || ''}
+              onChange={e => setValue('name', {...editedPlace.name, ua: e.target.value})}
           />
         </FormGroup>
         <FormGroup>
