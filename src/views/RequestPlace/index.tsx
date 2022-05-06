@@ -257,18 +257,20 @@ export default () => {
               onChange={e => setPlaceValue('bankAccount', e.target.value)}
             />
           </FormGroup>
-            <FormGroup>
-                <Label>
-                    <TranslatedText value="bankAccountDescription" />
-                </Label>
-                <TextInput
-                    id='bankAccountDescription'
-                    type='text'
-                    placeholder="Bank Account Description"
-                    value={place.bankAccountDescription || ''}
-                    onChange={e => setPlaceValue('bankAccountDescription', e.target.value)}
-                    />
-            </FormGroup>
+          <FormGroup>
+            <Label>
+              <TranslatedText value="bankAccountDescription" />
+            </Label>
+            <TextInput
+              id="bankAccountDescription"
+              type="text"
+              placeholder="Bank Account Description"
+              value={place.bankAccountDescription || ''}
+              onChange={e =>
+                setPlaceValue('bankAccountDescription', e.target.value)
+              }
+            />
+          </FormGroup>
           <Wrapper>
             {error && (
               <FormError>

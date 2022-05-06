@@ -60,7 +60,7 @@ export default () => {
     selectedPlace?.bankAccount || ''
   )
   const formattedBankAccountDescription = useTextTransformToHTML(
-      selectedPlace?.bankAccountDescription || ''
+    selectedPlace?.bankAccountDescription || ''
   )
 
   const { groupedDemands, demandsKeys } = useGroupDemands(
@@ -155,9 +155,7 @@ export default () => {
                               }}
                             />
                           </span>
-                          <span>
-                            {formattedBankAccountDescription}
-                          </span>
+                          <span>{formattedBankAccountDescription}</span>
                         </BankAccount>
                       )}
                     </PlaceAddress>

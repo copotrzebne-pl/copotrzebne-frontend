@@ -127,7 +127,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
   bankAccountDescription: {
     namePl: 'Szczegółowe informacje do nr konta (np. tytuł przelewu)',
     nameEn: 'Additional information about bank account (eg. transfer title)',
-    nameUa: 'Additional information about bank account (eg. transfer title)',
+    nameUa: 'Additional information about bank account (eg. transfer title)'
   },
   homepageLink: {
     namePl: 'Link do strony domowej organizacji',
@@ -652,5 +652,5 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Znaleziono',
     nameEn: 'Found',
     nameUa: 'Знайдено'
-  },
+  }
 }
