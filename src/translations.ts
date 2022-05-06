@@ -350,6 +350,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'blankets, sandwiches, food',
     nameUa: 'ковдри, бутерброди, їжа'
   },
+  search: {
+    namePl: 'Szukaj',
+    nameEn: 'Search',
+    nameUa: 'Пошук'
+  },
   inputProductName: {
     namePl: 'Wpisz nazwę produktu',
     nameEn: 'Enter a product name',
@@ -642,5 +647,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'copotrzebne.pl',
     nameEn: 'whatisneeded.pl',
     nameUa: 'shchopotribno.pl'
-  }
+  },
+  found: {
+    namePl: 'Znaleziono',
+    nameEn: 'Found',
+    nameUa: 'Знайдено'
+  },
 }

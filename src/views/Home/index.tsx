@@ -125,7 +125,9 @@ export default () => {
                 toggleSelectedSupply={toggleSelectedSupply}
                 toggleSelectedSupplyGroup={toggleSelectedSupplyGroup}
               />
-              <FoundPlacesNumber>Znaleziono: {places.length}</FoundPlacesNumber>
+              <FoundPlacesNumber>
+                <TranslatedText value="found" />: {places.length}
+              </FoundPlacesNumber>
             </SelectedSuppliesWrapper>
           )}
           <PlacesList>
