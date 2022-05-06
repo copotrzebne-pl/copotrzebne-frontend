@@ -358,6 +358,13 @@ export const ResourcesTitle = styled.div`
   font-weight: 500;
   color: ${({ theme }) => theme.colors.blue};
 `
+export const ResourcesList = styled.div`
+  display: flex;
+  padding: 0.2rem 0.4rem;
+  flex-shrink: 0;
+  font-size: 0.6rem;
+  margin-right: 0.4rem;
+`
 
 export const UrgentDemandsList = styled.div`
   display: flex;

@@ -45,11 +45,14 @@ const PlaceBoxComponent = ({
         {place.additionalDescription && (
           <PlaceDetails>{place.additionalDescription || ''}</PlaceDetails>
         )}
-        {place.resources !== undefined && (
-          <ResourcesTitle>
-            {' '}
-            <TranslatedText value="resources" />{' '}
-          </ResourcesTitle>
+        {place.resources && (
+          <>
+            <ResourcesTitle>
+              {console.log(place)}
+              <TranslatedText value="resources" />{' '}
+            </ResourcesTitle>
+            <PlaceDetails>{place.resources || ''}</PlaceDetails>
+          </>
         )}
       </PlaceNameAndAddress>
       {!place.lastUpdatedAt && (

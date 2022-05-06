@@ -35,6 +35,7 @@ import {
   PlaceDetailsWrapper,
   PlaceName,
   PlaceNameLabel,
+  ResourcesList,
   ResourcesTitle,
   ResourcesWrapper,
   ShowOnMapButton,
@@ -157,7 +158,9 @@ export default () => {
                         <ResourcesTitle>
                           <TranslatedText value="resources" />
                         </ResourcesTitle>
-                        <span>{selectedPlace.resources}</span>
+                        <ResourcesList>
+                          <span>{selectedPlace.resources}</span>
+                        </ResourcesList>
                       </ResourcesWrapper>
                     </PlaceAddress>
                   </PlaceAddressWrapper>
