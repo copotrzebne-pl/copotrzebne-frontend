@@ -8,7 +8,7 @@ import {
 import { RequestPlaceContextValue, Place, DraftPlaceDto } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
-import { Language } from 'common/types'
+import { Language } from 'common/language'
 
 export const RequestPlaceContext =
   createContext<RequestPlaceContextValue | null>(null)

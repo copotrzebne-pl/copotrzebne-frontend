@@ -18,7 +18,7 @@ import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { usePanelContext } from 'contexts/panelContext'
 import { Page, routes } from 'routes'
-import { Language } from 'common/types'
+import { Language } from 'common/language'
 
 export default () => {
   const { id } = useParams()

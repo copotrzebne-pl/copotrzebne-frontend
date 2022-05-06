@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import { TranslatedField } from 'common/types'
+import { TranslatedField } from 'types/types'
 
 export type User = {
   role: string
