@@ -3,8 +3,10 @@ import Button from 'components/Button'
 import {
   Form,
   FormGroup,
+  FormGroupRow,
   Label,
   RequiredDecorator,
+  RowLabel,
   TextInput
 } from 'components/forms'
 import PageTitle from 'components/PageTitle'
@@ -16,14 +18,20 @@ import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { usePanelContext } from 'contexts/panelContext'
 import { Page, routes } from 'routes'
+import { Language } from 'common/language'
 
 export default () => {
   const { id } = useParams()
-  const { savePlace, ownedPlaces, fetchOwnedPlaces } = useUserContext()
+  const { language, savePlace, ownedPlaces, fetchOwnedPlaces } =
+    useUserContext()
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
   const [editedPlace, setEditedPlace] = useState<PlaceDto>({
     id,
-    name: '',
+    name: {
+      [Language.PL]: '',
+      [Language.EN]: '',
+      [Language.UA]: ''
+    },
     city: '',
     street: '',
     buildingNumber: '',
@@ -93,21 +101,56 @@ export default () => {
 
   return (
     <Container>
-      <PageTitle>{selectedPlace?.name || 'Dodaj nowe miejsce'}</PageTitle>
+      <PageTitle>
+        {selectedPlace?.name[language] ||
+          selectedPlace?.name[Language.PL] ||
+          'Dodaj nowe miejsce'}
+      </PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
           <Label>
             <TranslatedText value="name" />
             <RequiredDecorator>*</RequiredDecorator>
           </Label>
-          <TextInput
-            id="name"
-            type="text"
-            placeholder="name"
-            required
-            value={editedPlace.name || ''}
-            onChange={e => setValue('name', e.target.value)}
-          />
+          <FormGroupRow>
+            <RowLabel>PL</RowLabel>
+            <TextInput
+              id="name"
+              type="text"
+              placeholder="name"
+              required
+              value={editedPlace.name[Language.PL] || ''}
+              onChange={e =>
+                setValue('name', { ...editedPlace.name, pl: e.target.value })
+              }
+            />
+          </FormGroupRow>
+          <FormGroupRow>
+            <RowLabel>EN</RowLabel>
+            <TextInput
+              id="name"
+              type="text"
+              placeholder="name"
+              required
+              value={editedPlace.name[Language.EN] || ''}
+              onChange={e =>
+                setValue('name', { ...editedPlace.name, en: e.target.value })
+              }
+            />
+          </FormGroupRow>
+          <FormGroupRow>
+            <RowLabel>UA</RowLabel>
+            <TextInput
+              id="name"
+              type="text"
+              placeholder="name"
+              required
+              value={editedPlace.name[Language.UA] || ''}
+              onChange={e =>
+                setValue('name', { ...editedPlace.name, ua: e.target.value })
+              }
+            />
+          </FormGroupRow>
         </FormGroup>
         <FormGroup>
           <Label>

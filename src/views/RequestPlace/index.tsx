@@ -6,8 +6,10 @@ import {
   Form,
   FormError,
   FormGroup,
+  FormGroupRow,
   Label,
   RequiredDecorator,
+  RowLabel,
   TextInput
 } from 'components/forms'
 import PageTitle from 'components/PageTitle'
@@ -15,6 +17,7 @@ import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { useRequestPlaceContext } from 'contexts/requestPlaceContext'
 import { isEmail } from '../../utils/validators'
+import { Language } from 'common/language'
 
 export default () => {
   const {
@@ -98,14 +101,45 @@ export default () => {
               <TranslatedText value="name" />
               <RequiredDecorator>*</RequiredDecorator>
             </Label>
-            <TextInput
-              id="name"
-              type="text"
-              placeholder="name"
-              required
-              value={place.name || ''}
-              onChange={e => setPlaceValue('name', e.target.value)}
-            />
+            <FormGroupRow>
+              <RowLabel>PL</RowLabel>
+              <TextInput
+                id="name"
+                type="text"
+                placeholder="name"
+                required
+                value={place.name[Language.PL] || ''}
+                onChange={e =>
+                  setPlaceValue('name', { ...place.name, pl: e.target.value })
+                }
+              />
+            </FormGroupRow>
+            <FormGroupRow>
+              <RowLabel>EN</RowLabel>
+              <TextInput
+                id="name"
+                type="text"
+                placeholder="name"
+                required
+                value={place.name[Language.EN] || ''}
+                onChange={e =>
+                  setPlaceValue('name', { ...place.name, en: e.target.value })
+                }
+              />
+            </FormGroupRow>
+            <FormGroupRow>
+              <RowLabel>UA</RowLabel>
+              <TextInput
+                id="name"
+                type="text"
+                placeholder="name"
+                required
+                value={place.name[Language.UA] || ''}
+                onChange={e =>
+                  setPlaceValue('name', { ...place.name, ua: e.target.value })
+                }
+              />
+            </FormGroupRow>
           </FormGroup>
           <FormGroup>
             <Label>

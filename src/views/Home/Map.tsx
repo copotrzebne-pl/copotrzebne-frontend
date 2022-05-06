@@ -7,8 +7,10 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import { PlaceBox } from '../../components/PlaceBox'
+import { useUserContext } from 'contexts/userContext'
 
 export const OrganizationsMap = ({ places }: { places: Place[] }) => {
+  const { language } = useUserContext()
   const [mapHeight, setMapHeight] = useState<number>(600)
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null)
   const [mapCenter, setMapCenter] = useState<[number, number]>([
@@ -64,7 +66,9 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
         >
           <InfoBox>
             <CloseIcon onClick={() => setSelectedPlace(null)} />
-            <Link to={`${routes[Page.PLACE]}/${selectedPlace.nameSlug}`}>
+            <Link
+              to={`${routes[Page.PLACE]}/${selectedPlace.nameSlug[language]}`}
+            >
               <PlaceBox place={selectedPlace} />
             </Link>
           </InfoBox>

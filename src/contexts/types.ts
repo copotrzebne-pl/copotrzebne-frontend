@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import { TranslatedField } from 'types/types'
+import { Language } from 'common/language'
 
 export type User = {
   role: string
@@ -15,7 +17,7 @@ export type UserContextValue = {
   savePlace: (place: PlaceDto, redirectRoute: string) => void
   deletePlace: (placeId: string) => void
   authorized: boolean
-  language: string
+  language: Language
   changeLanguage: (lang: string) => void
   setAuthorized: (authorized: boolean) => void
 }
@@ -79,14 +81,14 @@ export type Place = {
   id?: string
   latitude: string | null
   longitude: string | null
-  name: string
+  name: TranslatedField
   phone: string
   street: string
   lastUpdatedAt: string
   workingHours: string
   state?: number
   priority?: number
-  nameSlug: string
+  nameSlug: TranslatedField
   bankAccount: string | null
   bankAccountDescription: string | null
   demands?: Demand[]
@@ -103,7 +105,7 @@ export type PlaceDto = {
   email: string
   latitude: string | null
   longitude: string | null
-  name: string
+  name: TranslatedField
   phone: string
   street: string
   workingHours: string
@@ -157,7 +159,7 @@ export type RequestPlaceContextValue = {
   place: DraftPlaceDto
   setPlaceValue: (
     key: keyof Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>,
-    value: string
+    value: string | TranslatedField
   ) => void
   userEmail: string
   setUserEmail: (email: string) => void
