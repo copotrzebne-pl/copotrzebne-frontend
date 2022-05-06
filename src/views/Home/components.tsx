@@ -8,6 +8,7 @@ import { PlaceBox as PlaceDetailedBox } from 'components/PlaceBox'
 import TranslatedText from 'components/TranslatedText'
 import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
 import { useUserContext } from 'contexts/userContext'
+import { Language } from '../../common/language'
 
 const StyledLink = styled(Link)`
   width: 100%;
@@ -55,7 +56,9 @@ export const WrappedPlacesComponent = ({
           .slice(0, showMore ? places.length : initialNumber)
           .map(place => (
             <StyledLink
-              to={`${routes[Page.PLACE]}/${place.nameSlug[language]}`}
+              to={`${routes[Page.PLACE]}/${
+                place.nameSlug[language] || place.nameSlug[Language.PL]
+              }`}
               key={place.id}
             >
               <PlaceDetailedBox place={place} />

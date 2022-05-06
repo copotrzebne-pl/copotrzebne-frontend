@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import { PlaceBox } from '../../components/PlaceBox'
 import { useUserContext } from 'contexts/userContext'
+import { Language } from '../../common/language'
 
 export const OrganizationsMap = ({ places }: { places: Place[] }) => {
   const { language } = useUserContext()
@@ -67,7 +68,10 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
           <InfoBox>
             <CloseIcon onClick={() => setSelectedPlace(null)} />
             <Link
-              to={`${routes[Page.PLACE]}/${selectedPlace.nameSlug[language]}`}
+              to={`${routes[Page.PLACE]}/${
+                selectedPlace.nameSlug[language] ||
+                selectedPlace.nameSlug[Language.PL]
+              }`}
             >
               <PlaceBox place={selectedPlace} />
             </Link>
