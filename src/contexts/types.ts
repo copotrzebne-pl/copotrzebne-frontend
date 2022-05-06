@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import { TranslatedField } from 'types/types'
+import { Language } from 'common/language'
 
 export type User = {
   role: string
@@ -16,7 +17,7 @@ export type UserContextValue = {
   savePlace: (place: PlaceDto, redirectRoute: string) => void
   deletePlace: (placeId: string) => void
   authorized: boolean
-  language: string
+  language: Language
   changeLanguage: (lang: string) => void
   setAuthorized: (authorized: boolean) => void
 }
