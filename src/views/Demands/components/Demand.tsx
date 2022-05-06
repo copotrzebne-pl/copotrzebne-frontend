@@ -6,6 +6,8 @@ import styled from 'styled-components'
 import TranslatedEntry from 'components/TranslatedEntry'
 import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
 import TranslatedText from '../../../components/TranslatedText'
+import trashIconUrl from '../../../assets/trash-icon.svg'
+import { usePanelContext } from '../../../contexts/panelContext'
 
 const DemandComponent = ({
   className,
@@ -36,6 +38,10 @@ const DemandComponent = ({
     comment: '',
     priorityId: ''
   })
+
+  const {
+    removeDemand,
+  } = usePanelContext()
 
   useEffect(() => {
     setDemandDTO({ ...demandDTO, supplyId: supply.id })
@@ -75,9 +81,21 @@ const DemandComponent = ({
             <TranslatedEntry entry={supply} />
           </span>
         </Title>
-        <AddIcon>
-          <PlusIconStyled />
-        </AddIcon>
+        <IconGroup>
+          {demand && (
+            <TrashIcon
+              src={trashIconUrl}
+              alt="remove"
+              onClick={(e) => {
+                e.stopPropagation();
+                removeDemand(demand.id)}
+              }
+            />
+          )}
+          <AddIcon>
+            <PlusIconStyled />
+          </AddIcon>
+        </IconGroup>
       </DemandTitle>
       {demand?.comment && !isSelected && (
         <DemandComment>{demand?.comment}</DemandComment>
@@ -265,4 +283,21 @@ const DemandComment = styled.div`
   margin-top: 0.2rem;
   font-size: 0.85rem;
   color: #999999;
+`
+
+const TrashIcon = styled.img`
+  display: inline-block;
+  padding: 0.3rem;
+  height: 28px;
+  width: auto;
+  cursor: pointer;
+  &:hover {
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  }
+`
+
+const IconGroup = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 `
