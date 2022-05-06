@@ -101,7 +101,9 @@ export default () => {
   return (
     <Container>
       <PageTitle>
-        {selectedPlace?.name[language] || 'Dodaj nowe miejsce'}
+        {selectedPlace?.name[language] ||
+          selectedPlace?.name[Language.PL] ||
+          'Dodaj nowe miejsce'}
       </PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>

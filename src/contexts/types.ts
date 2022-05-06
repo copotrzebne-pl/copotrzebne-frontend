@@ -156,7 +156,7 @@ export type RequestPlaceContextValue = {
   place: DraftPlaceDto
   setPlaceValue: (
     key: keyof Omit<Place, 'id' | 'lastUpdatedAt' | 'latitude' | 'longitude'>,
-    value: string | Record<string, string>
+    value: string | TranslatedField
   ) => void
   userEmail: string
   setUserEmail: (email: string) => void

@@ -8,6 +8,7 @@ import { checkIfAuthorized } from '../utils/session'
 import { formatDateWithTime } from '../utils/date'
 import TranslatedEntry from './TranslatedEntry'
 import { breakpoint } from 'themes/breakpoints'
+import { Language } from 'common/language'
 
 const PlaceBoxComponent = ({
   className,
@@ -23,7 +24,9 @@ const PlaceBoxComponent = ({
   return (
     <div className={className}>
       <PlaceNameAndAddress>
-        <PlaceName place={place}>{place.name[language] || ''}</PlaceName>
+        <PlaceName place={place}>
+          {place.name[language] || place.name[Language.PL] || ''}
+        </PlaceName>
         {authorized && user?.role === 'admin' && (
           <TrashIcon
             src={trashIconUrl}
