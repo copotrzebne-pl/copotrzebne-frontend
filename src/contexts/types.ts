@@ -88,7 +88,7 @@ export type Place = {
   workingHours: string
   state?: number
   priority?: number
-  nameSlug: string
+  nameSlug: TranslatedField
   bankAccount: string | null
   demands?: Demand[]
   urgentDemands?: Demand[]

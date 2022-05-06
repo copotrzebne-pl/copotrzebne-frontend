@@ -19,6 +19,7 @@ import { useUserContext } from '../../contexts/userContext'
 import { useAnnouncementsContext } from '../../contexts/announcementsContext'
 import { breakpoint } from '../../themes/breakpoints'
 import { Select } from '../../components/Select'
+import { Language } from 'common/language'
 
 const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
   const {
@@ -31,7 +32,7 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
     fetchAnnouncements
   } = useAnnouncementsContext()
 
-  const { fetchOwnedPlaces, ownedPlaces } = useUserContext()
+  const { language, fetchOwnedPlaces, ownedPlaces } = useUserContext()
 
   useEffect(() => {
     fetchOwnedPlaces()
@@ -90,7 +91,10 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
         required
         label={<TranslatedText value="announcementPlace" />}
         value={formData.placeId}
-        options={ownedPlaces.map(p => ({ name: p.name, value: p.id }))}
+        options={ownedPlaces.map(p => ({
+          name: p.name[language] || p.name[Language.PL],
+          value: p.id
+        }))}
         onChange={(value: string) => setFormValue('placeId', value)}
         disabled={ownedPlaces.length <= 1}
       />

@@ -45,6 +45,7 @@ import {
 } from './components'
 import { breakpoint } from 'themes/breakpoints'
 import { OrganizationMap } from './Map'
+import { Language } from 'common/language'
 
 export default () => {
   const [faqDialogOpened, setFaqDialogOpened] = useState<boolean>(false)
@@ -93,7 +94,8 @@ export default () => {
                   <TranslatedText value="organizationLabel" />
                 </PlaceNameLabel>
                 <PlaceName>
-                  {selectedPlace?.name}
+                  {selectedPlace?.name[language] ||
+                    selectedPlace?.name[Language.PL]}
                   {selectedPlace.placeLink?.homepage && (
                     <OrganisationLink
                       href={selectedPlace.placeLink?.facebook || '/'}

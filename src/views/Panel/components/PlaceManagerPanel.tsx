@@ -16,9 +16,10 @@ import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
 import UpdateDateButton from '../../../components/UpdateDateButton'
 import LastUpdateDate from '../../../components/LastUpdateDate'
 import PanelButton from '../../../components/PanelButton'
+import { Language } from 'common/language'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
-  const { ownedPlaces, fetchOwnedPlaces } = useUserContext()
+  const { language, ownedPlaces, fetchOwnedPlaces } = useUserContext()
   const {
     demands,
     priorities,
@@ -50,7 +51,10 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
           <SectionTitle>
             <TranslatedText value="loggedInAs" />
           </SectionTitle>
-          <PlaceTitle>{ownedPlaces[0]?.name}</PlaceTitle>
+          <PlaceTitle>
+            {ownedPlaces[0]?.name[language] ||
+              ownedPlaces[0]?.name[Language.PL]}
+          </PlaceTitle>
           <PanelButton
             onClick={() =>
               navigate(
