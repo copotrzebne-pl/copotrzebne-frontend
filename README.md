@@ -25,9 +25,9 @@ Cache headers are set by application: small for HTML files, big for static files
 To support multiple languages, Cloud Front pass header `Host`. Based on it, in `index.js` file, app detects language
 and proper index file is sent - one of:
 
-* `index.html`
-* `index_en.html`
-* `index_ua.html`
+- `index.html`
+- `index_en.html`
+- `index_ua.html`
 
 ## Logs
 
@@ -44,5 +44,5 @@ Deployment is done using GitHub Actions.
 
 Workflows
 
-* `deploy-dev` - Deployment from branch `develop` to new Dev AWS Account
-* `deploy-pro` - Deployment from branch `main` to new Pro AWS Account
+- `deploy-dev` - Deployment from branch `develop` to new Dev AWS Account
+- `deploy-pro` - Deployment from branch `main` to new Pro AWS Account

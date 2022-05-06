@@ -14,7 +14,6 @@ import { getTranslation } from 'utils/translation'
 import { translations } from 'translations'
 import { useUserContext } from 'contexts/userContext'
 
-
 export default () => {
   const {
     priorities,
@@ -73,10 +72,7 @@ export default () => {
           type="text"
           name="searchFilter"
           autoComplete="false"
-          placeholder={getTranslation(
-            language,
-            translations['search']
-          )}
+          placeholder={getTranslation(language, translations['search'])}
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
         />

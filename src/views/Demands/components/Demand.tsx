@@ -39,9 +39,7 @@ const DemandComponent = ({
     priorityId: ''
   })
 
-  const {
-    removeDemand,
-  } = usePanelContext()
+  const { removeDemand } = usePanelContext()
 
   useEffect(() => {
     setDemandDTO({ ...demandDTO, supplyId: supply.id })
@@ -76,26 +74,23 @@ const DemandComponent = ({
         isSelected={isSelected}
       >
         <Title>
-          {isSaved && <CheckIcon />}{' '}
+          {isSaved && (
+            <CheckIcon
+              onClick={e => {
+                if (demand && !isSelected) {
+                  e.stopPropagation()
+                  removeDemand(demand.id)
+                }
+              }}
+            />
+          )}{' '}
           <span>
             <TranslatedEntry entry={supply} />
           </span>
         </Title>
-        <IconGroup>
-          {demand && (
-            <TrashIcon
-              src={trashIconUrl}
-              alt="remove"
-              onClick={(e) => {
-                e.stopPropagation();
-                removeDemand(demand.id)}
-              }
-            />
-          )}
-          <AddIcon>
-            <PlusIconStyled />
-          </AddIcon>
-        </IconGroup>
+        <AddIcon>
+          <PlusIconStyled />
+        </AddIcon>
       </DemandTitle>
       {demand?.comment && !isSelected && (
         <DemandComment>{demand?.comment}</DemandComment>
@@ -292,7 +287,8 @@ const TrashIcon = styled.img`
   width: auto;
   cursor: pointer;
   &:hover {
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   }
 `
 

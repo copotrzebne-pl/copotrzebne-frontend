@@ -271,11 +271,11 @@ export default () => {
             <TranslatedText value="bankAccountDescription" />
           </Label>
           <TextInput
-              id="bankAccountDescription"
-              type="text"
-              placeholder="bank account description"
-              value={editedPlace.bankAccountDescription || ''}
-              onChange={e => setValue('bankAccountDescription', e.target.value)}
+            id="bankAccountDescription"
+            type="text"
+            placeholder="bank account description"
+            value={editedPlace.bankAccountDescription || ''}
+            onChange={e => setValue('bankAccountDescription', e.target.value)}
           />
         </FormGroup>
         <FormGroup>
