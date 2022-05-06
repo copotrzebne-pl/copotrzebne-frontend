@@ -49,7 +49,7 @@ export const FormGroup = styled.div`
 export const FormGroupRow = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0.8rem;
 `
 
@@ -59,7 +59,7 @@ export const RowLabel = styled.div`
   color: ${({ theme }) => theme.colors.grey900};
   font-size: 0.9rem;
   font-weight: 400;
-  flex-basis: 5%;
+  min-width: 20px;
 `
 
 export const Form = styled.form`
