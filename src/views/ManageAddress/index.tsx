@@ -18,12 +18,8 @@ import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { usePanelContext } from 'contexts/panelContext'
 import { Page, routes } from 'routes'
+import { Language } from 'common/types'
 
-export enum Language {
-  PL = 'pl',
-  UA = 'ua',
-  EN = 'en'
-}
 export default () => {
   const { id } = useParams()
   const { language, savePlace, ownedPlaces, fetchOwnedPlaces } =
@@ -31,7 +27,11 @@ export default () => {
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
   const [editedPlace, setEditedPlace] = useState<PlaceDto>({
     id,
-    name: {},
+    name: {
+      [Language.PL]: '',
+      [Language.EN]: '',
+      [Language.UA]: ''
+    },
     city: '',
     street: '',
     buildingNumber: '',

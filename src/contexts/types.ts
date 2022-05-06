@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { TranslatedField } from 'common/types'
 
 export type User = {
   role: string
@@ -79,7 +80,7 @@ export type Place = {
   id?: string
   latitude: string | null
   longitude: string | null
-  name: Record<string, string>
+  name: TranslatedField
   phone: string
   street: string
   lastUpdatedAt: string
@@ -102,7 +103,7 @@ export type PlaceDto = {
   email: string
   latitude: string | null
   longitude: string | null
-  name: Record<string, string>
+  name: TranslatedField
   phone: string
   street: string
   workingHours: string

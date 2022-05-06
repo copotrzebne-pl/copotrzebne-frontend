@@ -59,6 +59,7 @@ export const RowLabel = styled.div`
   color: ${({ theme }) => theme.colors.grey900};
   font-size: 0.9rem;
   font-weight: 400;
+  flex-basis: 5%;
 `
 
 export const Form = styled.form`

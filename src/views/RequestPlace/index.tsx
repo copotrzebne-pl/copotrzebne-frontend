@@ -17,7 +17,7 @@ import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
 import { useRequestPlaceContext } from 'contexts/requestPlaceContext'
 import { isEmail } from '../../utils/validators'
-import { Language } from 'views/ManageAddress'
+import { Language } from 'common/types'
 
 export default () => {
   const {
