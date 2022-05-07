@@ -105,6 +105,7 @@ export default () => {
                     setOpenOrganisationSearch(false)
                     mobileViewport.matches && setMobileMapOpened(true)
                   }}
+                  onClose={() => setOpenOrganisationSearch(false)}
                 />
               </DialogSupplySearch>
             )}
