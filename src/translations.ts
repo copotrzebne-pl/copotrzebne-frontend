@@ -437,7 +437,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
       'Ми перевіряємо організації, перш ніж додати їх до системи. Номер рахунку організації: <br /><b>{bankAccountNumber}</b>'
   },
   faqTitle_2: {
-    namePl: 'Chcę przekazać żywność, jak mogę to zrobić?',
+    namePl: 'Chcę przekazać dary rzeczowe, jak mogę to zrobić?',
     nameEn: 'I want to donate goods, how can I do it?',
     nameUa: 'Я хочу пожертвувати товари, як я можу це зробити?'
   },
