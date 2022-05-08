@@ -48,6 +48,7 @@ import {
 } from './components'
 import { breakpoint } from 'themes/breakpoints'
 import { OrganizationMap } from './Map'
+import { Language } from 'common/language'
 
 export default () => {
   const [faqDialogOpened, setFaqDialogOpened] = useState<boolean>(false)
@@ -61,6 +62,10 @@ export default () => {
   const formattedBankAccountDetails = useTextTransformToHTML(
     selectedPlace?.bankAccount || ''
   )
+  const formattedBankAccountDescription = useTextTransformToHTML(
+    selectedPlace?.bankAccountDescription || ''
+  )
+
   const { groupedDemands, demandsKeys } = useGroupDemands(
     selectedPlace?.demands || []
   )
@@ -96,7 +101,8 @@ export default () => {
                   <TranslatedText value="organizationLabel" />
                 </PlaceNameLabel>
                 <PlaceName>
-                  {selectedPlace?.name}
+                  {selectedPlace?.name[language] ||
+                    selectedPlace?.name[Language.PL]}
                   {selectedPlace.placeLink?.homepage && (
                     <OrganisationLink
                       href={selectedPlace.placeLink?.facebook || '/'}
@@ -152,6 +158,7 @@ export default () => {
                               }}
                             />
                           </span>
+                          <span>{formattedBankAccountDescription}</span>
                         </BankAccount>
                       )}
                       <ResourcesWrapper>

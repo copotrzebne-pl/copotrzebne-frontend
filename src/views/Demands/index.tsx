@@ -10,6 +10,9 @@ import TranslatedText from 'components/TranslatedText'
 import TranslatedEntry from 'components/TranslatedEntry'
 import { useGroupSupplies } from 'hooks/useGroupSupplies'
 import { Demand } from 'contexts/types'
+import { getTranslation } from 'utils/translation'
+import { translations } from 'translations'
+import { useUserContext } from 'contexts/userContext'
 
 export default () => {
   const {
@@ -25,6 +28,8 @@ export default () => {
     clearDemands,
     clearSelectedPlace
   } = usePanelContext()
+  const { language } = useUserContext()
+
   const { id } = useParams()
   const { groupedSupplies, suppliesKeys, searchText, setSearchText } =
     useGroupSupplies(supplies)
@@ -59,13 +64,15 @@ export default () => {
         <TranslatedText value="chooseCurrentDemands" />
       </PageTitle>
       <FormGroup>
-        <Label>Szukaj</Label>
+        <Label>
+          <TranslatedText value="search" />
+        </Label>
         <TextInput
           id="search"
           type="text"
           name="searchFilter"
           autoComplete="false"
-          placeholder="Szukaj"
+          placeholder={getTranslation(language, translations['search'])}
           value={searchText}
           onChange={e => setSearchText(e.target.value)}
         />

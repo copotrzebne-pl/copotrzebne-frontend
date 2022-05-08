@@ -302,6 +302,7 @@ const CloseIcon = styled.button`
   color: black;
   transition: color 0.6s;
   margin-left: 0.4rem;
+  padding: 0;
   &:after {
     content: '✕';
     font-size: 16px;

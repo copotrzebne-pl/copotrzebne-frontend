@@ -7,6 +7,8 @@ import { breakpoint } from 'themes/breakpoints'
 import { PlaceBox as PlaceDetailedBox } from 'components/PlaceBox'
 import TranslatedText from 'components/TranslatedText'
 import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
+import { useUserContext } from 'contexts/userContext'
+import { Language } from '../../common/language'
 
 const StyledLink = styled(Link)`
   width: 100%;
@@ -45,6 +47,7 @@ export const WrappedPlacesComponent = ({
   places: Place[]
   initialNumber: number
 }) => {
+  const { language } = useUserContext()
   const [showMore, setShowMore] = useState<boolean>(false)
   return (
     <div>
@@ -53,7 +56,9 @@ export const WrappedPlacesComponent = ({
           .slice(0, showMore ? places.length : initialNumber)
           .map(place => (
             <StyledLink
-              to={`${routes[Page.PLACE]}/${place.nameSlug}`}
+              to={`${routes[Page.PLACE]}/${
+                place.nameSlug[language] || place.nameSlug[Language.PL]
+              }`}
               key={place.id}
             >
               <PlaceDetailedBox place={place} />

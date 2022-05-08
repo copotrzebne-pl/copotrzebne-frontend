@@ -12,6 +12,7 @@ import { getRestClient } from 'clients/restClient'
 import { Page, routes } from 'routes'
 import { checkIfAuthorized } from '../utils/session'
 import omit from 'lodash.omit'
+import { Language } from 'common/language'
 
 const DEFAULT_LANGUAGE = 'pl'
 
@@ -21,11 +22,11 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [authorized, setAuthorized] = useState<boolean>(() =>
     checkIfAuthorized()
   )
-  const [language, setLanguage] = useState<string>(
+  const [language, setLanguage] = useState<Language>(
     () =>
-      localStorage.getItem('lang') ||
-      document?.documentElement?.lang ||
-      DEFAULT_LANGUAGE
+      (localStorage.getItem('lang') ||
+        document?.documentElement?.lang ||
+        DEFAULT_LANGUAGE) as Language
   )
   const [userValue, setUserValue] = useState<User | null>(null)
   const [ownedPlaces, setOwnedPlaces] = useState<(Place & { id: string })[]>([])

@@ -12,10 +12,13 @@ import TranslatedText from 'components/TranslatedText'
 import PageTitle from 'components/PageTitle'
 import Dialog from 'components/Dialog'
 import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
+import { Language } from 'common/language'
+import { useUserContext } from 'contexts/userContext'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const { language } = useUserContext()
   const [editedDemandId, setEditedDemandId] = useState<string>('')
   const {
     demands,
@@ -45,7 +48,11 @@ export default () => {
 
   return (
     <Container>
-      <PageTitle>{selectedPlace?.name || 'Dodaj nowe potrzeby'}</PageTitle>
+      <PageTitle>
+        {selectedPlace?.name[language] ||
+          selectedPlace?.name[Language.PL] ||
+          'Dodaj nowe potrzeby'}
+      </PageTitle>
       <ButtonWrapper>
         {demands.length === 0 && (
           <SectionTitle>
