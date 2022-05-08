@@ -36,18 +36,13 @@ export const OrganizationsMap = ({ places }: { places: Place[] }) => {
     >
       {places
         .filter(place => !!place.latitude && !!place.longitude)
+        .filter(place => !(!place.demands || place.demands.length === 0))
         .map((place, index) => (
           <Marker
             key={index}
             width={50}
             anchor={[parseFloat(place.latitude!), parseFloat(place.longitude!)]}
-            color={
-              selectedPlace?.id === place.id
-                ? '#00e676'
-                : place.demands && place.demands.length > 0
-                ? '#0076FF'
-                : '#bdbdbd'
-            }
+            color={selectedPlace?.id === place.id ? '#00e676' : '#0076FF'}
             onClick={() => {
               setSelectedPlace(place)
               setMapCenter([
