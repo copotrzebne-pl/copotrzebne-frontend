@@ -18,11 +18,13 @@ import { breakpoint } from 'themes/breakpoints'
 const SupplySearchComponent = ({
   className,
   placesNumber,
-  handleSeeOnMap
+  handleSeeOnMap,
+  onClose
 }: {
   className?: string
   placesNumber: number
   handleSeeOnMap: () => void
+  onClose: () => void
 }) => {
   const [contextMenuOpened, setContextMenuOpened] = useState<boolean>(false)
   const {
@@ -92,11 +94,11 @@ const SupplySearchComponent = ({
             onFocus={() => {
               setContextMenuOpened(false)
             }}
+            isNotEmpty={searchText.length > 0}
           />
+          {searchText.length > 0 && <ClearSearchIcon onClick={() => setSearchText('')} />}
           <SelectedSuppliesIcon
-            onClick={() => {
-              setContextMenuOpened(!contextMenuOpened)
-            }}
+            onClick={onClose}
           >
             <SearchIcon height="20px" color="white" />
           </SelectedSuppliesIcon>
@@ -198,7 +200,7 @@ const FormGroup = styled.div`
   max-width: 500px;
 `
 
-const TextInput = styled.input`
+const TextInput = styled.input<{ isNotEmpty: boolean }>`
   display: inline-block;
   width: calc(100% - 60px);
   border: 1px solid rgba(150, 147, 147, 0.8);
@@ -213,6 +215,7 @@ const TextInput = styled.input`
   font-size: 0.8rem;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.grey600};
+  padding-right: ${props => props.isNotEmpty ? '2.3rem' : '0'};
 `
 
 const SuppliesList = styled.div`
@@ -365,6 +368,23 @@ const RemoveAllButton = styled.div`
   flex-shrink: 0;
   & > button {
     margin-left: 0;
+  }
+`
+
+const ClearSearchIcon = styled.button`
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  position: absolute;
+  right: 70px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: black;
+  padding: 0;
+  font-size: 1.3rem;
+  line-height: 1;
+  &:after {
+    content: '✕';
   }
 `
 
