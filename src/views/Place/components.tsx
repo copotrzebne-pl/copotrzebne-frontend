@@ -203,6 +203,28 @@ export const BankAccount = styled.div`
   }
 `
 
+export const Links = styled.div`
+  margin-top: 1.6rem;
+  color: #8d99b2;
+  font-size: 0.8rem;
+  font-weight: 400;
+
+  div {
+    margin: 0.5rem 0;
+  }
+
+  a {
+    color: #0076ff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.2rem 0;
+  }
+
+  a:hover {
+    color: #0055ff;
+  }
+`
+
 export const DemandsWrapper = styled.div`
   display: flex;
   flex-direction: column;
