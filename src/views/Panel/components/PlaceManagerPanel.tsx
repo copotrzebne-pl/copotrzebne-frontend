@@ -86,6 +86,13 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
           >
             <TranslatedText value="addDemands" />
           </PanelButton>
+          {ownedPlaces[0].resources !== undefined && (
+            <AvailableResources>
+              <TranslatedText value="resources" />
+              <span>{': '}</span>
+              <span>{ownedPlaces[0].resources}</span>
+            </AvailableResources>
+          )}
           <LastUpdateDate lastUpdatedAt={ownedPlaces[0].lastUpdatedAt} />
           <UpdateDateButton
             onClick={async () => {
@@ -293,4 +300,8 @@ const DemandComponentStyled = styled(DemandComponent)`
   ${AddIcon} {
     display: none;
   }
+`
+const AvailableResources = styled.div`
+  width: auto;
+  margin: 1.2rem 2.2rem 0.2rem;
 `

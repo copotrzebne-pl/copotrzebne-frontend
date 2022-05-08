@@ -94,6 +94,7 @@ export type Place = {
   demands?: Demand[]
   urgentDemands?: Demand[]
   placeLink?: PlaceLink
+  resources?: string
 }
 
 export type PlaceDto = {
@@ -112,6 +113,7 @@ export type PlaceDto = {
   bankAccount: string | null
   bankAccountDescription: string | null
   placeLink?: PlaceLink
+  resources?: string
 }
 
 export type PlaceLink = {

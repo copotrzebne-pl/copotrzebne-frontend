@@ -44,6 +44,7 @@ export default () => {
     longitude: null,
     bankAccount: '',
     bankAccountDescription: '',
+    resources: '',
     placeLink: { homepage: '', facebook: '', signup: '', fundraising: '' }
   })
 
@@ -64,7 +65,6 @@ export default () => {
 
   const setValue = useCallback(
     (name: string, value: string | Record<string, string>) => {
-      console.log(editedPlace)
       setEditedPlace({ ...editedPlace, [name]: value })
     },
     [editedPlace]
@@ -348,6 +348,18 @@ export default () => {
             placeholder="longitude"
             value={editedPlace.longitude || ''}
             onChange={e => setValue('longitude', e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label>
+            <TranslatedText value="resources" />
+          </Label>
+          <TextInput
+            id="resources"
+            type="text"
+            placeholder="resources"
+            value={editedPlace.resources || ''}
+            onChange={e => setValue('resources', e.target.value)}
           />
         </FormGroup>
         <ButtonWrapper>
