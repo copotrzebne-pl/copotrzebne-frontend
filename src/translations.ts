@@ -145,9 +145,9 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Посилання для реєстрації на волонтерську службу тут'
   },
   fundraisingLink: {
-    namePl: 'Link do zbiórki pieniężnej',
-    nameEn: 'Link to fundraising',
-    nameUa: 'Посилання на збір коштів'
+    namePl: 'Link do zbiórki pieniężnej tej organizacji',
+    nameEn: `Link to the fundraiser of this organization`,
+    nameUa: 'Посилання на збір коштів цієї організації'
   },
   save: {
     namePl: 'Zapisz',

@@ -14,6 +14,7 @@ import { ReactComponent as FbIcon } from 'assets/facebook-small-icon.svg'
 import { ReactComponent as WebsiteIcon } from 'assets/website-icon.svg'
 import {
   BankAccount,
+  Links,
   CategoryHeader,
   CollapsableSection,
   Container,
@@ -75,6 +76,11 @@ export default () => {
       clearSelectedPlace()
     }
   }, [idOrSlug])
+
+  const shouldRenderLinksSection = (): boolean =>
+    !!selectedPlace?.placeLink &&
+    (!!selectedPlace?.placeLink.signup ||
+      !!selectedPlace?.placeLink.fundraising)
 
   return (
     <>
@@ -157,6 +163,37 @@ export default () => {
                           </span>
                           <span>{formattedBankAccountDescription}</span>
                         </BankAccount>
+                      )}
+                      {shouldRenderLinksSection() && (
+                        <DetailsRow>
+                          <Links>
+                            {selectedPlace.placeLink?.signup && (
+                              <div>
+                                <a
+                                  href={selectedPlace.placeLink?.signup || '/'}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  &#8594; <TranslatedText value="signupLink" />
+                                </a>
+                              </div>
+                            )}
+                            {selectedPlace.placeLink?.fundraising && (
+                              <div>
+                                <a
+                                  href={
+                                    selectedPlace.placeLink?.fundraising || '/'
+                                  }
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  &#8594;{' '}
+                                  <TranslatedText value="fundraisingLink" />
+                                </a>
+                              </div>
+                            )}
+                          </Links>
+                        </DetailsRow>
                       )}
                     </PlaceAddress>
                   </PlaceAddressWrapper>
