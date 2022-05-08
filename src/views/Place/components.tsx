@@ -204,7 +204,7 @@ export const BankAccount = styled.div`
 `
 
 export const Links = styled.div`
-  margin-top: 1.6rem;
+  margin: 0.5rem 0;
   color: #8d99b2;
   font-size: 0.8rem;
   font-weight: 400;
