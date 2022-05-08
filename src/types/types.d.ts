@@ -42,9 +42,7 @@ export type InternalAnnouncement = {
 
 export type PublicAnnouncement = {
   id: string
-  title: string
   message: string
-  contactInfo: string
   placeId: string
   createdAt: string
 }

@@ -36,7 +36,7 @@ type AnnouncementsContextValue = {
 }
 
 export const AnnouncementsContext =
-  createContext<AnnouncementsContextValue>(null)
+  createContext<AnnouncementsContextValue | null>(null)
 
 export const AnnouncementsContextProvider = ({
   children
@@ -98,9 +98,13 @@ export const AnnouncementsContextProvider = ({
     setError('')
 
     const dto = {
-      title: formData.title,
+      title:
+        currentAnnouncementsType === 'internal' ? formData.title : undefined,
       message: formData.message,
-      contactInfo: formData.contactInfo,
+      contactInfo:
+        currentAnnouncementsType === 'internal'
+          ? formData.contactInfo
+          : undefined,
       placeId: formData.placeId,
       startDate:
         currentAnnouncementsType === 'internal'
