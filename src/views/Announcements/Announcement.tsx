@@ -38,7 +38,7 @@ const Announcement = ({
     <div className={`${className}${isInactive ? ' inactive' : ''}`}>
       <Row>
         <div>
-          <Title>{announcement.title}</Title>
+          {type === 'internal' && <Title>{announcement.title}</Title>}
           <PlaceName>
             <TranslatedText value="author" />:{' '}
             {place?.name[language] || place?.name[Language.PL] || '-'}
@@ -60,17 +60,19 @@ const Announcement = ({
       </Row>
       <Text>{sanitize(announcement.message)}</Text>
 
-      <Text>
-        <b>
-          <TranslatedText value="contactInformation" />
-        </b>
-        <div>{sanitize(announcement.contactInfo)}</div>
-      </Text>
       {type === 'internal' && (
-        <Comments
-          comments={announcement.announcementComments}
-          announcementId={announcement.id}
-        />
+        <>
+          <Text>
+            <b>
+              <TranslatedText value="contactInformation" />
+            </b>
+            <div>{sanitize(announcement.contactInfo)}</div>
+          </Text>
+          <Comments
+            comments={announcement.announcementComments}
+            announcementId={announcement.id}
+          />
+        </>
       )}
     </div>
   )
