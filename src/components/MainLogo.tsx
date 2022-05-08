@@ -51,13 +51,17 @@ const LogoText = styled.span`
   display: inline-block;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.black};
-  font-size: 1.6rem;
+  font-size: 5.3vw;
   margin-top: -3px;
+
+  ${breakpoint.xxs`
+    font-size: 1.6rem;
+  `}
 
   ${breakpoint.sm`
     font-size: 1.85rem;
     margin-top: -5px;
-`}
+  `}
 `
 
 export default MainLogo
