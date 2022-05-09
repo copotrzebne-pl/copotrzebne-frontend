@@ -39,11 +39,12 @@ export const Label = styled.label`
   font-weight: 400;
 `
 
-export const FormGroup = styled.div`
+export const FormGroup = styled.div<{ isRelative?: boolean }>`
   display: flex;
   flex-direction: column;
   margin-bottom: 1.2rem;
   padding: 0 1.8rem;
+  ${props => props.isRelative && 'position: relative'};
 `
 
 export const FormGroupRow = styled.div`
