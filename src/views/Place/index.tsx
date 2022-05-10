@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { usePanelContext } from 'contexts/panelContext'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -54,6 +54,7 @@ export default () => {
   const { language } = useUserContext()
   const { idOrSlug } = useParams()
   const mobileViewport = window.matchMedia('screen and (max-width: 992px)')
+  const placeInformationRef = useRef<HTMLDivElement | null>(null)
   const formattedPlaceDescription = useTextTransformToHTML(
     selectedPlace?.additionalDescription || ''
   )
@@ -87,7 +88,7 @@ export default () => {
       <Container>
         <OgranizationInformation>
           {selectedPlace !== null && (
-            <PlaceDetails>
+            <PlaceDetails ref={placeInformationRef}>
               <LastUpdate>
                 <span>
                   <TranslatedText value="lastUpdate" />{' '}
@@ -354,7 +355,10 @@ export default () => {
             </ShowOnMapButton>
           )}
           {selectedPlace && !mobileViewport.matches && (
-            <OrganizationMap place={selectedPlace} />
+            <OrganizationMap
+              place={selectedPlace}
+              placeInformationRef={placeInformationRef.current}
+            />
           )}
         </OgranizationInformation>
         <StyledFacebookButton>

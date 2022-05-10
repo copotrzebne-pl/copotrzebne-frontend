@@ -1,20 +1,29 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Map, Marker } from 'pigeon-maps'
 import { stamenToner } from 'pigeon-maps/providers'
 import { Place } from 'contexts/types'
 
-export const OrganizationMap = ({ place }: { place: Place }) => {
-  const [mapHeight] = useState<number>(430)
+export const OrganizationMap = ({
+  place,
+  placeInformationRef
+}: {
+  place: Place
+  placeInformationRef: HTMLDivElement | null
+}) => {
+  const [mapHeight, setMapHeight] = useState<number>(430)
   const [mapCenter, setMapCenter] = useState<[number, number]>([
     place.latitude ? parseFloat(place.latitude) : 50.0647,
     place.longitude ? parseFloat(place.longitude) : 19.945
   ])
   const [mapZoom, setMapZoom] = useState<number>(14)
 
-  // useEffect(() => {
-  //   setMapHeight(document.body.clientHeight)
-  // }, [])
+  useEffect(() => {
+    if (placeInformationRef !== null) {
+      setMapHeight(placeInformationRef.offsetHeight)
+    }
+  }, [placeInformationRef])
+
   return (
     <Map
       provider={stamenToner}
