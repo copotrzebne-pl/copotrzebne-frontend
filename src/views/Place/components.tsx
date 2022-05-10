@@ -231,7 +231,7 @@ export const DemandsWrapper = styled.div`
   padding: 1rem 1.2rem 3.2rem;
   width: 100%;
   ${breakpoint.sm`
-    max-width: 450px;
+    max-width: 980px;
     margin: 0 auto;
   `}
 `
@@ -243,17 +243,26 @@ export const DemandsListTitle = styled.h4`
   font-size: 1.6rem;
   font-weight: 700;
   color: #333333;
+  justify-content: center;
 `
 
-export const DemandsList = styled.ol`
+export const DemandsList = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
   padding: 0 1.2rem;
   margin: 0;
+  ${breakpoint.sm`
+    padding-bottom: 4.2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 1.2rem;
+    grid-row-gap: 10px;
+    justify-content: center;
+  `}
 `
 
-export const DemandComponent = styled.li`
+export const DemandComponent = styled.div`
   margin: 0.6rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid #999;
@@ -311,6 +320,10 @@ export const CategoryHeader = styled.span`
   border-radius: 12px;
   background-color: #0076ff1f;
   margin: 0.4rem -24px;
+  ${breakpoint.sm`
+    width: 100%;
+    margin: 0.4rem 0;
+  `}
 `
 
 export const PlaceNameLabel = styled.span`
