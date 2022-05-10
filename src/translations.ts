@@ -21,24 +21,23 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   aboutUsPageTitle: {
     namePl: 'Copotrzebne.pl - O nas',
-    nameEn: 'Copotrzebne.pl - About us',
-    nameUa: 'Copotrzebne.pl - Про нас'
+    nameEn: 'whatisneeded.pl - About us',
+    nameUa: 'shchopotribno.pl - Про нас'
   },
   aboutUs: {
-    namePl: `Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
+    namePl: `Copotrzebne.pl jest aplikacją charytatywną wspieraną przez Schibsted Tech Polska. Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
       wsparcie osobom uchodźczym z Ukrainy - z osobami, które chciałyby je w tej
       pomocy wspierać. Ułatwiamy lokalizację zbiórek i pomagamy koordynować
       zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
       aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
       można dane rzeczy dostarczyć. 
       Jako część Koalicji Otwarty Kraków działamy na terenie Krakowa, ale zapraszamy do współpracy także inne organizacje oraz lokalizacje!`,
-    nameEn: `We are helping others help by connecting charity aid places and foundations,
+    nameEn: `Whatisneeded.pl is a charity app powered by Schibsted Tech Polska. We are helping others help by connecting charity aid places and foundations,
       providing support to refugees from Ukraine - with people who would like to donate goods or items.
       We make it easier to locate the ongoing collections and coordinate demands for given supply.
       Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.
       As a part of the Open Krakow Coalition, we are actively working in Krakow, but we also invite other organisations and locations to come and join us!`,
-    nameUa: `Помагаємо допомагати! 
-    З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
+    nameUa: `Shchopotribno.pl – це благодійний додаток, розроблений Schibsted Tech Polska. Помагаємо допомагати! З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
     Полегшуємо пошук пунктів збирання допомоги, координуємо в них попит на основні потреби.
     Завдяки нам дізнаєшся, що цієї миті найнеобхідніше в пунктах твого міста,а також куди і коли можна доставити речі.`
   },

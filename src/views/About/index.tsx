@@ -2,7 +2,7 @@ import PageTitle from 'components/PageTitle'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
-import schibstedLogo from '../../assets/schibsted-logo.png'
+import schibstedLogo from 'assets/schibsted-logo.png'
 
 export default () => (
   <Container>
@@ -72,6 +72,7 @@ const StyledLink = styled.a`
 const SchibstedWrapper = styled.div`
   display: inline-block;
   text-align: center;
+  padding-bottom: 3.8rem;
 `
 
 const SchibstedInfo = styled.div`
