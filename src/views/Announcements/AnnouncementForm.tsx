@@ -146,7 +146,7 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
 
       {type === 'internal' && (
         <>
-          <FormGroup>
+          <FormGroup isRelative>
             <Label>
               <TranslatedText value="announcementStartDate" />
               <RequiredDecorator>*</RequiredDecorator>
@@ -182,7 +182,7 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
               </CalendarWrapper>
             )}
           </FormGroup>
-          <FormGroup>
+          <FormGroup isRelative>
             <Label>
               <TranslatedText value="announcementEndDate" />
               <RequiredDecorator>*</RequiredDecorator>

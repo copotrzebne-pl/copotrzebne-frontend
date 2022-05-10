@@ -2,6 +2,7 @@ import PageTitle from 'components/PageTitle'
 import styled from 'styled-components'
 import { breakpoint } from 'themes/breakpoints'
 import TranslatedText from 'components/TranslatedText'
+import schibstedLogo from 'assets/schibsted-logo.png'
 
 export default () => (
   <Container>
@@ -18,6 +19,14 @@ export default () => (
       </StyledLink>
       <StyledLink href="tel:885812070">885812070</StyledLink>
     </ContactDetails>
+    <SchibstedWrapper>
+      <SchibstedInfo>
+        Powered by <strong>Schibsted Tech Polska</strong>
+      </SchibstedInfo>
+      <SchibstedLogoWrapper target="_blank" href="https://schibsted.pl">
+        <SchibstedLogo src={schibstedLogo} />
+      </SchibstedLogoWrapper>
+    </SchibstedWrapper>
   </Container>
 )
 
@@ -58,4 +67,20 @@ const StyledLink = styled.a`
   width: 100%;
   margin-top: 0.6rem;
   color: #0076ff;
+`
+
+const SchibstedWrapper = styled.div`
+  display: inline-block;
+  text-align: center;
+  padding-bottom: 3.8rem;
+`
+
+const SchibstedInfo = styled.div`
+  padding: 1rem;
+`
+
+const SchibstedLogoWrapper = styled.a``
+
+const SchibstedLogo = styled.img`
+  height: 1.5rem;
 `
