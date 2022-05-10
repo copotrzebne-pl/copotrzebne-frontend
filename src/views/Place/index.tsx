@@ -421,6 +421,6 @@ const DemandWrapper = styled.div`
   display: flex;
   flex-direction: column;
   ${breakpoint.sm`
-    max-width: 420px
+    width: 100%;
   `}
 `
