@@ -45,7 +45,7 @@ export default () => {
 const Dropdown = styled.div`
   background: white;
   position: absolute;
-  top: 40px;
+  top: 45px;
   left: 50%;
   transform: translateX(-50%);
   box-shadow: ${({ theme }) => theme.boxShadows.medium};
