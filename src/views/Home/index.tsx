@@ -105,6 +105,7 @@ export default () => {
                     setOpenOrganisationSearch(false)
                     mobileViewport.matches && setMobileMapOpened(true)
                   }}
+                  onClose={() => setOpenOrganisationSearch(false)}
                 />
               </DialogSupplySearch>
             )}
@@ -125,7 +126,9 @@ export default () => {
                 toggleSelectedSupply={toggleSelectedSupply}
                 toggleSelectedSupplyGroup={toggleSelectedSupplyGroup}
               />
-              <FoundPlacesNumber>Znaleziono: {places.length}</FoundPlacesNumber>
+              <FoundPlacesNumber>
+                <TranslatedText value="found" />: {places.length}
+              </FoundPlacesNumber>
             </SelectedSuppliesWrapper>
           )}
           <PlacesList>

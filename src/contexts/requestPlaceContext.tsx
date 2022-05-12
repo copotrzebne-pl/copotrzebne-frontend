@@ -8,6 +8,7 @@ import {
 import { RequestPlaceContextValue, Place, DraftPlaceDto } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
+import { Language } from 'common/language'
 
 export const RequestPlaceContext =
   createContext<RequestPlaceContextValue | null>(null)
@@ -19,7 +20,11 @@ export const RequestPlaceContextProvider = ({
 }) => {
   const [isPlaceCreated, setPlaceCreated] = useState<boolean>(false)
   const [place, setPlace] = useState<DraftPlaceDto>({
-    name: '',
+    name: {
+      [Language.PL]: '',
+      [Language.EN]: '',
+      [Language.UA]: ''
+    },
     city: '',
     street: '',
     buildingNumber: '',
@@ -28,7 +33,8 @@ export const RequestPlaceContextProvider = ({
     email: '',
     phone: '',
     workingHours: '',
-    bankAccount: ''
+    bankAccount: '',
+    bankAccountDescription: ''
   })
   const [userEmail, setUserEmail] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
@@ -58,6 +64,7 @@ export const RequestPlaceContextProvider = ({
         email: place.email || undefined,
         phone: place.phone || undefined,
         bankAccount: place.bankAccount || undefined,
+        bankAccountDescription: place.bankAccountDescription || undefined,
         workingHours: place.workingHours || undefined,
         placeLink: place.placeLink || undefined
       }

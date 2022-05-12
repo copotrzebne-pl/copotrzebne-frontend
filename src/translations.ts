@@ -21,24 +21,23 @@ export const translations: { [value: string]: DictionaryEntry } = {
   },
   aboutUsPageTitle: {
     namePl: 'Copotrzebne.pl - O nas',
-    nameEn: 'Copotrzebne.pl - About us',
-    nameUa: 'Copotrzebne.pl - Про нас'
+    nameEn: 'whatisneeded.pl - About us',
+    nameUa: 'shchopotribno.pl - Про нас'
   },
   aboutUs: {
-    namePl: `Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
+    namePl: `Copotrzebne.pl jest aplikacją charytatywną wspieraną przez Schibsted Tech Polska. Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
       wsparcie osobom uchodźczym z Ukrainy - z osobami, które chciałyby je w tej
       pomocy wspierać. Ułatwiamy lokalizację zbiórek i pomagamy koordynować
       zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
       aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
       można dane rzeczy dostarczyć. 
       Jako część Koalicji Otwarty Kraków działamy na terenie Krakowa, ale zapraszamy do współpracy także inne organizacje oraz lokalizacje!`,
-    nameEn: `We are helping others help by connecting charity aid places and foundations,
+    nameEn: `Whatisneeded.pl is a charity app powered by Schibsted Tech Polska. We are helping others help by connecting charity aid places and foundations,
       providing support to refugees from Ukraine - with people who would like to donate goods or items.
       We make it easier to locate the ongoing collections and coordinate demands for given supply.
       Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.
       As a part of the Open Krakow Coalition, we are actively working in Krakow, but we also invite other organisations and locations to come and join us!`,
-    nameUa: `Помагаємо допомагати! 
-    З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
+    nameUa: `Shchopotribno.pl – це благодійний додаток, розроблений Schibsted Tech Polska. Помагаємо допомагати! З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
     Полегшуємо пошук пунктів збирання допомоги, координуємо в них попит на основні потреби.
     Завдяки нам дізнаєшся, що цієї миті найнеобхідніше в пунктах твого міста,а також куди і коли можна доставити речі.`
   },
@@ -124,6 +123,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'Bank account number for donations',
     nameUa: 'Номер банківського рахунку для внесення пожертв'
   },
+  bankAccountDescription: {
+    namePl: 'Szczegółowe informacje do nr konta (np. tytuł przelewu)',
+    nameEn: 'Additional information about bank account (eg. transfer title)',
+    nameUa: 'Additional information about bank account (eg. transfer title)'
+  },
   homepageLink: {
     namePl: 'Link do strony domowej organizacji',
     nameEn: 'Link to the home page of the organization',
@@ -140,9 +144,9 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: 'Посилання для реєстрації на волонтерську службу тут'
   },
   fundraisingLink: {
-    namePl: 'Link do zbiórki pieniężnej',
-    nameEn: 'Link to fundraising',
-    nameUa: 'Посилання на збір коштів'
+    namePl: 'Link do zbiórki pieniężnej tej organizacji',
+    nameEn: `Link to the fundraiser of this organization`,
+    nameUa: 'Посилання на збір коштів цієї організації'
   },
   save: {
     namePl: 'Zapisz',
@@ -345,6 +349,11 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameEn: 'blankets, sandwiches, food',
     nameUa: 'ковдри, бутерброди, їжа'
   },
+  search: {
+    namePl: 'Szukaj',
+    nameEn: 'Search',
+    nameUa: 'Пошук'
+  },
   inputProductName: {
     namePl: 'Wpisz nazwę produktu',
     nameEn: 'Enter a product name',
@@ -427,7 +436,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
       'Ми перевіряємо організації, перш ніж додати їх до системи. Номер рахунку організації: <br /><b>{bankAccountNumber}</b>'
   },
   faqTitle_2: {
-    namePl: 'Chcę przekazać żywność, jak mogę to zrobić?',
+    namePl: 'Chcę przekazać dary rzeczowe, jak mogę to zrobić?',
     nameEn: 'I want to donate goods, how can I do it?',
     nameUa: 'Я хочу пожертвувати товари, як я можу це зробити?'
   },
@@ -491,7 +500,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
     nameUa: ''
   },
   faqTitle_6: {
-    namePl: 'Nie mam aktualnie środów, jak mogę pomóc?',
+    namePl: 'Nie mam aktualnie środków, jak mogę pomóc?',
     nameEn: 'I can’t afford to buy a lot of goods, how can I help?',
     nameUa:
       'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
@@ -637,5 +646,10 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'copotrzebne.pl',
     nameEn: 'whatisneeded.pl',
     nameUa: 'shchopotribno.pl'
+  },
+  found: {
+    namePl: 'Znaleziono',
+    nameEn: 'Found',
+    nameUa: 'Знайдено'
   }
 }

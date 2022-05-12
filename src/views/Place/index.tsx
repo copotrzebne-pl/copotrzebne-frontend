@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { usePanelContext } from 'contexts/panelContext'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -14,6 +14,7 @@ import { ReactComponent as FbIcon } from 'assets/facebook-small-icon.svg'
 import { ReactComponent as WebsiteIcon } from 'assets/website-icon.svg'
 import {
   BankAccount,
+  Links,
   CategoryHeader,
   CollapsableSection,
   Container,
@@ -45,6 +46,7 @@ import {
 } from './components'
 import { breakpoint } from 'themes/breakpoints'
 import { OrganizationMap } from './Map'
+import { Language } from 'common/language'
 
 export default () => {
   const [faqDialogOpened, setFaqDialogOpened] = useState<boolean>(false)
@@ -52,12 +54,17 @@ export default () => {
   const { language } = useUserContext()
   const { idOrSlug } = useParams()
   const mobileViewport = window.matchMedia('screen and (max-width: 992px)')
+  const placeInformationRef = useRef<HTMLDivElement | null>(null)
   const formattedPlaceDescription = useTextTransformToHTML(
     selectedPlace?.additionalDescription || ''
   )
   const formattedBankAccountDetails = useTextTransformToHTML(
     selectedPlace?.bankAccount || ''
   )
+  const formattedBankAccountDescription = useTextTransformToHTML(
+    selectedPlace?.bankAccountDescription || ''
+  )
+
   const { groupedDemands, demandsKeys } = useGroupDemands(
     selectedPlace?.demands || []
   )
@@ -71,12 +78,17 @@ export default () => {
     }
   }, [idOrSlug])
 
+  const shouldRenderLinksSection = (): boolean =>
+    !!selectedPlace?.placeLink &&
+    (!!selectedPlace?.placeLink.signup ||
+      !!selectedPlace?.placeLink.fundraising)
+
   return (
     <>
       <Container>
         <OgranizationInformation>
           {selectedPlace !== null && (
-            <PlaceDetails>
+            <PlaceDetails ref={placeInformationRef}>
               <LastUpdate>
                 <span>
                   <TranslatedText value="lastUpdate" />{' '}
@@ -93,7 +105,8 @@ export default () => {
                   <TranslatedText value="organizationLabel" />
                 </PlaceNameLabel>
                 <PlaceName>
-                  {selectedPlace?.name}
+                  {selectedPlace?.name[language] ||
+                    selectedPlace?.name[Language.PL]}
                   {selectedPlace.placeLink?.homepage && (
                     <OrganisationLink
                       href={selectedPlace.placeLink?.facebook || '/'}
@@ -149,7 +162,39 @@ export default () => {
                               }}
                             />
                           </span>
+                          <span>{formattedBankAccountDescription}</span>
                         </BankAccount>
+                      )}
+                      {shouldRenderLinksSection() && (
+                        <DetailsRow>
+                          <Links>
+                            {selectedPlace.placeLink?.signup && (
+                              <div>
+                                <a
+                                  href={selectedPlace.placeLink?.signup || '/'}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  &#8594; <TranslatedText value="signupLink" />
+                                </a>
+                              </div>
+                            )}
+                            {selectedPlace.placeLink?.fundraising && (
+                              <div>
+                                <a
+                                  href={
+                                    selectedPlace.placeLink?.fundraising || '/'
+                                  }
+                                  target="_blank"
+                                  rel="noreferrer"
+                                >
+                                  &#8594;{' '}
+                                  <TranslatedText value="fundraisingLink" />
+                                </a>
+                              </div>
+                            )}
+                          </Links>
+                        </DetailsRow>
                       )}
                     </PlaceAddress>
                   </PlaceAddressWrapper>
@@ -310,7 +355,10 @@ export default () => {
             </ShowOnMapButton>
           )}
           {selectedPlace && !mobileViewport.matches && (
-            <OrganizationMap place={selectedPlace} />
+            <OrganizationMap
+              place={selectedPlace}
+              placeInformationRef={placeInformationRef.current}
+            />
           )}
         </OgranizationInformation>
         <StyledFacebookButton>
@@ -377,6 +425,6 @@ const DemandWrapper = styled.div`
   display: flex;
   flex-direction: column;
   ${breakpoint.sm`
-    max-width: 420px
+    width: 100%;
   `}
 `

@@ -7,6 +7,8 @@ import { formatDate, formatDateWithTime } from '../../utils/date'
 import { Place } from '../../contexts/types'
 import Comments from './Comments'
 import TranslatedText from '../../components/TranslatedText'
+import { Language } from 'common/language'
+import { useUserContext } from 'contexts/userContext'
 
 const Announcement = ({
   announcement,
@@ -26,6 +28,7 @@ const Announcement = ({
       place?: Place
       type: 'public'
     }) => {
+  const { language } = useUserContext()
   const isInactive =
     type === 'internal' &&
     announcement.endDate &&
@@ -35,9 +38,10 @@ const Announcement = ({
     <div className={`${className}${isInactive ? ' inactive' : ''}`}>
       <Row>
         <div>
-          <Title>{announcement.title}</Title>
+          {type === 'internal' && <Title>{announcement.title}</Title>}
           <PlaceName>
-            <TranslatedText value="author" />: {place?.name || '-'}
+            <TranslatedText value="author" />:{' '}
+            {place?.name[language] || place?.name[Language.PL] || '-'}
           </PlaceName>
         </div>
 
@@ -56,17 +60,19 @@ const Announcement = ({
       </Row>
       <Text>{sanitize(announcement.message)}</Text>
 
-      <Text>
-        <b>
-          <TranslatedText value="contactInformation" />
-        </b>
-        <div>{sanitize(announcement.contactInfo)}</div>
-      </Text>
       {type === 'internal' && (
-        <Comments
-          comments={announcement.announcementComments}
-          announcementId={announcement.id}
-        />
+        <>
+          <Text>
+            <b>
+              <TranslatedText value="contactInformation" />
+            </b>
+            <div>{sanitize(announcement.contactInfo)}</div>
+          </Text>
+          <Comments
+            comments={announcement.announcementComments}
+            announcementId={announcement.id}
+          />
+        </>
       )}
     </div>
   )

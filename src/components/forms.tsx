@@ -39,11 +39,28 @@ export const Label = styled.label`
   font-weight: 400;
 `
 
-export const FormGroup = styled.div`
+export const FormGroup = styled.div<{ isRelative?: boolean }>`
   display: flex;
   flex-direction: column;
   margin-bottom: 1.2rem;
   padding: 0 1.8rem;
+  ${props => props.isRelative && 'position: relative'};
+`
+
+export const FormGroupRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
+`
+
+export const RowLabel = styled.div`
+  display: inline-block;
+  margin-right: 0.6rem;
+  color: ${({ theme }) => theme.colors.grey900};
+  font-size: 0.9rem;
+  font-weight: 400;
+  min-width: 20px;
 `
 
 export const Form = styled.form`

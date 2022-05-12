@@ -1,4 +1,5 @@
 import React from 'react'
+import { Language } from 'common/language'
 
 export type Route = {
   path: string
@@ -41,9 +42,9 @@ export type InternalAnnouncement = {
 
 export type PublicAnnouncement = {
   id: string
-  title: string
   message: string
-  contactInfo: string
   placeId: string
   createdAt: string
 }
+
+export type TranslatedField = Record<Language, string>

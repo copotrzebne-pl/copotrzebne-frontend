@@ -19,6 +19,7 @@ import { useUserContext } from '../../contexts/userContext'
 import { useAnnouncementsContext } from '../../contexts/announcementsContext'
 import { breakpoint } from '../../themes/breakpoints'
 import { Select } from '../../components/Select'
+import { Language } from 'common/language'
 
 const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
   const {
@@ -31,7 +32,7 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
     fetchAnnouncements
   } = useAnnouncementsContext()
 
-  const { fetchOwnedPlaces, ownedPlaces } = useUserContext()
+  const { language, fetchOwnedPlaces, ownedPlaces } = useUserContext()
 
   useEffect(() => {
     fetchOwnedPlaces()
@@ -90,25 +91,30 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
         required
         label={<TranslatedText value="announcementPlace" />}
         value={formData.placeId}
-        options={ownedPlaces.map(p => ({ name: p.name, value: p.id }))}
+        options={ownedPlaces.map(p => ({
+          name: p.name[language] || p.name[Language.PL],
+          value: p.id
+        }))}
         onChange={(value: string) => setFormValue('placeId', value)}
         disabled={ownedPlaces.length <= 1}
       />
 
-      <FormGroup>
-        <Label>
-          <TranslatedText value="announcementTitle" />
-          <RequiredDecorator>*</RequiredDecorator>
-        </Label>
-        <TextInput
-          id="title"
-          type="text"
-          placeholder="Title"
-          required
-          value={formData.title}
-          onChange={e => setFormValue('title', e.target.value)}
-        />
-      </FormGroup>
+      {type === 'internal' && (
+        <FormGroup>
+          <Label>
+            <TranslatedText value="announcementTitle" />
+            <RequiredDecorator>*</RequiredDecorator>
+          </Label>
+          <TextInput
+            id="title"
+            type="text"
+            placeholder="Title"
+            required
+            value={formData.title}
+            onChange={e => setFormValue('title', e.target.value)}
+          />
+        </FormGroup>
+      )}
       <FormGroup>
         <Label>
           <TranslatedText value="announcementMessage" />
@@ -122,23 +128,25 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
           onChange={e => setFormValue('message', e.target.value)}
         />
       </FormGroup>
-      <FormGroup>
-        <Label>
-          <TranslatedText value="announcementContact" />
-          <RequiredDecorator>*</RequiredDecorator>
-        </Label>
-        <TextArea
-          id="contactInfo"
-          placeholder="Contact info"
-          required
-          value={formData.contactInfo}
-          onChange={e => setFormValue('contactInfo', e.target.value)}
-        />
-      </FormGroup>
+      {type === 'internal' && (
+        <FormGroup>
+          <Label>
+            <TranslatedText value="announcementContact" />
+            <RequiredDecorator>*</RequiredDecorator>
+          </Label>
+          <TextArea
+            id="contactInfo"
+            placeholder="Contact info"
+            required
+            value={formData.contactInfo}
+            onChange={e => setFormValue('contactInfo', e.target.value)}
+          />
+        </FormGroup>
+      )}
 
       {type === 'internal' && (
         <>
-          <FormGroup>
+          <FormGroup isRelative>
             <Label>
               <TranslatedText value="announcementStartDate" />
               <RequiredDecorator>*</RequiredDecorator>
@@ -174,7 +182,7 @@ const AnnouncementForm = ({ type }: { type: 'internal' | 'public' }) => {
               </CalendarWrapper>
             )}
           </FormGroup>
-          <FormGroup>
+          <FormGroup isRelative>
             <Label>
               <TranslatedText value="announcementEndDate" />
               <RequiredDecorator>*</RequiredDecorator>
