@@ -26,7 +26,9 @@ const SupplySearchComponent = ({
   handleSeeOnMap: () => void
   onClose: () => void
 }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [contextMenuOpened, setContextMenuOpened] = useState<boolean>(false)
+
   const {
     supplies,
     selectedSupplies,
@@ -96,10 +98,10 @@ const SupplySearchComponent = ({
             }}
             isNotEmpty={searchText.length > 0}
           />
-          {searchText.length > 0 && <ClearSearchIcon onClick={() => setSearchText('')} />}
-          <SelectedSuppliesIcon
-            onClick={onClose}
-          >
+          {searchText.length > 0 && (
+            <ClearSearchIcon onClick={() => setSearchText('')} />
+          )}
+          <SelectedSuppliesIcon onClick={onClose}>
             <SearchIcon height="20px" color="white" />
           </SelectedSuppliesIcon>
         </SearchRow>
@@ -215,7 +217,7 @@ const TextInput = styled.input<{ isNotEmpty: boolean }>`
   font-size: 0.8rem;
   font-weight: 600;
   color: ${({ theme }) => theme.colors.grey600};
-  padding-right: ${props => props.isNotEmpty ? '2.3rem' : '0'};
+  padding-right: ${props => (props.isNotEmpty ? '2.3rem' : '0')};
 `
 
 const SuppliesList = styled.div`
