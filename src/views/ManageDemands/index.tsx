@@ -68,7 +68,7 @@ export default () => {
         >
           <TranslatedText value="addDemands" />
         </StyledButton>
-        {selectedPlace?.id && (
+        {selectedPlace?.id && !!demands.length && (
           <RemoveAllDemandsButton
             onClick={() => removeAllDemands(selectedPlace?.id || '')}
           >
