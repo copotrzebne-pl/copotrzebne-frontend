@@ -12,10 +12,12 @@ import { Language } from 'common/language'
 
 const PlaceBoxComponent = ({
   className,
-  place
+  place,
+  allowDelete = true
 }: {
   className?: string
   place: Place
+  allowDelete?: boolean
 }) => {
   const { deletePlace } = useUserContext()
   const { user, language } = useUserContext()
@@ -27,7 +29,7 @@ const PlaceBoxComponent = ({
         <PlaceName place={place}>
           {place.name[language] || place.name[Language.PL] || ''}
         </PlaceName>
-        {authorized && user?.role === 'admin' && (
+        {allowDelete && authorized && user?.role === 'admin' && (
           <TrashIcon
             src={trashIconUrl}
             alt="remove"

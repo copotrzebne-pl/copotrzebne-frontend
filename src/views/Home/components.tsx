@@ -61,7 +61,7 @@ export const WrappedPlacesComponent = ({
               }`}
               key={place.id}
             >
-              <PlaceDetailedBox place={place} />
+              <PlaceDetailedBox place={place} allowDelete={false} />
             </StyledLink>
           ))}
       </div>
