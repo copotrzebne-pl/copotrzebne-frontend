@@ -184,6 +184,7 @@ export const AddIcon = styled.span`
   border: 1px solid #333;
   border-radius: 50%;
   padding: 4px;
+  margin-left: 0.5rem;
 `
 
 const PlusIconStyled = styled(PlusIcon)`
