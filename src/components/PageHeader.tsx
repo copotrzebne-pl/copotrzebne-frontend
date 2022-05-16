@@ -129,7 +129,6 @@ const MenuHeader = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid transparent;
 `
 
 const Navigation = styled.nav`
