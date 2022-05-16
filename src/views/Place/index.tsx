@@ -437,4 +437,5 @@ const DemandPriority = styled.div`
   padding: 0.3rem 0.5rem 0.4rem 0.5rem;
   line-height: 1;
   border-radius: 20px;
+  margin-left: 0.5rem;
 `
