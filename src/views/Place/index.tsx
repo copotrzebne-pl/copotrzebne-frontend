@@ -391,7 +391,9 @@ export default () => {
                                 <TranslatedEntry entry={demand?.supply} />
                               </span>
                               {demand?.priority.importance === 2 && (
-                                <TranslatedEntry entry={demand?.priority} />
+                                <DemandPriority>
+                                  <TranslatedEntry entry={demand?.priority} />
+                                </DemandPriority>
                               )}
                             </DemandInfo>
                             {demand?.comment && (
@@ -427,4 +429,13 @@ const DemandWrapper = styled.div`
   ${breakpoint.sm`
     width: 100%;
   `}
+`
+const DemandPriority = styled.div`
+  background-color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.white};
+  font-size: 0.815rem;
+  padding: 0.3rem 0.5rem 0.4rem 0.5rem;
+  line-height: 1;
+  border-radius: 20px;
+  margin-left: 0.5rem;
 `

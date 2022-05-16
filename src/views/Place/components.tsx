@@ -284,6 +284,7 @@ export const DemandInfo = styled.div`
 
   & > span {
     color: #333333;
+    flex: 1;
   }
 `
 
