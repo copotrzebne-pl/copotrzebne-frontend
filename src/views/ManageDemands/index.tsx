@@ -68,6 +68,13 @@ export default () => {
         >
           <TranslatedText value="addDemands" />
         </StyledButton>
+        {selectedPlace?.id && !!demands.length && (
+          <RemoveAllDemandsButton
+            onClick={() => removeAllDemands(selectedPlace?.id || '')}
+          >
+            <TranslatedText value="removeDemands" />
+          </RemoveAllDemandsButton>
+        )}
         {demands.length > 0 && (
           <>
             <DemandsWrapper>
@@ -118,13 +125,6 @@ export default () => {
                 </>
               ))}
             </DemandsWrapper>
-            {selectedPlace?.id && (
-              <RemoveAllDemandsButton
-                onClick={() => removeAllDemands(selectedPlace?.id || '')}
-              >
-                <TranslatedText value="removeDemands" />
-              </RemoveAllDemandsButton>
-            )}
           </>
         )}
       </ButtonWrapper>
@@ -161,7 +161,20 @@ const ButtonWrapper = styled.div`
 
 const StyledButton = styled(Button)`
   margin-top: 0.8rem;
+  margin-bottom: 1.2rem;
+`
+
+const RemoveAllDemandsButton = styled(Button)`
+  margin-top: 0.8rem;
   margin-bottom: 2.2rem;
+  background-color: transparent;
+  color: ${({ theme }) => theme.colors.red};
+  border: 1px solid ${({ theme }) => theme.colors.red};
+  &:hover,
+  &:focus {
+    color: white;
+    background: ${({ theme }) => theme.colors.red};
+  }
 `
 
 const DemandsWrapper = styled.div`
@@ -190,19 +203,6 @@ const DemandTitle = styled.div`
 
 const PriorityLabel = styled.span`
   color: #999;
-`
-
-const RemoveAllDemandsButton = styled(Button)`
-  margin-top: 0.8rem;
-  margin-bottom: 2.2rem;
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.red};
-  border: 1px solid ${({ theme }) => theme.colors.red};
-  &:hover,
-  &:focus {
-    color: white;
-    background: ${({ theme }) => theme.colors.red};
-  }
 `
 
 const TrashIcon = styled.img`
