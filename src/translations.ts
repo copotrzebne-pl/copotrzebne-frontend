@@ -651,5 +651,25 @@ export const translations: { [value: string]: DictionaryEntry } = {
     namePl: 'Znaleziono',
     nameEn: 'Found',
     nameUa: 'Знайдено'
-  }
+  },
+  changeLanguage: {
+    namePl: 'zmień',
+    nameEn: 'change',
+    nameUa: 'змінити'
+  },
+  polish: {
+    namePl: 'Polski',
+    nameEn: 'Polish',
+    nameUa: 'польський'
+  },
+  ukrainian: {
+    namePl: 'Ukraiński',
+    nameEn: 'Ukrainian',
+    nameUa: 'український'
+  },
+  english: {
+    namePl: 'Angielski',
+    nameEn: 'English',
+    nameUa: 'англійська'
+  },
 }
