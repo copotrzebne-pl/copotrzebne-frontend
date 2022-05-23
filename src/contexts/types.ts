@@ -50,9 +50,7 @@ export type SupplyGroup = {
 export type Supply = {
   id: string
   category: Category
-  namePl: string
-  nameUa: string
-  nameEn: string
+  name: TranslatedField
 }
 
 export type Demand = {

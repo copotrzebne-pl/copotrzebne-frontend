@@ -2,7 +2,7 @@ import Button from 'components/Button'
 import { PlaceBox } from 'components/PlaceBox'
 import { usePanelContext } from 'contexts/panelContext'
 import { useUserContext } from 'contexts/userContext'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
@@ -17,6 +17,8 @@ import UpdateDateButton from '../../../components/UpdateDateButton'
 import LastUpdateDate from '../../../components/LastUpdateDate'
 import PanelButton from '../../../components/PanelButton'
 import { Language } from 'common/language'
+import { getTranslation } from 'utils/translation'
+import { translations } from 'translations'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { language, ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -100,7 +102,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
               <>
                 <DemandsWrapper>
                   {demands.map((demand, index) => (
-                    <>
+                    <Fragment key={index}>
                       <DemandBox
                         key={demand.id}
                         onClick={() => setEditedDemandId(demand.id)}
@@ -110,7 +112,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                             <PriorityLabel>
                               <TranslatedEntry entry={demand.priority} />
                             </PriorityLabel>
-                            <TranslatedEntry entry={demand.supply} />
+                            {demand.supply.name[language] || demand.supply.name[Language.PL] || ''}
                             {demand.comment && (
                               <PriorityLabel>{demand.comment}</PriorityLabel>
                             )}
@@ -138,12 +140,15 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                               isSaved
                               demand={demand}
                               onSelected={console.log}
-                              buttonText="Zapisz"
+                              buttonText={getTranslation(
+                                language,
+                                translations['save']
+                              )}
                             />
                           </div>
                         </Dialog>
                       )}
-                    </>
+                    </Fragment>
                   ))}
                 </DemandsWrapper>
                 {ownedPlaces[0]?.id && (

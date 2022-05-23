@@ -1,6 +1,6 @@
 import Button from 'components/Button'
 import { usePanelContext } from 'contexts/panelContext'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { Page, routes } from 'routes'
 import styled from 'styled-components'
@@ -78,8 +78,8 @@ export default () => {
         {demands.length > 0 && (
           <>
             <DemandsWrapper>
-              {demands.map(demand => (
-                <>
+              {demands.map((demand, index) => (
+                <Fragment key={index}>
                   <DemandBox
                     key={demand.supply?.id}
                     onClick={() => setEditedDemandId(demand.id)}
@@ -89,7 +89,7 @@ export default () => {
                         <PriorityLabel>
                           <TranslatedEntry entry={demand.priority} />
                         </PriorityLabel>
-                        <TranslatedEntry entry={demand.supply} />
+                        {demand.supply.name[language] || demand.supply.name[Language.PL] || ''}
                         {demand.comment && (
                           <PriorityLabel>{demand.comment}</PriorityLabel>
                         )}
@@ -122,7 +122,7 @@ export default () => {
                       </div>
                     </Dialog>
                   )}
-                </>
+                </Fragment>
               ))}
             </DemandsWrapper>
           </>
