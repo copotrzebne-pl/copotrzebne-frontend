@@ -8,12 +8,12 @@ import { breakpoint } from 'themes/breakpoints'
 export default () => {
   const { user, fetchUser } = useUserContext()
   useEffect(() => {
-    // whoimi - get logged in user data
+    // whoami - get logged in user data
     fetchUser()
   }, [])
   return (
     <Container>
-      {user?.role === 'admin' && <AdminPanel />}
+      {(user?.role === 'admin' || user?.role === 'moderator') && <AdminPanel />}
       {user?.role === 'place_manager' && <PlaceManagerPanel />}
     </Container>
   )
