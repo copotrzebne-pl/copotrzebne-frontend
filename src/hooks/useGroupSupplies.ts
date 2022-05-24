@@ -2,6 +2,7 @@ import { Supply, SupplyGroup } from 'contexts/types'
 import { useState, useCallback, useEffect } from 'react'
 import debounce from 'lodash.debounce'
 import { useUserContext } from 'contexts/userContext'
+import { Language } from 'common/language'
 
 export function useGroupSupplies(supplies: Supply[]) {
   const [groupedSupplies, setGroupedSupplies] = useState<
@@ -60,7 +61,7 @@ export function useGroupSupplies(supplies: Supply[]) {
       setGroupedSupplies(
         groupSupplies(
           supplies.filter(supply => 
-            supply.name[language]
+            (supply.name[language] || supply.name[Language.PL] || '')
             .toLowerCase()
             .includes(text.toLowerCase())
           )
