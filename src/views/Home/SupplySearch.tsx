@@ -14,6 +14,8 @@ import { useUserContext } from 'contexts/userContext'
 import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
 import mapPlaceholderUrl from 'assets/map-background.svg'
 import { breakpoint } from 'themes/breakpoints'
+import { Language } from 'common/language'
+
 
 const SupplySearchComponent = ({
   className,
@@ -147,7 +149,7 @@ const SupplySearchComponent = ({
                     onChange={_ => toggleSelectedSupply(supply)}
                   />{' '}
                   <SupplyLabel htmlFor={`search_supply_${supply.id}`}>
-                    <TranslatedEntry entry={supply} />
+                    {supply.name[language] || supply.name[Language.PL] || ''}
                   </SupplyLabel>
                 </SupplyWrapper>
               ))}
@@ -402,7 +404,9 @@ export const SelectedSupplies = ({
   toggleSelectedSupply: (supply: Supply) => void
   toggleSelectedSupplyGroup: (supply: SupplyGroup) => void
   unselectAll: () => void
-}) => (
+}) => {
+  const { language } = useUserContext()
+  return (
   <SelectedTags>
     <RemoveAllButton>
       <CloseIcon onClick={() => unselectAll()} />
@@ -424,7 +428,7 @@ export const SelectedSupplies = ({
     {Object.keys(selectedSupplies).map((supplyId, key) => (
       <Row key={key}>
         <SelectedItem>
-          <TranslatedEntry entry={selectedSupplies[supplyId]} />
+          {selectedSupplies[supplyId].name[language] || selectedSupplies[supplyId].name[Language.PL] || ''}
           <CloseIcon
             onClick={() => toggleSelectedSupply(selectedSupplies[supplyId])}
           />
@@ -432,4 +436,4 @@ export const SelectedSupplies = ({
       </Row>
     ))}
   </SelectedTags>
-)
+)}

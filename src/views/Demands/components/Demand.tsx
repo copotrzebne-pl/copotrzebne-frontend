@@ -7,6 +7,8 @@ import TranslatedEntry from 'components/TranslatedEntry'
 import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
 import TranslatedText from '../../../components/TranslatedText'
 import { usePanelContext } from '../../../contexts/panelContext'
+import { useUserContext } from '../../../contexts/userContext'
+import { Language } from 'common/language'
 
 const DemandComponent = ({
   className,
@@ -39,6 +41,8 @@ const DemandComponent = ({
   })
 
   const { removeDemand } = usePanelContext()
+  const { language } = useUserContext()
+
 
   useEffect(() => {
     setDemandDTO({ ...demandDTO, supplyId: supply.id })
@@ -84,7 +88,7 @@ const DemandComponent = ({
             />
           )}{' '}
           <span>
-            <TranslatedEntry entry={supply} />
+            {supply.name[language] || supply.name[Language.PL] || ''}
           </span>
         </Title>
         <AddIcon>
@@ -117,7 +121,9 @@ const DemandComponent = ({
             ))}
           </PrioritiesWrapper>
           <FormGroup>
-            <Label>Komentarz</Label>
+            <Label>
+              <TranslatedText value="comment" />
+            </Label>
             <TextInput
               id="comment"
               type="text"

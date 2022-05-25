@@ -1,8 +1,8 @@
 import { Supply, SupplyGroup } from 'contexts/types'
 import { useState, useCallback, useEffect } from 'react'
 import debounce from 'lodash.debounce'
-import { getTranslation } from 'utils/translation'
 import { useUserContext } from 'contexts/userContext'
+import { Language } from 'common/language'
 
 export function useGroupSupplies(supplies: Supply[]) {
   const [groupedSupplies, setGroupedSupplies] = useState<
@@ -60,10 +60,10 @@ export function useGroupSupplies(supplies: Supply[]) {
       if (!text) setGroupedSupplies(groupSupplies(supplies))
       setGroupedSupplies(
         groupSupplies(
-          supplies.filter(supply =>
-            getTranslation(language, supply)
-              .toLowerCase()
-              .includes(text.toLowerCase())
+          supplies.filter(supply => 
+            (supply.name[language] || supply.name[Language.PL] || '')
+            .toLowerCase()
+            .includes(text.toLowerCase())
           )
         )
       )

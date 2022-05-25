@@ -104,7 +104,7 @@ export default () => {
       <PageTitle>
         {selectedPlace?.name[language] ||
           selectedPlace?.name[Language.PL] ||
-          'Dodaj nowe miejsce'}
+          <TranslatedText value="requestPlace" />}
       </PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>
