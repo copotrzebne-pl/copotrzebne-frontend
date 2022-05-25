@@ -108,7 +108,9 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                         <DemandTitle>
                           <DemandContent>
                             <PriorityLabel>
-                              <TranslatedEntry entry={demand.priority} />
+                              {demand.priority.name[language] ||
+                                demand.priority.name[Language.PL] ||
+                                ''}
                             </PriorityLabel>
                             <TranslatedEntry entry={demand.supply} />
                             {demand.comment && (

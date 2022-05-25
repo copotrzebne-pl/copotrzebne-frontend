@@ -392,7 +392,9 @@ export default () => {
                               </span>
                               {demand?.priority.importance === 2 && (
                                 <DemandPriority>
-                                  <TranslatedEntry entry={demand?.priority} />
+                                  {demand?.priority.name[language] ||
+                                    demand?.priority.name[Language.PL] ||
+                                    ''}
                                 </DemandPriority>
                               )}
                             </DemandInfo>

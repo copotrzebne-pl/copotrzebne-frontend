@@ -7,6 +7,8 @@ import TranslatedEntry from 'components/TranslatedEntry'
 import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
 import TranslatedText from '../../../components/TranslatedText'
 import { usePanelContext } from '../../../contexts/panelContext'
+import { Language } from 'common/language'
+import { useUserContext } from 'contexts/userContext'
 
 const DemandComponent = ({
   className,
@@ -39,6 +41,7 @@ const DemandComponent = ({
   })
 
   const { removeDemand } = usePanelContext()
+  const { language } = useUserContext()
 
   useEffect(() => {
     setDemandDTO({ ...demandDTO, supplyId: supply.id })
@@ -111,7 +114,7 @@ const DemandComponent = ({
                   readOnly
                 />
                 <PriorityInputLabel htmlFor={priority.id}>
-                  <TranslatedEntry entry={priority} />
+                  {priority.name[language] || priority.name[Language.PL] || ''}
                 </PriorityInputLabel>
               </PriorityWrapper>
             ))}
