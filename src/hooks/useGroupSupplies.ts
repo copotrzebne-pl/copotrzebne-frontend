@@ -60,10 +60,10 @@ export function useGroupSupplies(supplies: Supply[]) {
       if (!text) setGroupedSupplies(groupSupplies(supplies))
       setGroupedSupplies(
         groupSupplies(
-          supplies.filter(supply => 
+          supplies.filter(supply =>
             (supply.name[language] || supply.name[Language.PL] || '')
-            .toLowerCase()
-            .includes(text.toLowerCase())
+              .toLowerCase()
+              .includes(text.toLowerCase())
           )
         )
       )

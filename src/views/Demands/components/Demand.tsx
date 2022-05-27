@@ -43,7 +43,6 @@ const DemandComponent = ({
   const { removeDemand } = usePanelContext()
   const { language } = useUserContext()
 
-
   useEffect(() => {
     setDemandDTO({ ...demandDTO, supplyId: supply.id })
   }, [supply])
@@ -87,9 +86,7 @@ const DemandComponent = ({
               }}
             />
           )}{' '}
-          <span>
-            {supply.name[language] || supply.name[Language.PL] || ''}
-          </span>
+          <span>{supply.name[language] || supply.name[Language.PL] || ''}</span>
         </Title>
         <AddIcon>
           <PlusIconStyled />

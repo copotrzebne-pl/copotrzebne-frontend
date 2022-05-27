@@ -16,7 +16,6 @@ import mapPlaceholderUrl from 'assets/map-background.svg'
 import { breakpoint } from 'themes/breakpoints'
 import { Language } from 'common/language'
 
-
 const SupplySearchComponent = ({
   className,
   placesNumber,
@@ -407,33 +406,36 @@ export const SelectedSupplies = ({
 }) => {
   const { language } = useUserContext()
   return (
-  <SelectedTags>
-    <RemoveAllButton>
-      <CloseIcon onClick={() => unselectAll()} />
-    </RemoveAllButton>
-    {Object.keys(selectedSuppliesGroup).map((groupId, key) => (
-      <Row key={key}>
-        <SelectedItem>
-          <TranslatedEntry
-            entry={selectedSuppliesGroup[groupId].supplies[0].category}
-          />
-          <CloseIcon
-            onClick={() =>
-              toggleSelectedSupplyGroup(selectedSuppliesGroup[groupId])
-            }
-          />
-        </SelectedItem>
-      </Row>
-    ))}
-    {Object.keys(selectedSupplies).map((supplyId, key) => (
-      <Row key={key}>
-        <SelectedItem>
-          {selectedSupplies[supplyId].name[language] || selectedSupplies[supplyId].name[Language.PL] || ''}
-          <CloseIcon
-            onClick={() => toggleSelectedSupply(selectedSupplies[supplyId])}
-          />
-        </SelectedItem>
-      </Row>
-    ))}
-  </SelectedTags>
-)}
+    <SelectedTags>
+      <RemoveAllButton>
+        <CloseIcon onClick={() => unselectAll()} />
+      </RemoveAllButton>
+      {Object.keys(selectedSuppliesGroup).map((groupId, key) => (
+        <Row key={key}>
+          <SelectedItem>
+            <TranslatedEntry
+              entry={selectedSuppliesGroup[groupId].supplies[0].category}
+            />
+            <CloseIcon
+              onClick={() =>
+                toggleSelectedSupplyGroup(selectedSuppliesGroup[groupId])
+              }
+            />
+          </SelectedItem>
+        </Row>
+      ))}
+      {Object.keys(selectedSupplies).map((supplyId, key) => (
+        <Row key={key}>
+          <SelectedItem>
+            {selectedSupplies[supplyId].name[language] ||
+              selectedSupplies[supplyId].name[Language.PL] ||
+              ''}
+            <CloseIcon
+              onClick={() => toggleSelectedSupply(selectedSupplies[supplyId])}
+            />
+          </SelectedItem>
+        </Row>
+      ))}
+    </SelectedTags>
+  )
+}
