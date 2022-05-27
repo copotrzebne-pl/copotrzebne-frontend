@@ -21,7 +21,7 @@ const PlaceBoxComponent = ({
   const { deletePlace } = useUserContext()
   const { user, language } = useUserContext()
   const [authorized] = useState<boolean>(() => checkIfAuthorized())
-  
+
   return (
     <div className={className}>
       <PlaceNameAndAddress>
@@ -55,7 +55,7 @@ const PlaceBoxComponent = ({
           <TranslatedText value="noOngoingCollections" />
         </LastUpdate>
       )}
-      
+
       {place.urgentDemands && place.urgentDemands.length > 0 && (
         <UrgentDemandsWrapper>
           <UrgentDemandsTitle>
@@ -65,7 +65,9 @@ const PlaceBoxComponent = ({
           <UrgentDemandsList>
             {place.urgentDemands.map((demand, key) => (
               <UrgentDemand key={key}>
-                {demand.supply.name[language] || demand.supply.name[Language.PL] || ''}
+                {demand.supply.name[language] ||
+                  demand.supply.name[Language.PL] ||
+                  ''}
               </UrgentDemand>
             ))}
           </UrgentDemandsList>

@@ -29,9 +29,7 @@ export type UserContextProviderProps = {
 export type Priority = {
   id: string
   importance: number
-  namePl: string
-  nameUa: string
-  nameEn: string
+  name: TranslatedField
 }
 
 export type Category = {

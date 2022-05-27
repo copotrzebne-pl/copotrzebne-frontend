@@ -9,7 +9,6 @@ import styled from 'styled-components'
 
 import trashIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
-import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import Dialog from 'components/Dialog'
 import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
@@ -110,9 +109,13 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                         <DemandTitle>
                           <DemandContent>
                             <PriorityLabel>
-                              <TranslatedEntry entry={demand.priority} />
+                              {demand.priority.name[language] ||
+                                demand.priority.name[Language.PL] ||
+                                ''}
                             </PriorityLabel>
-                            {demand.supply.name[language] || demand.supply.name[Language.PL] || ''}
+                            {demand.supply.name[language] ||
+                              demand.supply.name[Language.PL] ||
+                              ''}
                             {demand.comment && (
                               <PriorityLabel>{demand.comment}</PriorityLabel>
                             )}

@@ -209,7 +209,9 @@ export default () => {
                       <UrgentDemandsList>
                         {selectedPlace.urgentDemands.map((demand, key) => (
                           <UrgentDemand key={key}>
-                            {demand.supply.name[language] || demand.supply.name[Language.PL] || ''}
+                            {demand.supply.name[language] ||
+                              demand.supply.name[Language.PL] ||
+                              ''}
                           </UrgentDemand>
                         ))}
                       </UrgentDemandsList>
@@ -388,11 +390,15 @@ export default () => {
                           <div>
                             <DemandInfo>
                               <span>
-                                {demand?.supply.name[language] || demand?.supply.name[Language.PL] || ''}
+                                {demand?.supply.name[language] ||
+                                  demand?.supply.name[Language.PL] ||
+                                  ''}
                               </span>
                               {demand?.priority.importance === 2 && (
                                 <DemandPriority>
-                                  <TranslatedEntry entry={demand?.priority} />
+                                  {demand?.priority.name[language] ||
+                                    demand?.priority.name[Language.PL] ||
+                                    ''}
                                 </DemandPriority>
                               )}
                             </DemandInfo>
