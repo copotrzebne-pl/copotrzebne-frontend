@@ -6,7 +6,6 @@ import { useUserContext } from '../contexts/userContext'
 import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
 import { formatDateWithTime } from '../utils/date'
-import TranslatedEntry from './TranslatedEntry'
 import { breakpoint } from 'themes/breakpoints'
 import { Language } from 'common/language'
 
@@ -56,6 +55,7 @@ const PlaceBoxComponent = ({
           <TranslatedText value="noOngoingCollections" />
         </LastUpdate>
       )}
+
       {place.urgentDemands && place.urgentDemands.length > 0 && (
         <UrgentDemandsWrapper>
           <UrgentDemandsTitle>
@@ -65,7 +65,9 @@ const PlaceBoxComponent = ({
           <UrgentDemandsList>
             {place.urgentDemands.map((demand, key) => (
               <UrgentDemand key={key}>
-                <TranslatedEntry entry={demand.supply} />
+                {demand.supply.name[language] ||
+                  demand.supply.name[Language.PL] ||
+                  ''}
               </UrgentDemand>
             ))}
           </UrgentDemandsList>

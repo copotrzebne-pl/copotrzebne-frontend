@@ -102,9 +102,9 @@ export default () => {
   return (
     <Container>
       <PageTitle>
-        {selectedPlace?.name[language] ||
-          selectedPlace?.name[Language.PL] ||
-          'Dodaj nowe miejsce'}
+        {selectedPlace?.name[language] || selectedPlace?.name[Language.PL] || (
+          <TranslatedText value="requestPlace" />
+        )}
       </PageTitle>
       <Form onSubmit={handleSubmit}>
         <FormGroup>

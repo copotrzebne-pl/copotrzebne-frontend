@@ -3,12 +3,11 @@ import Button from 'components/Button'
 import { Demand, DemandDTO, Priority, Supply } from 'contexts/types'
 import { useCallback, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import TranslatedEntry from 'components/TranslatedEntry'
 import { ReactComponent as PlusIcon } from 'assets/plus-icon.svg'
 import TranslatedText from '../../../components/TranslatedText'
 import { usePanelContext } from '../../../contexts/panelContext'
+import { useUserContext } from '../../../contexts/userContext'
 import { Language } from 'common/language'
-import { useUserContext } from 'contexts/userContext'
 
 const DemandComponent = ({
   className,
@@ -86,9 +85,7 @@ const DemandComponent = ({
               }}
             />
           )}{' '}
-          <span>
-            <TranslatedEntry entry={supply} />
-          </span>
+          <span>{supply.name[language] || supply.name[Language.PL] || ''}</span>
         </Title>
         <AddIcon>
           <PlusIconStyled />
@@ -120,7 +117,9 @@ const DemandComponent = ({
             ))}
           </PrioritiesWrapper>
           <FormGroup>
-            <Label>Komentarz</Label>
+            <Label>
+              <TranslatedText value="comment" />
+            </Label>
             <TextInput
               id="comment"
               type="text"

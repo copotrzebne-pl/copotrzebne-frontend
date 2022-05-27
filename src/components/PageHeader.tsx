@@ -26,7 +26,7 @@ const PageHeader = ({
   useClickOutside(menuRef, () => setOpened(false))
 
   const items = menuItems.map(
-    ({ route, translationKey, hidden, action, highlighted }) => {
+    ({ route, translationKey, hidden, action, highlighted }, key) => {
       const onClick = () => {
         if (action) action()
         closeMenu()
@@ -35,7 +35,7 @@ const PageHeader = ({
       const Item = highlighted ? HighlightedMenuItem : MenuItem
       return (
         !hidden && (
-          <Item to={route} onClick={onClick}>
+          <Item key={key} to={route} onClick={onClick}>
             <TranslatedText value={translationKey} />
           </Item>
         )
