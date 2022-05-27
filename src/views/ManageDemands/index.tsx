@@ -7,7 +7,6 @@ import styled from 'styled-components'
 
 import trashIconUrl from 'assets/trash-icon.svg'
 import { breakpoint } from 'themes/breakpoints'
-import TranslatedEntry from 'components/TranslatedEntry'
 import TranslatedText from 'components/TranslatedText'
 import PageTitle from 'components/PageTitle'
 import Dialog from 'components/Dialog'
