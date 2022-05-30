@@ -5,8 +5,7 @@ import {
   UserContextValue,
   UserContextProviderProps,
   Place,
-  PlaceDto,
-  PlaceTransition
+  PlaceDto
 } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
@@ -131,7 +130,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   }, [])
 
   const performPlaceTransition = useCallback(
-    async (placeId: string, transition: PlaceTransition) => {
+    async (placeId: string, transition: string) => {
       const client = await getRestClient(process.env.API_URL)
       try {
         if (!placeId) {

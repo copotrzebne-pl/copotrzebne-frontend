@@ -1,4 +1,4 @@
-import { Place, PlaceState, PlaceTransition } from 'contexts/types'
+import { Place } from 'contexts/types'
 import styled from 'styled-components'
 import TranslatedText from 'components/TranslatedText'
 import trashIconUrl from '../assets/trash-icon.svg'
@@ -35,20 +35,19 @@ const PlaceBoxComponent = ({
               src={onOffIconUrl}
               alt="remove"
               onClick={() => {
-                if (!place.state || !(place.state in PlaceState)) {
-                  throw new Error('Incorrect state of place')
+                const [transition] = place.transitions
+
+                if (!['ACTIVATE', 'DEACTIVATE'].includes(transition.name)) {
+                  return
                 }
 
                 const confirmationText =
-                  place.state === PlaceState.ACTIVE
-                    ? 'Czy na pewno deaktywować organizację?'
-                    : 'Czy na pewno aktywować organizację?'
-
-                const transition: PlaceTransition =
-                  place.state === PlaceState.ACTIVE ? 'DEACTIVATE' : 'ACTIVATE'
+                  transition.name === 'ACTIVATE'
+                    ? 'Czy na pewno aktywować organizację?'
+                    : 'Czy na pewno deaktywować organizację?'
 
                 return window.confirm(confirmationText)
-                  ? performPlaceTransition(place.id || '', transition)
+                  ? performPlaceTransition(place.id || '', transition.name)
                   : place.id
               }}
             />
