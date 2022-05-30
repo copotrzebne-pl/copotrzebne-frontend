@@ -13,6 +13,7 @@ const panel = {
   savePlace: '/places',
   saveDraftPlace: '/places/draft',
   deletePlace: '/places/:id',
+  performPlaceTransition: '/places/:id/transitions/perform',
   supplies: '/supplies',
   priorities: '/priorities',
   saveDemand: '/demands',
