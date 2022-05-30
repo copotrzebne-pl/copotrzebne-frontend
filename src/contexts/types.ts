@@ -16,7 +16,7 @@ export type UserContextValue = {
   fetchOwnedPlaces: () => void
   savePlace: (place: PlaceDto, redirectRoute: string) => void
   deletePlace: (placeId: string) => void
-  performPlaceTransition: (placeId: string, transition: PlaceTransition) => void
+  performPlaceTransition: (placeId: string, transition: string) => void
   authorized: boolean
   language: Language
   changeLanguage: (lang: string) => void
@@ -91,6 +91,7 @@ export type Place = {
   demands?: Demand[]
   urgentDemands?: Demand[]
   placeLink?: PlaceLink
+  transitions: Transition[]
 }
 
 export type PlaceDto = {
@@ -120,11 +121,10 @@ export type PlaceLink = {
   fundraising: string
 }
 
-export type PlaceTransition = 'ACTIVATE' | 'DEACTIVATE'
-
-export enum PlaceState {
-  ACTIVE = 1,
-  INACTIVE = 2
+export type Transition = {
+  startState: number
+  endState: number
+  name: string
 }
 
 export type DraftPlaceDto = Omit<PlaceDto, 'id' | 'latitude' | 'longitude'>
