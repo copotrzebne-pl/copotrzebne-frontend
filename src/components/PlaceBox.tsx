@@ -1,7 +1,8 @@
-import { Place } from 'contexts/types'
+import { Place, PlaceState, PlaceTransition } from 'contexts/types'
 import styled from 'styled-components'
 import TranslatedText from 'components/TranslatedText'
 import trashIconUrl from '../assets/trash-icon.svg'
+import onOffIconUrl from '../assets/on-off-icon.svg'
 import { useUserContext } from '../contexts/userContext'
 import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
@@ -18,7 +19,7 @@ const PlaceBoxComponent = ({
   place: Place
   allowDelete?: boolean
 }) => {
-  const { deletePlace } = useUserContext()
+  const { deletePlace, performPlaceTransition } = useUserContext()
   const { user, language } = useUserContext()
   const [authorized] = useState<boolean>(() => checkIfAuthorized())
 
@@ -29,15 +30,38 @@ const PlaceBoxComponent = ({
           {place.name[language] || place.name[Language.PL] || ''}
         </PlaceName>
         {allowDelete && authorized && user?.role === 'admin' && (
-          <TrashIcon
-            src={trashIconUrl}
-            alt="remove"
-            onClick={() =>
-              window.confirm('Czy na pewno usunąć organizację?')
-                ? deletePlace(place.id || '')
-                : place.id
-            }
-          />
+          <>
+            <ModificationIcon
+              src={onOffIconUrl}
+              alt="remove"
+              onClick={() => {
+                if (!place.state || !(place.state in PlaceState)) {
+                  throw new Error('Incorrect state of place')
+                }
+
+                const confirmationText =
+                  place.state === PlaceState.ACTIVE
+                    ? 'Czy na pewno deaktywować organizację?'
+                    : 'Czy na pewno aktywować organizację?'
+
+                const transition: PlaceTransition =
+                  place.state === PlaceState.ACTIVE ? 'DEACTIVATE' : 'ACTIVATE'
+
+                return window.confirm(confirmationText)
+                  ? performPlaceTransition(place.id || '', transition)
+                  : place.id
+              }}
+            />
+            <ModificationIcon
+              src={trashIconUrl}
+              alt="remove"
+              onClick={() =>
+                window.confirm('Czy na pewno usunąć organizację?')
+                  ? deletePlace(place.id || '')
+                  : place.id
+              }
+            />
+          </>
         )}
         <PlaceDetails>
           {place.city || ''}, {place.street || ''} {place.buildingNumber || ''}
@@ -111,7 +135,7 @@ const PlaceName = styled.h3<{ place: Place }>`
   line-height: 1.45;
   margin-bottom: 0.1rem;
   display: inline-block;
-  width: 90%;
+  width: 80%;
   color: ${props => (props.place.priority !== 0 ? '#1f2635' : '#8d99b2')};
 `
 
@@ -132,7 +156,7 @@ const LastUpdate = styled.div`
   color: #8d99b2;
   padding-top: 0.2rem;
 `
-const TrashIcon = styled.img`
+const ModificationIcon = styled.img`
   display: inline-block;
   padding: 0.3rem;
   height: 28px;

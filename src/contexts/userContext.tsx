@@ -5,7 +5,8 @@ import {
   UserContextValue,
   UserContextProviderProps,
   Place,
-  PlaceDto
+  PlaceDto,
+  PlaceTransition
 } from './types'
 import { API } from 'endpoints'
 import { getRestClient } from 'clients/restClient'
@@ -114,11 +115,13 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const deletePlace = useCallback(async (placeId: string) => {
     const client = await getRestClient(process.env.API_URL)
     try {
-      if (placeId) {
-        await client.delete<null, Place>(
-          API.panel.deletePlace.replace(':id', placeId)
-        )
+      if (!placeId) {
+        return
       }
+
+      await client.delete<null, Place>(
+        API.panel.deletePlace.replace(':id', placeId)
+      )
     } catch {
       console.error('Error: place delete error!')
       return
@@ -126,6 +129,28 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
     navigate(routes[Page.PANEL])
   }, [])
+
+  const performPlaceTransition = useCallback(
+    async (placeId: string, transition: PlaceTransition) => {
+      const client = await getRestClient(process.env.API_URL)
+      try {
+        if (!placeId) {
+          return
+        }
+
+        await client.patch<null, Place>(
+          API.panel.performPlaceTransition.replace(':id', placeId),
+          { transition }
+        )
+      } catch {
+        console.error('Error: performing place transition error!')
+        return
+      }
+
+      navigate(routes[Page.PANEL])
+    },
+    []
+  )
 
   return (
     <UserContext.Provider
@@ -137,6 +162,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         login,
         savePlace,
         deletePlace,
+        performPlaceTransition,
         authorized,
         language,
         changeLanguage,
