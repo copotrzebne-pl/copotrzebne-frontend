@@ -13,7 +13,9 @@ export default () => {
   }, [])
   return (
     <Container>
-      {(user?.role === 'admin' || user?.role === 'moderator') && <AdminPanel />}
+      {user && ['admin', 'moderator', 'auditor'].includes(user.role) && (
+        <AdminPanel />
+      )}
       {user?.role === 'place_manager' && <PlaceManagerPanel />}
     </Container>
   )
