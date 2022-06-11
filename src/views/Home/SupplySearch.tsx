@@ -14,7 +14,6 @@ import { useUserContext } from 'contexts/userContext'
 import { ReactComponent as SearchIcon } from 'assets/search-icon.svg'
 import mapPlaceholderUrl from 'assets/map-background.svg'
 import { breakpoint } from 'themes/breakpoints'
-import { Language } from 'common/language'
 
 const SupplySearchComponent = ({
   className,
@@ -148,7 +147,7 @@ const SupplySearchComponent = ({
                     onChange={_ => toggleSelectedSupply(supply)}
                   />{' '}
                   <SupplyLabel htmlFor={`search_supply_${supply.id}`}>
-                    {supply.name[language] || supply.name[Language.PL] || ''}
+                    <TranslatedEntry entry={supply} />
                   </SupplyLabel>
                 </SupplyWrapper>
               ))}
@@ -403,39 +402,34 @@ export const SelectedSupplies = ({
   toggleSelectedSupply: (supply: Supply) => void
   toggleSelectedSupplyGroup: (supply: SupplyGroup) => void
   unselectAll: () => void
-}) => {
-  const { language } = useUserContext()
-  return (
-    <SelectedTags>
-      <RemoveAllButton>
-        <CloseIcon onClick={() => unselectAll()} />
-      </RemoveAllButton>
-      {Object.keys(selectedSuppliesGroup).map((groupId, key) => (
-        <Row key={key}>
-          <SelectedItem>
-            <TranslatedEntry
-              entry={selectedSuppliesGroup[groupId].supplies[0].category}
-            />
-            <CloseIcon
-              onClick={() =>
-                toggleSelectedSupplyGroup(selectedSuppliesGroup[groupId])
-              }
-            />
-          </SelectedItem>
-        </Row>
-      ))}
-      {Object.keys(selectedSupplies).map((supplyId, key) => (
-        <Row key={key}>
-          <SelectedItem>
-            {selectedSupplies[supplyId].name[language] ||
-              selectedSupplies[supplyId].name[Language.PL] ||
-              ''}
-            <CloseIcon
-              onClick={() => toggleSelectedSupply(selectedSupplies[supplyId])}
-            />
-          </SelectedItem>
-        </Row>
-      ))}
-    </SelectedTags>
-  )
-}
+}) => (
+  <SelectedTags>
+    <RemoveAllButton>
+      <CloseIcon onClick={() => unselectAll()} />
+    </RemoveAllButton>
+    {Object.keys(selectedSuppliesGroup).map((groupId, key) => (
+      <Row key={key}>
+        <SelectedItem>
+          <TranslatedEntry
+            entry={selectedSuppliesGroup[groupId].supplies[0].category}
+          />
+          <CloseIcon
+            onClick={() =>
+              toggleSelectedSupplyGroup(selectedSuppliesGroup[groupId])
+            }
+          />
+        </SelectedItem>
+      </Row>
+    ))}
+    {Object.keys(selectedSupplies).map((supplyId, key) => (
+      <Row key={key}>
+        <SelectedItem>
+          <TranslatedEntry entry={selectedSupplies[supplyId]} />
+          <CloseIcon
+            onClick={() => toggleSelectedSupply(selectedSupplies[supplyId])}
+          />
+        </SelectedItem>
+      </Row>
+    ))}
+  </SelectedTags>
+)

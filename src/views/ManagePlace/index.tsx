@@ -9,13 +9,11 @@ import TranslatedText from 'components/TranslatedText'
 import { Page, routes } from '../../routes'
 import LastUpdateDate from '../../components/LastUpdateDate'
 import UpdateDateButton from '../../components/UpdateDateButton'
-import { useUserContext } from 'contexts/userContext'
-import { Language } from 'common/language'
+import TranslatedEntry from '../../components/TranslatedEntry'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { language } = useUserContext()
   const {
     selectedPlace,
     fetchPlace,
@@ -33,9 +31,7 @@ export default () => {
   return (
     <Container>
       <PageTitle>
-        {selectedPlace?.name[language] ||
-          selectedPlace?.name[Language.PL] ||
-          'Dodaj nowe miejsce'}
+        <TranslatedEntry entry={selectedPlace} fallback="Dodaj nowe miejsce" />
       </PageTitle>
       <StyledButton
         onClick={() =>

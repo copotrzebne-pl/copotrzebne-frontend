@@ -1,11 +1,20 @@
 import { useUserContext } from '../contexts/userContext'
-import { DictionaryEntry } from '../types/types'
+import { TranslatedEntry } from '../types/types'
 import { getTranslation } from '../utils/translation'
 
-export default ({ entry }: { entry: DictionaryEntry }) => {
+export default ({
+  entry,
+  fallback = ''
+}: {
+  entry: TranslatedEntry | null | undefined
+  fallback?: string
+}) => {
+  if (!entry) {
+    return <>{fallback}</>
+  }
+
   const { language } = useUserContext()
 
-  if (!entry) return null
   const translation = getTranslation(language, entry)
 
   return <>{translation}</>

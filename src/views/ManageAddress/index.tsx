@@ -19,11 +19,11 @@ import TranslatedText from 'components/TranslatedText'
 import { usePanelContext } from 'contexts/panelContext'
 import { Page, routes } from 'routes'
 import { Language } from 'common/language'
+import TranslatedEntry from '../../components/TranslatedEntry'
 
 export default () => {
   const { id } = useParams()
-  const { language, savePlace, ownedPlaces, fetchOwnedPlaces } =
-    useUserContext()
+  const { savePlace, ownedPlaces, fetchOwnedPlaces } = useUserContext()
   const { selectedPlace, fetchPlace, clearSelectedPlace } = usePanelContext()
   const [editedPlace, setEditedPlace] = useState<PlaceDto>({
     id,
@@ -102,7 +102,7 @@ export default () => {
   return (
     <Container>
       <PageTitle>
-        {selectedPlace?.name[language] || selectedPlace?.name[Language.PL] || (
+        {<TranslatedEntry entry={selectedPlace} /> || (
           <TranslatedText value="requestPlace" />
         )}
       </PageTitle>

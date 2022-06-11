@@ -1,469 +1,651 @@
-import { DictionaryEntry } from './types/types'
+import { TranslatedEntry } from './types/types'
+import { Language } from './common/language'
 
-export const translations: { [value: string]: DictionaryEntry } = {
+export const translations: { [value: string]: TranslatedEntry } = {
   pageDescription: {
-    namePl: `Nie wiesz gdzie potrzebna jest żywność, komu koce a gdzie zawieźć
+    name: {
+      [Language.PL]: `Nie wiesz gdzie potrzebna jest żywność, komu koce a gdzie zawieźć
      środki higieniczne? Zobacz aktualne zbiórki dla Ukrainy w twoim 
      mieście!`,
-    nameEn:
-      'You have no idea where to donate food, who needs blankets and where to deliver hygienic supplies? Check the ongoing collections for ukrainian refugees in your city!',
-    nameUa: `Не знаєш, де потрібні продукти, кому треба ковдри, куди завезти засоби особистої гігієни? Перевір діючі пункти збирання допомоги для України у твоєму місті!`
+      [Language.EN]:
+        'You have no idea where to donate food, who needs blankets and where to deliver hygienic supplies? Check the ongoing collections for ukrainian refugees in your city!',
+      [Language.UA]: `Не знаєш, де потрібні продукти, кому треба ковдри, куди завезти засоби особистої гігієни? Перевір діючі пункти збирання допомоги для України у твоєму місті!`
+    }
   },
   shareActiveCollections: {
-    namePl: 'Udostępnij aktywne zbiórki',
-    nameEn: 'Share all ongoing collections',
-    nameUa: 'Поділитися активними пунктами'
+    name: {
+      [Language.PL]: 'Udostępnij aktywne zbiórki',
+      [Language.EN]: 'Share all ongoing collections',
+      [Language.UA]: 'Поділитися активними пунктами'
+    }
   },
   shareThisOrganizationCollection: {
-    namePl: 'Udostępnij zbiórkę tej organizacji',
-    nameEn: 'Share this collection',
-    nameUa: 'Поділитися пунктом'
+    name: {
+      [Language.PL]: 'Udostępnij zbiórkę tej organizacji',
+      [Language.EN]: 'Share this collection',
+      [Language.UA]: 'Поділитися пунктом'
+    }
   },
   aboutUsPageTitle: {
-    namePl: 'Copotrzebne.pl - O nas',
-    nameEn: 'whatisneeded.pl - About us',
-    nameUa: 'shchopotribno.pl - Про нас'
+    name: {
+      [Language.PL]: 'Copotrzebne.pl - O nas',
+      [Language.EN]: 'whatisneeded.pl - About us',
+      [Language.UA]: 'shchopotribno.pl - Про нас'
+    }
   },
   aboutUs: {
-    namePl: `Copotrzebne.pl jest aplikacją charytatywną wspieraną przez Schibsted Tech Polska. Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
+    name: {
+      [Language.PL]: `Copotrzebne.pl jest aplikacją charytatywną wspieraną przez Schibsted Tech Polska. Pomagamy pomagać - łączymy miejsca oferujące pomoc rzeczową, noclegi i
       wsparcie osobom uchodźczym z Ukrainy - z osobami, które chciałyby je w tej
       pomocy wspierać. Ułatwiamy lokalizację zbiórek i pomagamy koordynować
       zaspokajanie podstawowych potrzeb. Dzięki nam dowiesz się, co jest
       aktualnie najbardziej potrzebne w twojej lokalizacji oraz gdzie i kiedy
       można dane rzeczy dostarczyć. 
       Jako część Koalicji Otwarty Kraków działamy na terenie Krakowa, ale zapraszamy do współpracy także inne organizacje oraz lokalizacje!`,
-    nameEn: `Whatisneeded.pl is a charity app powered by Schibsted Tech Polska. We are helping others help by connecting charity aid places and foundations,
+      [Language.EN]: `Whatisneeded.pl is a charity app powered by Schibsted Tech Polska. We are helping others help by connecting charity aid places and foundations,
       providing support to refugees from Ukraine - with people who would like to donate goods or items.
       We make it easier to locate the ongoing collections and coordinate demands for given supply.
       Thanks to us, you will know what is most needed in the aid center in your location and where and what you can donate to help.
       As a part of the Open Krakow Coalition, we are actively working in Krakow, but we also invite other organisations and locations to come and join us!`,
-    nameUa: `Shchopotribno.pl – це благодійний додаток, розроблений Schibsted Tech Polska. Помагаємо допомагати! З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
+      [Language.UA]: `Shchopotribno.pl – це благодійний додаток, розроблений Schibsted Tech Polska. Помагаємо допомагати! З'єднуємо пункти збирання допомоги, де пропонують речі, проживання і підтримку біженцям з України, з особами, які хочуть  таку допомогу надати.
     Полегшуємо пошук пунктів збирання допомоги, координуємо в них попит на основні потреби.
     Завдяки нам дізнаєшся, що цієї миті найнеобхідніше в пунктах твого міста,а також куди і коли можна доставити речі.`
+    }
   },
   contactDetails: {
-    namePl: `Chcesz dodać zbiórkę w twojej organizacji?
+    name: {
+      [Language.PL]: `Chcesz dodać zbiórkę w twojej organizacji?
       Skontaktuj się z nami:`,
-    nameEn: `Do you want to add collections in your organisation here?
+      [Language.EN]: `Do you want to add collections in your organisation here?
       Get in touch with us:`,
-    nameUa: 'Хочете додати новий пункт збору допомоги? Напиши до нас:'
+      [Language.UA]: 'Хочете додати новий пункт збору допомоги? Напиши до нас:'
+    }
   },
   chooseCurrentDemands: {
-    namePl: 'Wybierz aktualne potrzeby',
-    nameEn: 'Choose your current needs',
-    nameUa: 'Виберіть потрібні речі'
+    name: {
+      [Language.PL]: 'Wybierz aktualne potrzeby',
+      [Language.EN]: 'Choose your current needs',
+      [Language.UA]: 'Виберіть потрібні речі'
+    }
   },
   logIn: {
-    namePl: 'Zaloguj się',
-    nameEn: 'Login',
-    nameUa: 'Увійти'
+    name: {
+      [Language.PL]: 'Zaloguj się',
+      [Language.EN]: 'Login',
+      [Language.UA]: 'Увійти'
+    }
   },
   email: {
-    namePl: 'Email',
-    nameEn: 'Email',
-    nameUa: 'Email'
+    name: {
+      [Language.PL]: 'Email',
+      [Language.EN]: 'Email',
+      [Language.UA]: 'Email'
+    }
   },
   password: {
-    namePl: 'Hasło',
-    nameEn: 'Password',
-    nameUa: 'Пароль'
+    name: {
+      [Language.PL]: 'Hasło',
+      [Language.EN]: 'Password',
+      [Language.UA]: 'Пароль'
+    }
   },
   name: {
-    namePl: 'Nazwa',
-    nameEn: 'Name',
-    nameUa: 'Назва'
+    name: {
+      [Language.PL]: 'Nazwa',
+      [Language.EN]: 'Name',
+      [Language.UA]: 'Назва'
+    }
   },
   city: {
-    namePl: 'Miasto',
-    nameEn: 'City',
-    nameUa: 'Місто'
+    name: {
+      [Language.PL]: 'Miasto',
+      [Language.EN]: 'City',
+      [Language.UA]: 'Місто'
+    }
   },
   street: {
-    namePl: 'Ulica',
-    nameEn: 'Street',
-    nameUa: 'Вулиця'
+    name: {
+      [Language.PL]: 'Ulica',
+      [Language.EN]: 'Street',
+      [Language.UA]: 'Вулиця'
+    }
   },
   buildingNumber: {
-    namePl: 'Numer budynku',
-    nameEn: 'Building no.',
-    nameUa: 'Номер будинку'
+    name: {
+      [Language.PL]: 'Numer budynku',
+      [Language.EN]: 'Building no.',
+      [Language.UA]: 'Номер будинку'
+    }
   },
   apartmentNumber: {
-    namePl: 'Numer lokalu',
-    nameEn: 'Flat',
-    nameUa: 'Номер квартири'
+    name: {
+      [Language.PL]: 'Numer lokalu',
+      [Language.EN]: 'Flat',
+      [Language.UA]: 'Номер квартири'
+    }
   },
   workingHours: {
-    namePl: 'Godziny otwarcia',
-    nameEn: 'Working hours',
-    nameUa: 'Робочі години'
+    name: {
+      [Language.PL]: 'Godziny otwarcia',
+      [Language.EN]: 'Working hours',
+      [Language.UA]: 'Робочі години'
+    }
   },
   comment: {
-    namePl: 'Komentarz',
-    nameEn: 'Comment',
-    nameUa: 'Коментар'
+    name: {
+      [Language.PL]: 'Komentarz',
+      [Language.EN]: 'Comment',
+      [Language.UA]: 'Коментар'
+    }
   },
   phone: {
-    namePl: 'Numer telefonu',
-    nameEn: 'Contact person',
-    nameUa: 'Номер телефону'
+    name: {
+      [Language.PL]: 'Numer telefonu',
+      [Language.EN]: 'Contact person',
+      [Language.UA]: 'Номер телефону'
+    }
   },
   latitude: {
-    namePl: 'Szerokość geograficzna',
-    nameEn: 'Latitude',
-    nameUa: 'Широта'
+    name: {
+      [Language.PL]: 'Szerokość geograficzna',
+      [Language.EN]: 'Latitude',
+      [Language.UA]: 'Широта'
+    }
   },
   longitude: {
-    namePl: 'Długość geograficzna',
-    nameEn: 'Longitude',
-    nameUa: 'Довгота'
+    name: {
+      [Language.PL]: 'Długość geograficzna',
+      [Language.EN]: 'Longitude',
+      [Language.UA]: 'Довгота'
+    }
   },
   bankAccount: {
-    namePl: 'Numer konta bankowego do wpłat darowizn',
-    nameEn: 'Bank account number for donations',
-    nameUa: 'Номер банківського рахунку для внесення пожертв'
+    name: {
+      [Language.PL]: 'Numer konta bankowego do wpłat darowizn',
+      [Language.EN]: 'Bank account number for donations',
+      [Language.UA]: 'Номер банківського рахунку для внесення пожертв'
+    }
   },
   bankAccountDescription: {
-    namePl: 'Szczegółowe informacje do nr konta (np. tytuł przelewu)',
-    nameEn: 'Additional information about bank account (eg. transfer title)',
-    nameUa: 'Additional information about bank account (eg. transfer title)'
+    name: {
+      [Language.PL]: 'Szczegółowe informacje do nr konta (np. tytuł przelewu)',
+      [Language.EN]:
+        'Additional information about bank account (eg. transfer title)',
+      [Language.UA]:
+        'Additional information about bank account (eg. transfer title)'
+    }
   },
   homepageLink: {
-    namePl: 'Link do strony domowej organizacji',
-    nameEn: 'Link to the home page of the organization',
-    nameUa: 'Посилання на домашню сторінку організації'
+    name: {
+      [Language.PL]: 'Link do strony domowej organizacji',
+      [Language.EN]: 'Link to the home page of the organization',
+      [Language.UA]: 'Посилання на домашню сторінку організації'
+    }
   },
   facebookLink: {
-    namePl: 'Link do strony organizacji na Facebooku',
-    nameEn: 'Link to the Facebook page of the organization',
-    nameUa: 'Посилання на сторінку організації у Facebook'
+    name: {
+      [Language.PL]: 'Link do strony organizacji na Facebooku',
+      [Language.EN]: 'Link to the Facebook page of the organization',
+      [Language.UA]: 'Посилання на сторінку організації у Facebook'
+    }
   },
   signupLink: {
-    namePl: 'Link do zapisów na wolontariat w tym miejscu',
-    nameEn: 'Link to register for voluntary service at this location',
-    nameUa: 'Посилання для реєстрації на волонтерську службу тут'
+    name: {
+      [Language.PL]: 'Link do zapisów na wolontariat w tym miejscu',
+      [Language.EN]: 'Link to register for voluntary service at this location',
+      [Language.UA]: 'Посилання для реєстрації на волонтерську службу тут'
+    }
   },
   fundraisingLink: {
-    namePl: 'Link do zbiórki pieniężnej tej organizacji',
-    nameEn: `Link to the fundraiser of this organization`,
-    nameUa: 'Посилання на збір коштів цієї організації'
+    name: {
+      [Language.PL]: 'Link do zbiórki pieniężnej tej organizacji',
+      [Language.EN]: `Link to the fundraiser of this organization`,
+      [Language.UA]: 'Посилання на збір коштів цієї організації'
+    }
   },
   save: {
-    namePl: 'Zapisz',
-    nameEn: 'Save',
-    nameUa: 'Зберегти'
+    name: {
+      [Language.PL]: 'Zapisz',
+      [Language.EN]: 'Save',
+      [Language.UA]: 'Зберегти'
+    }
   },
   cancel: {
-    namePl: 'Anuluj',
-    nameEn: 'Cancel',
-    nameUa: 'Cancel'
+    name: {
+      [Language.PL]: 'Anuluj',
+      [Language.EN]: 'Cancel',
+      [Language.UA]: 'Cancel'
+    }
   },
   pageNotFound: {
-    namePl: 'Nie znaleziono strony',
-    nameEn: 'Page not found',
-    nameUa: 'Сторінка не знайдена'
+    name: {
+      [Language.PL]: 'Nie znaleziono strony',
+      [Language.EN]: 'Page not found',
+      [Language.UA]: 'Сторінка не знайдена'
+    }
   },
   addPlace: {
-    namePl: 'Dodaj miejsce',
-    nameEn: 'Add place',
-    nameUa: 'Додати нове місце'
+    name: {
+      [Language.PL]: 'Dodaj miejsce',
+      [Language.EN]: 'Add place',
+      [Language.UA]: 'Додати нове місце'
+    }
   },
   placeLastUpdate: {
-    namePl: 'Aktualizacja',
-    nameEn: 'Last update',
-    nameUa: 'Оновлено'
+    name: {
+      [Language.PL]: 'Aktualizacja',
+      [Language.EN]: 'Last update',
+      [Language.UA]: 'Оновлено'
+    }
   },
   noDemandsReported: {
-    namePl: 'Aktualnie nie masz zgłoszonych żadnych potrzeb',
-    nameEn: 'You have no ongoing collections',
-    nameUa: 'Наразі ви не додали жодних потреб'
+    name: {
+      [Language.PL]: 'Aktualnie nie masz zgłoszonych żadnych potrzeb',
+      [Language.EN]: 'You have no ongoing collections',
+      [Language.UA]: 'Наразі ви не додали жодних потреб'
+    }
   },
   addDemands: {
-    namePl: 'Dodaj potrzeby',
-    nameEn: 'Add demands',
-    nameUa: 'Додати потребні речі'
+    name: {
+      [Language.PL]: 'Dodaj potrzeby',
+      [Language.EN]: 'Add demands',
+      [Language.UA]: 'Додати потребні речі'
+    }
   },
   finishCollection: {
-    namePl: 'Zakończ zbiórkę',
-    nameEn: 'Finish current collection',
-    nameUa: 'Завершити збирання речей'
+    name: {
+      [Language.PL]: 'Zakończ zbiórkę',
+      [Language.EN]: 'Finish current collection',
+      [Language.UA]: 'Завершити збирання речей'
+    }
   },
   removeDemands: {
-    namePl: 'Usuń wszystkie potrzeby',
-    nameEn: 'Remove all demands',
-    nameUa: 'Remove all demands'
+    name: {
+      [Language.PL]: 'Usuń wszystkie potrzeby',
+      [Language.EN]: 'Remove all demands',
+      [Language.UA]: 'Remove all demands'
+    }
   },
   lastUpdate: {
-    namePl: 'Ostatnia aktualizacja:',
-    nameEn: 'Last modified at:',
-    nameUa: 'Останнє оновлення:'
+    name: {
+      [Language.PL]: 'Ostatnia aktualizacja:',
+      [Language.EN]: 'Last modified at:',
+      [Language.UA]: 'Останнє оновлення:'
+    }
   },
   demandsList: {
-    namePl: 'Lista potrzeb',
-    nameEn: 'Demands list',
-    nameUa: 'Список потрібних речей'
+    name: {
+      [Language.PL]: 'Lista potrzeb',
+      [Language.EN]: 'Demands list',
+      [Language.UA]: 'Список потрібних речей'
+    }
   },
   addToList: {
-    namePl: 'Dodaj do listy',
-    nameEn: 'Add to list',
-    nameUa: 'Add to list'
+    name: {
+      [Language.PL]: 'Dodaj do listy',
+      [Language.EN]: 'Add to list',
+      [Language.UA]: 'Add to list'
+    }
   },
   saveChanges: {
-    namePl: 'Zapisz zmiany',
-    nameEn: 'Save changes',
-    nameUa: 'Save changes'
+    name: {
+      [Language.PL]: 'Zapisz zmiany',
+      [Language.EN]: 'Save changes',
+      [Language.UA]: 'Save changes'
+    }
   },
   loggedInAs: {
-    namePl: 'Jesteś zalogowany jako',
-    nameEn: 'Logged in as',
-    nameUa: 'Залогований як'
+    name: {
+      [Language.PL]: 'Jesteś zalogowany jako',
+      [Language.EN]: 'Logged in as',
+      [Language.UA]: 'Залогований як'
+    }
   },
   menuLogout: {
-    namePl: 'Wyloguj się',
-    nameEn: 'Log out',
-    nameUa: 'Вийти'
+    name: {
+      [Language.PL]: 'Wyloguj się',
+      [Language.EN]: 'Log out',
+      [Language.UA]: 'Вийти'
+    }
   },
   menuAboutUs: {
-    namePl: 'O nas',
-    nameEn: 'About us',
-    nameUa: 'Про нас'
+    name: {
+      [Language.PL]: 'O nas',
+      [Language.EN]: 'About us',
+      [Language.UA]: 'Про нас'
+    }
   },
   menuPanel: {
-    namePl: 'Panel',
-    nameEn: 'Panel',
-    nameUa: 'Панель'
+    name: {
+      [Language.PL]: 'Panel',
+      [Language.EN]: 'Panel',
+      [Language.UA]: 'Панель'
+    }
   },
   menuLogIn: {
-    namePl: 'Zaloguj się',
-    nameEn: 'Log in',
-    nameUa: 'Увійти'
+    name: {
+      [Language.PL]: 'Zaloguj się',
+      [Language.EN]: 'Log in',
+      [Language.UA]: 'Увійти'
+    }
   },
   requestPlace: {
-    namePl: 'Dodaj nowe miejsce',
-    nameEn: 'Add new place',
-    nameUa: 'додати нове місце'
+    name: {
+      [Language.PL]: 'Dodaj nowe miejsce',
+      [Language.EN]: 'Add new place',
+      [Language.UA]: 'додати нове місце'
+    }
   },
   userEmail: {
-    namePl: 'Email użytkownika - do stworzenia konta',
-    nameEn: 'User email - for creating an account',
-    nameUa: 'Електронна адреса користувача - для створення облікового запису'
+    name: {
+      [Language.PL]: 'Email użytkownika - do stworzenia konta',
+      [Language.EN]: 'User email - for creating an account',
+      [Language.UA]:
+        'Електронна адреса користувача - для створення облікового запису'
+    }
   },
   fulfillRequiredFields: {
-    namePl: 'Należy wypełnić wszystkie wymagane pola oznaczone znakiem *',
-    nameEn: 'All required fields marked with * must be completed',
-    nameUa: 'Усі обов’язкові поля, позначені *, необхідно заповнити'
+    name: {
+      [Language.PL]:
+        'Należy wypełnić wszystkie wymagane pola oznaczone znakiem *',
+      [Language.EN]: 'All required fields marked with * must be completed',
+      [Language.UA]: 'Усі обов’язкові поля, позначені *, необхідно заповнити'
+    }
   },
   thanksForRequestingPlace: {
-    namePl: 'Dziękujemy za zgłoszenie nowego miejsca zbiórek.',
-    nameEn: 'Thank you for creating a new place.',
-    nameUa: 'Дякуємо, що повідомили про новий пункт збору.'
+    name: {
+      [Language.PL]: 'Dziękujemy za zgłoszenie nowego miejsca zbiórek.',
+      [Language.EN]: 'Thank you for creating a new place.',
+      [Language.UA]: 'Дякуємо, що повідомили про новий пункт збору.'
+    }
   },
   credentialsWillBeSent: {
-    namePl: 'Dane do logowania prześlemy po weryfikacji miejsca.',
-    nameEn: 'We will send login credentials after the data verification.',
-    nameUa: 'Ми надішлемо дані для входу після перевірки місця.'
+    name: {
+      [Language.PL]: 'Dane do logowania prześlemy po weryfikacji miejsca.',
+      [Language.EN]:
+        'We will send login credentials after the data verification.',
+      [Language.UA]: 'Ми надішлемо дані для входу після перевірки місця.'
+    }
   },
   requestPlaceFailed: {
-    namePl: 'Wystąpił nieznany błąd podczas zgłaszania miejsca.',
-    nameEn: 'An unknown error has occurred during the creation of the place.',
-    nameUa: 'Під час повідомлення про місце сталася невідома помилка.'
+    name: {
+      [Language.PL]: 'Wystąpił nieznany błąd podczas zgłaszania miejsca.',
+      [Language.EN]:
+        'An unknown error has occurred during the creation of the place.',
+      [Language.UA]: 'Під час повідомлення про місце сталася невідома помилка.'
+    }
   },
   addNewPlace: {
-    namePl: 'Dodaj nowe miejsce',
-    nameEn: 'Add new place',
-    nameUa: 'додати нове місце'
+    name: {
+      [Language.PL]: 'Dodaj nowe miejsce',
+      [Language.EN]: 'Add new place',
+      [Language.UA]: 'додати нове місце'
+    }
   },
   addNewPlaceDescription: {
-    namePl:
-      'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i utworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
-    nameEn:
-      'Are you running a charity collection? Do you want to report a new place? Fill out the form and enter your email address. We will receive your application, check it and create an account for you. You will receive the login details at the e-mail address provided.',
-    nameUa:
-      'Ви проводите збір коштів? Ви хочете повідомити про місце зустрічі? Заповніть форму та введіть свою електронну адресу. Ми отримаємо вашу заявку, перевіримо її та створимо для вас обліковий запис. Ви отримаєте дані для входу на вказану адресу електронної пошти.'
+    name: {
+      [Language.PL]:
+        'Prowadzisz zbiórkę? Chcesz zgłosić miejsce zbiórki? Wypełnij formularz i podaj adres email. Otrzymamy twoje zgłoszenie, sprawdzimy je i utworzymy konto dla Ciebie. Dane do logowania otrzymasz na podany adres email.',
+      [Language.EN]:
+        'Are you running a charity collection? Do you want to report a new place? Fill out the form and enter your email address. We will receive your application, check it and create an account for you. You will receive the login details at the e-mail address provided.',
+      [Language.UA]:
+        'Ви проводите збір коштів? Ви хочете повідомити про місце зустрічі? Заповніть форму та введіть свою електронну адресу. Ми отримаємо вашу заявку, перевіримо її та створимо для вас обліковий запис. Ви отримаєте дані для входу на вказану адресу електронної пошти.'
+    }
   },
   editPlaceData: {
-    namePl: 'Edytuj dane organizacji',
-    nameEn: 'Edit data',
-    nameUa: 'Редагуй дані про організацію'
+    name: {
+      [Language.PL]: 'Edytuj dane organizacji',
+      [Language.EN]: 'Edit data',
+      [Language.UA]: 'Редагуй дані про організацію'
+    }
   },
   updatePlaceLastUpdatedDate: {
-    namePl: 'Lista potrzeb jest nadal aktualna',
-    nameEn: 'The demands list is up to date',
-    nameUa: 'Список потреб залишається актуальним'
+    name: {
+      [Language.PL]: 'Lista potrzeb jest nadal aktualna',
+      [Language.EN]: 'The demands list is up to date',
+      [Language.UA]: 'Список потреб залишається актуальним'
+    }
   },
   editDemands: {
-    namePl: 'Edytuj listę potrzeb',
-    nameEn: 'Edit current demands',
-    nameUa: 'Редагуй список потребних речей'
+    name: {
+      [Language.PL]: 'Edytuj listę potrzeb',
+      [Language.EN]: 'Edit current demands',
+      [Language.UA]: 'Редагуй список потребних речей'
+    }
   },
   noOngoingCollections: {
-    namePl: 'Brak aktualnych zbiórek',
-    nameEn: 'No ongoing collections',
-    nameUa: 'Пункт допомоги не збирає речей'
+    name: {
+      [Language.PL]: 'Brak aktualnych zbiórek',
+      [Language.EN]: 'No ongoing collections',
+      [Language.UA]: 'Пункт допомоги не збирає речей'
+    }
   },
   cookiesBarDescription: {
-    namePl:
-      'Cześć! Zbieramy ciasteczka aby analizować ruch na stronie i usprawniać funkcjonowanie serwisu.',
-    nameEn:
-      'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.',
-    nameUa:
-      'Привіт! Ми збираємо файли cookies, щоб аналізувати рух на вебсайті та покращувати роботу нашого сервісу'
+    name: {
+      [Language.PL]:
+        'Cześć! Zbieramy ciasteczka aby analizować ruch na stronie i usprawniać funkcjonowanie serwisu.',
+      [Language.EN]:
+        'Hi! We collect cookies to analyze website traffic and improve the functioning of the website.',
+      [Language.UA]:
+        'Привіт! Ми збираємо файли cookies, щоб аналізувати рух на вебсайті та покращувати роботу нашого сервісу'
+    }
   },
   showMore: {
-    namePl: 'Pokaż więcej',
-    nameEn: 'Show more',
-    nameUa: 'Показати більше'
+    name: {
+      [Language.PL]: 'Pokaż więcej',
+      [Language.EN]: 'Show more',
+      [Language.UA]: 'Показати більше'
+    }
   },
   showLess: {
-    namePl: 'Pokaż mniej',
-    nameEn: 'Show less',
-    nameUa: 'Показати меньше'
+    name: {
+      [Language.PL]: 'Pokaż mniej',
+      [Language.EN]: 'Show less',
+      [Language.UA]: 'Показати меньше'
+    }
   },
   showOnMap: {
-    namePl: 'Zobacz na mapie',
-    nameEn: 'See on map',
-    nameUa: 'Подивитися на карті'
+    name: {
+      [Language.PL]: 'Zobacz na mapie',
+      [Language.EN]: 'See on map',
+      [Language.UA]: 'Подивитися на карті'
+    }
   },
   stateActive: {
-    namePl: 'Aktywne',
-    nameEn: 'Active',
-    nameUa: 'активний'
+    name: {
+      [Language.PL]: 'Aktywne',
+      [Language.EN]: 'Active',
+      [Language.UA]: 'активний'
+    }
   },
   stateInactive: {
-    namePl: 'Nieaktywne',
-    nameEn: 'Inactive',
-    nameUa: 'неактивний'
+    name: {
+      [Language.PL]: 'Nieaktywne',
+      [Language.EN]: 'Inactive',
+      [Language.UA]: 'неактивний'
+    }
   },
   notAnEmail: {
-    namePl: 'Adres email nie jest poprawny',
-    nameEn: 'Email address is not valid',
-    nameUa: 'Адреса електронної пошти недійсна'
+    name: {
+      [Language.PL]: 'Adres email nie jest poprawny',
+      [Language.EN]: 'Email address is not valid',
+      [Language.UA]: 'Адреса електронної пошти недійсна'
+    }
   },
   searchPlaceByName: {
-    namePl: 'Szukaj po potrzebnych produktach',
-    nameEn: 'Search by the products needed',
-    nameUa: 'Пошук за потрібними продуктами'
+    name: {
+      [Language.PL]: 'Szukaj po potrzebnych produktach',
+      [Language.EN]: 'Search by the products needed',
+      [Language.UA]: 'Пошук за потрібними продуктами'
+    }
   },
   searchPlacePlaceholder: {
-    namePl: 'Np koce, kanapki, żywność',
-    nameEn: 'blankets, sandwiches, food',
-    nameUa: 'ковдри, бутерброди, їжа'
+    name: {
+      [Language.PL]: 'Np koce, kanapki, żywność',
+      [Language.EN]: 'blankets, sandwiches, food',
+      [Language.UA]: 'ковдри, бутерброди, їжа'
+    }
   },
   search: {
-    namePl: 'Szukaj',
-    nameEn: 'Search',
-    nameUa: 'Пошук'
+    name: {
+      [Language.PL]: 'Szukaj',
+      [Language.EN]: 'Search',
+      [Language.UA]: 'Пошук'
+    }
   },
   inputProductName: {
-    namePl: 'Wpisz nazwę produktu',
-    nameEn: 'Enter a product name',
-    nameUa: 'Введіть назву продукту'
+    name: {
+      [Language.PL]: 'Wpisz nazwę produktu',
+      [Language.EN]: 'Enter a product name',
+      [Language.UA]: 'Введіть назву продукту'
+    }
   },
   removeAll: {
-    namePl: 'Usuń wszystkie',
-    nameEn: 'Remove all',
-    nameUa: 'Видалити всі'
+    name: {
+      [Language.PL]: 'Usuń wszystkie',
+      [Language.EN]: 'Remove all',
+      [Language.UA]: 'Видалити всі'
+    }
   },
   managePlaces: {
-    namePl: 'Zarządzaj miejscami',
-    nameEn: 'Manage places',
-    nameUa: 'Керуйте місцями'
+    name: {
+      [Language.PL]: 'Zarządzaj miejscami',
+      [Language.EN]: 'Manage places',
+      [Language.UA]: 'Керуйте місцями'
+    }
   },
   placeId: {
-    namePl: 'ID miejsca',
-    nameEn: 'Place ID',
-    nameUa: 'Place ID'
+    name: {
+      [Language.PL]: 'ID miejsca',
+      [Language.EN]: 'Place ID',
+      [Language.UA]: 'Place ID'
+    }
   },
   createUser: {
-    namePl: 'Dodaj użytkownika',
-    nameEn: 'Create user',
-    nameUa: 'Create user'
+    name: {
+      [Language.PL]: 'Dodaj użytkownika',
+      [Language.EN]: 'Create user',
+      [Language.UA]: 'Create user'
+    }
   },
   login: {
-    namePl: 'Login',
-    nameEn: 'Login',
-    nameUa: 'Login'
+    name: {
+      [Language.PL]: 'Login',
+      [Language.EN]: 'Login',
+      [Language.UA]: 'Login'
+    }
   },
   urgentlyNeeded: {
-    namePl: 'Pilnie potrzebne!',
-    nameEn: 'Urgently needed',
-    nameUa: 'Терміново потрібна'
+    name: {
+      [Language.PL]: 'Pilnie potrzebne!',
+      [Language.EN]: 'Urgently needed',
+      [Language.UA]: 'Терміново потрібна'
+    }
   },
   notFound: {
-    namePl: 'Nie znaleziono',
-    nameEn: 'Not found',
-    nameUa: 'Не знайдено'
+    name: {
+      [Language.PL]: 'Nie znaleziono',
+      [Language.EN]: 'Not found',
+      [Language.UA]: 'Не знайдено'
+    }
   },
   additionalDescription: {
-    namePl: 'Dodatkowy opis miejsca',
-    nameEn: 'Additional description',
-    nameUa: 'Additional description'
+    name: {
+      [Language.PL]: 'Dodatkowy opis miejsca',
+      [Language.EN]: 'Additional description',
+      [Language.UA]: 'Additional description'
+    }
   },
   howCanIHelp: {
-    namePl: 'Jak mogę pomóc?',
-    nameEn: 'How can I help?',
-    nameUa: 'Чим я можу допомогти?'
+    name: {
+      [Language.PL]: 'Jak mogę pomóc?',
+      [Language.EN]: 'How can I help?',
+      [Language.UA]: 'Чим я можу допомогти?'
+    }
   },
   organizationLabel: {
-    namePl: 'Organizacja',
-    nameEn: 'Organization',
-    nameUa: 'Організація'
+    name: {
+      [Language.PL]: 'Organizacja',
+      [Language.EN]: 'Organization',
+      [Language.UA]: 'Організація'
+    }
   },
   faqAccountNumberDescription: {
-    namePl:
-      'Aktualny numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
-    nameEn:
-      "Organization's current account number: <br /><b>{bankAccountNumber}</b>",
-    nameUa:
-      'Номер поточного рахунку організації: <br /><b>{bankAccountNumber}</b>'
+    name: {
+      [Language.PL]:
+        'Aktualny numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
+      [Language.EN]:
+        "Organization's current account number: <br /><b>{bankAccountNumber}</b>",
+      [Language.UA]:
+        'Номер поточного рахунку організації: <br /><b>{bankAccountNumber}</b>'
+    }
   },
   faqFundraisingDescription: {
-    namePl: 'Strona gdzie można nas wspomóc: {fundraising}',
-    nameEn: 'Page where you can help us: {fundraising}',
-    nameUa: 'Сторінка, де ви можете нам допомогти: {fundraising}'
+    name: {
+      [Language.PL]: 'Strona gdzie można nas wspomóc: {fundraising}',
+      [Language.EN]: 'Page where you can help us: {fundraising}',
+      [Language.UA]: 'Сторінка, де ви можете нам допомогти: {fundraising}'
+    }
   },
   faqTitle_1: {
-    namePl: 'Chcę przekazać pieniądze, jak mogę to zrobić?',
-    nameEn: 'I want to donate money, how can I do it?',
-    nameUa: 'Я хочу пожертвувати гроші, як я можу це зробити?'
+    name: {
+      [Language.PL]: 'Chcę przekazać pieniądze, jak mogę to zrobić?',
+      [Language.EN]: 'I want to donate money, how can I do it?',
+      [Language.UA]: 'Я хочу пожертвувати гроші, як я можу це зробити?'
+    }
   },
   faqText_1: {
-    namePl:
-      'Weryfikujemy organizacje przed dodaniem ich do systemu. Numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
-    nameEn:
-      'We verify organizations before adding them to the system. Organization Account Number: <br /><b>{bankAccountNumber}</b>',
-    nameUa:
-      'Ми перевіряємо організації, перш ніж додати їх до системи. Номер рахунку організації: <br /><b>{bankAccountNumber}</b>'
+    name: {
+      [Language.PL]:
+        'Weryfikujemy organizacje przed dodaniem ich do systemu. Numer konta ogranizacji: <br /><b>{bankAccountNumber}</b>',
+      [Language.EN]:
+        'We verify organizations before adding them to the system. Organization Account Number: <br /><b>{bankAccountNumber}</b>',
+      [Language.UA]:
+        'Ми перевіряємо організації, перш ніж додати їх до системи. Номер рахунку організації: <br /><b>{bankAccountNumber}</b>'
+    }
   },
   faqTitle_2: {
-    namePl: 'Chcę przekazać dary rzeczowe, jak mogę to zrobić?',
-    nameEn: 'I want to donate goods, how can I do it?',
-    nameUa: 'Я хочу пожертвувати товари, як я можу це зробити?'
+    name: {
+      [Language.PL]: 'Chcę przekazać dary rzeczowe, jak mogę to zrobić?',
+      [Language.EN]: 'I want to donate goods, how can I do it?',
+      [Language.UA]: 'Я хочу пожертвувати товари, як я можу це зробити?'
+    }
   },
   faqText_2: {
-    namePl:
-      'Wszystkie dary można przywieść pod adres: <br /> <b>{address}</b> <br /> Godziny otwarcia: <b>{workingHours}</b>',
-    nameEn:
-      'All donations can be brought to: <br /> <b> {address} </b> <br /> Opening hours: <b> {workingHours} </b>',
-    nameUa: ''
+    name: {
+      [Language.PL]:
+        'Wszystkie dary można przywieść pod adres: <br /> <b>{address}</b> <br /> Godziny otwarcia: <b>{workingHours}</b>',
+      [Language.EN]:
+        'All donations can be brought to: <br /> <b> {address} </b> <br /> Opening hours: <b> {workingHours} </b>',
+      [Language.UA]: ''
+    }
   },
   faqTitle_3: {
-    namePl: 'Mieszkam dość daleko od tej organizacji, jak mogę pomóc?',
-    nameEn: 'I live quite far away from this organisation, how can I help?',
-    nameUa: 'Я живу досить далеко від цієї організації, як я можу допомогти?'
+    name: {
+      [Language.PL]: 'Mieszkam dość daleko od tej organizacji, jak mogę pomóc?',
+      [Language.EN]:
+        'I live quite far away from this organisation, how can I help?',
+      [Language.UA]:
+        'Я живу досить далеко від цієї організації, як я можу допомогти?'
+    }
   },
   faqText_3: {
-    namePl: '',
-    nameEn: '',
-    nameUa: ''
+    name: {
+      [Language.PL]: '',
+      [Language.EN]: '',
+      [Language.UA]: ''
+    }
   },
   faqTitle_4: {
-    namePl: 'Mieszkam za granicą, jak mogę pomóc?',
-    nameEn: 'I live abroad, how can I help?',
-    nameUa: 'Я живу за кордоном, як я можу допомогти?'
+    name: {
+      [Language.PL]: 'Mieszkam za granicą, jak mogę pomóc?',
+      [Language.EN]: 'I live abroad, how can I help?',
+      [Language.UA]: 'Я живу за кордоном, як я можу допомогти?'
+    }
   },
   faqText_4: {
-    namePl: `Nawet będąc daleko możesz pomóc na wiele sposobów!<br /><br />
+    name: {
+      [Language.PL]: `Nawet będąc daleko możesz pomóc na wiele sposobów!<br /><br />
       Część organizacji prowadzi zbiórki pieniężne, a dzięki wpłatom ma fundusze realizację bieżących potrzeb Osób które korzystają z ich pomocy.<br />
       Jeżeli chcesz, możesz wesprzeć tą organizację finansowo: <br />
       <b>{bankAccountNumber}</b>
@@ -474,7 +656,7 @@ export const translations: { [value: string]: DictionaryEntry } = {
       <br /><br />
       Poza pomocą rzeczową i finansową, możesz także pomóc rozpowszechniając informację o potrzebach danej organizacji oraz możliwych sposobach jej wsparcia - być może dzięki Twojej sieci kontaktów dotrzemy do organizacji i firm, które będą w stanie wesprzeć organizację rzeczowo lub finansowo.<br />
       A może sam(a) zorganizujesz zbiórkę wsród znajomych?`,
-    nameEn: `Even if you live far away, there are still quite a few ways of helping!<br /><br />
+      [Language.EN]: `Even if you live far away, there are still quite a few ways of helping!<br /><br />
       Some organisations have fundraising sites or collect funds on dedicated bank accounts; those funds are later used to buy needed supplies and provide them to People in need.
       If you want you can support this organisation financially <br />
       <b>{bankAccountNumber}</b>
@@ -487,169 +669,234 @@ export const translations: { [value: string]: DictionaryEntry } = {
       Apart from delivering supplies and financial support, you can also help by spreading the information about the organisation’s needs and possible ways to provide help - perhaps thanks to your social network we will be able to reach companies and foundations able to support this organisation even more?<br />
       Or maybe you can organise a fundraising or goods collection event among your friends? :)  
       `,
-    nameUa: ''
+      [Language.UA]: ''
+    }
   },
   faqTitle_5: {
-    namePl: 'Nie mam dużo wolnego czasu, jak mogę pomóc?',
-    nameEn: 'I don’t have much free time, how can I help?',
-    nameUa: 'У мене мало вільного часу, чим я можу допомогти?'
+    name: {
+      [Language.PL]: 'Nie mam dużo wolnego czasu, jak mogę pomóc?',
+      [Language.EN]: 'I don’t have much free time, how can I help?',
+      [Language.UA]: 'У мене мало вільного часу, чим я можу допомогти?'
+    }
   },
   faqText_5: {
-    namePl: '',
-    nameEn: '',
-    nameUa: ''
+    name: {
+      [Language.PL]: '',
+      [Language.EN]: '',
+      [Language.UA]: ''
+    }
   },
   faqTitle_6: {
-    namePl: 'Nie mam aktualnie środków, jak mogę pomóc?',
-    nameEn: 'I can’t afford to buy a lot of goods, how can I help?',
-    nameUa:
-      'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
+    name: {
+      [Language.PL]: 'Nie mam aktualnie środków, jak mogę pomóc?',
+      [Language.EN]: 'I can’t afford to buy a lot of goods, how can I help?',
+      [Language.UA]:
+        'Я не можу дозволити собі купувати багато товарів, як я можу допомогти?'
+    }
   },
   faqText_6: {
-    namePl: '',
-    nameEn: '',
-    nameUa: ''
+    name: {
+      [Language.PL]: '',
+      [Language.EN]: '',
+      [Language.UA]: ''
+    }
   },
   faqTitle_7: {
-    namePl: 'Mam trochę wolnego czasu, jak mogę pomóc?',
-    nameEn: 'I have some spare time, how can I help?',
-    nameUa: 'У мене є вільний час, як я можу допомогти?'
+    name: {
+      [Language.PL]: 'Mam trochę wolnego czasu, jak mogę pomóc?',
+      [Language.EN]: 'I have some spare time, how can I help?',
+      [Language.UA]: 'У мене є вільний час, як я можу допомогти?'
+    }
   },
   faqText_7: {
-    namePl:
-      'Tutaj jest link do zapisu na wolontariat w naszych punktach: {link}',
-    nameEn: 'Here is a link to signup for a volunteer work, link: {link}',
-    nameUa: 'Ось посилання для реєстрації на волонтерську роботу, посилання:'
+    name: {
+      [Language.PL]:
+        'Tutaj jest link do zapisu na wolontariat w naszych punktach: {link}',
+      [Language.EN]:
+        'Here is a link to signup for a volunteer work, link: {link}',
+      [Language.UA]:
+        'Ось посилання для реєстрації на волонтерську роботу, посилання:'
+    }
   },
   menuInternalAnnouncements: {
-    namePl: 'Zobacz ogłoszenia',
-    nameEn: 'Browse announcements',
-    nameUa: 'Browse announcements'
+    name: {
+      [Language.PL]: 'Zobacz ogłoszenia',
+      [Language.EN]: 'Browse announcements',
+      [Language.UA]: 'Browse announcements'
+    }
   },
   internalAnnouncementsTitle: {
-    namePl: 'Lista ogłoszeń',
-    nameEn: 'Announcements list',
-    nameUa: 'Announcements list'
+    name: {
+      [Language.PL]: 'Lista ogłoszeń',
+      [Language.EN]: 'Announcements list',
+      [Language.UA]: 'Announcements list'
+    }
   },
   internalAnnouncementsSubtitle: {
-    namePl:
-      'Przeglądaj i dodawaj ogłoszenia. Możesz dodawać ogłoszenia publiczne widoczne na stronie głównej, oraz wewnętrzne, które są widoczne tylko dla innych zalogowanych osób koordynujących zbiórki.',
-    nameEn:
-      'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.',
-    nameUa:
-      'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.'
+    name: {
+      [Language.PL]:
+        'Przeglądaj i dodawaj ogłoszenia. Możesz dodawać ogłoszenia publiczne widoczne na stronie głównej, oraz wewnętrzne, które są widoczne tylko dla innych zalogowanych osób koordynujących zbiórki.',
+      [Language.EN]:
+        'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.',
+      [Language.UA]:
+        'Browse and add announcements. You can add public announcements visible on the home page, and internal announcements that are visible only to other logged-in collection coordinators.'
+    }
   },
   internalAnnouncementsSubtitle2: {
-    namePl:
-      'Zamieszczaj ważne informacje dla ciebie i innych koordynatorów. Masz za dużo produktów w magazynie lub nie masz jak przewieźć produktów? Poinformuj innych i umówcie się na wzajemną pomoc. Potrzebujesz wolontariuszy? Umieść publiczne ogłoszenie.',
-    nameEn:
-      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.',
-    nameUa:
-      'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.'
+    name: {
+      [Language.PL]:
+        'Zamieszczaj ważne informacje dla ciebie i innych koordynatorów. Masz za dużo produktów w magazynie lub nie masz jak przewieźć produktów? Poinformuj innych i umówcie się na wzajemną pomoc. Potrzebujesz wolontariuszy? Umieść publiczne ogłoszenie.',
+      [Language.EN]:
+        'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.',
+      [Language.UA]:
+        'Post important information for you and other coordinators. Do you have too many products in stock or you do not have how to transport the products? Inform others and arrange for mutual assistance. Do you need volunteers? Add a public announcement.'
+    }
   },
   announcementTitle: {
-    namePl: 'Tytuł ogłoszenia',
-    nameEn: 'Announcement title',
-    nameUa: 'Announcement title'
+    name: {
+      [Language.PL]: 'Tytuł ogłoszenia',
+      [Language.EN]: 'Announcement title',
+      [Language.UA]: 'Announcement title'
+    }
   },
   announcementMessage: {
-    namePl: 'Treść',
-    nameEn: 'Message',
-    nameUa: 'Message'
+    name: {
+      [Language.PL]: 'Treść',
+      [Language.EN]: 'Message',
+      [Language.UA]: 'Message'
+    }
   },
   announcementStartDate: {
-    namePl: 'Data rozpoczęcia',
-    nameEn: 'Start date',
-    nameUa: 'Start date'
+    name: {
+      [Language.PL]: 'Data rozpoczęcia',
+      [Language.EN]: 'Start date',
+      [Language.UA]: 'Start date'
+    }
   },
   announcementEndDate: {
-    namePl: 'Data zakończenia',
-    nameEn: 'End date',
-    nameUa: 'End date'
+    name: {
+      [Language.PL]: 'Data zakończenia',
+      [Language.EN]: 'End date',
+      [Language.UA]: 'End date'
+    }
   },
   failedToCreateAnnouncement: {
-    namePl: 'Nie udało się zapisać ogłoszenia',
-    nameEn: 'Failed to save the announcement',
-    nameUa: 'Failed to save the announcement'
+    name: {
+      [Language.PL]: 'Nie udało się zapisać ogłoszenia',
+      [Language.EN]: 'Failed to save the announcement',
+      [Language.UA]: 'Failed to save the announcement'
+    }
   },
   announcementContact: {
-    namePl: 'Informacje kontaktowe',
-    nameEn: 'Contact info',
-    nameUa: 'Contact info'
+    name: {
+      [Language.PL]: 'Informacje kontaktowe',
+      [Language.EN]: 'Contact info',
+      [Language.UA]: 'Contact info'
+    }
   },
   announcementPlace: {
-    namePl: 'Miejsce',
-    nameEn: 'Place',
-    nameUa: 'Place'
+    name: {
+      [Language.PL]: 'Miejsce',
+      [Language.EN]: 'Place',
+      [Language.UA]: 'Place'
+    }
   },
   addComment: {
-    namePl: 'Skomentuj',
-    nameEn: 'Add comment',
-    nameUa: 'Add comment'
+    name: {
+      [Language.PL]: 'Skomentuj',
+      [Language.EN]: 'Add comment',
+      [Language.UA]: 'Add comment'
+    }
   },
   hideComments: {
-    namePl: 'Ukryj komentarze',
-    nameEn: 'Hide comments',
-    nameUa: 'Hide comments'
+    name: {
+      [Language.PL]: 'Ukryj komentarze',
+      [Language.EN]: 'Hide comments',
+      [Language.UA]: 'Hide comments'
+    }
   },
   showComments: {
-    namePl: 'Pokaż komentarze',
-    nameEn: 'Show comments',
-    nameUa: 'Show comments'
+    name: {
+      [Language.PL]: 'Pokaż komentarze',
+      [Language.EN]: 'Show comments',
+      [Language.UA]: 'Show comments'
+    }
   },
   author: {
-    namePl: 'Autor',
-    nameEn: 'Author',
-    nameUa: 'Author'
+    name: {
+      [Language.PL]: 'Autor',
+      [Language.EN]: 'Author',
+      [Language.UA]: 'Author'
+    }
   },
   addedAt: {
-    namePl: 'Dodano:',
-    nameEn: 'Added:',
-    nameUa: 'Added:'
+    name: {
+      [Language.PL]: 'Dodano:',
+      [Language.EN]: 'Added:',
+      [Language.UA]: 'Added:'
+    }
   },
   validUntil: {
-    namePl: 'Ważne do:',
-    nameEn: 'Valid until:',
-    nameUa: 'Valid until:'
+    name: {
+      [Language.PL]: 'Ważne do:',
+      [Language.EN]: 'Valid until:',
+      [Language.UA]: 'Valid until:'
+    }
   },
   contactInformation: {
-    namePl: 'Dane kontaktowe:',
-    nameEn: 'Contact:',
-    nameUa: 'Contact:'
+    name: {
+      [Language.PL]: 'Dane kontaktowe:',
+      [Language.EN]: 'Contact:',
+      [Language.UA]: 'Contact:'
+    }
   },
   addInternalAnnouncement: {
-    namePl: 'Dodaj ogłoszenie wewnętrzne',
-    nameEn: 'Add internal announcement',
-    nameUa: 'Add internal announcement'
+    name: {
+      [Language.PL]: 'Dodaj ogłoszenie wewnętrzne',
+      [Language.EN]: 'Add internal announcement',
+      [Language.UA]: 'Add internal announcement'
+    }
   },
   addPublicAnnouncement: {
-    namePl: 'Dodaj ogłoszenie publiczne',
-    nameEn: 'Add public announcement',
-    nameUa: 'Add public announcement'
+    name: {
+      [Language.PL]: 'Dodaj ogłoszenie publiczne',
+      [Language.EN]: 'Add public announcement',
+      [Language.UA]: 'Add public announcement'
+    }
   },
   publicAnnouncements: {
-    namePl: 'Ogłoszenia publiczne',
-    nameEn: 'Public announcements',
-    nameUa: 'Public announcements'
+    name: {
+      [Language.PL]: 'Ogłoszenia publiczne',
+      [Language.EN]: 'Public announcements',
+      [Language.UA]: 'Public announcements'
+    }
   },
   internalAnnouncements: {
-    namePl: 'Ogłoszenia wewnętrzne',
-    nameEn: 'Internal announcements',
-    nameUa: 'Internal announcements'
+    name: {
+      [Language.PL]: 'Ogłoszenia wewnętrzne',
+      [Language.EN]: 'Internal announcements',
+      [Language.UA]: 'Internal announcements'
+    }
   },
   addAnnouncement: {
-    namePl: 'Dodaj ogłoszenie',
-    nameEn: 'Add announcement',
-    nameUa: 'Add announcement'
+    name: {
+      [Language.PL]: 'Dodaj ogłoszenie',
+      [Language.EN]: 'Add announcement',
+      [Language.UA]: 'Add announcement'
+    }
   },
   whatisneededPl: {
-    namePl: 'copotrzebne.pl',
-    nameEn: 'whatisneeded.pl',
-    nameUa: 'shchopotribno.pl'
+    name: {
+      [Language.PL]: 'copotrzebne.pl',
+      [Language.EN]: 'whatisneeded.pl',
+      [Language.UA]: 'shchopotribno.pl'
+    }
   },
   found: {
-    namePl: 'Znaleziono',
-    nameEn: 'Found',
-    nameUa: 'Знайдено'
+    name: {
+      [Language.PL]: 'Znaleziono',
+      [Language.EN]: 'Found',
+      [Language.UA]: 'Знайдено'
+    }
   }
 }
