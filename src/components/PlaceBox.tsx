@@ -8,7 +8,7 @@ import { useState } from 'react'
 import { checkIfAuthorized } from '../utils/session'
 import { formatDateWithTime } from '../utils/date'
 import { breakpoint } from 'themes/breakpoints'
-import { Language } from 'common/language'
+import TranslatedEntry from './TranslatedEntry'
 
 const PlaceBoxComponent = ({
   className,
@@ -20,14 +20,14 @@ const PlaceBoxComponent = ({
   allowDelete?: boolean
 }) => {
   const { deletePlace, performPlaceTransition } = useUserContext()
-  const { user, language } = useUserContext()
+  const { user } = useUserContext()
   const [authorized] = useState<boolean>(() => checkIfAuthorized())
 
   return (
     <div className={className}>
       <PlaceNameAndAddress>
         <PlaceName place={place}>
-          {place.name[language] || place.name[Language.PL] || ''}
+          <TranslatedEntry entry={place} />
         </PlaceName>
         {allowDelete && authorized && user?.role === 'admin' && (
           <>
@@ -88,9 +88,7 @@ const PlaceBoxComponent = ({
           <UrgentDemandsList>
             {place.urgentDemands.map((demand, key) => (
               <UrgentDemand key={key}>
-                {demand.supply.name[language] ||
-                  demand.supply.name[Language.PL] ||
-                  ''}
+                <TranslatedEntry entry={demand.supply} />
               </UrgentDemand>
             ))}
           </UrgentDemandsList>

@@ -15,9 +15,9 @@ import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
 import UpdateDateButton from '../../../components/UpdateDateButton'
 import LastUpdateDate from '../../../components/LastUpdateDate'
 import PanelButton from '../../../components/PanelButton'
-import { Language } from 'common/language'
 import { getTranslation } from 'utils/translation'
 import { translations } from 'translations'
+import TranslatedEntry from '../../../components/TranslatedEntry'
 
 const PlaceManagerPanel = ({ className }: { className?: string }) => {
   const { language, ownedPlaces, fetchOwnedPlaces } = useUserContext()
@@ -53,8 +53,7 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
             <TranslatedText value="loggedInAs" />
           </SectionTitle>
           <PlaceTitle>
-            {ownedPlaces[0]?.name[language] ||
-              ownedPlaces[0]?.name[Language.PL]}
+            <TranslatedEntry entry={ownedPlaces[0]} />
           </PlaceTitle>
           <PanelButton
             onClick={() =>
@@ -109,13 +108,9 @@ const PlaceManagerPanel = ({ className }: { className?: string }) => {
                         <DemandTitle>
                           <DemandContent>
                             <PriorityLabel>
-                              {demand.priority.name[language] ||
-                                demand.priority.name[Language.PL] ||
-                                ''}
+                              <TranslatedEntry entry={demand.priority} />
                             </PriorityLabel>
-                            {demand.supply.name[language] ||
-                              demand.supply.name[Language.PL] ||
-                              ''}
+                            <TranslatedEntry entry={demand.supply} />
                             {demand.comment && (
                               <PriorityLabel>{demand.comment}</PriorityLabel>
                             )}

@@ -6,11 +6,9 @@ export type Route = {
   component: React.ComponentType
 }
 
-export type DictionaryEntry = {
+export type TranslatedEntry = {
   id?: string
-  namePl: string
-  nameUa?: string
-  nameEn?: string
+  name: TranslatedField
 }
 
 export type ItemMenu = {

@@ -1,22 +1,10 @@
-import { DictionaryEntry } from '../types/types'
+import { TranslatedEntry } from '../types/types'
+import { Language } from '../common/language'
 
-type LanguageToField = {
-  pl: string
-  ua: string
-  en: string
-}
+export const getTranslation = (language: Language, entry: TranslatedEntry) => {
+  if (!entry) {
+    return ''
+  }
 
-const languageToFieldNameMap: LanguageToField = {
-  pl: 'namePl',
-  ua: 'nameUa',
-  en: 'nameEn'
-}
-
-export const getTranslation = (language: string, entry: DictionaryEntry) => {
-  const languageFieldName =
-    languageToFieldNameMap[language as keyof LanguageToField]
-
-  if (!entry) return ''
-
-  return entry[languageFieldName as keyof DictionaryEntry] || entry.namePl
+  return entry.name[language] || entry.name[Language.PL]
 }

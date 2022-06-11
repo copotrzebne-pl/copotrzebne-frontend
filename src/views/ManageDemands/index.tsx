@@ -11,13 +11,11 @@ import TranslatedText from 'components/TranslatedText'
 import PageTitle from 'components/PageTitle'
 import Dialog from 'components/Dialog'
 import DemandComponent, { AddIcon } from 'views/Demands/components/Demand'
-import { Language } from 'common/language'
-import { useUserContext } from 'contexts/userContext'
+import TranslatedEntry from '../../components/TranslatedEntry'
 
 export default () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { language } = useUserContext()
   const [editedDemandId, setEditedDemandId] = useState<string>('')
   const {
     demands,
@@ -48,9 +46,7 @@ export default () => {
   return (
     <Container>
       <PageTitle>
-        {selectedPlace?.name[language] ||
-          selectedPlace?.name[Language.PL] ||
-          'Dodaj nowe potrzeby'}
+        <TranslatedEntry entry={selectedPlace} fallback="Dodaj nowe potrzeby" />
       </PageTitle>
       <ButtonWrapper>
         {demands.length === 0 && (
@@ -86,13 +82,9 @@ export default () => {
                     <DemandTitle>
                       <DemandContent>
                         <PriorityLabel>
-                          {demand.priority.name[language] ||
-                            demand.priority.name[Language.PL] ||
-                            ''}
+                          <TranslatedEntry entry={demand.priority} />
                         </PriorityLabel>
-                        {demand.supply.name[language] ||
-                          demand.supply.name[Language.PL] ||
-                          ''}
+                        <TranslatedEntry entry={demand.supply} />
                         {demand.comment && (
                           <PriorityLabel>{demand.comment}</PriorityLabel>
                         )}

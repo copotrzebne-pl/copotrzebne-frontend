@@ -7,8 +7,7 @@ import { formatDate, formatDateWithTime } from '../../utils/date'
 import { Place } from '../../contexts/types'
 import Comments from './Comments'
 import TranslatedText from '../../components/TranslatedText'
-import { Language } from 'common/language'
-import { useUserContext } from 'contexts/userContext'
+import TranslatedEntry from '../../components/TranslatedEntry'
 
 const Announcement = ({
   announcement,
@@ -28,7 +27,6 @@ const Announcement = ({
       place?: Place
       type: 'public'
     }) => {
-  const { language } = useUserContext()
   const isInactive =
     type === 'internal' &&
     announcement.endDate &&
@@ -41,7 +39,7 @@ const Announcement = ({
           {type === 'internal' && <Title>{announcement.title}</Title>}
           <PlaceName>
             <TranslatedText value="author" />:{' '}
-            {place?.name[language] || place?.name[Language.PL] || '-'}
+            <TranslatedEntry entry={place} fallback="-" />
           </PlaceName>
         </div>
 

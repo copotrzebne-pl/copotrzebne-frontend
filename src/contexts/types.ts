@@ -36,9 +36,7 @@ export type Priority = {
 export type Category = {
   id: string
   priority: number
-  namePl: string
-  nameUa: string
-  nameEn: string
+  name: TranslatedField
 }
 
 export type SupplyGroup = {
